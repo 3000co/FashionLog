@@ -2,9 +2,12 @@ package com.fashionlog.model.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -18,26 +21,26 @@ import lombok.ToString;
 @Table(name = "item")
 public class Item {
 	@Id
-//	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int itemNo;
 	
-//	@ManyToOne(targetEntity = Post.class)
-//	@JoinColumn(name = "POST_NO")
+	@ManyToOne(targetEntity = Post.class)
+	@JoinColumn(name = "POST_NO")
 	private int postNo;
 	
 	private int tagNo;
 	
 	private String name;
 	
-//	@OneToOne
-//	@JoinColumn(name = "CATECORY_NO")
+	@OneToOne(targetEntity = Category.class)
+	@JoinColumn(name = "CATEGORY_NO")
 	private int categoryNo;
 	
 //	@OneToOne
 //	@JoinColumn(name = "BRAND_NO")
 	private int brandNo;
 	
-	@Column( name="color", columnDefinition ="char")
+	@Column(name="color", columnDefinition ="char")
 	private String color;
 	
 	private String store;
