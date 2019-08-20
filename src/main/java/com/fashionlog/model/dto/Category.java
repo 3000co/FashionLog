@@ -13,10 +13,13 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-public class Post {
+public class Category {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int postNo;
+	int categoryNo;
+	
+	String name;
+	
 	
 }

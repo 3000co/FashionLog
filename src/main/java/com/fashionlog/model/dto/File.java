@@ -1,5 +1,7 @@
 package com.fashionlog.model.dto;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,10 +15,24 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-public class Post {
+public class File {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int postNo;
+	int fileNo;
+	
+	String type;
+	
+	String name;
+	
+	String path;
+	
+	int size;
+	
+	String state;
+	
+	Timestamp uploadTime;
+	
+	Timestamp deletedTime;
 	
 }

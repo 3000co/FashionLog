@@ -7,3 +7,4 @@ import com.fashionlog.model.dto.Post;
 public interface PostRepository extends JpaRepository<Post, Integer> {
 
 }
+
