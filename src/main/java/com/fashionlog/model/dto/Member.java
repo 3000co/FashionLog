@@ -1,12 +1,12 @@
 package com.fashionlog.model.dto;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,33 +20,38 @@ public class Member {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int memberNo;
+	private int memberNo;
 	
-	String id;
+	@Column(columnDefinition = "char")
+	private String id;
+	 
+	@Column(columnDefinition = "char")
+	private String password;
 	
-	String password;
+	@Column(columnDefinition = "char")
+	private String nickname;
 	
-	String nickname;
+	@Column(columnDefinition = "char")
+	private String phonenumber;
 	
-	String phonenumber;
-	
-	String email;
-	
-	@OneToOne
-	@JoinColumn(name = "fileNo")
-	int profileImageNo;
-	
-	@ManyToOne
-	@JoinColumn(name = "styleNo", nullable = false)
-	int styleNo1;
+	@Column(columnDefinition = "char")
+	private String email;
 	
 	@ManyToOne
-	@JoinColumn(name = "styleNo")
-	int styleNo2;
+	@JoinColumn(name = "PROFILE_IMAGE_NO")
+	private File profileImageNo;
 	
 	@ManyToOne
-	@JoinColumn(name = "styleNo")
-	int styleNo3;
+	@JoinColumn(name = "STYLE_NO1")
+	private Style styleNo1;
+	
+	@ManyToOne
+	@JoinColumn(name = "STYLE_NO2")
+	private Style styleNo2;
+	
+	@ManyToOne
+	@JoinColumn(name = "STYLE_NO3")
+	private Style styleNo3;
 	
 	
 }

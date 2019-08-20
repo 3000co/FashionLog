@@ -23,15 +23,15 @@ public class Follow {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int followNo;
+	private int followNo;
 	
 	@ManyToOne
-	@JoinColumn(name = "memberNo", nullable = false)
-	int followerMemNo;
+	@JoinColumn(name = "followerMemNo")
+	private Member followerMemNo;
 	
 	@ManyToOne
-	@JoinColumn(name = "memberNo", nullable = false)
-	int followeeMemNo;
+	@JoinColumn(name = "followeeMemNo")
+	private Member followeeMemNo;
 	
 	@CreationTimestamp
 	Timestamp followTime;

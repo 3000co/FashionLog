@@ -4,13 +4,15 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Data;
 
@@ -21,34 +23,34 @@ public class Notification {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	int notiNo;
+	private int notiNo;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "memberNo")
-	int senderMemNo;
+	@ManyToOne
+	@JoinColumn(name = "SENDER_MEM_NO")
+	private Member senderMemNo;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "memberNo")
-	int recieverMemNo;
+	@ManyToOne
+	@JoinColumn(name = "RECIEVER_MEM_NO")
+	private Member recieverMemNo;
 	
-	int type;
+	private int type;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "likesNo")
-	int likesNo;
+	@ManyToOne
+	@JoinColumn(name = "LIKES_NO")
+	private Likes likesNo;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "commentNo")
-	int commentNo;
+	@ManyToOne
+	@JoinColumn(name = "COMMENT_NO")
+	private Comment commentNo;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "followNo")
-	int followNo;
+	@ManyToOne
+	@JoinColumn(name = "FOLLOW_NO")
+	private Follow followNo;
 	
-	@Column
-	Timestamp sendTime;
+	@CreationTimestamp
+	private Timestamp sendTime;
 	
-	@Column
-	Timestamp checkTime;
+	@UpdateTimestamp
+	private Timestamp checkTime;
 	
 }

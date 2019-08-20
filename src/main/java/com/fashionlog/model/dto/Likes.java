@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -24,17 +23,17 @@ public class Likes {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int likesNo;
+	private int likesNo;
 	
 	@ManyToOne
-	@JoinTable(name = "MEMBER")
-	int MemberNo;
+	@JoinColumn(name = "MEMBER_NO")
+	private Member MemberNo;
 	
 	@ManyToOne
-	@JoinColumn(name = "postNo", nullable = false)
-	int postNo;
+	@JoinColumn(name = "POST_NO")
+	private Post postNo;
 	
 	@CreationTimestamp
-	Timestamp followTime;
+	Timestamp likesTime;
 
 }

@@ -1,5 +1,6 @@
 package com.fashionlog.model.dto;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,9 +18,10 @@ public class Category {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int categoryNo;
+	private int categoryNo;
 	
-	String name;
+	@Column(columnDefinition = "char")
+	private String name;
 	
 	
 }

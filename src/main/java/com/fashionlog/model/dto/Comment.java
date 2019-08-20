@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -20,22 +19,19 @@ public class Comment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int commentNo;
-	
-	@ManyToOne(targetEntity = Member.class)
-	@JoinTable(name = "MEMBER",
-	joinColumns = @JoinColumn(name = "MEMBER_NO"))
-	int memberNo;
+	private int commentNo;
 	
 	@ManyToOne
-	@JoinColumn(name = "postNo")
-	int postNo;
+	@JoinColumn(name = "MEMBER_NO")
+	private Member memberNo;
+	
+	@ManyToOne
+	@JoinColumn(name = "POST_NO")
+	private Post postNo;
 	
 	@CreationTimestamp
 	Timestamp uploadTime;
 	
 	String contents;
-	
-	
 	
 }
