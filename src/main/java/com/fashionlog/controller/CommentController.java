@@ -39,8 +39,7 @@ public class CommentController {
 	}
 	
 	@RequestMapping("/insertComment")
-	public String insertComment(HttpServletRequest request,
-            HttpServletResponse response) {
+	public String insertComment(HttpServletRequest request) {
 		Comment comment = new Comment();
 		//memberNo과 postNo은 샘플 데이터를 넣어둠. 세션에서 받을 예정. 
 		comment.setMemberNo(3);
