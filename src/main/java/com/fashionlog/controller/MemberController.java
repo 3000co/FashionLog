@@ -1,6 +1,5 @@
 package com.fashionlog.controller;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,4 +30,3 @@ public class MemberController {
 		return memresult;
 	}
 }
-
