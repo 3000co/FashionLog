@@ -11,8 +11,8 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-public class Member{
-	@Id
+
+public class Member {
 	private int memberNo;
 	private String id;
 	private String password;
@@ -22,5 +22,5 @@ public class Member{
 	private int profileImageNo;
 	private int styleNo1;
 	private int styleNo2;
-	
+
 }
