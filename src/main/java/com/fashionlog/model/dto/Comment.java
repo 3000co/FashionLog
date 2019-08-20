@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,15 +14,16 @@ import lombok.ToString;
 
 @Entity
 @Getter @Setter @ToString
-public class Post {
-    @Id
-    @GeneratedValue
-    private int postNo;
-    private int memberNo;
+public class Comment {
+	@Id
+	@GeneratedValue
+	private int commentNo;
+	private int memberNo;
+	private int postNo;
 	private Date uploadTime;
-	private int postImageNo;
 	private String contents;
-	private int styleNo1;
-	private int styleNo2;
-	private int styleNo3;
+	
+	@OneToOne(optional=true)
+	@JoinColumn(name="memberNo")
+	private Member member;
 }

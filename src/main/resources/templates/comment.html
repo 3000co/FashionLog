@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<table>
+<tr th:each="comment : ${commentList}">
+	<td><a th:href="@{/report(tagetCommentNo=${comment.commentNo})}"
+		th:text="${comment.memberNo}"></a></td>
+	<td th:text="${comment.contents}"></td>
+	<td><a th:href="@{/deleteComment(commentNo=${comment.commentNo})}">x</td>
+</tr>
+</table>
+
+<form action="/insertComment">
+<input type="text" name="contents" placeholder="내용을 입력해주세요" >
+<button type="submit" >등록</button>
+</form>
+
+</body>
+</html>

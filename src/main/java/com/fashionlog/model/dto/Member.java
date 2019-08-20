@@ -1,6 +1,11 @@
 package com.fashionlog.model.dto;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Member {
+	@Id
 	private int memberNo;
 	private String id;
 	private String password;
