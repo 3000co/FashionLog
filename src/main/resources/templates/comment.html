@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">  
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
@@ -7,18 +7,41 @@
 <body>
 
 <table>
-<tr th:each="comment : ${commentList}">
-	<td><a th:href="@{/report(tagetCommentNo=${comment.path})}"
-		th:text="${comment.nickname}"></a></td>
-	<td th:text="${comment.contents}"></td>
-	<td><a th:href="@{/deleteComment(commentNo=${comment.commentNo})}">x</td>
+<!-- <tr th:text="${commentList}"></tr> -->
+
+<tr th:each="comment:${commentList}">
+	<td th:text="${comment[4]}"></td>
+	<td><a th:href="@{/report(tagetCommentNo=${comment[0]})}"
+		th:text="${comment[2]}"></a></td>
+	<td th:text="${comment[1]}"></td>
+	<td><a th:href="@{/deleteComment(commentNo=${comment[0]})}">x</td>
+</tr>  
+
+<tr>
+<form name=commentInputForm action="/insertComment" method="post">
+		<input type="text" name="contents" placeholder="내용을 입력해주세요" >
+		<button type="submit" value="insertBtn" th:onchange="Inputprocess()">등록</button>
+</form>
 </tr>
 </table>
 
-<form action="/insertComment" method="post">
-<input type="text" name="contents" placeholder="내용을 입력해주세요" >
-<button type="submit">등록</button>
-</form>
+<script type="text/javascript" th:inline="javascript">
+	document.myform.insertBtn.disabled = true;
+	document.onkeyup = Inputprocess;
+	document.onmouseup = Inputprocess;
+	document.onmousedown = Inputprocess;
+
+	function Inputprocess(){
+		/*<![CDATA[*/
+		if (document.commentInputForm.contents.value == ''){
+			document.commentInputForm.insertBtn.disable = true;
+		} else {
+			document.commentInputForm.insert.disable = false;
+		}
+		/*]]>*/
+	}
+
+</script>	
 
 </body>
 </html>

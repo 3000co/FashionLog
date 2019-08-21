@@ -23,9 +23,10 @@ public class Comment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int commentNo;
-	@ManyToOne(targetEntity = Member.class)
-	@JoinColumn(name="memberNo")
-	private Optional<Member> member;
+//	@ManyToOne(targetEntity = Member.class)
+//	@JoinColumn(name="memberNo")
+//	private Optional<Member> member;
+	private int memberNo;
 	private int postNo;
 	private Date uploadTime;
 	private String contents;

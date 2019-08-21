@@ -1,5 +1,6 @@
 package com.fashionlog.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -30,48 +31,45 @@ public class CommentController {
 	CommentRepository commentRepository;
 	//샘플 멤버를 위해 임시로 작성
 	MemberRepository memberRepository;
-	
-//	@RequestMapping("/")
-//	public String moveView() {
-//		return "view";
-//	}
-	
+
+	//	@RequestMapping("/")
+	//	public String moveView() {
+	//		return "view";
+	//	}
+
 	@RequestMapping("/")
-	public String getCommentList(Model model, Comment comment) {
-		
-	List<Object[]> commentList = commentRepository.getCommentList();
-	for(Object[] item : commentList) {
+	public String getCommentList(Model model) {
 
-		// System.out.println(item);
-
-		System.out.println(Arrays.toString(item));
-
-		}
-	model.addAttribute("commentList", commentList);
-	
+		List<Object[]> commentList = commentRepository.getCommentList();
+//		for(Object[] item : commentList) {
+//			System.out.println(Arrays.toString(item));
+//
+//		}
+		model.addAttribute("commentList", commentList);
 		return "view";	
 	}
-	
-	@RequestMapping("/insertCommentdf")
+
+
+	@RequestMapping("/insertComment")
 	public String insertComment(HttpServletRequest request) {
 		Comment comment = new Comment();
-		Optional<Member> member = memberRepository.findById(3);
+		//Optional<Member> member = memberRepository.findById(3);
 		//postNo은 샘플 데이터를 넣어둠. 세션에서 받을 예정. 
-		
-		comment.setMember(member);
+
+		comment.setMemberNo(3);
 		comment.setContents(request.getParameter("contents"));
 		comment.setPostNo(9);
 		comment.setUploadTime(new Date());
 		commentRepository.save(comment);
-		
+
 		return "redirect:/";
 	}
-	
+
 	@RequestMapping("/deleteComment")
 	public String deleteComment(@RequestParam("commentNo")int commentNo) {
-		commentRepository.deleteById(commentNo);
+		commentRepository.deleteById(commentNo);;
 		return "redirect:/";
 	}
-	
+
 
 }

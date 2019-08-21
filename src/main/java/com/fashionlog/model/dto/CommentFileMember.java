@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter@Setter@ToString
+@Data
 public class CommentFileMember {
 	private int commentNo;
 	private String contents;
