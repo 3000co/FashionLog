@@ -1,5 +1,8 @@
 package com.fashionlog.model.service;
 
-public interface MemberService {
+import com.fashionlog.model.dto.Member;
 
+public interface MemberService {
+	Member findById(String Id);
+	
 }
