@@ -8,8 +8,8 @@
 
 <table>
 <tr th:each="comment : ${commentList}">
-	<td><a th:href="@{/report(tagetCommentNo=${comment.commentNo})}"
-		th:text="${comment.memberNo}"></a></td>
+	<td><a th:href="@{/report(tagetCommentNo=${comment.path})}"
+		th:text="${comment.nickname}"></a></td>
 	<td th:text="${comment.contents}"></td>
 	<td><a th:href="@{/deleteComment(commentNo=${comment.commentNo})}">x</td>
 </tr>

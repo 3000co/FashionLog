@@ -1,6 +1,7 @@
 package com.fashionlog.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.fashionlog.model.dao.CommentRepository;
 import com.fashionlog.model.dao.TestRepository;
 import com.fashionlog.model.dto.Comment;
 import com.fashionlog.model.dto.Post;
@@ -42,4 +43,17 @@ public class TestController {
 		
 		return commentList;
 	}
+	
+	@RequestMapping("/test1")
+	public List<Object[]> queryTest() {
+		
+		List<Object[]> commentList = testRepository.test1();
+		for(Object[] row : commentList) {
+			System.out.println(Arrays.toString(row));
+		}
+		
+		return commentList;
+	}
+	
+	
 }

@@ -1,7 +1,9 @@
 package com.fashionlog.controller;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fashionlog.model.dao.CommentRepository;
+import com.fashionlog.model.dao.MemberRepository;
 import com.fashionlog.model.dto.Comment;
+import com.fashionlog.model.dto.CommentFileMember;
+import com.fashionlog.model.dto.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,6 +28,8 @@ import lombok.extern.slf4j.Slf4j;
 public class CommentController {
 	@Autowired
 	CommentRepository commentRepository;
+	//샘플 멤버를 위해 임시로 작성
+	MemberRepository memberRepository;
 	
 //	@RequestMapping("/")
 //	public String moveView() {
@@ -32,17 +39,26 @@ public class CommentController {
 	@RequestMapping("/")
 	public String getCommentList(Model model, Comment comment) {
 		
-	List<Comment> commentList = commentRepository.findAll();
+	List<Object[]> commentList = commentRepository.getCommentList();
+	for(Object[] item : commentList) {
+
+		// System.out.println(item);
+
+		System.out.println(Arrays.toString(item));
+
+		}
 	model.addAttribute("commentList", commentList);
 	
 		return "view";	
 	}
 	
-	@RequestMapping("/insertComment")
+	@RequestMapping("/insertCommentdf")
 	public String insertComment(HttpServletRequest request) {
 		Comment comment = new Comment();
-		//memberNo과 postNo은 샘플 데이터를 넣어둠. 세션에서 받을 예정. 
-		comment.setMemberNo(3);
+		Optional<Member> member = memberRepository.findById(3);
+		//postNo은 샘플 데이터를 넣어둠. 세션에서 받을 예정. 
+		
+		comment.setMember(member);
 		comment.setContents(request.getParameter("contents"));
 		comment.setPostNo(9);
 		comment.setUploadTime(new Date());
