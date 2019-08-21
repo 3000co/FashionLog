@@ -23,20 +23,29 @@ public class Item {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int itemNo;
+	
 	@ManyToOne
 	@JoinColumn(name = "POST_NO")
 	private Post postNo;
+	
 	private int tagNo;
+	
 	private String name;
+	
 	@ManyToOne
 	@JoinColumn(name = "CATEGORY_NO")
 	private Category categoryNo;
+	
 	@ManyToOne
 	@JoinColumn(name = "BRAND_NO")
 	private Brand brandNo;
-	@Column(name="color", columnDefinition ="char")
+	
+	@Column(columnDefinition ="char")
 	private String color;
+	
 	private String store;
+	
 	private float xCoordinate;
+	
 	private float yCoordinate;
 }

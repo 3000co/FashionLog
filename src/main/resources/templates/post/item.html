@@ -1,25 +1,36 @@
 <!DOCTYPE html>
-<html>
-<head>     
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
 <meta charset="UTF-8">
 <title>Item</title>
 </head>
 <body>
+
+	<p th:text="${categoryName}"></p>
+	<br>
+
+
+
+
 	<form action="item">
 <!-- 		post_no<input type="number" name="postNo" value="9"><br> -->
-		tag_no<input type="number" name="tagNo" value="1"><br>
+
+<!-- 		tag_no<input type="number" name="tagNo" value="1"><br> -->
 		name<input type="text" name="name" value="노랑파워"><br>
-<!-- 		category_no<input type="number" name="categoryNo" value="1"><br> -->
-<!-- 		brand_no<input type="number" name="brandNo" value="1"><br> -->
+		category_no 
+		<select id="categoryNo" name="categoryNo">
+			<option th:each="category:${categoryName}" th:text="${category}">1</option>
+		</select><br> 
+		brand_no<input type="number" name="brandNo" value="1"><br>
 		color<input type="text" name="color" value="#cdcdcd"><br>
 		store<input type="text" name="store" value="default"><br>
-		xCoordinate<input type="number" step="any" name="xCoordinate" value="1.5"><br>
-		yCoordinate<input type="number" step="any" name="yCoordinate" value="1.3"><br>
+<!-- 		xCoordinate<input type="number" step="any" name="xCoordinate" value="1.5"><br>  -->
+<!-- 		yCoordinate<input type="number" step="any" name="yCoordinate" value="1.3"><br>  -->
 		<input type="submit" value="등록">
 	</form>
 	<br>
-<!-- 	<form action="itemRead"> -->
-<!-- 		<input type="submit" value="읽기"> -->
-<!-- 	</form> -->
+	<form action="itemRead">
+		<input type="submit" value="읽기">
+	</form>
 </body>
 </html>

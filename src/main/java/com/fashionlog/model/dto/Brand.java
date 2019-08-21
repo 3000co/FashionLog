@@ -21,7 +21,7 @@ public class Brand {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int brandNo;
-	@Column(name="name", columnDefinition ="char")
+	@Column(columnDefinition ="char")
 	private String name;
 	private int brandImageNo;
 }
