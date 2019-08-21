@@ -67,7 +67,7 @@ public class CommentController {
 
 	@RequestMapping("/deleteComment")
 	public String deleteComment(@RequestParam("commentNo")int commentNo) {
-		commentRepository.deleteById(commentNo);;
+		commentRepository.deleteById(commentNo);
 		return "redirect:/";
 	}
 

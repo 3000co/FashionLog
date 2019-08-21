@@ -16,27 +16,28 @@
 	<td th:text="${comment[1]}"></td>
 	<td><a th:href="@{/deleteComment(commentNo=${comment[0]})}">x</td>
 </tr>  
-
-<tr>
-<form name=commentInputForm action="/insertComment" method="post">
-		<input type="text" name="contents" placeholder="내용을 입력해주세요" >
-		<button type="submit" value="insertBtn" th:onchange="Inputprocess()">등록</button>
-</form>
-</tr>
 </table>
 
-<script type="text/javascript" th:inline="javascript">
-	document.myform.insertBtn.disabled = true;
-	document.onkeyup = Inputprocess;
-	document.onmouseup = Inputprocess;
-	document.onmousedown = Inputprocess;
+<form name=commentInputForm action="/insertComment" method="post">
+		<input type="text" id="contents" placeholder="내용을 입력해주세요" >
+		<button type="submit" id="insertBtn" onchange="InputProcess()">등록</button>
+</form>
 
-	function Inputprocess(){
+
+
+<script type="text/javascript" th:inline="javascript">
+	document.getElementById("insertBtn").disabled = true;
+	document.onkeyup = InputProcess;
+	document.onmouseup = InputProcess;
+	document.onmousedown = InputProcess;
+
+	function InputProcess(){
+		
 		/*<![CDATA[*/
-		if (document.commentInputForm.contents.value == ''){
-			document.commentInputForm.insertBtn.disable = true;
+		if (document.getElementById("contents").value == ''){
+			document.getElementById("insertBtn").disabled = true;
 		} else {
-			document.commentInputForm.insert.disable = false;
+			document.getElementById("insertBtn").disabled = false;
 		}
 		/*]]>*/
 	}
