@@ -10,8 +10,8 @@ import com.fashionlog.model.dto.Category;
 
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 	
-	@Query(value = "select name from category", nativeQuery = true)
-	public List<String> findCategoryQuery();
+//	@Query(value = "select name, category_no from category", nativeQuery = true)
+//	public List<Object[]> findCategoryQuery();
 	
 //	@Query(value = "select category_no from fashionlog.category where name = ?name", nativeQuery = true)
 //	public Category findbyNameQuery(@Param("name") String name);

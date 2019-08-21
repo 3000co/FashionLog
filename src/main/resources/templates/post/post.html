@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Post</title>
@@ -13,7 +13,7 @@
 		left: 50%;
 		margin-left: -533px;
 		overflow: hidden;
-		border: 3px dashed #ffbb00;
+		border: 3px dashed #000000;
 	}
 	.imgwrap {
 		width: 250px;
@@ -83,24 +83,47 @@
 		</div>
 		
 		<div class="contents">
+	<!-- 스타일 -->
 			<div class="style">
 				<label for="style">스 타 일</label>
-				<select id="style">
-					<option>Vintage</option>
-					<option>Casual</option>
-					<option>Chic</option>
-					<option>Street</option>
-					<option>Sporty</option>
-					<option>Formal</option>
-					<option>Gothic</option>
-					<option>Punk</option>
-					<option>Retro</option>
-					<option>Dandy</option>
-				</select>
-				<input type="text" value="">
-			</div>
+				<select id="styleNo" name="styleNo1">
+						<option th:each="style:${style}" th:text="${style.name}"
+							th:value="${style.styleNo}"></option>
+				</select><br> 
+			
+				<input type="text" value="" placeholder="스타일을 선택해 주세요">
+			</div><hr>
+	<!-- 태그 -->
 			<div class="tag">
-				
+				<form action="item">
+		<!-- 		post_no<input type="number" name="postNo" value="9"><br> -->
+		<!-- 		tag_no<input type="number" name="tagNo" value="1"><br> -->
+			
+					<label for="name">상 품 명</label>
+					<input type="text" id="name" name="name" value="노랑파워"><br>
+			
+					<label for="categoryNo">카테고리</label>
+					<select id="categoryNo" name="categoryNo">
+						<option th:each="category:${category}" th:text="${category.name}"
+							th:value="${category.categoryNo}"></option>
+					</select><br> 
+					
+					<label for="brandNo">브 랜 드</label>
+					<select id="brandNo" name="brandNo">
+						<option th:each="brand:${brand}" th:text="${brand[1]}"
+							th:value="${brand[0]}"></option>
+					</select><br> 
+					
+					<label for="color">색상</label>
+					<input type="text" id="color" name="color" value="#cdcdcd"><a href="#" name="palette">파레트</a><br>
+			
+					<label for="store">구 매 처</label>
+					<input type="text" id="store" name="store" value="default"><button>지도</button> <br>
+			
+			<!-- 		xCoordinate<input type="number" step="any" name="xCoordinate" value="1.5"><br>  -->
+			<!-- 		yCoordinate<input type="number" step="any" name="yCoordinate" value="1.3"><br>  -->
+					<input type="submit" value="등록">
+				</form>
 			</div>
 		</div>
 	
