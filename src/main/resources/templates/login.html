@@ -1,23 +1,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>회원 로그인</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>회원 로그인</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 
 <body th:align="center">
 	<h1>로그인</h1>
-	<img src="google-logo.png"/>
-	<form th:action="login" method="post">
+	<img src="google-logo.png" />
+	<form th:action="@{/login}" method="post">
 		<table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0">
 			<tr>
 				<td><input name="id" type="text" size="20" placeholder="이메일"></td>
 			</tr>
 
 			<tr>
-				<td><input name="password" type="password" size="20" placeholder="비밀번호"></td>
+				<td><input name="password" type="password" size="20"
+					placeholder="비밀번호"></td>
 			</tr>
 		</table>
+		<input type="submit" value="로그인">
 	</form>
-	<input type="submit" value="로그인">
+
 </body>
 </html>
