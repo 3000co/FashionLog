@@ -5,13 +5,15 @@
 <title>Post</title>
 
 <style>
-	.wrapper{
+	#styleNo1, #styleNo2, #styleNo3 {
+		width: 50px;
+	}
+	.wrapper {
 		position: relative;
  		width: 600px; 
 		padding: 10px;
 		top: 10px;
-		left: 50%;
-		margin-left: -533px;
+		left: 25%;
 		overflow: hidden;
 		border: 3px dashed #000000;
 	}
@@ -39,9 +41,6 @@
 		padding-bottom: 10px;
 		border: 1px dashed #bcbcbc;
 	}
-	.style{
-	
-	} 
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
@@ -86,12 +85,13 @@
 	<!-- 스타일 -->
 			<div class="style">
 				<label for="style">스 타 일</label>
-				<select id="styleNo" name="styleNo1">
+				<select id="styleNo" name="styleNo">
 						<option th:each="style:${style}" th:text="${style.name}"
 							th:value="${style.styleNo}"></option>
 				</select><br> 
-			
-				<input type="text" value="" placeholder="스타일을 선택해 주세요">
+				&emsp;<input type="text" id="styleNo1" name="styleNo1" value="">
+				&emsp;<input type="text" id="styleNo3" name="styleNo2" value="">
+				&emsp;<input type="text" id="styleNo3" name="styleNo3" value="">
 			</div><hr>
 	<!-- 태그 -->
 			<div class="tag">
