@@ -31,7 +31,7 @@ public class Item {
 	@ManyToOne
 	@JoinColumn(name = "CATEGORY_NO")
 	private Category categoryNo;
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "BRAND_NO")
 	private Brand brandNo;
 	@Column(name="color", columnDefinition ="char")
