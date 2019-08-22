@@ -6,11 +6,11 @@
 
 <body th:align="center">
 	<h1>로그인</h1>
-	<img src="google-logo.png" />
+	<img src="google-logo.png" width="50" height="50" />
 	<form th:action="@{/login}" method="post">
 		<table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0">
 			<tr>
-				<td><input name="id" type="text" size="20" placeholder="이메일"></td>
+				<td><input name="id" type="text" size="20" placeholder="아이디"></td>
 			</tr>
 
 			<tr>
@@ -19,6 +19,7 @@
 			</tr>
 		</table>
 		<input type="submit" value="로그인">
+				
 	</form>
 
 </body>
