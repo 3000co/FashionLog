@@ -1,8 +1,35 @@
 
-var selFile;
 $(document).ready(function() {
 	$("#inputImg").on("change", handleImgFileSelect);
+
+	$("#img").click(function (event){
+		var x = event.clientX;
+		var y = event.clientY;
+		var tagStyle = document.getElementById("tag").style.display;
+		var tagHtml = $("#tag").html();
+		
+		document.getElementById("xCoordinate").value = x;
+		document.getElementById("yCoordinate").value = y;
+	
+		if (tagStyle === "block") {
+			$("#tagContents").append(tagHtml);	
+		} else {
+			$("#tag").show();
+		}
+		
+		console.log(tag);
+	});
+	
+	$("#exitBtn").click(function (event){
+		var tagStyle = document.getElementById("tag").style.display;
+		if (tagStyle === "block") {
+			$("#tag").hide();
+		} 
+	});
+	
 });
+
+var selFile;
 
 function handleImgFileSelect(e) {
 	var files = e.target.files;

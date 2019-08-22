@@ -32,11 +32,17 @@
 }
 
 .contents {
-	width: 250px;
+	width: 300px;
 	height: 450px;
 	margin-top: 1%;
 	float: right;
 	padding: 10px;
 	padding-bottom: 10px;
 	border: 1px dashed #bcbcbc;
+}
+
+.tag {
+	display: none;
+	border: 1px dashed #bcbcbc;
+	padding: 10px;
 }
