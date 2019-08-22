@@ -12,10 +12,12 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 @Entity
-public class Comment {
+public class Comment implements SocialEvent{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

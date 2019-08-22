@@ -11,15 +11,13 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-@Getter
-@Setter
-@ToString
+@Data
+@EqualsAndHashCode(callSuper=false)
 @Entity
-public class Follow {
+public class Follow implements SocialEvent{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
