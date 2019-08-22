@@ -14,4 +14,4 @@ FashionLog is awesome SNS for the fashion people
 [FashionLog Class Diagram(drawio)](https://drive.google.com/file/d/1D6zVhJm32IYNzrDsjjai0qM1iqiTXHOA/view?usp=sharing)
 
 ### ERD
-![FashionLog ERD](./intro_sources/FashionLog ERD.png)
+![FashionLog ERD](./intro_sources/FashionLog_ERD.png)
