@@ -1,5 +1,7 @@
 package com.fashionlog.model.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +14,22 @@ public class MemberServiceImpl implements MemberService{
 	private MemberRepository memberRepo;
 	
 	@Override
-	public Member findById(String Id) {
+	public Optional<Member> findById(char Id) {
 		return memberRepo.findById(Id);
+	}
+
+	@Override
+	public Member getMemberInfo(Member member) {
+		Optional<Member> findMember = memberRepo.findById(member.getId());
+		if (findMember.isPresent()) 
+			return findMember.get();
+		else return null;
+	}
+
+	@Override
+	public void doJoin(Member member) {
+		memberRepo.setJoin(member);
+		
 	}
 	
 }
