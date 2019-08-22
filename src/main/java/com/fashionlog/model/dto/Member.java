@@ -31,9 +31,10 @@ public class Member {
 	private char phonenumber;
 	@Column( name="email", columnDefinition ="char")  
 	private char email;
-	@ManyToOne 
-	@JoinColumn(name = "profileImageNo", referencedColumnName = "fileNo")
-	private File file;
+//	@ManyToOne 
+//	@JoinColumn(name = "profileImageNo", referencedColumnName = "fileNo")
+//	private File file;
+	private int profileImageNo;
 	private int styleNo1;
 	private int styleNo2;
 

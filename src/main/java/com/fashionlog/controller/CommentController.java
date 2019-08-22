@@ -29,8 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CommentController {
 	@Autowired
 	CommentRepository commentRepository;
-	//샘플 멤버를 위해 임시로 작성
-	MemberRepository memberRepository;
+	
 
 	//	@RequestMapping("/")
 	//	public String moveView() {
@@ -41,10 +40,10 @@ public class CommentController {
 	public String getCommentList(Model model) {
 
 		List<Object[]> commentList = commentRepository.getCommentList();
-//		for(Object[] item : commentList) {
-//			System.out.println(Arrays.toString(item));
-//
-//		}
+		for(Object[] item : commentList) {
+			System.out.println(Arrays.toString(item));
+
+		}
 		model.addAttribute("commentList", commentList);
 		return "view";	
 	}
