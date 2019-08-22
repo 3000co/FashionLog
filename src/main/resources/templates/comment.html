@@ -2,28 +2,50 @@
 <html xmlns:th="http://www.thymeleaf.org">  
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" href="comment.css">
 <title>Insert title here</title>
 </head>
 <body>
 
-<table>
-<!-- <tr th:text="${commentList}"></tr> -->
+<div id="badge">
+  
+  <section class="all">
 
-<tr th:each="comment:${commentList}">
-	<td th:text="${comment[4]}"></td>
-	<td><a th:href="@{/report(tagetCommentNo=${comment[0]})}"
-		th:text="${comment[2]}"></a></td>
-	<td th:text="${comment[1]}"></td>
-	<td><a th:href="@{/deleteComment(commentNo=${comment[0]})}">x</td>
-</tr>  
-</table>
-
-<form name=commentInputForm action="/insertComment" method="post">
-		<input type="text" id="contents" placeholder="내용을 입력해주세요" >
-		<button type="submit" id="insertBtn" onchange="InputProcess()">등록</button>
-</form>
-
-
+    <div class="list">
+      <div class="mask"></div>
+ 
+      <section>
+        <div class="comments">
+        <table>
+		<!-- <tr th:text="${commentList}"></tr> -->
+		
+		<tr th:each="comment:${commentList}">
+			<td><span th:text="${comment[4]}"></span>
+			<a th:href="@{/report(tagetCommentNo=${comment[0]})}"
+				th:text="${comment[2]}"></a></span>
+			<span th:text="${comment[1]}"></span>
+			<span><a th:href="@{/deleteComment(commentNo=${comment[0]})}"/>x</span>
+			</td>
+		</tr>  
+		</table>
+        </div> 
+      </section>
+         
+    </div>
+    
+  </section>
+  
+  <section>
+  
+        <div class="commentInput">
+        <form name=commentInputForm action="/insertComment" method="post">
+			<td><input type="text" name="contents" id="contents" placeholder="내용을 입력해주세요" ></td>
+			<td><button type="submit" id="insertBtn" onchange="InputProcess()">등록</button></td>
+		</form>
+        </div>
+ 
+  </section>
+</div>
 
 <script type="text/javascript" th:inline="javascript">
 	document.getElementById("insertBtn").disabled = true;
