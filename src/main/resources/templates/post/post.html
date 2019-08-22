@@ -1,74 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Post</title>
-
-<style>
-	#styleNo1, #styleNo2, #styleNo3 {
-		width: 50px;
-	}
-	.wrapper {
-		position: relative;
- 		width: 600px; 
-		padding: 10px;
-		top: 10px;
-		left: 25%;
-		overflow: hidden;
-		border: 3px dashed #000000;
-	}
-	.imgwrap {
-		width: 250px;
-		height: 450px;
-		margin-top: 1%;
-		float: left;
-		padding: 10px;
-		padding-bottom: 10px;
-		border: 1px dashed #bcbcbc;
-	}
-	.imgwrap img {
-		margin-top: 1%;
-		margin-bottom: 1%;
-		width: 100%;
-		height: 100%;
-	}
-	.contents {
-		width: 250px;
-		height: 450px;
-		margin-top: 1%;
-		float: right;
-		padding: 10px;
-		padding-bottom: 10px;
-		border: 1px dashed #bcbcbc;
-	}
-</style>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script>
-	var selFile;
-	$(document).ready(function() {
-		$("#inputImg").on("change", handleImgFileSelect);
-	});
+	<meta charset="UTF-8">
+	<title>Post</title>
 	
-	function handleImgFileSelect(e) {
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-		
-		filesArr.forEach(function(f) {
-			if(!f.type.match("image.*")) {
-				alert("이미지 확장자만 가능");
-				return;
-			}
-			
-			selFile = f;
-			
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$("#img").attr("src", e.target.result);
-			}
-			reader.readAsDataURL(f);
-		});
-	}
-</script>
+	<link rel="stylesheet" href="css/post.css">
+
 </head>
 <body>
 	<div class="wrapper">
@@ -76,7 +13,7 @@
 			<p>이미지 업로드 </p>
 			<input type='file' id="inputImg" />
 	
-			<div calss="img">
+			<div class="imgDiv">
 				<img id="img" />
 			</div>
 		</div>
@@ -89,12 +26,12 @@
 						<option th:each="style:${style}" th:text="${style.name}"
 							th:value="${style.styleNo}"></option>
 				</select><br> 
-				&emsp;<input type="text" id="styleNo1" name="styleNo1" value="">
-				&emsp;<input type="text" id="styleNo3" name="styleNo2" value="">
-				&emsp;<input type="text" id="styleNo3" name="styleNo3" value="">
+				&emsp;<input type="text" id="styleNo1" name="styleNo1" class="styleNo1">
+				&emsp;<input type="text" id="styleNo3" name="styleNo2" class="styleNo2">
+				&emsp;<input type="text" id="styleNo3" name="styleNo3" class="styleNo3">
 			</div><hr>
 	<!-- 태그 -->
-			<div class="tag">
+			<div id="tag" class="tag">
 				<form action="item">
 		<!-- 		post_no<input type="number" name="postNo" value="9"><br> -->
 		<!-- 		tag_no<input type="number" name="tagNo" value="1"><br> -->
@@ -122,13 +59,15 @@
 			
 			<!-- 		xCoordinate<input type="number" step="any" name="xCoordinate" value="1.5"><br>  -->
 			<!-- 		yCoordinate<input type="number" step="any" name="yCoordinate" value="1.3"><br>  -->
+					<button onclick="exitFuntion()">X</button>
 					<input type="submit" value="등록">
 				</form>
 			</div>
-		</div>
-	
+		</div>	
 	</div>
-</body>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="js/previewImage.js"></script>
 
+</body>
 
 </html>
