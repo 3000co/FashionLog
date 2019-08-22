@@ -1,5 +1,9 @@
 package com.fashionlog.model.dao;
 
-public interface MemberRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.fashionlog.model.dto.Member;
+
+public interface MemberRepository extends JpaRepository<Member, Integer>{
 
 }

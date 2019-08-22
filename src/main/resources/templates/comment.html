@@ -1,24 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">  
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" href="comment.css">
 <title>Insert title here</title>
 </head>
 <body>
 
-<table>
-<tr th:each="comment : ${commentList}">
-	<td><a th:href="@{/report(tagetCommentNo=${comment.commentNo})}"
-		th:text="${comment.memberNo}"></a></td>
-	<td th:text="${comment.contents}"></td>
-	<td><a th:href="@{/deleteComment(commentNo=${comment.commentNo})}">x</td>
-</tr>
-</table>
+<div id="badge">
+  
+  <section class="all">
 
-<form action="/insertComment" method="post">
-<input type="text" name="contents" placeholder="내용을 입력해주세요" >
-<button type="submit">등록</button>
-</form>
+    <div class="list">
+      <div class="mask"></div>
+ 
+      <section>
+        <div class="comments">
+        <table>
+		<!-- <tr th:text="${commentList}"></tr> -->
+		
+		<tr th:each="comment:${commentList}">
+			<td><span th:text="${comment[4]}"></span>
+			<a th:href="@{/report(tagetCommentNo=${comment[0]})}"
+				th:text="${comment[2]}"></a></span>
+			<span th:text="${comment[1]}"></span>
+			<span><a th:href="@{/deleteComment(commentNo=${comment[0]})}"/>x</span>
+			</td>
+		</tr>  
+		</table>
+        </div> 
+      </section>
+         
+    </div>
+    
+  </section>
+  
+  <section>
+  
+        <div class="commentInput">
+        <form name=commentInputForm action="/insertComment" method="post">
+			<td><input type="text" name="contents" id="contents" placeholder="내용을 입력해주세요" ></td>
+			<td><button type="submit" id="insertBtn" onchange="InputProcess()">등록</button></td>
+		</form>
+        </div>
+ 
+  </section>
+</div>
+
+<script type="text/javascript" th:inline="javascript">
+	document.getElementById("insertBtn").disabled = true;
+	document.onkeyup = InputProcess;
+	document.onmouseup = InputProcess;
+	document.onmousedown = InputProcess;
+
+	function InputProcess(){
+		
+		/*<![CDATA[*/
+		if (document.getElementById("contents").value == ''){
+			document.getElementById("insertBtn").disabled = true;
+		} else {
+			document.getElementById("insertBtn").disabled = false;
+		}
+		/*]]>*/
+	}
+
+</script>	
 
 </body>
 </html>
