@@ -17,10 +17,8 @@
       <section>
         <div class="comments">
         <table>
-		<!-- <tr th:text="${commentList}"></tr> -->
-		
 		<tr th:each="comment:${commentList}">
-			<td><span th:text="${comment[4]}"></span>
+			<td><span img th:src="@{${comment[4]}}"></span>
 			<a th:href="@{/report(tagetCommentNo=${comment[0]})}"
 				th:text="${comment[2]}"></a></span>
 			<span th:text="${comment[1]}"></span>
