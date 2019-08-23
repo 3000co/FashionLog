@@ -6,7 +6,7 @@ import com.fashionlog.model.dto.SocialEvent;
 public interface NotificationService {
 
 	public void enrollNotification(SocialEvent event);
+
+	public void checkNotification(Notification noti);
 	
-	public void deleteNotification(SocialEvent event);
-		
 }

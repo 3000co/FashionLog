@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -51,7 +50,6 @@ public class Report {
 	@CreationTimestamp
 	private Timestamp reportTime;
 	
-	@UpdateTimestamp
 	private Timestamp checkTime;
 	
 	private String checkHistory;

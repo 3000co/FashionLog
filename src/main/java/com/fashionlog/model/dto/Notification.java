@@ -9,10 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Data;
 
@@ -35,22 +35,21 @@ public class Notification {
 	
 	private int type;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "LIKES_NO")
 	private Likes likesNo;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "COMMENT_NO")
 	private Comment commentNo;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "FOLLOW_NO")
 	private Follow followNo;
 	
 	@CreationTimestamp
 	private Timestamp sendTime;
 	
-	@UpdateTimestamp
 	private Timestamp checkTime;
 	
 }

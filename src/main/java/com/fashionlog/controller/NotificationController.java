@@ -10,27 +10,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fashionlog.model.dao.MemberRepository;
 import com.fashionlog.model.dao.NotificationRepository;
 import com.fashionlog.model.dto.Comment;
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Notification;
+import com.fashionlog.model.service.NotificationService;
 
 @RestController
 public class NotificationController {
 	@Autowired
 	private NotificationRepository notificiationRepository;
 	
+	@Autowired
+	private MemberRepository memberRepository;
+	
+	@Autowired
+	private NotificationService notificationService;
+	
 	@RequestMapping("/noti/{memberNo}")
 	@ResponseBody
 	public List<Notification> notificationList(@PathVariable int memberNo, Model model) {
-		Member reciever = new Member();
-		reciever.setMemberNo(memberNo);
-		
+		Member reciever = memberRepository.findById(memberNo).get();
 		List<Notification> uncheckedNoti = notificiationRepository.findByRecieverMemNo(reciever);
 		System.out.println(uncheckedNoti);
 		model.addAllAttributes(uncheckedNoti);
-	
-//		return "notification/notification";
+		
 		return uncheckedNoti;
 	}
 	

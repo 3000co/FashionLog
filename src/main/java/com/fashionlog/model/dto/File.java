@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -41,7 +40,6 @@ public class File {
 	@CreationTimestamp
 	Timestamp uploadTime;
 	
-	@UpdateTimestamp
 	Timestamp deleteTime;
 	
 }
