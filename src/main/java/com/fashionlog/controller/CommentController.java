@@ -41,7 +41,7 @@ public class CommentController {
 	//		return "view";
 	//	}
 
-	@RequestMapping("/")
+	@RequestMapping("/commnet")
 	public String getCommentList(Model model) {
 
 		List<Object[]> commentList = commentRepository.getCommentList();
