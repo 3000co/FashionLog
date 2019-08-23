@@ -1,5 +1,6 @@
 package com.fashionlog.model.dto;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -24,19 +26,25 @@ import lombok.Builder.Default;
 public class File {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int fileNo;
-	@Column( name="type", columnDefinition ="char")  
-	private String type;
-//	@Column( name="name", columnDefinition ="char")
-//	private char name;
-	private String name;
-	private String path;
-	private int size;
-	@Column(columnDefinition ="char default 'published'")
-	private String state;
-	private Date uploadTime;
-	@Column(nullable = true)
-	private Date deleteTime;
+	int fileNo;
+	
+	@Column(columnDefinition = "char")
+	String type;
+	
+	@Column(name="name", columnDefinition = "char")
+	String name;
+	
+	String path;
+	
+	int size;
+	
+	@Column(columnDefinition = "char")
+	String state;
+	
+	@CreationTimestamp
+	Timestamp uploadTime;
+	
+	Timestamp deleteTime;
 	
 	
 	

@@ -18,9 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fashionlog.model.dao.CommentRepository;
 import com.fashionlog.model.dao.MemberRepository;
+import com.fashionlog.model.dao.PostRepository;
 import com.fashionlog.model.dto.Comment;
-import com.fashionlog.model.dto.CommentFileMember;
 import com.fashionlog.model.dto.Member;
+import com.fashionlog.model.dto.Post;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +30,10 @@ import lombok.extern.slf4j.Slf4j;
 public class CommentController {
 	@Autowired
 	CommentRepository commentRepository;
+	@Autowired
+	MemberRepository memberRepository;
+	@Autowired
+	PostRepository postRepository;
 	
 
 	//	@RequestMapping("/")
@@ -52,13 +57,13 @@ public class CommentController {
 	@RequestMapping("/insertComment")
 	public String insertComment(HttpServletRequest request) {
 		Comment comment = new Comment();
-		//Optional<Member> member = memberRepository.findById(3);
+		Member member = memberRepository.findById(3).get();
+		Post post = postRepository.findById(9).get();
+		
 		//postNo은 샘플 데이터를 넣어둠. 세션에서 받을 예정. 
-
-		comment.setMemberNo(3);
+		comment.setMemberNo(member);
 		comment.setContents(request.getParameter("contents"));
-		comment.setPostNo(9);
-		comment.setUploadTime(new Date());
+		comment.setPostNo(post);
 		commentRepository.save(comment);
 
 		return "redirect:/";

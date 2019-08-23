@@ -27,23 +27,22 @@
 		</tr>  
 		</table>
         </div> 
-      </section>
-         
+      </section> 
     </div>
-    
   </section>
   
   <section>
-  
         <div class="commentInput">
         <form name=commentInputForm action="/insertComment" method="post">
 			<td><input type="text" name="contents" id="contents" placeholder="내용을 입력해주세요" ></td>
 			<td><button type="submit" id="insertBtn" onchange="InputProcess()">등록</button></td>
 		</form>
         </div>
- 
   </section>
 </div>
+
+<span><a th:href="@{/file}">파일로</span>
+
 
 <script type="text/javascript" th:inline="javascript">
 	document.getElementById("insertBtn").disabled = true;
