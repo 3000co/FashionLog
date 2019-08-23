@@ -36,7 +36,7 @@ public class Follow implements SocialEvent{
 	@CreationTimestamp
 	Timestamp followTime;
 	
-	@OneToOne(mappedBy = "notificationNo", cascade = CascadeType.REMOVE)
-	Notification notification;
+//	@OneToOne(mappedBy = "notiNo", cascade = CascadeType.REMOVE)
+//	Notification notification;
 	
 }

@@ -22,7 +22,7 @@ import lombok.Data;
 public class Notification {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
+	@Column(name = "NOTI_NO")
 	private int notiNo;
 	
 	@ManyToOne

@@ -36,7 +36,7 @@ public class Likes implements SocialEvent{
 	@CreationTimestamp
 	Timestamp likesTime;
 	
-	@OneToOne(mappedBy = "notificationNo", cascade = CascadeType.REMOVE)
-	Notification notification;
+//	@OneToOne(mappedBy = "notiNo", cascade = CascadeType.REMOVE)
+//	Notification notification;
 	
 }
