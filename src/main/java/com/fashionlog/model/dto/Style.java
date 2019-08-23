@@ -15,12 +15,13 @@ import lombok.ToString;
 @ToString
 @Entity
 public class Style {
-	
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int styleNo;
 	
 	@Column(columnDefinition = "char")
 	String name;
-	
+
 }

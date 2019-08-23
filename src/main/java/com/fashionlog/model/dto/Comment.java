@@ -2,24 +2,32 @@ package com.fashionlog.model.dto;
 
 import java.sql.Timestamp;
 
+import java.util.Date;
+import java.util.Optional;
+
+import javax.management.Notification;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-@Data
-@EqualsAndHashCode(callSuper=false)
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
+@Getter @Setter @ToString
 public class Comment implements SocialEvent{
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +46,12 @@ public class Comment implements SocialEvent{
 	
 	String contents;
 	
-	@OneToOne(mappedBy = "notificationNo", cascade = CascadeType.REMOVE)
-	Notification notification;
+
+//	@OneToOne(mappedBy = "notificationNo", cascade = CascadeType.REMOVE)
+//	Notification notification;
 	
-}
+	
+		
+	}
+	
+

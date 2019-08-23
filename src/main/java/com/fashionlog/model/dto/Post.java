@@ -2,6 +2,8 @@ package com.fashionlog.model.dto;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -23,6 +25,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
+
 public class Post {
 	
 	@Id
@@ -57,7 +60,9 @@ public class Post {
 	
 	@OneToMany(mappedBy = "commentNo")
 	private List<Comment> commentList = new ArrayList<Comment>();
+
 	
 }
+
 
 
