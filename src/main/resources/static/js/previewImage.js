@@ -1,29 +1,45 @@
 $(document).ready(function() {
 	$("#inputImg").on("change", handleImgFileSelect);
-
-	$("#img").click(function (event){
-		var x = event.clientX;
-		var y = event.clientY;
-		var tagStyle = document.getElementById("tag").style.display;
-		var tagHtml = $("#tag").html();
-		
-		document.getElementById("xCoordinate").value = x;
-		document.getElementById("yCoordinate").value = y;
 	
-		if (tagStyle === "block") {
-			$("#tagContents").append(tagHtml);	
-		} else {
-			$("#tag").show();
-		}
+	var count = 0;
+	var chageTagId = $("#tag");
+	var tagHtml = $(chageTagId).html();
+	
+	$("#img").click(function (event){
+		count++;
 		
-		console.log(tag);
+		if (count <= 7) {
+			var x = event.clientX;
+			var y = event.clientY;
+			var tagStyle = $(chageTagId).css("display");
+			
+			document.getElementById("xCoordinate").value = x;
+			document.getElementById("yCoordinate").value = y;
+			
+			chageTagId = $(chageTagId).attr("id","tag" + count);
+		
+			
+			
+			
+			if (tagStyle === "block") {
+				$(chageTagId).append(tagHtml);	
+			} else {
+				$(chageTagId).show();
+			}
+			console.log(chageTagId);
+			
+			console.log(tagStyle);
+			console.log(count);
+		}
 	});
 	
 	$("#exitBtn").click(function (event){
-		var tagStyle = document.getElementById("tag").style.display;
-		if (tagStyle === "block") {
-			$("#tag").hide();
-		} 
+		
+			$(chageTagId).hide();
+			
+			count--;
+			console.log(count);
+
 	});
 	
 });

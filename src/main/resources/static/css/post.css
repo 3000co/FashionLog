@@ -43,7 +43,9 @@
 
 .tag {
 	display: none;
+}
+.tagForm{
 	border: 1px dashed #bcbcbc;
 	padding: 10px;
+	margin-bottom: 10px;
 }
-
