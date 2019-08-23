@@ -9,10 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+
 
 import lombok.Data;
 
@@ -22,7 +24,8 @@ import lombok.Data;
 public class Notification {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "NOTI_NO")
+
+	@Column
 	private int notiNo;
 	
 	@ManyToOne
@@ -49,7 +52,7 @@ public class Notification {
 	
 	@CreationTimestamp
 	private Timestamp sendTime;
-	
+
 	private Timestamp checkTime;
 	
 }

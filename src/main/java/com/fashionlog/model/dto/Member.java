@@ -53,6 +53,5 @@ public class Member {
 	@JoinColumn(name = "STYLE_NO3")
 	private Style styleNo3;
 
-
 }
 

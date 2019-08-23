@@ -8,6 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,7 +21,7 @@ import lombok.ToString;
 @ToString
 @Entity
 public class Item {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int itemNo;
@@ -25,7 +29,7 @@ public class Item {
 	@ManyToOne
 	@JoinColumn(name = "POST_NO")
 	private Post postNo;
-	 
+
 	private int tagNo;
 	
 	private String name;
@@ -43,8 +47,8 @@ public class Item {
 	
 	private String store;
 	
-	private Float xCoordinate;
+	private float xCoordinate;
 	
-	private Float yCoordinate;
-	
+	private float yCoordinate;
+
 }

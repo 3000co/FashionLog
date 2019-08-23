@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Post</title>
+
+	<link rel="stylesheet" href="css/post.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+</head>
+<body>
+
+	<div class="wrapper">
+		<div class="imgwrap">
+			<p>이미지 업로드 </p>
+
+			<input type="file" id="inputImg" />
+
+			<div class="imgdiv">
+<!-- 				<form> -->
+<!-- 					<img id="img" OnClick="javascript:tagFunction(event)"><br> -->
+					<img id="img"><br>
+<!-- 				</form> -->
+
+			</div>
+		</div>
+		
+		<div class="contents">
+	<!-- 스타일 -->
+			<div class="style">
+				<label for="style">스 타 일</label>
+				<select id="styleNo" name="styleNo">
+						<option th:each="style:${style}" th:text="${style.name}"
+							th:value="${style.styleNo}"></option>
+				</select><br> 
+				&emsp;<input type="text" id="styleNo1" name="styleNo1" class="styleNo1">
+				&emsp;<input type="text" id="styleNo3" name="styleNo2" class="styleNo2">
+				&emsp;<input type="text" id="styleNo3" name="styleNo3" class="styleNo3">
+			</div><hr>
+	<!-- 태그 -->
+
+			<div id="tagContents" class="tagContents">
+				<div id="tag" class="tag">
+					<form action="item" class="tagForm">
+			<!-- 		post_no<input type="number" name="postNo" value="9"><br> -->
+			<!-- 		tag_no<input type="number" name="tagNo" value="1"><br> -->
+				
+						<label for="name">상 품 명</label>
+						<input type="text" id="name" name="name" value="노랑파워"><br>
+				
+						<label for="categoryNo">카테고리</label>
+						<select id="categoryNo" name="categoryNo">
+							<option th:each="category:${category}" th:text="${category.name}"
+								th:value="${category.categoryNo}"></option>
+						</select><br> 
+						
+						<label for="brandNo">브 랜 드</label>
+						<select id="brandNo" name="brandNo">
+							<option th:each="brand:${brand}" th:text="${brand[1]}"
+								th:value="${brand[0]}"></option>
+						</select><br> 
+						
+						<label for="color">색상</label>
+						<input type="text" id="color" name="color" value="#cdcdcd"><a href="#" name="palette">파레트</a><br>
+				
+						<label for="store">구 매 처</label>
+						<input type="text" id="store" name="store" value="default"><button>지도</button> <br>
+				
+						<input type="text" id="xCoordinate" name="xCoordinate">
+						<input type="text" id="yCoordinate" name="yCoordinate"><br> 
+						<button type="button" id="exitBtn">EXIT</button>
+						<input type="submit" value="등록">
+					</form>
+					</div>
+			</div>
+		</div>	
+	</div>
+
+	<script src="js/previewImage.js"></script>
+</body>
+
+</body>
+
+</html>

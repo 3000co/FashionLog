@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import java.util.Date;
+
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -60,9 +61,4 @@ public class Post {
 	
 	@OneToMany(mappedBy = "commentNo")
 	private List<Comment> commentList = new ArrayList<Comment>();
-
-	
 }
-
-
-

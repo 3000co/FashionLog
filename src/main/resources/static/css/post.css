@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+.styleNo1, .styleNo2, .styleNo3 {
+	width: 50px;
+}
+
+.wrapper {
+	position: relative;
+	width: 600px;
+	padding: 10px;
+	top: 10px;
+	left: 25%;
+	overflow: hidden;
+	border: 3px dashed #000000;
+}
+
+.imgwrap {
+	width: 250px;
+	height: 450px;
+	margin-top: 1%;
+	float: left;
+	padding: 10px;
+	padding-bottom: 10px;
+	border: 1px dashed #bcbcbc;
+}
+
+.imgwrap img {
+	margin-top: 1%;
+	margin-bottom: 1%;
+	width: 100%;
+	height: 100%;
+}
+
+.contents {
+	width: 300px;
+	height: 450px;
+	margin-top: 1%;
+	float: right;
+	padding: 10px;
+	padding-bottom: 10px;
+	border: 1px dashed #bcbcbc;
+}
+
+.tag {
+	display: none;
+}
+.tagForm{
+	border: 1px dashed #bcbcbc;
+	padding: 10px;
+	margin-bottom: 10px;
+}

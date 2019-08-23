@@ -16,7 +16,6 @@ import lombok.ToString;
 @Entity
 public class Style {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int styleNo;

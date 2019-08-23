@@ -2,12 +2,14 @@ package com.fashionlog.model.dto;
 
 import java.sql.Timestamp;
 
+
 import java.util.Date;
 import java.util.Optional;
 
 import javax.management.Notification;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -45,12 +47,11 @@ public class Comment implements SocialEvent{
 	Timestamp uploadTime;
 	
 	String contents;
+
 //	
 //	@OneToOne(mappedBy = "notiNo", cascade = CascadeType.REMOVE)
 //	Notification notification;
-	
-	
-		
-	}
-	
 
+
+	
+}
