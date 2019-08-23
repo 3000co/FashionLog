@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 	$("#inputImg").on("change", handleImgFileSelect);
 
@@ -32,6 +31,7 @@ $(document).ready(function() {
 var selFile;
 
 function handleImgFileSelect(e) {
+
 	var files = e.target.files;
 	var filesArr = Array.prototype.slice.call(files);
 
@@ -49,4 +49,5 @@ function handleImgFileSelect(e) {
 		}
 		reader.readAsDataURL(f);
 	});
+
 }
