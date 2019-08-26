@@ -1,16 +1,23 @@
 ﻿package com.fashionlog.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.service.MemberService;
@@ -21,53 +28,36 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 
-	@RequestMapping(value="/")
-	public String main(){
+	@RequestMapping(value = "/")
+	public String main() {
 		return "main";
 	}
 
 	// 로그인
-	@RequestMapping("/login")
-	public String login(Model model, String error, String logout,HttpServletRequest httpServletRequest) {
-		if(logout != null) {
-			model.addAttribute("logout", "로그아웃 성공");
-			return "login";	
-		}else {
-			System.out.println("로그인 실패");
-			return "login";	
-		}
-	}
-	
-	//로그인 실패
-	@RequestMapping(value="/loginError")
-	public String loginError(Model model, String id) {
-		model.addAttribute("error", "오류");
-		model.addAttribute("id", id);
+	@RequestMapping(value="/login", method = RequestMethod.POST )
+	public String login() {
 		return "login";
 	}
-
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String doLogin(Member member, HttpServletRequest request) throws Exception {
-
+	
+	// 로그인 처리
+	@RequestMapping(value = "/login.do" , method = RequestMethod.POST)
+	public ModelAndView doLogin(@Valid Member member, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		HttpSession session = request.getSession();
 
 		Member getMemberInfo = memberService.getMemberInfo(member);
-
+		
+		System.out.println(member.getId()+member.getPassword());
+		
 		if (getMemberInfo == null) {
 			session.setAttribute("member", null);
-			System.out.println("로그인성공");
-			return "login";
+			System.out.println("로그인실패" + member);
+			return new ModelAndView("login");
 		} else {
 			session.setAttribute("member", getMemberInfo);
-			System.out.println("로그인 실패");
-			return "redirect:/";
+			System.out.println("로그인 성공" + getMemberInfo);
+			return new ModelAndView("redirect:/");
 		}
-	}
-
-	@RequestMapping("/logout")
-	public String logout(HttpSession session) throws Exception {
-		session.invalidate();
-		return "redirect:/";
 	}
 
 	@RequestMapping("/join")
@@ -75,10 +65,12 @@ public class MemberController {
 		return "join";
 	}
 
-	@RequestMapping(value = "/Join.do", method = {RequestMethod.POST, RequestMethod.GET})
-	public String signupProcess(Member member) {
+	@RequestMapping(value = "/join.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String signupProcess(Member member, HttpSession session) {
+		System.out.println("아이디: "+member.getId()+ " 비밀번호: "+member.getPassword());
 		System.out.println("Member::" + member);
-		memberService.doJoin(member);
+		
+		
 		return "redirect:login";
 	}
 

@@ -16,19 +16,19 @@ public class Member {
 	private int memberNo;
 	
 	@Column( name="id", columnDefinition ="char")  
-	private char id;
+	private String id;
 	
 	@Column( name="password", columnDefinition ="char")  
-	private char password;
+	private String password;
 	
 	@Column( name="nickname", columnDefinition ="char")  
-	private char nickname;
+	private String nickname;
 	
 	@Column( name="phonenumber", columnDefinition ="char")  
-	private char phonenumber;
+	private String phonenumber;
 	
 	@Column( name="email", columnDefinition ="char")  
-	private char email;
+	private String email;
 	
 	private int profileImageNo;
 	private int styleNo1;

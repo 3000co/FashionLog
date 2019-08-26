@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
 <title>회원 로그인</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -7,19 +7,19 @@
 <body th:align="center">
 	<h1>로그인</h1>
 	<img src="google-logo.png" width="50" height="50" />
-	<form th:action="@{/login}" method="post">
+	<form th:action="@{/login.do}" method="post" th:object="${member} id="loginForm">
 		<table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0">
 			<tr>
-				<td><input name="id" type="text" size="20" placeholder="아이디"></td>
+				<td><input type="text" id="id" name="id"  class="form-control" size="20" placeholder="아이디" ></td>
 			</tr>
 
 			<tr>
-				<td><input name="password" type="password" size="20"
-					placeholder="비밀번호"></td>
+				<td><input type="password" id="password" name="password" size="20" placeholder="비밀번호"></td>
 			</tr>
 		</table>
-		<input type="submit" value="로그인">
-				
+		<span><input type="submit" value="로그인"></span>
+		<span >[[${member}]]</span>
+		
 	</form>
 
 </body>
