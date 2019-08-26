@@ -1,10 +1,13 @@
 @charset "UTF-8";
 
+.contents input{
+	width: 50px;
+}
 .styleNo1, .styleNo2, .styleNo3 {
 	width: 50px;
 }
 
-.wrapper {
+.post {
 	position: relative;
 	width: 600px;
 	padding: 10px;
@@ -14,7 +17,7 @@
 	border: 3px dashed #000000;
 }
 
-.imgwrap {
+.imgWrap {
 	width: 250px;
 	height: 450px;
 	margin-top: 1%;
@@ -24,7 +27,7 @@
 	border: 1px dashed #bcbcbc;
 }
 
-.imgwrap img {
+.imgWrap img {
 	margin-top: 1%;
 	margin-bottom: 1%;
 	width: 100%;
@@ -40,8 +43,11 @@
 	padding-bottom: 10px;
 	border: 1px dashed #bcbcbc;
 }
-
-.tag {
+div.tagWrap {
+	overflow: auto;
+	height: 390px;
+}
+.tagContents {
 	display: none;
 }
 .tagForm{

@@ -1,47 +1,5 @@
 $(document).ready(function() {
-	$("#inputImg").on("change", handleImgFileSelect);
-	
-	var count = 0;
-	var chageTagId = $("#tag");
-	var tagHtml = $(chageTagId).html();
-	
-	$("#img").click(function (event){
-		count++;
-		
-		if (count <= 7) {
-			var x = event.clientX;
-			var y = event.clientY;
-			var tagStyle = $(chageTagId).css("display");
-			
-			document.getElementById("xCoordinate").value = x;
-			document.getElementById("yCoordinate").value = y;
-			
-			chageTagId = $(chageTagId).attr("id","tag" + count);
-		
-			
-			
-			
-			if (tagStyle === "block") {
-				$(chageTagId).append(tagHtml);	
-			} else {
-				$(chageTagId).show();
-			}
-			console.log(chageTagId);
-			
-			console.log(tagStyle);
-			console.log(count);
-		}
-	});
-	
-	$("#exitBtn").click(function (event){
-		
-			$(chageTagId).hide();
-			
-			count--;
-			console.log(count);
-
-	});
-	
+	$("#selectImg").on("change", handleImgFileSelect);
 });
 
 var selFile;

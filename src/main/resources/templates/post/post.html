@@ -11,23 +11,19 @@
 </head>
 <body>
 
-	<div class="wrapper">
-		<div class="imgwrap">
+	<form class="post">
+		<div class="imgWrap">
 			<p>이미지 업로드 </p>
 
-			<input type="file" id="inputImg" />
+			<input type="file" id="selectImg" />
 
-			<div class="imgdiv">
-<!-- 				<form> -->
-<!-- 					<img id="img" OnClick="javascript:tagFunction(event)"><br> -->
+			<div class="imgMold">
 					<img id="img"><br>
-<!-- 				</form> -->
-
 			</div>
 		</div>
 		
 		<div class="contents">
-	<!-- 스타일 -->
+			<!-- 스타일 -->
 			<div class="style">
 				<label for="style">스 타 일</label>
 				<select id="styleNo" name="styleNo">
@@ -38,11 +34,10 @@
 				&emsp;<input type="text" id="styleNo3" name="styleNo2" class="styleNo2">
 				&emsp;<input type="text" id="styleNo3" name="styleNo3" class="styleNo3">
 			</div><hr>
-	<!-- 태그 -->
-
-			<div id="tagContents" class="tagContents">
-				<div id="tag" class="tag">
-					<form action="item" class="tagForm">
+			<!-- 태그 -->
+			<div id="tagWrap" class="tagWrap">
+				<div id="tagContents1" class="tagContents">
+					<div class="tagForm">
 			<!-- 		post_no<input type="number" name="postNo" value="9"><br> -->
 			<!-- 		tag_no<input type="number" name="tagNo" value="1"><br> -->
 				
@@ -62,24 +57,22 @@
 						</select><br> 
 						
 						<label for="color">색상</label>
-						<input type="text" id="color" name="color" value="#cdcdcd"><a href="#" name="palette">파레트</a><br>
+						<input type="text" id="color" name="color" value="#cdcdcd"><a href="#">palette</a><br>
 				
 						<label for="store">구 매 처</label>
 						<input type="text" id="store" name="store" value="default"><button>지도</button> <br>
 				
 						<input type="text" id="xCoordinate" name="xCoordinate">
 						<input type="text" id="yCoordinate" name="yCoordinate"><br> 
-						<button type="button" id="exitBtn">EXIT</button>
-						<input type="submit" value="등록">
-					</form>
+						<button type="button" id="exitBtn" class="exitBtn">EXIT</button>
 					</div>
+				</div>
 			</div>
-		</div>	
-	</div>
-
+		</div>
+		<input type="submit" value="등록">
+	</form>
 	<script src="js/previewImage.js"></script>
-</body>
-
+	<script src="js/tag.js"></script>
 </body>
 
 </html>
