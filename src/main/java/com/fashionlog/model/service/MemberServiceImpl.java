@@ -10,13 +10,13 @@ import com.fashionlog.model.dao.MemberRepository;
 import com.fashionlog.model.dto.Member;
 
 @Service
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberRepository memberRepo;
-	
+
 	@Override
-	public Member findById(String Id) {
-		return memberRepo.findById(Id);
+	public Member findByIdAndPassword(String Id, String Password) {
+		return memberRepo.findByIdAndPassword(Id, Password);
 	}
 
 //	@Override
@@ -30,7 +30,5 @@ public class MemberServiceImpl implements MemberService{
 	public void doJoin(Member member) {
 		memberRepo.save(member);
 	}
-	
-	
-	
+
 }

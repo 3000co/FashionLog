@@ -46,12 +46,11 @@ public class MemberController {
 		System.out.println("아이디: "+member.getId()+ " 비밀번호: "+member.getPassword());
 
 //		Member getMemberInfo = memberService.getMemberInfo(member);
-		Member getMemberInfo =memberService.findById(member.getId());
+		Member getMemberInfo =memberService.findByIdAndPassword(member.getId(), member.getPassword());
 		System.out.println("getMemberInfo: "+getMemberInfo);
 		
 		if (getMemberInfo == null) {
 			session.setAttribute("member", null);
-			System.out.println("로그인실패" + member);
 			return "login";
 		} else {
 			session.setAttribute("member", getMemberInfo);
