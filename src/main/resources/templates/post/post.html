@@ -5,24 +5,24 @@
 	<title>Post</title>
 
 	<link rel="stylesheet" href="css/post.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 </head>
 <body>
 
-	<form class="post">
-		<div class="imgWrap">
-			<p>이미지 업로드 </p>
-
-			<input type="file" id="selectImg" />
-
-			<div class="imgMold">
-					<img id="img"><br>
+	<div class="post">
+		<div class="leftWrap">	
+			<div class="imgWrap">
+				<input type="file" id="selectImg"/>
+				<div class="imgMold">
+						<img id="img"><br>
+				</div>
+			</div>
+			<div class="contents">
+				<textarea rows="3" cols="10" placeholder="#해시태그 #글내용작성"></textarea>
 			</div>
 		</div>
-		
-		<div class="contents">
+		<div class="itemWrap">
 			<!-- 스타일 -->
 			<div class="style">
 				<label for="style">스 타 일</label>
@@ -35,9 +35,9 @@
 				&emsp;<input type="text" id="styleNo3" name="styleNo3" class="styleNo3">
 			</div><hr>
 			<!-- 태그 -->
-			<div id="tagWrap" class="tagWrap">
-				<div id="tagContents1" class="tagContents">
-					<div class="tagForm">
+			<div id="itemTagWrap" class="itemTagWrap">
+				<div id="itemTag1" class="itemTag">
+					<div class="tag">
 			<!-- 		post_no<input type="number" name="postNo" value="9"><br> -->
 			<!-- 		tag_no<input type="number" name="tagNo" value="1"><br> -->
 				
@@ -46,21 +46,25 @@
 				
 						<label for="categoryNo">카테고리</label>
 						<select id="categoryNo" name="categoryNo">
+							<option value="0" selected>카테고리 선택</option>
 							<option th:each="category:${category}" th:text="${category.name}"
 								th:value="${category.categoryNo}"></option>
 						</select><br> 
 						
 						<label for="brandNo">브 랜 드</label>
 						<select id="brandNo" name="brandNo">
+							<option value="0" selected>브랜드 선택</option>
 							<option th:each="brand:${brand}" th:text="${brand[1]}"
 								th:value="${brand[0]}"></option>
 						</select><br> 
 						
 						<label for="color">색상</label>
-						<input type="text" id="color" name="color" value="#cdcdcd"><a href="#">palette</a><br>
+						<input type="text" id="color" name="color" value="#cdcdcd">
+						<button type="button" id="paletteBtn">Palette</button><br>
 				
 						<label for="store">구 매 처</label>
-						<input type="text" id="store" name="store" value="default"><button>지도</button> <br>
+						<input type="text" id="store" name="store" value="default">
+						<button type="button" id="mapBtn">지도</button> <br>
 				
 						<input type="text" id="xCoordinate" name="xCoordinate">
 						<input type="text" id="yCoordinate" name="yCoordinate"><br> 
@@ -69,10 +73,27 @@
 				</div>
 			</div>
 		</div>
+
 		<input type="submit" value="등록">
-	</form>
+	</div>
+	
+	<div id="paletteModal" class="modal">
+		<div class="modalContent">
+			<span class="close">&times;</span>
+			<p>팔렛트트트</p>
+		</div>
+	</div>
+	
+	<div id="mapModal" class="modal">
+		<div class="modalContent">
+			<span class="close">&times;</span>
+			<p>지도지도도</p>
+		</div>
+	</div>
+	
 	<script src="js/previewImage.js"></script>
 	<script src="js/tag.js"></script>
+	<script src="js/post.js"></script>
 </body>
 
 </html>
