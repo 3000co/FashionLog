@@ -5,20 +5,17 @@
 </head>
 
 <body th:align="center">
-	<h1>로그인</h1>
+	<h3>로그인</h3>
 	<img src="google-logo.png" width="50" height="50" />
-	<form th:action="@{/login.do}" method="post" th:object="${member} id="loginForm">
-		<table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0">
-			<tr>
-				<td><input type="text" id="id" name="id"  class="form-control" size="20" placeholder="아이디" ></td>
-			</tr>
-
-			<tr>
-				<td><input type="password" id="password" name="password" size="20" placeholder="비밀번호"></td>
-			</tr>
-		</table>
+	<form th:action="@{/login.do}" method="post" >
+		<div class="form-group">
+			<label>아이디</label><br> <input type="text" class="form-control" id="id" name="id" placeholder="아이디"><br>
+			<br>
+		</div>
+		<div class="form-group">
+			<label>비밀번호</label><br> <input type="text" class="form-control" id="password" name="password" placeholder="비밀번호"><br>
+		</div>
 		<span><input type="submit" value="로그인"></span>
-		<span >[[${member}]]</span>
 		
 	</form>
 
