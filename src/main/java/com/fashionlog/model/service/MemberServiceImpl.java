@@ -15,20 +15,22 @@ public class MemberServiceImpl implements MemberService{
 	private MemberRepository memberRepo;
 	
 	@Override
-	public List<Member> findById(String Id) {
+	public Member findById(String Id) {
 		return memberRepo.findById(Id);
 	}
 
-	@Override
-	public Member getMemberInfo(Member member) {
-		List<Member> findMember = memberRepo.findById(member.getId());
-		return member;
-	}
+//	@Override
+//	public Member getMemberInfo(Member member) {
+//		String findMember = memberRepo.findById(member.getId());
+//		
+//		return member;
+//	}
 
 	@Override
 	public void doJoin(Member member) {
-		memberRepo.setJoin(member);
+		memberRepo.save(member);
 	}
+	
 	
 	
 }

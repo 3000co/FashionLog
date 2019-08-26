@@ -7,7 +7,7 @@
 <body th:align="center">
 	<h3>회원가입</h3>
 	<img src="google-logo.png" width="50" height="50" />
-	<form th:action="@{/join.do}" th:object="${join}" method="post">
+	<form th:action="@{/join.do}" method="post" th:object="${join}">
 		<div class="form-group">
 			<label>아이디</label><br> <input type="text" class="form-control"  id="id" name="id" placeholder="아이디를 입력해주세요"><br>
 			<br>

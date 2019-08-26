@@ -1,5 +1,6 @@
 ﻿package com.fashionlog.controller;
 
+import javax.persistence.criteria.SetJoin;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -34,29 +35,28 @@ public class MemberController {
 	}
 
 	// 로그인
-	@RequestMapping(value="/login", method = RequestMethod.POST )
+	@RequestMapping("/login")
 	public String login() {
 		return "login";
 	}
 	
 	// 로그인 처리
-	@RequestMapping(value = "/login.do" , method = RequestMethod.POST)
-	public ModelAndView doLogin(@Valid Member member, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		HttpSession session = request.getSession();
+	@RequestMapping(value = "/login.do" , method = {RequestMethod.GET,RequestMethod.POST})
+	public String doLogin(Member member, HttpSession session) throws Exception {
+		System.out.println("아이디: "+member.getId()+ " 비밀번호: "+member.getPassword());
 
-		Member getMemberInfo = memberService.getMemberInfo(member);
-		
-		System.out.println(member.getId()+member.getPassword());
+//		Member getMemberInfo = memberService.getMemberInfo(member);
+		Member getMemberInfo =memberService.findById(member.getId());
+		System.out.println("getMemberInfo: "+getMemberInfo);
 		
 		if (getMemberInfo == null) {
 			session.setAttribute("member", null);
 			System.out.println("로그인실패" + member);
-			return new ModelAndView("login");
+			return "login";
 		} else {
 			session.setAttribute("member", getMemberInfo);
 			System.out.println("로그인 성공" + getMemberInfo);
-			return new ModelAndView("redirect:/");
+			return "redirect:/";
 		}
 	}
 
@@ -69,7 +69,7 @@ public class MemberController {
 	public String signupProcess(Member member, HttpSession session) {
 		System.out.println("아이디: "+member.getId()+ " 비밀번호: "+member.getPassword());
 		System.out.println("Member::" + member);
-		
+		memberService.doJoin(member);
 		
 		return "redirect:login";
 	}

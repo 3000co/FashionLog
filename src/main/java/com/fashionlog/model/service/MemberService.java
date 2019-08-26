@@ -7,12 +7,12 @@ import com.fashionlog.model.dto.Member;
 
 public interface MemberService {
 	
-	List<Member> findById(String Id);
+	Member findById(String Id);
 
-	Member getMemberInfo(Member member);
+//	Member getMemberInfo(Member member);
 
 	void doJoin(Member member);
-
+	
 	
 	
 }
