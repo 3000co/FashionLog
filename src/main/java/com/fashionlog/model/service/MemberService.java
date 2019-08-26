@@ -7,7 +7,7 @@ import com.fashionlog.model.dto.Member;
 
 public interface MemberService {
 	
-	Member findById(String Id);
+	Member findByIdAndPassword(String Id, String Password);
 
 //	Member getMemberInfo(Member member);
 
