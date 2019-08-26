@@ -29,11 +29,6 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 
-	@RequestMapping(value = "/")
-	public String main() {
-		return "main";
-	}
-
 	// 로그인
 	@RequestMapping("/login")
 	public String login() {

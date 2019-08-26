@@ -18,7 +18,8 @@
         <div class="comments">
         <table>
 		<tr th:each="comment:${commentList}">
-			<td><img th:src="@{${comment[4]}}"/>
+			<td><p th:text="${comment}"></p>
+			<img th:src="@{${comment[4]}}"/>
 			<a th:href="@{/report(tagetCommentNo=${comment[0]})}"
 				th:text="${comment[2]}"></a></span>
 			<span th:text="${comment[1]}"></span>
