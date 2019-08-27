@@ -28,7 +28,7 @@ public class Item {
 	
 	@ManyToOne
 	@JoinColumn(name = "POST_NO")
-	private Post post;
+	private Post postNo;
 
 	private int tagNo;
 	
@@ -36,11 +36,11 @@ public class Item {
 	
 	@ManyToOne
 	@JoinColumn(name = "CATEGORY_NO")
-	private Category category;
+	private Category categoryNo;
 	
 	@ManyToOne
 	@JoinColumn(name = "BRAND_NO")
-	private Brand brand;
+	private Brand brandNo;
 	
 	@Column(columnDefinition = "char")
 	private String color;
