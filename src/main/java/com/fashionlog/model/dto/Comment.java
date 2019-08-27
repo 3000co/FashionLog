@@ -37,11 +37,11 @@ public class Comment implements SocialEvent{
 	
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_NO")
-	private Member member;
+	private Member memberNo;
 	
 	@ManyToOne
 	@JoinColumn(name = "POST_NO")
-	private Post post;
+	private Post postNo;
 	
 	@CreationTimestamp
 	Timestamp uploadTime;

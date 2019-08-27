@@ -35,28 +35,28 @@ public class Post {
 	
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_NO")
-	private Member member;
+	private Member memberNo;
 	
 	@CreationTimestamp
 	private Timestamp uploadTime;
 	
 	@OneToOne
 	@JoinColumn(name = "POST_IMAGE_NO")
-	private File postImage;
+	private File postImageNo;
 	
 	private String contents;
 	
 	@ManyToOne
 	@JoinColumn(name = "STYLE_NO1")
-	private Style style1;
+	private Style styleNo1;
 
 	@ManyToOne
 	@JoinColumn(name = "STYLE_NO2")
-	private Style style2;
+	private Style styleNo2;
 	
 	@ManyToOne
 	@JoinColumn(name = "STYLE_NO3")
-	private Style style3;
+	private Style styleNo3;
 	
 	
 	@OneToMany(mappedBy = "commentNo")

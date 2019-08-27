@@ -9,10 +9,10 @@ import com.fashionlog.model.dto.Notification;
 
 public interface NotificationRepository extends JpaRepository<Notification, Integer> {
 
-	public List<Notification> findByRecieverAndCheckTimeIsNull(Member reciever);
+	public List<Notification> findByRecieverMemNoAndCheckTimeIsNull(Member recieverMemNo);
 	
-	public List<Notification> findByReciever(Member reciever);
+	public List<Notification> findByRecieverMemNo(Member recieverMem);
 	
-	public List<Notification> findSenderByReciever(Member reciver);
+	public List<Notification> findSenderMemNoByRecieverMemNo(Member reciverMem);
 	
 }

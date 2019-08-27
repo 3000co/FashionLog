@@ -32,11 +32,11 @@ public class Likes implements SocialEvent{
 	
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_NO")
-	private Member Member;
+	private Member MemberNo;
 	
 	@ManyToOne
 	@JoinColumn(name = "POST_NO")
-	private Post post;
+	private Post postNo;
 	
 	@CreationTimestamp
 	Timestamp likesTime;
