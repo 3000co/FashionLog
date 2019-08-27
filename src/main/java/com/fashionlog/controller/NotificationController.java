@@ -44,7 +44,7 @@ public class NotificationController {
 	public String uncheckedNotificationList(@PathVariable int memberNo, Model model, HttpSession session) {
 		Member reciever = memberRepository.findById(memberNo).get();
 		session.setAttribute("member", reciever);
-		List<Notification> notiList = notificiationRepository.findByRecieverMemNoAndCheckTimeIsNull(reciever);
+		List<Notification> notiList = notificiationRepository.findByRecieverAndCheckTimeIsNull(reciever);
 		System.out.println(notiList);
 		model.addAttribute("notiList",notiList);
 		return "/notification/Notification";

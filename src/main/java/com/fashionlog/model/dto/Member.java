@@ -35,19 +35,19 @@ public class Member {
 	
 	@ManyToOne
 	@JoinColumn(name = "PROFILE_IMAGE_NO")
-	private File profileImageNo;
+	private File profileImage;
 	
 	@ManyToOne
 	@JoinColumn(name = "STYLE_NO1")
-	private Style styleNo1;
+	private Style style1;
 	
 	@ManyToOne
 	@JoinColumn(name = "STYLE_NO2")
-	private Style styleNo2;
+	private Style style2;
 	
 	@ManyToOne
 	@JoinColumn(name = "STYLE_NO3")
-	private Style styleNo3;
+	private Style style3;
 
 }
 

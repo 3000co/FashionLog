@@ -30,25 +30,25 @@ public class Notification {
 	
 	@ManyToOne
 	@JoinColumn(name = "SENDER_MEM_NO")
-	private Member senderMemNo;
+	private Member sender;
 	
 	@ManyToOne
 	@JoinColumn(name = "RECIEVER_MEM_NO")
-	private Member recieverMemNo;
+	private Member reciever;
 	
 	private int type;
 	
 	@OneToOne
 	@JoinColumn(name = "LIKES_NO")
-	private Likes likesNo;
+	private Likes likes;
 	
 	@OneToOne
 	@JoinColumn(name = "COMMENT_NO")
-	private Comment commentNo;
+	private Comment comment;
 	
 	@OneToOne
 	@JoinColumn(name = "FOLLOW_NO")
-	private Follow followNo;
+	private Follow follow;
 	
 	@CreationTimestamp
 	private Timestamp sendTime;

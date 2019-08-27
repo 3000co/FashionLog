@@ -32,11 +32,11 @@ public class Follow implements SocialEvent{
 	
 	@ManyToOne
 	@JoinColumn(name = "followerMemNo")
-	private Member followerMemNo;
+	private Member follower;
 	
 	@ManyToOne
 	@JoinColumn(name = "followeeMemNo")
-	private Member followeeMemNo;
+	private Member followee;
 	
 	@CreationTimestamp
 	Timestamp followTime;
