@@ -15,4 +15,5 @@ $(document).ready(function() {
 		$(palModal).hide();
 		$(mapModal).hide();
 	});
+
 });

@@ -10,7 +10,7 @@
 </head>
 <body>
 
-	<div class="post">
+	<form class="post" id="post" action="item">
 		<div class="leftWrap">	
 			<div class="imgWrap">
 				<input type="file" id="selectImg"/>
@@ -30,15 +30,16 @@
 						<option th:each="style:${style}" th:text="${style.name}"
 							th:value="${style.styleNo}"></option>
 				</select><br> 
-				&emsp;<input type="text" id="styleNo1" name="styleNo1" class="styleNo1">
-				&emsp;<input type="text" id="styleNo3" name="styleNo2" class="styleNo2">
-				&emsp;<input type="text" id="styleNo3" name="styleNo3" class="styleNo3">
+				<input type="text" id="styleNo1" name="styleNo1" class="styleNo1">&emsp;
+				<input type="text" id="styleNo3" name="styleNo2" class="styleNo2">&emsp;
+				<input type="text" id="styleNo3" name="styleNo3" class="styleNo3">&emsp;
 			</div><hr>
 			<!-- 태그 -->
 			<div id="itemTagWrap" class="itemTagWrap">
 				<div id="itemTag1" class="itemTag">
 					<div class="tag">
-					임시post_no<input type="number" name="postNo" value="9"><br>
+						<label for="tagNo">임시post_no</label>
+						<input type="number" id="postNo" name="postNo" value="9" ><br>
 					
 						<label for="tagNo">태그번호</label>
 						<input type="number" id="tagNo" name="tagNo" value="1"><br>
@@ -70,29 +71,28 @@
 				
 						<input type="text" id="xCoordinate" name="xCoordinate">
 						<input type="text" id="yCoordinate" name="yCoordinate"><br> 
-						<button type="button" id="exitBtn" class="exitBtn">EXIT</button>
+						<button type="button" id="exitBtn">&times;</button>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<input type="submit" value="등록">
-	</div>
+		<input type="submit" id="submit" value="등록">
 	
-	<div id="paletteModal" class="modal">
-		<div class="modalContent">
-			<span class="close">&times;</span>
-			<p>팔렛트트트</p>
+		<div id="paletteModal" class="modal">
+			<div class="modalContent">
+				<span class="close">&times;</span>
+				<p>팔렛트트트</p>
+			</div>
 		</div>
-	</div>
-	
-	<div id="mapModal" class="modal">
-		<div class="modalContent">
-			<span class="close">&times;</span>
-			<p>지도지도도</p>
+		
+		<div id="mapModal" class="modal">
+			<div class="modalContent">
+				<span class="close">&times;</span>
+				<p>지도지도도</p>
+			</div>
 		</div>
-	</div>
-	
+	</form>
 	<script src="js/previewImage.js"></script>
 	<script src="js/tag.js"></script>
 	<script src="js/post.js"></script>

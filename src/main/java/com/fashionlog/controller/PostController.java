@@ -12,7 +12,6 @@ import com.fashionlog.model.dao.BrandRepository;
 import com.fashionlog.model.dao.CategoryRepository;
 import com.fashionlog.model.dao.ItemRepository;
 import com.fashionlog.model.dao.StyleRepository;
-import com.fashionlog.model.dto.Brand;
 import com.fashionlog.model.dto.Category;
 import com.fashionlog.model.dto.Item;
 import com.fashionlog.model.dto.Style;
@@ -45,11 +44,11 @@ public class PostController {
 	@RequestMapping("/item")
 	@ResponseBody
 	public void itemTest(Item item) {
+//		System.out.println("뭐뭐뭐뭠지?");
 		System.out.println(item);
-		System.out.println("뭐뭐뭐뭠지?");
-		System.out.println(item.getCategoryNo().getCategoryNo());
-		System.out.println("되?");
-		System.out.println(item.getBrandNo().getBrandNo());
+//		System.out.println(item.getCategoryNo().getCategoryNo());
+//		System.out.println("되?");
+//		System.out.println(item.getBrandNo().getBrandNo());
 		//Item i = itemRepository.save(item);
 		//return i;
 	}
