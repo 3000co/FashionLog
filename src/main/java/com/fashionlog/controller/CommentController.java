@@ -61,9 +61,9 @@ public class CommentController {
 		Post post = postRepository.findById(9).get();
 		
 		//postNo은 샘플 데이터를 넣어둠. 세션에서 받을 예정. 
-		comment.setMemberNo(member);
+		comment.setMember(member);
 		comment.setContents(request.getParameter("contents"));
-		comment.setPostNo(post);
+		comment.setPost(post);
 		commentRepository.save(comment);
 
 		return "redirect:/";

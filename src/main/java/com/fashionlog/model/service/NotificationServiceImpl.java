@@ -26,21 +26,21 @@ public class NotificationServiceImpl implements NotificationService {
 		switch (eventNoti.getType()) {
 		case EventType.LIKES:
 			Likes likesEvent = (Likes) event;
-			eventNoti.setLikesNo(likesEvent);
-			eventNoti.setRecieverMemNo(likesEvent.getPostNo().getMemberNo());
-			eventNoti.setSenderMemNo(likesEvent.getMemberNo());
+			eventNoti.setLikes(likesEvent);
+			eventNoti.setReciever(likesEvent.getPost().getMember());
+			eventNoti.setSender(likesEvent.getMember());
 			break;
 		case EventType.COMMENT:
 			Comment commentEvent = (Comment) event;
-			eventNoti.setCommentNo(commentEvent);
-			eventNoti.setRecieverMemNo(commentEvent.getPostNo().getMemberNo());
-			eventNoti.setSenderMemNo(commentEvent.getMemberNo());
+			eventNoti.setComment(commentEvent);
+			eventNoti.setReciever(commentEvent.getPost().getMember());
+			eventNoti.setSender(commentEvent.getMember());
 			break;
 		default:
 			Follow followEvent = (Follow) event;
-			eventNoti.setFollowNo(followEvent);
-			eventNoti.setRecieverMemNo(followEvent.getFolloweeMemNo());
-			eventNoti.setSenderMemNo(followEvent.getFollowerMemNo());
+			eventNoti.setFollow(followEvent);
+			eventNoti.setReciever(followEvent.getFollowee());
+			eventNoti.setSender(followEvent.getFollower());
 			break;
 		}
 		notificationRepository.save(eventNoti);
@@ -57,11 +57,11 @@ public class NotificationServiceImpl implements NotificationService {
 	public String moveToEvent(Notification noti) {
 		switch(noti.getType()) {
 		case EventType.LIKES: 
-			return "post/" + noti.getLikesNo().getPostNo();
+			return "post/" + noti.getLikes().getPost();
 		case EventType.COMMENT: 
-			return "post/" + noti.getCommentNo().getPostNo(); 
+			return "post/" + noti.getComment().getPost(); 
 		default:
-			return "profile/" + noti.getFollowNo().getFollowerMemNo().getMemberNo();
+			return "profile/" + noti.getFollow().getFollower().getMemberNo();
 		}
 	}
 	
