@@ -28,11 +28,11 @@ public class Report {
 	
 	@ManyToOne
 	@JoinColumn(name = "TARGET_POST_NO")
-	private Post targetPostNo;
+	private Post targetPost;
 	
 	@ManyToOne
 	@JoinColumn(name = "TARGET_COMMENT_NO")
-	private Comment targetCommentNo;
+	private Comment targetComment;
 	
 	private int type;
 	
@@ -41,11 +41,11 @@ public class Report {
 	
 	@ManyToOne
 	@JoinColumn(name = "REPORT_MEM_NO")
-	private Member reportMemNo;
+	private Member reportMem;
 	
 	@ManyToOne
 	@JoinColumn(name = "TARGET_MEM_NO")
-	private Member targetMemNo;
+	private Member targetMem;
 	
 	@CreationTimestamp
 	private Timestamp reportTime;

@@ -12,18 +12,18 @@
 	<h1>모든 알람 보여주기</h1>
 
 	<table border="1">
-		<tr th:each="noti : ${allNotiList}" th:attr="id=notiNo+${noti.getNotiNo()}">
+		<tr th:each="noti : ${allNotiList}" th:attr="id=notiNo+${noti.notiNo}">
 			<td>
-			<span th:switch="${noti.getType()}"> 
+			<span th:switch="${noti.type}"> 
 				<span th:case="1" class="likesNoti">
-					<span th:text="${noti.getSenderMemNo().getNickname()}">Sender Nickname</span>님이 회원님의 포스트를 좋아합니다.</span>
+					<span th:text="${noti.sender.nickname}">Sender Nickname</span>님이 회원님의 포스트를 좋아합니다.</span>
 				<span th:case="2" class="commentNoti">
-					<span th:text="${noti.getSenderMemNo().getNickname()}">Sender Nickname</span>님이 회원님의 글에 댓글을 남겼습니다.</span> 
+					<span th:text="${noti.sender.nickname}">Sender Nickname</span>님이 회원님의 글에 댓글을 남겼습니다.</span> 
 				<span th:case="3" class="followNoti">
-					<span th:text="${noti.getSenderMemNo().getNickname()}">Sender Nickname</span>님이 이제 회원님을 팔로우합니다.</span>
+					<span th:text="${noti.sender.nickname}">Sender Nickname</span>님이 이제 회원님을 팔로우합니다.</span>
 			</span>
 			</td>
-			<td th:text="${noti.getSendTime()}"> event time </td>
+			<td th:text="${noti.sendTime}"> event time </td>
 		</tr>
 
 	</table>
