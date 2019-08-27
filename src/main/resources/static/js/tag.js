@@ -5,6 +5,9 @@ $(document).ready( function() {
 	
 	$(document).on("click", "#img", function(event) {
 		count++;
+		if (count = 1 && ) {
+			
+		}
 		if (count <= 7) {
 			var eventX = event.clientX;
 			var eventY = event.clientY;
@@ -26,7 +29,11 @@ $(document).ready( function() {
 	$(document).on("click", "#exitBtn", function(event) {
 		console.log(event.target);
 		console.log($(event.target).parents(".itemTag"));
-		$(event.target).parents(".itemTag").hide();
+		if (count != 1) {
+			$(event.target).parents(".itemTag").detach();			
+		}else {
+			$(event.target).parents(".itemTag").hide();
+		}
 		count--;
 	});
 	
