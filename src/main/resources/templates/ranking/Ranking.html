@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Fashion Log - Ranking</title>
+</head>
+<body>
+
+<h1>ranking : <span th:text="${rankType}">type</span></h1>
+
+<div th:switch="${rankType}">
+	<div th:case="brand">
+	<div th:each="brand,index : ${brandRankingList}">
+	<span th:text="${index.index+1}"> </span>
+	 <!-- <p th:include=""></p> --> 
+	 <img th:alt="${brand.name+'의 프로필 사진'}" th:src="${brand.brandImageNo.path}">&nbsp;&nbsp;
+	 <span th:text=${brand.name}> 브랜드 이름 </span>
+	 <p th:text="'등록된 아이템 수 : '+${brand.itemCount}"></p> 
+	 </div>
+	</div>
+<div th:case="user" >
+<div th:each="user,index : ${userRankingList}">
+<span th:text="${index.index+1}"> </span>
+	<!--	<p th:include=""></p>-->
+	<img th:alt="${user.nickname+'의 프로필 사진'}" th:src="${user.profileImageNo.path}">&nbsp;&nbsp;
+	<span th:text=${user.nickname}> 유저 닉네임 </span>
+	<p th:text="'받은 좋아요 수 : '+${user.likesCount}"></p>
+	</div>
+	</div>
+</div> 
+</body>
+</html>

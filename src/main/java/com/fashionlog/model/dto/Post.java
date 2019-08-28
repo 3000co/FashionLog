@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -24,7 +25,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"itemList", "commentList"})
 @Entity
 
 public class Post {
@@ -58,7 +59,12 @@ public class Post {
 	@JoinColumn(name = "STYLE_NO3")
 	private Style styleNo3;
 	
-	
-	@OneToMany(mappedBy = "commentNo")
+	@OneToMany(mappedBy = "postNo")
 	private List<Comment> commentList = new ArrayList<Comment>();
+	
+	@OneToMany(mappedBy = "postNo")
+	private List<Item> itemList = new ArrayList<Item>();
+	
+	@Transient
+	private Long LikesCount;
 }
