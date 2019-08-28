@@ -32,7 +32,7 @@ public class Brand implements Comparable<Brand> {
 
 	@Override
 	public int compareTo(Brand otherBrand) {
-		
+		//아이템 수로 오름차순 정렬
 		return -itemCount.compareTo(otherBrand.getItemCount());
 	}
 	
