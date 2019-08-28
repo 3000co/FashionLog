@@ -1,44 +1,64 @@
-$(document).ready(function() {   
-    $('#tokenfield').tokenfield({
-      autocomplete: {
-        source: [],
-        
-        delay: 100
-      },
-      delimiter: ';',
-      showAutocompleteOnFocus: true,
-      createTokensOnBlur: false
-    });
-    
-    $("form").submit(function(e) {
-      e.preventDefault();
-      $('.form-data').text( $('#tokenfield').val());
+	$(document).ready(function() {
+				//responsive menu toggle
+				$("#menutoggle").click(function() {
+					$('.xs-menu').toggleClass('displaynone');
 
-    });
-});
+					});
+			//drop down menu	
+					$(".searchBoard").click(function() {
+						$('.mega-menu').addClass('display-on');
+					});
+					$(".searchBoard").mouseleave(function() {
+						$('.mega-menu').removeClass('display-on');
+					});
+			
+			});
+	
+//button js 
+	$(document).ready(function() {   
+	    $('#inputField').tokenfield({
+	      autocomplete: {
+	        source: [],
+	        
+	        delay: 100
+	      },
+	      delimiter: ';',
+	      showAutocompleteOnFocus: true,
+	      createTokensOnBlur: false
+	    });
+	    
+	    $("form").submit(function(e) {
+	      e.preventDefault();
+	      $('.form-data').text( $('#inputField').val());
 
-$('#tokenfield').on('tokenfield:createdtoken', function (e) {
-    console.log('createdtoken', {
-      value: e.attrs.value,
-      tokens: $('#tokenfield').tokenfield('getTokens'),
-      $input: $('#tokenfield').data('bs.tokenfield').$input.val()
-    });
-  });
+	    });
+	});
 
-$('#categoryBtn').click(function(){
-	var searchWord = $('#tokenfield-tokenfield').val();
-	console.log($(this).val());
-	searchWord += ($(this).val());
-	console.log("searchword2 : "+ searchWord);
-	$('#tokenfield-tokenfield').val(searchWord);
-});
+	
+	$('#inputField').on('tokenfield:createdtoken', function (e) {
+	    console.log('createdtoken', {
+	      value: e.attrs.value,
+	      tokens: $('#inputField').tokenfield('getTokens'),
+	      $input: $('#inputField').data('bs.tokenfield').$input.val()
+	    });
+	  });
 
-$('#hatBtn').click(function(){
-	var searchWord = $('#tokenfield-tokenfield').val();
-	console.log($(this).val());
-	searchWord += ($(this).val());
-	console.log("searchword2 : "+ searchWord);
-	$('#tokenfield-tokenfield').val(searchWord);
-	$("<span>으아아</span>").after("#tokenfield-tokenfield");
-});
+	//메뉴 버튼
+	$('.menuBtn').click(function(){
+		var searchWord = $('#inputField-tokenfield').val();
+		console.log($(this).val());
+		searchWord += ($(this).val());
+		console.log("searchword2 : "+ searchWord);
+		$('#inputField-tokenfield').val(searchWord);
+	});
 
+	//상세 속성 버튼 
+	$('.attrBtn').click(function(){
+		var attrWord = $(this).val();
+		var searchWord = $('#inputField-tokenfield').val();
+		$('#inputField').tokenfield('createToken',searchWord + attrWord);
+		$('#inputField-tokenfield').val('');
+		
+	});
+
+	 
