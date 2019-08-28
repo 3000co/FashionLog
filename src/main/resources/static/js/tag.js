@@ -29,7 +29,6 @@ $(document).ready( function() {
 				$('#xCoordinate').val(eventX);
 				$('#yCoordinate').val(eventY);
 			}
-	
 		}
 	});
 	

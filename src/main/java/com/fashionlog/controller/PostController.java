@@ -43,13 +43,13 @@ public class PostController {
 	
 	@RequestMapping("/item")
 	@ResponseBody
-	public void itemTest(Item item) {
+	public Item itemTest(Item item) {
 //		System.out.println("뭐뭐뭐뭠지?");
 		System.out.println(item);
 //		System.out.println(item.getCategoryNo().getCategoryNo());
 //		System.out.println("되?");
 //		System.out.println(item.getBrandNo().getBrandNo());
-		//Item i = itemRepository.save(item);
-		//return i;
+		Item i = itemRepository.save(item);
+		return i;
 	}
 }

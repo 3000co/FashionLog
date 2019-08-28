@@ -6,11 +6,12 @@
 
 	<link rel="stylesheet" href="css/post.css">
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 </head>
 <body>
 
-	<form class="post" id="post" action="item">
+	<div class="post" id="post">
 		<div class="leftWrap">	
 			<div class="imgWrap">
 				<input type="file" id="selectImg"/>
@@ -38,8 +39,8 @@
 			<div id="itemTagWrap" class="itemTagWrap">
 				<div id="itemTag1" class="itemTag">
 					<div class="tag">
-						<label for="tagNo">임시post_no</label>
-						<input type="number" id="postNo" name="postNo" value="9" ><br>
+						<label for="postNo">임시post_no</label>
+						<input type="number" id="postNo" name="postNo" value="10" ><br>
 					
 						<label for="tagNo">태그번호</label>
 						<input type="number" id="tagNo" name="tagNo" value="1"><br>
@@ -77,7 +78,7 @@
 			</div>
 		</div>
 
-		<input type="submit" id="submit" value="등록">
+		<button type="submit" id="submit">등록</button>
 	
 		<div id="paletteModal" class="modal">
 			<div class="modalContent">
@@ -92,7 +93,7 @@
 				<p>지도지도도</p>
 			</div>
 		</div>
-	</form>
+	</div>
 	<script src="js/previewImage.js"></script>
 	<script src="js/tag.js"></script>
 	<script src="js/post.js"></script>
