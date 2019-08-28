@@ -35,6 +35,6 @@ public class TestController {
 		model.addAttribute("category", category);
 		model.addAttribute("brand", brand);
 		
-		return "view";
+		return "commonheader";
 	}
 }

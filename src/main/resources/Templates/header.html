@@ -27,22 +27,11 @@
 </head>
 
 <body>
-
-	<!--db가져오기 테스트 -->
-	<label for="categoryNo">카테고리</label>
-						<select id="categoryNo" name="categoryNo">
-							<option th:each="category:${category}" th:text="${category.name}"
-								th:value="${category.categoryNo}"></option>
-						</select><br> 
-						
-						
-	<div class="xs-menu-cont">
-		<a id="menutoggle"><i class="fa fa-align-justify"></i> </a>
-	</div>
-
-	<form method="GET">
+	<nav class="fashion">
+    <img src="https://i.ibb.co/MVr31h7/logo.png" alt="logo"/>
+      <form id ="searchBar" method="GET">
 		<div class="searchBoard">
-		<input type="text" class="inputField" id="inputField" value="" />
+		<input type="text" class="inputField" placeholder="" size="35" id="inputField" value="" />
 		
 			<ul class="drop-down" id="defaultSearch">
 				
@@ -128,7 +117,23 @@
 
 				</div>
 			</ul>
-			 
+			</form>
+      <button><svg><path d="M6.162 10.035a3.877 3.877 0 0 1-3.873-3.873A3.877 3.877 0 0 1 6.162 2.29a3.877 3.877 0 0 1 3.873 3.872 3.877 3.877 0 0 1-3.873 3.873m9.363 3.196l-3.081-3.08a1.614 1.614 0 0 0-1.23-.468 6.127 6.127 0 0 0 1.11-3.521 6.162 6.162 0 1 0-6.162 6.162 6.13 6.13 0 0 0 3.521-1.109c-.022.442.13.891.467 1.229l3.081 3.081a1.622 1.622 0 0 0 2.294-2.294"></path></svg></button>
+    <div> 
+      <a href=""><i class="glyphicon glyphicon-plus"></i></a>    
+      <a href=""><i class="glyphicon glyphicon glyphicon-king"></i></a>    
+      <a href=""><i class="glyphicon glyphicon-heart"></i></a>    
+      <a href=""><i class="glyphicon glyphicon-user"></i></a>    
+    </div>
+  </nav>
+	
+	<!--db가져오기 테스트 -->
+	<!-- <label for="categoryNo">카테고리</label>
+						<select id="categoryNo" name="categoryNo">
+							<option th:each="category:${category}" th:text="${category.name}"
+								th:value="${category.categoryNo}"></option>
+						</select><br>  -->
+	
 			 <script type="text/javascript">
 			 	function changeSearchMod(target){
 			 		var defaultSearch = document.getElementById("defaultSearch");
@@ -163,7 +168,7 @@
 		<br>
 		<br>
 		<input type="submit" class="btn btn-primary">
-	</form>
+	
 	<br>
 	<div class="form-data"></div>
 
