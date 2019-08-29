@@ -1,20 +1,5 @@
 @charset "utf-8";
 
-*, *:before, *:after {
-    box-sizing: border-box;
-}
-/** * Eric Meyer's Reset CSS v2.0 (https://meyerweb.com/eric/tools/css/reset/) * http://cssreset.com */
-html, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, searchBoard, nav, output, ruby, section, summary, time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, footer, header, hgroup, searchBoard, nav, section {
-	display: block;
-}
 
 nav {
   display:flex;
@@ -23,7 +8,7 @@ nav {
 
 .fashion {
   flex-direction: row;
-  height: 70px;
+  height: 30px;
   padding: 20px;
   background: #fff;
   justify-content: space-around;
@@ -34,30 +19,26 @@ nav {
   border-bottom: 1px solid #ccc;
 }
 
-.fashion > * {
- 
-}
-
 .fashion > img {
   width: 50px;
+  height:auto;
 }
 
-.fashion > #searchBar {
+.fashion .form-control {
  
  margin: 20px;
  flex: 5;
  justify-content: flex-start;
+} 
+
+
+
+#searchButton{
+
+    height: fit-content;
+
 }
-
-.fashion > #searchBar > button{
-  flex-shrink: 1;
-  padding: 0px 8px;
-/*   padding: 15px 10px 10px 15px; */
-  border: none;
-  background: #eee;
-
-}
-
+ 
 button > svg {
   margin-top: 10px;
   margin-left: 2px;
@@ -67,7 +48,25 @@ button > svg {
   
 }
 
-.fashion #searchBar .searchBoard > div input{
+.fashion > a > i {  
+  font-size:20px;
+  padding: 7px 0px 0px 9px;
+  color: #bbb;
+  width: 40px;
+  height: 40px; 
+  
+  
+}
+.fashion > a > i:hover {  
+  font-size: 20px;
+  
+  border-radius: 50%;
+  background: #eee;
+ 
+ 
+}
+
+.fashion .searchBoard > div input{
   flex-grow: 1;
   font-size: 18px;
   background: #eee;
@@ -77,30 +76,14 @@ button > svg {
   border:none;
 }
 
-.fashion #searchBar .searchBoard {
-  flex: 1;
+.fashion .searchBoard {
   display: flex;
   flex-flow: row;
-  justify-content: space-around;
+  margin: 20px;
+  flex: 5;
+  justify-content: flex-start;
 }
 
-.fashion a {  
-  font-size:20px;
-  padding: 7px 0px 0px 9px;
-  color: #bbb;
-  width: 40px;
-  height: 40px; 
-  
-  
-}
-.fashion > div > a:hover {  
-  font-size: 20px;
-  
-  border-radius: 50%;
-  background: #eee;
- 
- 
-}
 
 input:focus {
   outline:0;
@@ -109,8 +92,6 @@ input:focus {
 button:focus {
   outline:0;
 }
-<!--여기까지 -->
-
 
 table {
 	border-collapse: collapse;
@@ -127,66 +108,15 @@ table {
 	content: "" clear : both;
 }
 
-
-.searchBoard > ul > li {
-	list-style: none;
-	display: inline-block;
-	color: #fff;
-	line-height: 45px;
-	
-}
-.searchBoard > ul li a, .xs-menu li a {
-	text-decoration: none;
-	color: #fff;
-	 display:block;
-	 padding: 0px 24px;
-}
-.searchBoard > ul li a:hover {
-	background:#444;
-	color: #fff;
-	transition-duration: 0.3s;
-	-moz-transition-duration: 0.3s;
-	-webkit-transition-duration: 0.3s;
-}
 .active{
 	background:#ff2e2e !important;
 	
-}
-.displaynone{
-	display: none;
-}
-.xs-menu-cont{
-display:none;
-}
-.xs-menu-cont > a {
-    background: none repeat scroll 0 0 #ff7f50;
-    border-radius: 3px;
-    padding: 3px 6px;
-	display: block;
-	border-bottom:1px solid #E67248;
-	    box-shadow: 0 1px 2px #e67248;
-		-webkit-box-shadow: 0 1px 2px #e67248;
-		-moz-box-shadow: 0 1px 2px #e67248;
-}
-.xs-menu-cont > a:hover{
- cursor: pointer;
-}
-  
-.xs-menu li {
-color: #fff;
-padding: 14px 30px;
-border-bottom: 1px solid #ccc;
-background: #FF7F50;
-
-}
-.xs-menu  a{
-text-decoration:none;
 }
 
 .mega-menu {
    background: none repeat scroll 0 0 #888;
     left: 0;
-    margin-top: 50px;
+    margin-top: 25px;
     position: absolute;
     width: 100%;
 	padding:15px;
@@ -219,17 +149,6 @@ clear:both;
 }
 .mm-3column {
         width: 15%;
-}
-
-
-.menu-list li {
-    display: block;
-    line-height: normal;
-    margin: 0;
-    padding: 5px 0;
-}
-.menu-list li :hover{
-		background:inherit !important;
 }
 
 .menu-list button {
