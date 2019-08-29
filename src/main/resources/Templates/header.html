@@ -27,11 +27,50 @@
 </head>
 
 <body>
+	<script type="text/javascript">
+		function changeSearchMod(target) {
+			var defaultSearch = document.getElementById("defaultSearch");
+
+			console.log(target);
+			
+			switch(target){
+			case 'categoryBtn' :
+				defaultSearch.style.display = 'none';
+				document.getElementById("categorySearch").style.display = 'block';
+				break;
+			case 'colorBtn' :
+				defaultSearch.style.display = 'none';
+				document.getElementById("categorySearch").style.display = 'block';
+				break;
+			case 'styleBtn' :
+				defaultSearch.style.display = 'none';
+				document.getElementById("styleSearch").style.display = 'block';
+				break;
+			case 'brandBtn' :
+				defaultSearch.style.display = 'none';
+				document.getElementById("brandSearch").style.display = 'block';
+				break;
+			case 'userBtn' :
+				defaultSearch.style.display = 'none';
+				document.getElementById("userSearch").style.display = 'block';
+				break;
+			}
+		}
+
+		function returnDefaultMod() {
+			var defaultSearch = document.getElementById("defaultSearch");
+			defaultSearch.style.display = 'block';
+			document.getElementById("categorySearch").style.display = 'none';
+			/* document.getElementById("colorSearch").style.display='none'; */
+			document.getElementById("styleSearch").style.display='none';
+			document.getElementById("brandSearch").style.display='none';
+			document.getElementById("userSearch").style.display='none'; 
+
+		}
+
+	</script>
 
 	<!--db가져오기 테스트 -->
-
-
-
 	<nav class="fashion">
 		<img src="https://i.ibb.co/MVr31h7/logo.png" alt="logo" />
 		<form id="searchBar" method="GET">
@@ -73,14 +112,15 @@
 						<div class="mm-3column">
 							<span class="menu-list"> <span>
 									<button class="menuBtn" id="brandBtn" value="브랜드: "
-									onclick="changeSearchMod('brandBtn')">스타일</button>>브랜드</button>
+									onclick="changeSearchMod('brandBtn')">브랜드</button>
 							</span>
 							</span>
 						</div>
 
 						<div class="mm-3column">
 							<span class="menu-list"> <span>
-									<button class="menuBtn" id="userBtn" value="유저: ">유저</button>
+									<button class="menuBtn" id="userBtn" value="유저: "
+									onclick="changeSearchMod('userBtn')">>유저</button>
 							</span>
 							</span>
 						</div>
@@ -149,6 +189,18 @@
 
 					</div>
 				</ul>
+				
+				<!-- 유저 -->
+				<ul class="drop-down" id='userSearch' style="display: none">
+					<div class="mega-menu">
+						<div class="mm-6column">
+							<p>유저 검색</p>
+							
+						</div>
+					</div>
+				</ul>
+				
+
 		</form>
 		<button>
 			<svg>
@@ -162,50 +214,6 @@
 				class="glyphicon glyphicon-user"></i></a>
 		</div>
 	</nav>
-
-
-
-	<script type="text/javascript">
-		function changeSearchMod(target) {
-			var defaultSearch = document.getElementById("defaultSearch");
-
-			console.log(target);
-			
-			switch(target){
-			case 'categoryBtn' :
-				defaultSearch.style.display = 'none';
-				document.getElementById("categorySearch").style.display = 'block';
-				break;
-			case 'colorBtn' :
-				defaultSearch.style.display = 'none';
-				document.getElementById("categorySearch").style.display = 'block';
-				break;
-			case 'styleBtn' :
-				defaultSearch.style.display = 'none';
-				document.getElementById("styleSearch").style.display = 'block';
-				break;
-			case 'brandBtn' :
-				defaultSearch.style.display = 'none';
-				document.getElementById("brandSearch").style.display = 'block';
-				break;
-			case 'userBtn' :
-				defaultSearch.style.display = 'none';
-				document.getElementById("categorySearch").style.display = 'block';
-				break;
-			}
-		}
-
-		function returnDefaultMod() {
-			var defaultSearch = document.getElementById("defaultSearch");
-			defaultSearch.style.display = 'block';
-			document.getElementById("categorySearch").style.display = 'none';
-			/* document.getElementById("colorSearch").style.display='none'; */
-			document.getElementById("styleSearch").style.display='none';
-			document.getElementById("brandSearch").style.display='none';
-			/* document.getElementById("userSearch").style.display='none';  */
-
-		}
-	</script>
 
 	</div>
 	<br>

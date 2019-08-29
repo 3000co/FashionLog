@@ -41,6 +41,7 @@
 	      tokens: $('#inputField').tokenfield('getTokens'),
 	      $input: $('#inputField').data('bs.tokenfield').$input.val()
 	    });
+	    returnDefaultMod();
 	  });
 
 	//메뉴 버튼
@@ -60,5 +61,10 @@
 		$('#inputField-tokenfield').val('');
 		
 	});
+
+
+			
+			
+
 
 	 
