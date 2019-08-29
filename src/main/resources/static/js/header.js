@@ -27,7 +27,7 @@
 	      createTokensOnBlur: false
 	    });
 	    
-	    $("form").submit(function(e) {
+	    $("#searchButton").click(function(e) {
 	      e.preventDefault();
 	      $('.form-data').text( $('#inputField').val());
 
