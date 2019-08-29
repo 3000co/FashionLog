@@ -17,7 +17,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString(exclude = "posts")
+@ToString(exclude = {"posts","followers","followees"})
 @Entity
 public class Member {
 	@Id
@@ -53,12 +53,18 @@ public class Member {
 	@ManyToOne
 	@JoinColumn(name = "STYLE_NO3")
 	private Style styleNo3;
+
+	@OneToMany(mappedBy = "memberNo")
+	private List<Post> posts = new ArrayList<Post>();
 	
 	@Transient
 	private Long likesCount;
 	
-	@OneToMany(mappedBy = "memberNo")
-	private List<Post> posts = new ArrayList<Post>();
+	@OneToMany(mappedBy = "followeeMemNo")
+	private List<Follow> followers;
+
+	@OneToMany(mappedBy = "followerMemNo")
+	private List<Follow> followees;
 	
 	@Transient
 	public void setLikesCount() {
