@@ -24,6 +24,7 @@ public class TestController {
 	@Autowired
 	private BrandRepository brandRepository;
 	
+	//로그인 할때의 컨트롤러에서 다음과 같이 동작함.
 	@RequestMapping("/test")
 	public String startTest(Model model) {
 		//DB에서 목록을 가져와서 SelectBox에 이용
@@ -34,7 +35,6 @@ public class TestController {
 		model.addAttribute("style", style);
 		model.addAttribute("category", category);
 		model.addAttribute("brand", brand);
-		
-		return "commonheader";
+		return "view";
 	}
 }
