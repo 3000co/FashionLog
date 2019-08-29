@@ -4,6 +4,17 @@ $(document).ready( function() {
 	var newTag = $("#itemTag1");
 	var tagMold;
 	
+	var style = 0;
+	$(document).on("change", "#styleNo", function(event) {
+		var text = $("#styleNo option:selected").text();
+		var value = $("#styleNo option:selected").val();
+		$("input[class=styleNo]").each(function(index) {
+			$("input[class=styleText]:eq(" + style + ")").val(text);
+			$("input[class=styleNo]:eq(" + style + ")").val(value);
+		});
+		style++;
+	});
+
 	$(document).on("click", "#img", function(event) {
 		
 		if (count < 7) {
@@ -31,6 +42,7 @@ $(document).ready( function() {
 			}
 		}
 	});
+	
 	
 	$(document).on("click", "#exitBtn", function(event) {
 		$("input[name=tagNo]").each(function(index) {

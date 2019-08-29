@@ -60,7 +60,7 @@
 	border-radius: 5px;
 }
 
-.itemWrap input, select {
+.itemTagWrap input, select {
 	float: right;
 }
 
@@ -70,7 +70,7 @@
 	border-radius: 5px;
 }
 
-.styleNo1, .styleNo2, .styleNo3 {
+.styleNo {
 	width: 65px;
 	margin-left: 20px;
 }

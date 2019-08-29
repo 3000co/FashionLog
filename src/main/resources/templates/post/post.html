@@ -12,15 +12,18 @@
 <body>
 
 	<div class="post" id="post">
+		<input type="number" id="memberNo" th:value="${member.memberNo}">
+<!-- 		<input type="text" id="file" th:value="${file.name}"> -->
 		<div class="leftWrap">	
-			<div class="imgWrap">
-				<input type="file" id="selectImg"/>
+			<form id="imgWrap" class="imgWrap" action="/insertFile" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="type" name="type" value="post">
+				<input type="file" id="selectImg" name="mulFile"/>
 				<div class="imgMold">
-						<img id="img"><br>
+					<img id="img"><br>
 				</div>
-			</div>
+			</form>
 			<div class="contents">
-				<textarea rows="3" cols="10" placeholder="#해시태그 #글내용작성"></textarea>
+				<textarea id="contents" rows="13" cols="39" placeholder="#해시태그 #글내용작성"></textarea>
 			</div>
 		</div>
 		<div class="itemWrap">
@@ -31,16 +34,22 @@
 						<option th:each="style:${style}" th:text="${style.name}"
 							th:value="${style.styleNo}"></option>
 				</select><br> 
-				<input type="text" id="styleNo1" name="styleNo1" class="styleNo1">&emsp;
-				<input type="text" id="styleNo3" name="styleNo2" class="styleNo2">&emsp;
-				<input type="text" id="styleNo3" name="styleNo3" class="styleNo3">&emsp;
+				&emsp;&emsp;
+				&emsp;<input type="text" id="styleText1" name="styleText1" class="styleText">
+				&emsp;<input type="number" id="styleNo1" name="styleNo1" class="styleNo" hidden="true">
+				
+				&emsp;<input type="text" id="styleText2" name="styleText2" class="styleText">
+				&emsp;<input type="number" id="styleNo2" name="styleNo2" class="styleNo" hidden="true">
+				
+				&emsp;<input type="text" id="styleText3" name="styleText3" class="styleText">
+				&emsp;<input type="number" id="styleNo3" name="styleNo3" class="styleNo" hidden="true">
 			</div><hr>
 			<!-- 태그 -->
 			<div id="itemTagWrap" class="itemTagWrap">
 				<div id="itemTag1" class="itemTag">
 					<div class="tag">
-						<label for="postNo">임시post_no</label>
-						<input type="number" id="postNo" name="postNo" value="10" ><br>
+<!-- 						<label for="postNo">임시post_no</label> -->
+<!-- 						<input type="number" id="postNo" name="postNo" value="10" ><br> -->
 					
 						<label for="tagNo">태그번호</label>
 						<input type="number" id="tagNo" name="tagNo" value="1"><br>
@@ -70,7 +79,7 @@
 						<input type="text" id="store" name="store" value="default">
 						<button type="button" id="mapBtn">지도</button> <br>
 				
-						<input type="text" id="xCoordinate" name="xCoordinate">
+						<input type="text" id="xCoordinate" name="xCoordinate"><br> 
 						<input type="text" id="yCoordinate" name="yCoordinate"><br> 
 						<button type="button" id="exitBtn">&times;</button>
 					</div>
