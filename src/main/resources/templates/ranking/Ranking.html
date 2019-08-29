@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/profileUnit.js"></script>
 <title>Fashion Log - Ranking</title>
 </head>
 <body>
@@ -22,14 +23,15 @@
 	 </div>
 	</div>
 <div th:case="user" >
+
 <div th:each="user,index : ${userRankingList}">
 <span th:text="${index.index+1}"> </span>
 	<!--	<p th:include=""></p>-->
 	<div class="profileUnit">
-	<input type="hidden" class="unitMember" th:value="${user}"/>
+	<input type="hidden" class="unitMemberNo" th:value="${user.memberNo}"/>
 	<img th:alt="${user.nickname+'의 프로필 사진'}" th:src="${user.profileImageNo.path}">&nbsp;&nbsp;
 	<span th:text=${user.nickname}> 유저 닉네임 </span>
-	<button class="followToggleBtn" > follow </button>
+	<button class="followToggleBtn" style="display:none" > follow </button>
 	</div>
 	<p th:text="'받은 좋아요 수 : '+${user.likesCount}"></p>
 	</div>
