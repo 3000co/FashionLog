@@ -8,5 +8,5 @@ import com.fashionlog.model.dto.File;
 
 public interface FileRepository extends JpaRepository<File, Integer>{
 	List<File> findByType(char type);
-	
+	File findByName(String name);
 }
