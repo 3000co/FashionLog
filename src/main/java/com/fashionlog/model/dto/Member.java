@@ -22,7 +22,7 @@ import lombok.ToString;
 public class Member {
 	@Id
 	private int memberNo;
-	
+
 	@Column(columnDefinition = "char")
 	private String id;
 	 

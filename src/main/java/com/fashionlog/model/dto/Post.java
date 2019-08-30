@@ -2,9 +2,6 @@ package com.fashionlog.model.dto;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-
-import java.util.Date;
-
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -27,7 +24,6 @@ import lombok.ToString;
 @Setter
 @ToString(exclude = {"itemList", "commentList"})
 @Entity
-
 public class Post {
 	
 	@Id
