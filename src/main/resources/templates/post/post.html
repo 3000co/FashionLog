@@ -6,16 +6,14 @@
 
 	<link rel="stylesheet" href="css/post.css">
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 </head>
 <body>
 
 	<div class="post" id="post">
-		<input type="number" id="memberNo" th:value="${member.memberNo}">
-<!-- 		<input type="text" id="file" th:value="${file.name}"> -->
+		<input id="memberNo" name="memberNo" class="memberNo" th:value="${member.memberNo}" hidden="true">
 		<div class="leftWrap">	
-			<form id="imgWrap" class="imgWrap" action="/insertFile" method="post" enctype="multipart/form-data">
+			<form id="imgWrap" class="imgWrap" action="/item" method="post" enctype="multipart/form-data">
 				<input type="hidden" id="type" name="type" value="post">
 				<input type="file" id="selectImg" name="mulFile"/>
 				<div class="imgMold">
@@ -48,9 +46,6 @@
 			<div id="itemTagWrap" class="itemTagWrap">
 				<div id="itemTag1" class="itemTag">
 					<div class="tag">
-<!-- 						<label for="postNo">임시post_no</label> -->
-<!-- 						<input type="number" id="postNo" name="postNo" value="10" ><br> -->
-					
 						<label for="tagNo">태그번호</label>
 						<input type="number" id="tagNo" name="tagNo" value="1"><br>
 				
@@ -79,8 +74,8 @@
 						<input type="text" id="store" name="store" value="default">
 						<button type="button" id="mapBtn">지도</button> <br>
 				
-						<input type="text" id="xCoordinate" name="xCoordinate"><br> 
-						<input type="text" id="yCoordinate" name="yCoordinate"><br> 
+						<input type="number" id="xCoordinate" name="xCoordinate" hidden="true"><br> 
+						<input type="number" id="yCoordinate" name="yCoordinate" hidden="true"><br> 
 						<button type="button" id="exitBtn">&times;</button>
 					</div>
 				</div>

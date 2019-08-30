@@ -2,12 +2,9 @@ package com.fashionlog.model.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,25 +13,17 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fashionlog.model.dao.FileRepository;
-import com.fashionlog.model.dao.PostRepository;
 import com.fashionlog.model.dto.File;
 
 @Service
 public class PostServiceImpl implements PostService {
 	@Autowired
-	private PostRepository postRepository;
-	@Autowired
 	private FileRepository fileRepository;
 	@Value("${file.uploadPath}")
 	private String uploadPath;
 
-	private static final Logger logger = LoggerFactory.getLogger(PostServiceImpl.class);
-
 	@Override
-	public String insertFile(MultipartFile mulFile, Model model, HttpServletRequest request) throws Exception {
-		logger.info("originalName:" + mulFile.getOriginalFilename());
-		logger.info("size:"+mulFile.getSize());
-		logger.info("contentType:"+mulFile.getContentType());
+	public File insertFile(MultipartFile mulFile, Model model, HttpServletRequest request) throws Exception {
 		Date now = new Date();
 		String savedName = uploadFile(mulFile.getOriginalFilename(), mulFile.getBytes(), now, mulFile );
 
@@ -43,10 +32,11 @@ public class PostServiceImpl implements PostService {
 		file.setName(savedName);
 		file.setPath(uploadPath+"/"+savedName);
 		file.setSize((int) mulFile.getSize());
-		System.out.println(file.toString());
 		fileRepository.save(file);
-
-		return savedName;
+		
+		File fileName = fileRepository.findByName(savedName);
+		
+		return fileName;
 	}
 	
 	private String uploadFile(String originalName,byte[] fileData, Date now, MultipartFile mulFile ) throws Exception{
