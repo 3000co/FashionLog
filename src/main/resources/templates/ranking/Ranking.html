@@ -8,12 +8,13 @@
 <script type="text/javascript" src="/js/profileUnit.js"></script>
 <title>Fashion Log - Ranking</title>
 </head>
-<body>
+<body> 
 
 <h1>ranking : <span th:text="${rankType}">type</span></h1>
 
 <div th:switch="${rankType}">
 	<div th:case="brand">
+	<h3><a href='/ranking/user/followers'>user 랭킹 보기</a></h3>
 		<div th:each="brand,index : ${brandRankingList}">
 			<span th:text="${index.index+1}"> </span>
 			 <!-- <p th:include=""></p> --> 
@@ -23,8 +24,9 @@
 		 </div>
 	</div>
 	<div th:case="user" >
-		<h4 th:if="${criterion=='likes'}"> <a href='/ranking/user/followers'>followers</a></h4>
-		<h4 th:if="${criterion=='followers'}"> <a href='/ranking/user/likes'>likes</a></h4>
+		<h3><a href='/ranking/brand'>brand 랭킹 보기</a></h3>
+		<h4 th:if="${criterion=='likes'}"> <a href='/ranking/user/followers'>followers 랭킹 보기</a></h4>
+		<h4 th:if="${criterion=='followers'}"> <a href='/ranking/user/likes'>likes 랭킹 보기</a></h4>
 		<div th:each="user,index : ${userRankingList}">
 			<span th:text="${index.index+1}"> </span>
 			<!--	<p th:include=""></p>-->
