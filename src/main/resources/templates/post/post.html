@@ -29,18 +29,19 @@
 			<div class="style">
 				<label for="style">스 타 일</label>
 				<select id="styleNo" name="styleNo">
+						<option value="0" selected>스타일 선택</option>
 						<option th:each="style:${style}" th:text="${style.name}"
 							th:value="${style.styleNo}"></option>
 				</select><br> 
 				&emsp;&emsp;
 				&emsp;<input type="text" id="styleText1" name="styleText1" class="styleText">
-				&emsp;<input type="number" id="styleNo1" name="styleNo1" class="styleNo" hidden="true">
+				<input type="number" id="styleNo1" name="styleNo1" class="styleNo" hidden="true">
 				
 				&emsp;<input type="text" id="styleText2" name="styleText2" class="styleText">
-				&emsp;<input type="number" id="styleNo2" name="styleNo2" class="styleNo" hidden="true">
+				<input type="number" id="styleNo2" name="styleNo2" class="styleNo" hidden="true">
 				
 				&emsp;<input type="text" id="styleText3" name="styleText3" class="styleText">
-				&emsp;<input type="number" id="styleNo3" name="styleNo3" class="styleNo" hidden="true">
+				<input type="number" id="styleNo3" name="styleNo3" class="styleNo" hidden="true">
 			</div><hr>
 			<!-- 태그 -->
 			<div id="itemTagWrap" class="itemTagWrap">
