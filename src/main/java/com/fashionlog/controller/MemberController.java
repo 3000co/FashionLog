@@ -68,18 +68,5 @@ public class MemberController {
 		return "redirect:login";
 	}
 
-	@RequestMapping("/join")
-	public String join() {
-		return "join";
-	}
-
-	@RequestMapping(value = "/join.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String signupProcess(Member member, HttpSession session) {
-		System.out.println("아이디: "+member.getId()+ " 비밀번호: "+member.getPassword());
-		System.out.println("Member::" + member);
-		memberService.doJoin(member);
-		
-		return "redirect:login";
-	}
 
 }
