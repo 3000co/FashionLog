@@ -22,7 +22,7 @@
 	        
 	        delay: 100
 	      },
-	      delimiter: ';',
+	      delimiter: '&',
 	      showAutocompleteOnFocus: true,
 	      createTokensOnBlur: false
 	    });
