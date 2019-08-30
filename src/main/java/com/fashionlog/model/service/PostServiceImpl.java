@@ -1,5 +1,6 @@
 package com.fashionlog.model.service;
 
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,7 +14,11 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fashionlog.model.dao.FileRepository;
+import com.fashionlog.model.dao.LikesRepository;
+import com.fashionlog.model.dao.PostRepository;
 import com.fashionlog.model.dto.File;
+import com.fashionlog.model.dto.Member;
+import com.fashionlog.model.dto.Post;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -21,6 +26,10 @@ public class PostServiceImpl implements PostService {
 	private FileRepository fileRepository;
 	@Value("${file.uploadPath}")
 	private String uploadPath;
+	@Autowired
+	private PostRepository postRepository;
+	@Autowired
+	private LikesRepository likesRepository;
 
 	@Override
 	public File insertFile(MultipartFile mulFile, Model model, HttpServletRequest request) throws Exception {
@@ -49,4 +58,14 @@ public class PostServiceImpl implements PostService {
 		return savedName;
 	}
 
+	@Override
+	public void countLikes() {
+		List<Post> posts = postRepository.findAll();
+		for (Post post:posts) {
+			post.setLikesCount(likesRepository.countByPostNo(post));
+			postRepository.save(post);
+			System.out.println("post likes count : " + post);
+		}
+		
+	}
 }

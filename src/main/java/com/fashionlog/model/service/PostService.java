@@ -9,4 +9,9 @@ import com.fashionlog.model.dto.File;
 
 public interface PostService {
 	public File insertFile(MultipartFile mulFile, Model model, HttpServletRequest request) throws Exception;
+
+	public void countLikes();
+
 }
+
+

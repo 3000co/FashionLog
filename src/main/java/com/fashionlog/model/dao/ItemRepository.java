@@ -1,7 +1,10 @@
 package com.fashionlog.model.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.fashionlog.model.dto.Brand;
 import com.fashionlog.model.dto.Item;
 
 public interface ItemRepository extends JpaRepository<Item, Integer> {
@@ -11,7 +14,7 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	
 	public Item deleteByPostNo(int postNo);
 	
-	
+	public Long countByBrandNo(Brand brand);
 	/*
 	 * 검색용
 	 * @Query(value = ) 
