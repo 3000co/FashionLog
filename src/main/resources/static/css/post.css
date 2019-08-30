@@ -71,10 +71,14 @@
 }
 
 .styleText {
-	width: 65px;
+	width: 60px;
 	margin-left: 20px;
+	text-align: center;
+	display: none;
 }
-
+.styleUndo{
+	display: none;
+}
 .itemTagWrap {
 	overflow: auto;
 	height: 510px;

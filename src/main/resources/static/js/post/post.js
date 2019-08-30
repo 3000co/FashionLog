@@ -54,7 +54,6 @@ function postInsert(fileNo){
 function itemInsert(postNo){
 	$("div[class=itemTag]").each(function(index) {
 		var eqValue = $("div[class=itemTag]:eq(" + index + ")");
-		
 		$.ajax({
 			type : "post",
 			url : "/itemInsert",
