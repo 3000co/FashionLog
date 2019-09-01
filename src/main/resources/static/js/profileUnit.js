@@ -16,6 +16,7 @@ $.setFollowBtnStat = function(memberNo, followBtn) {
 			memberNo : memberNo
 		},
 		success : function(followStat) {
+			console.log(followStat);
 			if(followStat!='self'){
 				followBtn.text(followStat);
 				followBtn.addClass("stat-"+followStat);
@@ -34,6 +35,7 @@ $.setFollowBtnStat = function(memberNo, followBtn) {
 		$(".profileUnit").each(function(index) {
 			var memNo = $("input[class=unitMemberNo]:eq(" + index + ")").val();
 			var followBtn = $("button[class=followToggleBtn]:eq(" + index + ")");
+			console.log(memNo);
 			$.setFollowBtnStat(memNo,followBtn);
 			
 		});

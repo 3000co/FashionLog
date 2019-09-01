@@ -29,13 +29,18 @@ public class FollowController {
 	@ResponseBody
 	public String checkFollow(Integer memberNo, HttpSession session) {
 		//가상 세션 데이터 , 6이 로그인 해있음.
-		Member mockUser = memberRepository.findById(5).get();
-		session.setAttribute("member", mockUser);
-		
+//		Member mockUser = memberRepository.findById(5).get();
+//		session.setAttribute("member", mockUser);
+//		
 		Member user = (Member) session.getAttribute("member");
+		System.out.println(user);
 		if(memberNo == user.getMemberNo()) return "self";
 		Optional<Follow> isFollowed = followRepository.findByFollowerMemNoAndFolloweeMemNo(user, memberRepository.findByMemberNo(memberNo));
 		return isFollowed.isPresent() ? "following" : "follow";
+	}
+	
+	public String follow(Integer memberNo, HttpSession session)	{
+		return "";
 	}
 }
 

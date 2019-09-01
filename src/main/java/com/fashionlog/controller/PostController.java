@@ -43,6 +43,7 @@ public class PostController {
 	@Autowired
 	private PostService postService;
 	
+	
 	@RequestMapping("/postWrite")
 	public String startTest(Model model, HttpServletResponse response) {
 		List<Style> style = styleRepository.findAll();
