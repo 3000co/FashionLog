@@ -61,7 +61,7 @@ public class CommentController {
 		comment.setPostNo(post);
 		commentRepository.save(comment);
 
-		return "redirect:/";
+		return "redirect:/comment";
 	}
 
 	@RequestMapping("/deleteComment")
