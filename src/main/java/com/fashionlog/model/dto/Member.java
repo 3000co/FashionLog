@@ -3,6 +3,9 @@ package com.fashionlog.model.dto;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -29,22 +32,14 @@ public class Member {
 	
 	@Column(columnDefinition = "char")
 	private String email;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "PROFILE_IMAGE_NO")
+	@JoinColumn(name = "PROFILE_IMAGE_NO", insertable = false, updatable = false)
 	private File profileImageNo;
 	
-	@ManyToOne
-	@JoinColumn(name = "STYLE_NO1")
-	private Style styleNo1;
-	
-	@ManyToOne
-	@JoinColumn(name = "STYLE_NO2")
-	private Style styleNo2;
-	
-	@ManyToOne
-	@JoinColumn(name = "STYLE_NO3")
-	private Style styleNo3;
+	private int styleNo1;
+	private Integer styleNo2;
+	private Integer styleNo3;
 
 }
 

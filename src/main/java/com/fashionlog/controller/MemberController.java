@@ -1,26 +1,13 @@
 ﻿package com.fashionlog.controller;
 
-import javax.persistence.criteria.SetJoin;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.fashionlog.model.dto.Member;
+import com.fashionlog.model.dto.Style;
 import com.fashionlog.model.service.MemberService;
 
 @SessionAttributes("member")
@@ -37,40 +24,73 @@ public class MemberController {
 	// 로그인
 	@RequestMapping("/login")
 	public String login() {
-		return "login";
+		return "member/login";
 	}
-	
-	// 로그인 처리
-	@RequestMapping(value = "/login.do" , method = {RequestMethod.GET,RequestMethod.POST})
-	public String doLogin(Member member, HttpSession session) throws Exception {
-		System.out.println("아이디: "+member.getId()+ " 비밀번호: "+member.getPassword());
 
-//		Member getMemberInfo = memberService.getMemberInfo(member);
-		Member getMemberInfo =memberService.findByIdAndPassword(member.getId(), member.getPassword());
-		System.out.println("getMemberInfo: "+getMemberInfo);
-		
+	// 로그인 처리
+	@RequestMapping(value = "/login.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String doLogin(Member member, HttpSession session) throws Exception {
+		System.out.println("아이디: " + member.getId() + " 비밀번호: " + member.getPassword());
+		Member getMemberInfo = memberService.findByIdAndPassword(member.getId(), member.getPassword());
+		System.out.println("getMemberInfo: " + getMemberInfo);
+
 		if (getMemberInfo == null) {
 			session.setAttribute("member", null);
-			return "login";
+			return "member/login";
 		} else {
 			session.setAttribute("member", getMemberInfo);
+			session.setAttribute("id", member.getId());
 			System.out.println("로그인 성공" + getMemberInfo);
 			return "redirect:/";
 		}
 	}
 
+	// 로그아웃 처리
+	@RequestMapping("/logout.do")
+	public String doLogout(Member member, HttpSession session) {
+		session.invalidate();
+		return "redirect:/login";
+	}
+
+	// 회원가입
 	@RequestMapping("/join")
 	public String join() {
-		return "join";
+		return "member/join";
+	}
+	// 회원가입 처리
+	@RequestMapping(value = "/join.do", method = RequestMethod.POST)
+	public String doJoin(Member member, HttpSession session) {
+		System.out.println("아이디: " + member.getId() + " 비밀번호: " + member.getPassword());
+		System.out.println("Member1::" + member);
+//		memberService.doJoin(member);
+		return "member/styleSelect";
+	}
+	
+	// 회원가입 스타일 처리
+		@RequestMapping(value = "/styleSelect.do", method = RequestMethod.POST)
+		public String doStyleSelect(Member member, HttpSession session) {
+			System.out.println(" 스타일 번호: " + member.getStyleNo1());
+			System.out.println("Member2::" + member);
+			int getStyleInfo = member.getStyleNo1();
+			if (getStyleInfo == 0) {
+				session.setAttribute("style", null);
+				return "member/styleSelect";
+			} else {
+				memberService.doJoin(member);
+				System.out.println("회원가입 성공" + getStyleInfo);
+				return "redirect:/login";
+			}
+		}
+		
+	// 비밀번호 변경
+	@RequestMapping("/modPassword")
+	public String modPassword() {
+		return "/modPassword";
 	}
 
-	@RequestMapping(value = "/join.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String signupProcess(Member member, HttpSession session) {
-		System.out.println("아이디: "+member.getId()+ " 비밀번호: "+member.getPassword());
-		System.out.println("Member::" + member);
-		memberService.doJoin(member);
-		
-		return "redirect:login";
+	// 마이프로필
+	@RequestMapping("profile")
+	public String profileSetting() {
+		return "member/profile";
 	}
 }
-

@@ -28,7 +28,7 @@ public class PostController {
 	@Autowired
 	private BrandRepository brandRepository;
 	
-	@RequestMapping("/")
+	@RequestMapping("/post")
 	public String startTest(Model model) {
 		//DB에서 목록을 가져와서 SelectBox에 이용
 		List<Style> style = styleRepository.findAll();

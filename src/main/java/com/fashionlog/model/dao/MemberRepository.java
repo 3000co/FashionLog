@@ -7,7 +7,9 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 
 	public Member findByIdAndPassword(String Id, String Password);
 	
-	public Member findById(String Id);
+	public Member findByPassword(String Password);
 
+	
+	
 }
 
