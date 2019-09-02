@@ -25,17 +25,11 @@ public class MemberController {
 	// 로그인 처리
 	@RequestMapping("/login.do")
 	public String doLogin(Member member, HttpSession session) throws Exception {
-		
 		Member getMemberInfo = memberService.findByIdAndPassword(member.getId(), member.getPassword());
-		System.out.println("getMemberInfo: "+getMemberInfo);
-		
-
 		if (getMemberInfo == null) {
-		
 			return "login";
 		} else {
 			session.setAttribute("member", getMemberInfo);
-			System.out.println("세션에 저장됨 : " + session.getAttribute("member"));
 				return "redirect:/ranking/user/followers";
 		}
 	}
@@ -47,10 +41,7 @@ public class MemberController {
 
 	@RequestMapping(value = "/join.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String signupProcess(Member member, HttpSession session) {
-		System.out.println("아이디: "+member.getId()+ " 비밀번호: "+member.getPassword());
-		System.out.println("Member::" + member);
 		memberService.doJoin(member);
-		
 		return "redirect:login";
 	}
 

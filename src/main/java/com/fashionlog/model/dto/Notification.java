@@ -24,8 +24,6 @@ import lombok.Data;
 public class Notification {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
-	@Column
 	private int notiNo;
 	
 	@ManyToOne

@@ -55,7 +55,6 @@ public class RankingController {
 
 	@RequestMapping("ranking/user/followers")
 	public String memberRankingByFollowers(Model model, HttpSession session) {
-		System.out.println("rank controller에서 확인됨 : "+session.getAttribute("member"));
 		List<Member> members = memberRepository.findAll();
 		Collections.sort(members,new Comparator<Member>() {
 			public int compare(Member m1, Member m2) {

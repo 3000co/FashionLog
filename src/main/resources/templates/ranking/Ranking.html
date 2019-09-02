@@ -11,7 +11,7 @@
 <body> 
 
 <h1>ranking : <span th:text="${rankType}">type</span></h1>
-<h2>로그인 됨 : <span th:text="${session.member}"></span></h2>
+<h2>로그인 됨 : <span id="loginUserNickname" th:text="${session.member.nickname}"></span></h2>
 
 <div th:switch="${rankType}">
 	<div th:case="brand">
@@ -30,13 +30,7 @@
 		<h4 th:if="${criterion=='followers'}"> <a href='/ranking/user/likes'>likes 랭킹 보기</a></h4>
 		<div th:each="user,index : ${userRankingList}">
 			<span th:text="${index.index+1}"> </span>
-			<!--	<p th:include=""></p>-->
-			<div class="profileUnit">
-				<input type="hidden" class="unitMemberNo" th:value="${user.memberNo}"/>
-				<img th:alt="${user.nickname+'의 프로필 사진'}" th:src="${user.profileImageNo.path}">&nbsp;&nbsp;
-				<span th:text=${user.nickname}> 유저 닉네임 </span>
-				<button class="followToggleBtn" style="display:none" > follow </button>
-			</div>
+			<div class="profileUnit" th:include="profileUnit"> </div>
 			<p th:text=
 			"${criterion=='likes'} ? 
 			${user.likesCount}+'개의 좋아요를 받았습니다.' : 

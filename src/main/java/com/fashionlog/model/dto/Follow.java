@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -41,7 +41,7 @@ public class Follow implements SocialEvent{
 	@CreationTimestamp
 	Timestamp followTime;
 	
-//	@OneToOne(mappedBy = "notiNo", cascade = CascadeType.REMOVE)
-//	Notification notification;
+	@OneToOne(mappedBy = "followNo", cascade = CascadeType.REMOVE)
+	Notification notification;
 
 }

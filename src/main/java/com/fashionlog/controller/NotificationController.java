@@ -35,7 +35,6 @@ public class NotificationController {
 	public String notificationAll(Model model) {
 		List<Notification> allNotiList = notificiationRepository.findAll();
 		model.addAttribute("allNotiList",allNotiList);
-		System.out.println(allNotiList);
 		return "/notification/NotiListAll";
 	}
 	
