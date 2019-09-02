@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Post</title>
+
+	<link rel="stylesheet" href="css/post.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+</head>
+<body>
+
+	<div class="post" id="post">
+		<input id="memberNo" name="memberNo" class="memberNo" th:value="${member.memberNo}" hidden="true">
+		<div class="leftWrap">	
+			<form id="imgWrap" class="imgWrap" action="/item" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="type" name="type" value="post">
+				<input type="file" id="selectImg" name="mulFile"/>
+				<div class="imgMold">
+					<img id="img"><br>
+				</div>
+			</form>
+			<div class="contents">
+				<textarea id="contents" rows="13" cols="39" placeholder="#해시태그 #글내용작성"></textarea>
+			</div>
+		</div>
+		<div class="itemWrap">
+			<!-- 스타일 -->
+			<div class="style">
+				<label for="style">스 타 일</label>
+				<select id="styleNo" name="styleNo">
+						<option value="0" selected>스타일 선택</option>
+						<option th:each="style:${style}" th:text="${style.name}"
+							th:value="${style.styleNo}"></option>
+				</select><br> 
+				&emsp;&emsp;
+				&emsp;<input type="text" id="styleText1" name="styleText1" class="styleText">
+				<input type="number" id="styleNo1" name="styleNo1" class="styleNo" hidden="true">
+				
+				&emsp;<input type="text" id="styleText2" name="styleText2" class="styleText">
+				<input type="number" id="styleNo2" name="styleNo2" class="styleNo" hidden="true">
+				
+				&emsp;<input type="text" id="styleText3" name="styleText3" class="styleText">
+				<input type="number" id="styleNo3" name="styleNo3" class="styleNo" hidden="true">
+			</div><hr>
+			<!-- 태그 -->
+			<div id="itemTagWrap" class="itemTagWrap">
+				<div id="itemTag1" class="itemTag">
+					<div class="tag">
+						<label for="tagNo">태그번호</label>
+						<input type="number" id="tagNo" name="tagNo" value="1"><br>
+				
+						<label for="name">상 품 명</label>
+						<input type="text" id="name" name="name" value="노랑파워"><br>
+				
+						<label for="categoryNo">카테고리</label>
+						<select id="categoryNo" name="categoryNo">
+							<option value="0" selected>카테고리 선택</option>
+							<option th:each="category:${category}" th:text="${category.name}"
+								th:value="${category.categoryNo}"></option>
+						</select><br> 
+						
+						<label for="brandNo">브 랜 드</label>
+						<select id="brandNo" name="brandNo">
+							<option value="0" selected>브랜드 선택</option>
+							<option th:each="brand:${brand}" th:text="${brand[1]}"
+								th:value="${brand[0]}"></option>
+						</select><br> 
+						
+						<label for="color">색상</label>
+						<input type="text" id="color" name="color" value="#cdcdcd">
+						<button type="button" id="paletteBtn">Palette</button><br>
+				
+						<label for="store">구 매 처</label>
+						<input type="text" id="store" name="store" value="default">
+						<button type="button" id="mapBtn">지도</button> <br>
+				
+						<input type="number" id="xCoordinate" name="xCoordinate" hidden="true"><br> 
+						<input type="number" id="yCoordinate" name="yCoordinate" hidden="true"><br> 
+						<button type="button" id="exitBtn">&times;</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<button type="submit" id="submit">등록</button>
+	
+		<div id="paletteModal" class="modal">
+			<div class="modalContent">
+				<span class="close">&times;</span>
+				<p>팔렛트트트</p>
+			</div>
+		</div>
+		
+		<div id="mapModal" class="modal">
+			<div class="modalContent">
+				<span class="close">&times;</span>
+				<p>지도지도도</p>
+			</div>
+		</div>
+	</div>
+	<script src="js/previewImage.js"></script>
+	<script src="js/tag.js"></script>
+	<script src="js/post.js"></script>
+</body>
+
+</html>

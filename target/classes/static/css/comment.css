@@ -1,0 +1,150 @@
+@charset "utf-8";
+
+@import
+	url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,600,300);
+
+body {
+	font-family: 'Open Sans';
+}
+
+#badge {
+	background-size: 100% 270px;
+	background-position: top;
+	background-repeat: no-repeat;
+	/* margin:5px auto; */
+	width: 400px;
+	height: 220px;
+	box-shadow: 0px 1px 3px black, inset 0px 0px 2px white;
+	border-radius: 4px;
+	background-color: white;
+}
+
+header {
+	height: 270px;
+	padding: 0;
+	border-bottom: 5px solid #f96243;
+}
+
+section.all {
+	padding: 20px 10px;
+}
+
+.commentInput button {
+	/*     float:right; */
+	background: #1bd5a7;
+	border: none;
+	width: 15%;
+	padding: 5px;
+	margin-top: 0.1em;
+	color: white;
+	border-radius: 5px;
+	transition: 0.3s background;
+}
+
+input {
+	display: block;
+	font-size: 1em;
+	padding: 0.25em;
+	width: 70%;
+	margin-left: 1em;
+	border-radius: 3px;
+	border: 1px solid #BABABA;
+	display: inline-block
+}
+
+.mask {
+	background-image: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 1)
+		45%, rgba(255, 255, 255, 0) 99%);
+	background-image: -moz-linear-gradient(bottom, rgba(255, 255, 255, 1)
+		45%, rgba(255, 255, 255, 0) 99%);
+	background-image: -ms-linear-gradient(bottom, rgba(255, 255, 255, 1) 45%,
+		rgba(255, 255, 255, 0) 99%);
+	background-image: -o-linear-gradient(bottom, rgba(255, 255, 255, 1) 45%,
+		rgba(255, 255, 255, 0) 99%);
+	background-image: linear-gradient(bottom, rgba(255, 255, 255, 1) 45%,
+		rgba(255, 255, 255, 0) 99%);
+	position: absolute;
+	width: 350px;
+	height: 50px;
+	margin-top: 100px;
+}
+
+.list {
+	height: 140px;
+	padding: 0 10px;
+	overflow: auto;
+}
+
+.list section.first {
+	margin-top: -20px;
+}
+
+.list section {
+	margin-bottom: 40px;
+}
+
+img {
+	float: left;
+	width: 25px;
+	height: 25px;
+	border-radius: 80px;
+	margin-right: 15px;
+}
+
+.comments h3 {
+	font-size: 18px;
+	margin-bottom: -10px;
+	margin-top: 30px;
+}
+
+.comments p {
+	font-size: 14px;
+}
+
+a {
+	text-decoration: none;
+	color: #666;
+	transition: 0.3s color;
+}
+
+a:hover {
+	color: #1bd5a7;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modalContents {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
