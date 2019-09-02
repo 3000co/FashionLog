@@ -1,0 +1,74 @@
+@charset "utf-8";
+
+.xs-menu-cont{
+display:none;
+}
+.xs-menu-cont > a {
+    background: none repeat scroll 0 0 #ff7f50;
+    border-radius: 3px;
+    padding: 3px 6px;
+	display: block;
+	border-bottom:1px solid #E67248;
+	    box-shadow: 0 1px 2px #e67248;
+		-webkit-box-shadow: 0 1px 2px #e67248;
+		-moz-box-shadow: 0 1px 2px #e67248;
+}
+.xs-menu-cont > a:hover{
+ cursor: pointer;
+}
+  
+.xs-menu li {
+color: #fff;
+padding: 14px 30px;
+border-bottom: 1px solid #ccc;
+background: #FF7F50;
+
+}
+.xs-menu  a{
+text-decoration:none;
+}
+ 
+
+.inputField {
+	background: coral;
+	position: relative;
+	min-height: 45px;
+	height: 100%;
+}
+
+/*--column--*/
+.mm-6column:after, .mm-6column:before, .mm-3column:after, .mm-3column:before{
+content:"";
+display:table;
+clear:both;
+
+
+}
+.mm-6column, .mm-3column {
+ float: left;
+ position: relative;
+ }
+.mm-6column {
+    width: 20%;
+}
+.mm-3column {
+        width: 15%;
+}
+
+.menu-list span {
+    font-size: 18px;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.mega-menu {
+   background: none repeat scroll 0 0 #888;
+    left: 0;
+    margin-top: 3px;
+    position: absolute;
+    width: 100%;
+	padding:15px;
+	display:none;
+	 transition-duration: 0.9s;
+    
+}

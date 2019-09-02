@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -24,15 +26,17 @@ public class Brand implements Comparable<Brand> {
 	@Column(columnDefinition ="char")
 	private String name;
 	
-	@Column(name = "BRAND_IMAGE_NO")
-	private int brandImage;
+	@ManyToOne
+	@JoinColumn(name = "BRAND_IMAGE_NO")
+	private File brandImageNo;
+
 	
 	@Transient
 	private Long itemCount;
 
 	@Override
 	public int compareTo(Brand otherBrand) {
-		
+		//아이템 수로 오름차순 정렬
 		return -itemCount.compareTo(otherBrand.getItemCount());
 	}
 	
