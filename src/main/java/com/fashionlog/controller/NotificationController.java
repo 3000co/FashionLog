@@ -39,10 +39,11 @@ public class NotificationController {
 	}
 	
 	//확인되지 않은 알림 불러오기
-	@RequestMapping("/noti/{memberNo}/unchecked")
-	public String uncheckedNotificationList(@PathVariable int memberNo, Model model, HttpSession session) {
-		Member reciever = memberRepository.findById(memberNo).get();
-		session.setAttribute("member", reciever);
+	@RequestMapping("/noti/unchecked")
+	public String uncheckedNotificationList(Model model, HttpSession session) {
+		Member tempMem = memberRepository.findById(8).get();
+		session.setAttribute("member", tempMem);
+		Member reciever = (Member) session.getAttribute("member");
 		List<Notification> notiList = notificiationRepository.findByRecieverMemNoAndCheckTimeIsNull(reciever);
 		System.out.println(notiList);
 		model.addAttribute("notiList",notiList);
