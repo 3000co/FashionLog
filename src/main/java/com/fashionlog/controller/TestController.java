@@ -2,6 +2,8 @@ package com.fashionlog.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,7 +45,10 @@ public class TestController {
 	}
 
 	
-	  @RequestMapping("/searchTest") public String startTest2(){ 
+	  @RequestMapping("/searchTest") 
+	  public String startTest2(HttpServletRequest request){ 
+		  System.out.println("안됨");
+		  System.out.println(request.getParameter("searchWords"));
 		  System.err.println(itemRepository.getItemPost("검은", "겨울"));
 		  
 		  return "view"; 

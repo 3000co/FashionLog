@@ -27,13 +27,27 @@
 	      createTokensOnBlur: false
 	    });
 	    
-	    $("#searchButton").click(function(e) {
+	   /* $("#searchButton").click(function(e) {
 	      e.preventDefault();
+	      var searchWord = $('#inputField').val()
+	      searchWord.submit();
+	      
 	      $('.form-data').text( $('#inputField').val());
 
-	    });
+	    });*/
+	    
+	    
 	});
 
+	$("#searchButton").click(function(e) {
+    	e.preventDefault();
+    	
+    	$('#searchWords').val( $('#inputField').val());
+    	
+    
+    	document.searchButton.submit();
+    	
+    });
 	
 	$('#inputField').on('tokenfield:createdtoken', function (e) {
 	    console.log('createdtoken', {
