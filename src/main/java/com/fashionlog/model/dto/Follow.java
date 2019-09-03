@@ -21,8 +21,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode(callSuper=false)
+@ToString(exclude = "notification")
 @Entity
 public class Follow implements SocialEvent{
 

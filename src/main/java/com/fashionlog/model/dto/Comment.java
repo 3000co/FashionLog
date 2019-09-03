@@ -2,32 +2,23 @@ package com.fashionlog.model.dto;
 
 import java.sql.Timestamp;
 
-
-import java.util.Date;
-import java.util.Optional;
-
-import javax.management.Notification;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
-
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Getter @Setter @ToString
+@Getter @Setter @ToString(exclude = "notification")
 public class Comment implements SocialEvent{
 
 
@@ -48,9 +39,9 @@ public class Comment implements SocialEvent{
 	
 	String contents;
 
-//	
-//	@OneToOne(mappedBy = "notiNo", cascade = CascadeType.REMOVE)
-//	Notification notification;
+	
+	@OneToOne(mappedBy = "commentNo", cascade = CascadeType.REMOVE)
+	Notification notification;
 
 
 	

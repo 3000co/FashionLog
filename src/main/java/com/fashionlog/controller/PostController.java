@@ -1,9 +1,12 @@
 package com.fashionlog.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +23,7 @@ import com.fashionlog.model.dao.PostRepository;
 import com.fashionlog.model.dao.StyleRepository;
 import com.fashionlog.model.dto.Category;
 import com.fashionlog.model.dto.File;
+import com.fashionlog.model.dto.Follow;
 import com.fashionlog.model.dto.Item;
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Post;
@@ -58,6 +62,7 @@ public class PostController {
 		return "post/post";
 	}
 
+	//1. file 올리기
 	@RequestMapping("/fileInsert")
 	@ResponseBody
 	public int fileInsert(MultipartFile mulFile, Model model, HttpServletRequest request) throws Exception {
@@ -65,18 +70,41 @@ public class PostController {
 		return file.getFileNo();
 	}
 	
+	//2. fileNo를 받아서 post 올리기
 	@RequestMapping("/postInsert")
 	@ResponseBody
 	public int postTest(Post post) {
 		Post getPost = postRepository.save(post);
+		// Member.posts가 자동으로 반영되지 않을 경우
+//		Member writer = post.getMemberNo();
+//		writer.getPosts().add(post);
+//		memberRepository.save(writer);
 		return getPost.getPostNo();
 	}
 	
+	
+	//3. postNo를 받아서 item 올리기
 	@RequestMapping("/itemInsert")
 	@ResponseBody
 	public void itemTest(Item item) {
 		Item getItem = itemRepository.save(item);
 //		return i;
 	}
-
+	
+	@RequestMapping("/feed")
+	public String getPost(Model model, HttpSession session) {
+		Member user = (Member) session.getAttribute("member");
+		user = memberRepository.findById(user.getMemberNo()).get();
+		Map<Integer,Post> feed = new HashMap<>();
+		for(Follow followee:user.getFollowees()) {
+			List<Post> postList = postRepository.findTop5ByMemberNoOrderByUploadTimeDesc(followee.getFolloweeMemNo()); 
+			for(Post post:postList) {
+			feed.put(post.getPostNo(),post);
+			}
+		}
+		model.addAttribute("feed",feed);
+		return "feed";
+	}
+	
+	
 }
