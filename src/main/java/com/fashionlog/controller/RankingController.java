@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.fashionlog.model.dao.BrandRepository;
 import com.fashionlog.model.dao.MemberRepository;
 import com.fashionlog.model.dto.Brand;
-import com.fashionlog.model.dto.Follow;
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.service.RankingService;
+
 
 @Controller
 public class RankingController {

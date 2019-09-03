@@ -12,4 +12,6 @@ public interface BrandRepository extends JpaRepository<Brand, Integer> {
 	@Query(value = "select brand_no, name from brand", nativeQuery = true)
 	public List<Object[]> findBrandQuery();
 	
+//	public List<Brand> findAllOrderByItemCountAsc();
+	
 }

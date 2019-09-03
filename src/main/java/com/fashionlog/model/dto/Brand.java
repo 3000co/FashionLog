@@ -29,6 +29,7 @@ public class Brand implements Comparable<Brand> {
 	@ManyToOne
 	@JoinColumn(name = "BRAND_IMAGE_NO")
 	private File brandImageNo;
+
 	
 	@Transient
 	private Long itemCount;

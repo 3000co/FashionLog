@@ -4,6 +4,7 @@
 
 //jquery선언
 $(function(){
+
 	//현재 시간 기준으로 알림 시간 표현
 	var sendTime = $('.notiSendTime');
 	for(var i = 0; i<sendTime.length; i++) {
