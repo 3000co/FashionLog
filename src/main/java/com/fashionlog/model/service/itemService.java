@@ -8,6 +8,6 @@ import com.fashionlog.model.dto.Item;
 
 
 public interface itemService {
-	public List<Object> getItemPost();
-	public List<Item> doSearch();
+	public List<Object> getItemPost(String itemName, String contents);
+	public List<Object> getSearchResult(List<String> tokenList);
 }

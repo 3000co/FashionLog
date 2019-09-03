@@ -44,7 +44,7 @@ public class TestController {
 
 	
 	  @RequestMapping("/searchTest") public String startTest2(){ 
-		  System.err.println(itemRepository.getItemPost().toString());
+		  System.err.println(itemRepository.getItemPost("검은", "겨울"));
 		  
 		  return "view"; 
 	 }
