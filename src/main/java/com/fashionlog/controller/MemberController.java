@@ -21,7 +21,7 @@ public class MemberController {
 		return "main";
 	}
 
-	// 로그인
+	// 로그인 화면
 	@RequestMapping("/login")
 	public String login() {
 		return "member/login";
@@ -29,7 +29,7 @@ public class MemberController {
 
 	// 로그인 처리
 	@RequestMapping(value = "/login.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String doLogin(Member member, HttpSession session) throws Exception {
+	public String doLogin(Member member, HttpSession session) {
 		System.out.println("아이디: " + member.getId() + " 비밀번호: " + member.getPassword());
 		Member getMemberInfo = memberService.findByIdAndPassword(member.getId(), member.getPassword());
 		System.out.println("getMemberInfo: " + getMemberInfo);
@@ -52,7 +52,7 @@ public class MemberController {
 		return "redirect:/login";
 	}
 
-	// 회원가입
+	// 회원가입 화면
 	@RequestMapping("/join")
 	public String join() {
 		return "member/join";
@@ -62,7 +62,6 @@ public class MemberController {
 	public String doJoin(Member member, HttpSession session) {
 		System.out.println("아이디: " + member.getId() + " 비밀번호: " + member.getPassword());
 		System.out.println("Member1::" + member);
-//		memberService.doJoin(member);
 		return "member/styleSelect";
 	}
 	
@@ -82,15 +81,41 @@ public class MemberController {
 			}
 		}
 		
-	// 비밀번호 변경
+	// 비밀번호 변경 화면
 	@RequestMapping("/modPassword")
 	public String modPassword() {
-		return "/modPassword";
+		return "member/modPassword";
 	}
+	// 비밀번호 변경 처리
+	@RequestMapping(value = "/modPassword.do", method = RequestMethod.POST)
+	public String doModPassword(Member member, HttpSession session) {
+		
+			return "redirect:/";
+		
+	}
+	
 
-	// 마이프로필
-	@RequestMapping("profile")
+	// 마이프로필 화면
+	@RequestMapping("/profile")
 	public String profileSetting() {
 		return "member/profile";
 	}
+	
+	//프로필 화면
+	@RequestMapping("/modProfile")
+	public String modProfile() {
+		return "member/modProfile";
+	}	
+	// 프로필 변경
+		@RequestMapping(value = "/modProfile.do", method = RequestMethod.POST)
+		public String doModProfile(Member member, HttpSession session) {
+			
+			return "redirect:/profile";
+		}
+		
+		
+		
+		
+		
+		
 }

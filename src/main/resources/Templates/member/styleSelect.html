@@ -6,16 +6,12 @@
 <script type="text/javascript">
 
 function btn() {
-
 	$(':checkbox').each(function(i){
 		if( $(':checkbox').eq(i).prop("checked") == true ){
 			$(':checked').each(function(j){
-	  
 	        $(':checked').eq(j).prop("name","styleNo"+(j+1));
-	        
 				});
 			}
-	    
 		});
 	} 
 	
@@ -45,7 +41,6 @@ function btn() {
 			<input type="button" id="selectBtn" onclick="location.href='/join'"  value="돌아가기"/>
 			<span><input type="submit" value="가입"></span>
 		</p>
-		<label id="la" value="결과창">ㅇ</label>
 		 <input type="button" id="btn1" value="실행" onclick="btn();" />
 
 	</form>

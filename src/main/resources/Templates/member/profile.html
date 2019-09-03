@@ -13,8 +13,8 @@
 	<ul class="profile-menu">
 	  <a><img src="images/settingIcon.png" width="50" height="50"/></a>
        <ul class="list">
-        <li><a href="#3A">프로필 변경</a></li>
-        <li><a href="#3B">비밀번호 변경</a></li>
+        <li><a href="modProfile">프로필 변경</a></li>
+        <li><a href="modPassword">비밀번호 변경</a></li>
         <li><a href="#3A">스타일 변경</a></li>
         <li><a href="logout.do">로그아웃</a></li>
        </ul>
@@ -26,14 +26,13 @@
 		$(document).ready(function() {
 			$(".profile-menu>a").click(function() {
 				var submenu = $(this).next("ul");
-
-				// submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+				
 				if (submenu.is(":visible")) {
 					submenu.slideUp();
 				} else {
 					submenu.slideDown();
 				}
-			}).mouseover(function() {
+			}).mouseclick(function() {
 				$(this).next("ul").slideDown();
 			});
 
