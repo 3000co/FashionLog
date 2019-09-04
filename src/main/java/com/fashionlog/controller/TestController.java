@@ -70,7 +70,6 @@ public class TestController {
 
 	private List<String> splitWordsByAmp(String searchWords, List<String> searchTokenList) {
 		String[] searchTokenArray;
-		System.out.println(searchWords);
 		searchTokenArray = searchWords.split(" ");
 
 		

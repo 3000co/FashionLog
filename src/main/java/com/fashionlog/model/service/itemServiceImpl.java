@@ -85,34 +85,25 @@ public List<Object> getItemPost(String itemName) {
 
 //leftjoin절
 private JPQLQuery setJoinConnection(List<String[]> searchTokenArrayList, JPQLQuery searchQuery){
-	int i=1;
 	searchQuery.leftJoin(item.postNo, post);
-	System.out.println("반복 횟수:"+ searchTokenArrayList.size());
-	
-	System.out.println("post와의 조인이 생성되었습니다");
-	
+
 	for (String[] temp : searchTokenArrayList) {
-		System.out.println("현재 반복 횟수:"+ i);
 		String tokenType = temp[0];
 		
 		switch(tokenType) {
 			
 		case "카테고리":
 			searchQuery.leftJoin(item.categoryNo, category);
-			System.out.println("category와의 조인이 생성되었습니다");
-			i++;
 			break;
 			
 		case "스타일":
 			searchQuery.leftJoin(post.styleNo1, style );
-			System.out.println("style와의 조인이 생성되었습니다");
-			i++;
+			searchQuery.leftJoin(post.styleNo2, style );
+			searchQuery.leftJoin(post.styleNo3, style );
 			break;
 			
 		case "브랜드":
 			searchQuery.leftJoin(item.brandNo, brand);
-			System.out.println("brand와의 조인이 생성되었습니다");
-			i++;
 			break;
 		
 		default:
@@ -124,11 +115,8 @@ private JPQLQuery setJoinConnection(List<String[]> searchTokenArrayList, JPQLQue
 
 //where절
 private JPQLQuery setSearchCondition(List<String[]> searchTokenArrayList, JPQLQuery searchQuery){
-	int i=1;
-	System.out.println("반복 횟수:"+ searchTokenArrayList.size());
 	
 	for (String[] temp : searchTokenArrayList) {
-		System.out.println("현재 반복 횟수:"+ i);
 		String tokenType = temp[0];
 		String tokenValue = temp[1];
 		
@@ -136,36 +124,25 @@ private JPQLQuery setSearchCondition(List<String[]> searchTokenArrayList, JPQLQu
 		
 		case "통합검색":
 			//post.contents 제외
-			searchQuery.where(ctItemName(tokenValue));
-			System.out.println("토큰 값 : "+tokenValue);
-			i++;
+			searchQuery.where(ctItemName(tokenValue).or(ctContents(tokenValue)));
 			break;
 			
 		case "색상":
 			searchQuery.where(eqColor(tokenValue));
-			System.out.println("토큰 값 : "+tokenValue);
-			i++;
 			break;
 			
 		case "카테고리":
 			searchQuery.where(ctCategoryName(tokenValue));
-			System.out.println("토큰 값 : "+tokenValue);
-			i++;
 			break;
 			
 		case "스타일":
 			searchQuery.where(ctStyleName(tokenValue));
-			System.out.println("토큰 값 : "+tokenValue);
-			i++;
 			break;
 			
 		case "브랜드":
 			searchQuery.where(ctBrandName(tokenValue));
-			System.out.println("토큰 값 : "+tokenValue);
-			i++;
 			break;
 		default:
-			i++;
 			break;
 		
 		}
