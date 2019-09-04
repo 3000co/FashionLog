@@ -61,10 +61,15 @@ $(document).ready( function() {
 			var eventY = event.clientY;
 			var tagStyle = $(newTag).css("display");
 			var pixelData = canvas.getContext("2d").getImageData(eventX, eventY, 1, 1).data;
-			console.log(pixelData[0,1,2]);
+//			console.log(pixelData[0,1,2]);
 			
-//			var hex = rgbToHex(pixelData);
-//			console.log(hex);
+			var hex0 = pixelData[0].toString(16);
+			var hex1 = pixelData[1].toString(16);
+			var hex2 = pixelData[2].toString(16);
+			console.log(pixelData[0]);
+			console.log(hex0);
+			console.log(hex1);
+			console.log(hex2);
 			
 			
 			if (tagStyle === "block") {
@@ -72,7 +77,7 @@ $(document).ready( function() {
 				$("#itemTagWrap").append(newTag);
 				$(newTag).find("#xCoordinate").val(eventX);
 				$(newTag).find("#yCoordinate").val(eventY);
-				$(newTag).find("#color").val(pixelData[0] + "" + pixelData[1] + "" + pixelData[2]);
+				$(newTag).find("#color").val("#" + hex0 + hex1 + hex2);
 
 
 				$("div[class=itemTag]").each(function(index) {
@@ -85,7 +90,7 @@ $(document).ready( function() {
 				$("#xCoordinate").val(eventX);
 				$("#yCoordinate").val(eventY);
 				
-				$("#color").val(pixelData[0] + "" + pixelData[1] + "" + pixelData[2]);
+				$("#color").val("#" + hex0 + hex1 + hex2);
 			}
 		}
 	});
