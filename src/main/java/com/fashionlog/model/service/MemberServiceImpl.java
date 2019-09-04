@@ -1,15 +1,19 @@
 package com.fashionlog.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 
 import com.fashionlog.model.dao.MemberRepository;
 import com.fashionlog.model.dao.StyleRepository;
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Style;
+import com.fashionlog.model.dto.Post;
+
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -42,11 +46,20 @@ public class MemberServiceImpl implements MemberService {
 	public void doJoin(Member member) {
 		memberRepo.save(member);
 	}
+	
+	@Override
+	public void countLikes() {
+		List<Member> members = memberRepo.findAll();
+		for (Member member:members) {
+			member.setLikesCount();
+			memberRepo.save(member);
+			System.out.println("member likes counted : " + member);
+		}
+  }
 
 	@Override
 	public void doLogout(Member member) {
 		
 	}
-
 	
 }

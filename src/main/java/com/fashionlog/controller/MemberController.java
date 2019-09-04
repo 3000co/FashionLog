@@ -1,4 +1,4 @@
-﻿package com.fashionlog.controller;
+package com.fashionlog.controller;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +86,7 @@ public class MemberController {
 	public String modPassword() {
 		return "member/modPassword";
 	}
+
 	// 비밀번호 변경 처리
 	@RequestMapping(value = "/modPassword.do", method = RequestMethod.POST)
 	public String doModPassword(Member member, HttpSession session) {

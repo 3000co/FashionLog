@@ -21,6 +21,6 @@ public interface MemberService {
 
 
 	
-	
+	public void countLikes();
 	
 }

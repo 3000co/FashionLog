@@ -33,7 +33,7 @@ public class CommentController {
 	//		return "view";
 	//	}
 
-	@RequestMapping("/commnet")
+	@RequestMapping("/comment")
 	public String getCommentList(Model model) {
 
 		List<Object[]> commentList = commentRepository.getCommentList();
@@ -58,13 +58,13 @@ public class CommentController {
 		comment.setPostNo(post);
 		commentRepository.save(comment);
 
-		return "redirect:/";
+		return "redirect:/comment";
 	}
 
 	@RequestMapping("/deleteComment")
 	public String deleteComment(@RequestParam("commentNo")int commentNo) {
 		commentRepository.deleteById(commentNo);
-		return "redirect:/";
+		return "redirect:/comment";
 	}
 
 

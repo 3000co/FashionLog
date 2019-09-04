@@ -10,9 +10,7 @@ public interface MemberRepository extends CrudRepository<Member, Integer> {
 	public Member findByPassword(String Password);
 
 	public Member findById(String id);
-
-
 	
-	
+	public Member findByMemberNo(int memNo);
 }
 
