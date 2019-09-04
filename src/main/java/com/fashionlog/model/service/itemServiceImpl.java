@@ -41,29 +41,41 @@ public class itemServiceImpl extends QuerydslRepositorySupport implements itemSe
 
 	
 @Override
-public List<Object> getSearchResult(List<String> tokenList) {
-	List searchResult = new ArrayList<Object>();
+public List<Object> getSearchResult(List<String[]> searchTokenArrayList) {
+	 List<Object> searchResult = new ArrayList<>();
+	
 	JPQLQuery searchQuery = from(item);
-	searchQuery.select(item.color,post.postNo,post.contents); 
-	
-	
-	setJoinConnection(tokenList, searchQuery);
+	setJoinConnection(searchTokenArrayList, searchQuery);
+	searchQuery.select(item.name,post.postNo,post.contents); 
+	setSearchCondition(searchTokenArrayList, searchQuery);
+//	searchQuery.where(
+//			ctCategoryName("하의")
+//			);
+//	searchQuery.where(
+//			ctItemName("바지"),
+//			ctItemName("회색")
+//			);
+//	searchQuery.where(
+//			ctItemName("회색")
+//			);
 
 	
+	searchResult =  searchQuery.fetch();
 	return searchResult;
 	
 	
 }@Override
-public List<Object> getItemPost(String itemName, String contents) {
+public List<Object> getItemPost(String itemName) {
 	
 	
 	List itemPostList = new ArrayList<Object>();
 	JPQLQuery jpqlQuery = from(item);
 	jpqlQuery.leftJoin(item.postNo, post);
-	jpqlQuery.select(item.color,post.postNo,post.contents); 
-	jpqlQuery.where(ctItemName(itemName),
-			ctContents(contents)
-			);
+	jpqlQuery.leftJoin(item.categoryNo, category);
+	jpqlQuery.select(item.name,post.postNo,post.contents); 
+//	jpqlQuery.where(
+//			eqCategoryNo(itemName)
+//			);
 	//eqCategoryNo(categoryNo)jpqlQuery.orderBy(item.itemNo.desc());
 	 
     itemPostList = jpqlQuery.fetch();
@@ -71,31 +83,95 @@ public List<Object> getItemPost(String itemName, String contents) {
 	return itemPostList;
 }
 
-private JPQLQuery setJoinConnection(List<String> tokenList, JPQLQuery searchQuery){
+//leftjoin절
+private JPQLQuery setJoinConnection(List<String[]> searchTokenArrayList, JPQLQuery searchQuery){
+	int i=1;
+	searchQuery.leftJoin(item.postNo, post);
+	System.out.println("반복 횟수:"+ searchTokenArrayList.size());
 	
+	System.out.println("post와의 조인이 생성되었습니다");
 	
-	for (String token : tokenList) {
-		switch(token) {
+	for (String[] temp : searchTokenArrayList) {
+		System.out.println("현재 반복 횟수:"+ i);
+		String tokenType = temp[0];
 		
-		case "":
-		case "색상":
-			searchQuery.leftJoin(item.postNo, post);
-			break;
+		switch(tokenType) {
 			
 		case "카테고리":
 			searchQuery.leftJoin(item.categoryNo, category);
+			System.out.println("category와의 조인이 생성되었습니다");
+			i++;
 			break;
 			
 		case "스타일":
 			searchQuery.leftJoin(post.styleNo1, style );
+			System.out.println("style와의 조인이 생성되었습니다");
+			i++;
 			break;
 			
 		case "브랜드":
-			searchQuery.leftJoin(item.categoryNo, category);
+			searchQuery.leftJoin(item.brandNo, brand);
+			System.out.println("brand와의 조인이 생성되었습니다");
+			i++;
+			break;
+		
+		default:
+			break;
+		}
+	}
+	return searchQuery;
+}
+
+//where절
+private JPQLQuery setSearchCondition(List<String[]> searchTokenArrayList, JPQLQuery searchQuery){
+	int i=1;
+	System.out.println("반복 횟수:"+ searchTokenArrayList.size());
+	
+	for (String[] temp : searchTokenArrayList) {
+		System.out.println("현재 반복 횟수:"+ i);
+		String tokenType = temp[0];
+		String tokenValue = temp[1];
+		
+		switch(tokenType) {
+		
+		case "통합검색":
+			//post.contents 제외
+			searchQuery.where(ctItemName(tokenValue));
+			System.out.println("토큰 값 : "+tokenValue);
+			i++;
+			break;
+			
+		case "색상":
+			searchQuery.where(eqColor(tokenValue));
+			System.out.println("토큰 값 : "+tokenValue);
+			i++;
+			break;
+			
+		case "카테고리":
+			searchQuery.where(ctCategoryName(tokenValue));
+			System.out.println("토큰 값 : "+tokenValue);
+			i++;
+			break;
+			
+		case "스타일":
+			searchQuery.where(ctStyleName(tokenValue));
+			System.out.println("토큰 값 : "+tokenValue);
+			i++;
+			break;
+			
+		case "브랜드":
+			searchQuery.where(ctBrandName(tokenValue));
+			System.out.println("토큰 값 : "+tokenValue);
+			i++;
+			break;
+		default:
+			i++;
 			break;
 		
 		}
 	}
+	
+	
 	return searchQuery;
 }
 
@@ -113,17 +189,18 @@ private BooleanExpression ctContents(String contents) {
 	return post.contents.contains(contents);
 }
 
-private BooleanExpression eqCategoryNo(String categoryNo) {
-	if(org.springframework.util.StringUtils.isEmpty(categoryNo)) {
+private BooleanExpression ctCategoryName(String categoryName) {
+	if(org.springframework.util.StringUtils.isEmpty(categoryName)) {
 		return null;
 	}
-	return post.contents.eq(categoryNo);
+	
+	return category.name.contains(categoryName);
 }
-private BooleanExpression eqBrandNo(String BrandNo) {
-	if(org.springframework.util.StringUtils.isEmpty(BrandNo)) {
+private BooleanExpression ctBrandName(String brandName) {
+	if(org.springframework.util.StringUtils.isEmpty(brandName)) {
 		return null;
 	}
-	return post.contents.eq(BrandNo);
+	return brand.name.contains(brandName);
 }
 private BooleanExpression eqColor(String color) {
 	if(org.springframework.util.StringUtils.isEmpty(color)) {
@@ -131,11 +208,11 @@ private BooleanExpression eqColor(String color) {
 	}
 	return post.contents.eq(color);
 }
-private BooleanExpression eqStyle(String StyleNo) {
-	if(org.springframework.util.StringUtils.isEmpty(StyleNo)) {
+private BooleanExpression ctStyleName(String styleName) {
+	if(org.springframework.util.StringUtils.isEmpty(styleName)) {
 		return null;
 	}
-	return post.contents.contains(StyleNo);
+	return style.name.contains(styleName);
 }
 	
 }

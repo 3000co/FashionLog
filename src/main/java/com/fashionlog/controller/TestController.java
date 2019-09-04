@@ -1,6 +1,7 @@
 package com.fashionlog.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,26 +48,30 @@ public class TestController {
 
 	@RequestMapping("/searchTest")
 	public String startTest2(HttpServletRequest request) {
-		ArrayList<String> searchTokenList = new ArrayList<>();
-		ArrayList<String[]> searchTokenArrayList = new ArrayList<>();
+		List<String> searchTokenList = new ArrayList<>();
+		List<String[]> searchTokenArrayList = new ArrayList<>();
 
 		splitWordsByAmp(request.getParameter("searchWords"), searchTokenList);
 		splitWordsByColon(searchTokenList, searchTokenArrayList);
 		
-		  for (int i = 0; i <= searchTokenArrayList.size() - 1; i++) { String[] temp =
-		  searchTokenArrayList.get(i); for (String t : temp) { System.out.println(t); }
-		  }
+		
+//		  for (int i = 0; i <= searchTokenArrayList.size() - 1; i++) { String[] temp =
+//		  searchTokenArrayList.get(i); for (String t : temp) { System.out.println(t); }
+//		  }
 		 
+		  
 
-		System.err.println(itemRepository.getItemPost("검은", "겨울"));
-
+		//System.err.println(itemRepository.getItemPost("1"));
+		System.err.println(itemRepository.getSearchResult(searchTokenArrayList));
+		
+		
 		return "view";
 	}
 
-	private List<String> splitWordsByAmp(String searchWords, ArrayList<String> searchTokenList) {
+	private List<String> splitWordsByAmp(String searchWords, List<String> searchTokenList) {
 		String[] searchTokenArray;
-
-		searchTokenArray = searchWords.split("&");
+		System.out.println(searchWords);
+		searchTokenArray = searchWords.split(" ");
 
 		
 		 for(String temp:searchTokenArray) {
@@ -75,7 +80,7 @@ public class TestController {
 		return searchTokenList;
 	}
 
-	private List<String[]> splitWordsByColon(ArrayList<String> searchTokenList, ArrayList<String[]> searchTokenArrayList) {
+	private List<String[]> splitWordsByColon(List<String> searchTokenList, List<String[]> searchTokenArrayList) {
 
 		for (String temp : searchTokenList) {
 			String[] searchToken = new String[2];

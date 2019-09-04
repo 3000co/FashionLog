@@ -22,7 +22,7 @@
 	        
 	        delay: 100
 	      },
-	      delimiter: '&',
+	      delimiter: '',
 	      showAutocompleteOnFocus: true,
 	      createTokensOnBlur: false
 	    });
@@ -63,7 +63,7 @@
 		var searchWord = $('#inputField-tokenfield').val();
 		console.log($(this).val());
 		searchWord += ($(this).val());
-		console.log("searchword2 : "+ searchWord);
+		console.log("searchword2 : "+searchWord);
 		$('#inputField-tokenfield').val(searchWord);
 	});
 
