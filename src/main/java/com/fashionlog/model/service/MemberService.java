@@ -9,11 +9,15 @@ public interface MemberService {
 	
 	Member findByPassword(String Password);
 	
+	Member findById(String Id);
+	
 	Style findById(int styleNo);
 	
 	void doJoin(Member member);
 
 	void doLogout(Member member);
+
+	
 
 
 	

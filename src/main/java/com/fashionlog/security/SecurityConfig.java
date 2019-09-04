@@ -1,4 +1,4 @@
-package com.fashionlog;
+package com.fashionlog.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,13 +16,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity security) throws Exception {
 		security.authorizeRequests().antMatchers("/").permitAll();
-		security.authorizeRequests().antMatchers("/member/**").authenticated();
-		security.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
 
 		security.csrf().disable();
-		security.formLogin().loginPage("/login").defaultSuccessUrl("/main", true);
+		security.formLogin().loginPage("/login").defaultSuccessUrl("/", true);
 		security.exceptionHandling().accessDeniedPage("/login");
-		security.logout().invalidateHttpSession(true).logoutSuccessUrl("/login");
+		security.logout().invalidateHttpSession(true).logoutSuccessUrl("/");
 
 		security.userDetailsService(boardUserDetailsService);
 

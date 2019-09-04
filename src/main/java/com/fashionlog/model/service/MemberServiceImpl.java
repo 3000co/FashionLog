@@ -1,7 +1,11 @@
 package com.fashionlog.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
 import com.fashionlog.model.dao.MemberRepository;
 import com.fashionlog.model.dao.StyleRepository;
 import com.fashionlog.model.dto.Member;
@@ -25,6 +29,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
+	public Member findById(String Id) {
+		return memberRepo.findById(Id);
+	}
+	
+	@Override
 	public Style findById(int styleNo) {
 		return styleRepo.findById(styleNo);
 	}
@@ -38,7 +47,6 @@ public class MemberServiceImpl implements MemberService {
 	public void doLogout(Member member) {
 		
 	}
-	
-	
 
+	
 }

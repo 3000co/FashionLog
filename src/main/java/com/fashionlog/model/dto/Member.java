@@ -7,6 +7,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fashionlog.security.Role;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -42,9 +45,8 @@ public class Member {
 	private Integer styleNo2;
 	private Integer styleNo3;
 	
-	@Enumerated(EnumType.STRING)
-	private Role role;
-	private boolean enabled;
-
+//	@Enumerated(EnumType.STRING)
+//	private Role role;
+//	private boolean enabled;
 }
 
