@@ -1,21 +1,19 @@
 @charset "UTF-8";
 
-.post {
+.postWrite {
 	position: relative;
 	width: 750px;
 	height: 650px;
 	padding: 10px;
 	margin: auto;
-	top: 30px;
-/* 	overflow: hidden; */
 	border: 1px dashed #a7a7a7;
 }
 
 .leftWrap {
 	width: 300px;
-	height:650px;
-	float:left;
-/* 	margin:5px; */
+	height: 650px;
+	float: left;
+	/* 	margin:5px; */
 }
 
 .imgWrap {
@@ -23,7 +21,7 @@
 	height: 400px;
 	float: left;
 	padding: 10px;
-/* 	border: 1px dashed #bcbcbc; */
+	/* 	border: 1px dashed #bcbcbc; */
 }
 
 .imgMold {
@@ -33,19 +31,18 @@
 	border: 1px solid #bcbcbc;
 }
 
-.imgWrap img {
+.postImage, .imgClone {
 	width: 100%;
 	height: 100%;
 }
 
-.contents {
+.postContents {
 	width: 300px;
 	height: 210px;
 	margin: 10px;
 	float: left;
 	border: 1px solid #bcbcbc;
 	border-radius: 5px;
-	
 }
 
 .itemWrap {
@@ -60,8 +57,13 @@
 	border-radius: 5px;
 }
 
-.itemTagWrap input, select {
+.itemTagWrap {
 	float: right;
+}
+
+.itemTagWrap label {
+	width: 90px;
+	text-align: justify; /* 왜안돼? */
 }
 
 .style {
@@ -76,9 +78,11 @@
 	text-align: center;
 	display: none;
 }
-.styleUndo{
+
+.styleUndo {
 	display: none;
 }
+
 .itemTagWrap {
 	overflow: auto;
 	height: 510px;
@@ -88,48 +92,71 @@
 	display: none;
 }
 
-.tag{
+.tag {
 	border: 1px solid #bcbcbc;
 	border-radius: 5px;
 	padding: 10px;
 	margin-bottom: 10px;
 }
 
+.paletteBtn {
+	background-color: transparent !important;
+	border-color: transparent;
+}
+
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content */
 .modalContent {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
+	background-color: #fefefe;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
 }
 
 /* The Close Button */
 .close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+	color: #aaaaaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+.close:hover, .close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
 }
+
+.modalContent .imgMold {
+	margin: auto;
+}
+
+
+.colorSquare {
+	display: inline-block;
+/* 	margin: 8px 10px 3px 2px; */
+	border: 1px solid #bcbcbc;
+	border-radius: 5px;
+	width: 2em;
+	height: 2em;
+/* 	box-shadow: 1px 1px 5px grey; */
+}
+
+/* .selected { */
+/* 	border: 5px solid orange !important; */
+/* } */

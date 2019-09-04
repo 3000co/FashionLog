@@ -3,7 +3,10 @@ $(document).ready(function() {
 	var mapModal = $("#mapModal");
 
 	$(document).on("click", "#paletteBtn", function(event) {
+		var src = $("#postImage").attr("src");
+		
 		$(palModal).show();
+		$("#imgClone").attr("src", src);
 	});
 
 	$(document).on("click", "#mapBtn", function(event) {
