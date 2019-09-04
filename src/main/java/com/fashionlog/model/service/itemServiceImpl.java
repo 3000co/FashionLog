@@ -3,27 +3,17 @@ package com.fashionlog.model.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.criteria.Fetch;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Service;
 
-import com.fashionlog.model.dao.ItemRepository;
-import com.fashionlog.model.dto.Category;
 import com.fashionlog.model.dto.Item;
 import com.fashionlog.model.dto.QBrand;
 import com.fashionlog.model.dto.QCategory;
 import com.fashionlog.model.dto.QItem;
 import com.fashionlog.model.dto.QPost;
 import com.fashionlog.model.dto.QStyle;
-import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.QueryFactory;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.AbstractSQLQuery;
 import com.querydsl.jpa.JPQLQuery;
-
-import antlr.StringUtils;
 
 @Service
 public class itemServiceImpl extends QuerydslRepositorySupport implements itemService{
