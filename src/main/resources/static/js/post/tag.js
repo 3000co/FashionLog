@@ -61,25 +61,23 @@ $(document).ready( function() {
 			var eventY = event.clientY;
 			var tagStyle = $(newTag).css("display");
 			var pixelData = canvas.getContext("2d").getImageData(eventX, eventY, 1, 1).data;
-//			console.log(pixelData[0,1,2]);
 			
 			var hex0 = pixelData[0].toString(16);
 			var hex1 = pixelData[1].toString(16);
 			var hex2 = pixelData[2].toString(16);
+			var hex = "#" + hex0 + hex1 + hex2;
 			console.log(pixelData[0]);
 			console.log(hex0);
 			console.log(hex1);
 			console.log(hex2);
-			
 			
 			if (tagStyle === "block") {
 				newTag = $(tagMold).clone().attr("id", "itemTag" + num);
 				$("#itemTagWrap").append(newTag);
 				$(newTag).find("#xCoordinate").val(eventX);
 				$(newTag).find("#yCoordinate").val(eventY);
-				$(newTag).find("#color").val("#" + hex0 + hex1 + hex2);
-
-
+				$(newTag).find("#color").val(hex);
+				$(newTag).find(".colorSquare").css("background-color", hex);
 				$("div[class=itemTag]").each(function(index) {
 					var clickIndex = $(this).index();
 					$(newTag).find('#tagNo').val(clickIndex + 1);
@@ -89,8 +87,8 @@ $(document).ready( function() {
 				tagMold = $(newTag).clone();
 				$("#xCoordinate").val(eventX);
 				$("#yCoordinate").val(eventY);
-				
-				$("#color").val("#" + hex0 + hex1 + hex2);
+				$("#color").val(hex);
+				$(".colorSquare").css("background-color", hex);
 			}
 		}
 	});
@@ -112,32 +110,3 @@ $(document).ready( function() {
 
 });
 
-//function rgbToHex ( rgbType ){ 
-//
-//    // 컬러값과 쉼표만 남기고 삭제. 
-//    var rgb = rgbType.replace( /[^%,.\d]/g, "" ); 
-//
-//    // 쉼표(,)를 기준으로 분리해서, 배열에 담기. 
-//    rgb = rgb.split( "," ); 
-//
-//    // 컬러값이 "%"일 경우, 변환하기. 
-//    for ( var x = 0; x < 3; x++ ) { 
-//            if ( rgb[ x ].indexOf( "%" ) > -1 ) rgb[ x ] = Math.round( parseFloat( rgb[ x ] ) * 2.55 ); 
-//    } 
-//
-//    // 16진수 문자로 변환. 
-//    var toHex = function( string ){ 
-//            string = parseInt( string, 10 ).toString( 16 ); 
-//            string = ( string.length === 1 ) ? "0" + string : string; 
-//
-//            return string; 
-//    }; 
-//
-//    var r = toHex( rgb[ 0 ] ); 
-//    var g = toHex( rgb[ 1 ] ); 
-//    var b = toHex( rgb[ 2 ] ); 
-//
-//    var hexType = "#" + r + g + b; 
-//
-//    return hexType; 
-//} 
