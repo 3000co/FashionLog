@@ -1,0 +1,100 @@
+@charset "utf-8";
+.selected-box{
+  display:block;
+  width:20px;
+  height:20px;
+  margin:20px auto;
+  text-align:center;
+  color:#7b6741;
+  border-radius:2px;
+  line-height:3em;
+ 
+}
+
+
+.colorContainer{
+  display:block;
+  width:35em;
+  height:auto;
+  margin:5px auto;
+  text-align:center;
+  line-height:1em;
+  background:#ececec;
+  border-radius:2px;
+  border: 4px #fff solid;
+  box-shadow: 0 0 10px -1px rgba(0, 0, 0, 1);
+}
+
+.square {
+	display:inline-block;
+	margin:8px 10px 3px 2px;
+  border-radius: 5px;
+	width: 2em;
+	height: 2em;
+  box-shadow: 1px 1px 5px grey;
+}
+
+.selected {
+	border:5px solid orange !important;
+}
+
+.red{
+	background-color:red;
+  border:5px dashed red;
+}
+
+.skyblue{
+	background-color:skyblue;
+   border:5px dashed skyblue;
+}
+
+.green{
+	background-color:green;
+   border:5px dashed green;
+}
+
+.yellow{
+	background-color:yellow;
+   border:5px dashed yellow;
+}
+
+.white{
+	background-color:white;
+   border:5px dashed white;
+}
+
+.black{
+	background-color:black;
+   border:5px dashed black;
+}
+
+.beige{
+	background-color:beige;
+   border:5px dashed beige;    
+}
+
+.navy{
+	background-color:navy;
+   border:5px dashed navy;    
+}
+
+.pink{
+	background-color:pink;
+   border:5px dashed pink;    
+}
+
+.slategray{
+	background-color:slategray;
+   border:5px dashed slategray;    
+}
+
+.deeppink{
+	background-color:deeppink;
+   border:5px dashed deeppink;    
+}
+
+.sienna{
+	background-color:sienna;
+   border:5px dashed sienna;    
+}
+

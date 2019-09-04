@@ -22,18 +22,32 @@
 	        
 	        delay: 100
 	      },
-	      delimiter: ';',
+	      delimiter: '',
 	      showAutocompleteOnFocus: true,
 	      createTokensOnBlur: false
 	    });
 	    
-	    $("#searchButton").click(function(e) {
+	   /* $("#searchButton").click(function(e) {
 	      e.preventDefault();
+	      var searchWord = $('#inputField').val()
+	      searchWord.submit();
+	      
 	      $('.form-data').text( $('#inputField').val());
 
-	    });
+	    });*/
+	    
+	    
 	});
 
+	$("#searchButton").click(function(e) {
+    	e.preventDefault();
+    	
+    	$('#searchWords').val( $('#inputField').val());
+    	
+    
+    	document.searchButton.submit();
+    	
+    });
 	
 	$('#inputField').on('tokenfield:createdtoken', function (e) {
 	    console.log('createdtoken', {
@@ -49,7 +63,7 @@
 		var searchWord = $('#inputField-tokenfield').val();
 		console.log($(this).val());
 		searchWord += ($(this).val());
-		console.log("searchword2 : "+ searchWord);
+		console.log("searchword2 : "+searchWord);
 		$('#inputField-tokenfield').val(searchWord);
 	});
 

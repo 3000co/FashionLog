@@ -44,7 +44,7 @@
 				break;
 			case 'colorBtn' :
 				defaultSearch.style.display = 'none';
-				document.getElementById("categorySearch").style.display = 'block';
+				document.getElementById("colorSearch").style.display = 'block';
 				break;
 			case 'styleBtn' :
 				defaultSearch.style.display = 'none';
@@ -65,7 +65,7 @@
 			var defaultSearch = document.getElementById("defaultSearch");
 			defaultSearch.style.display = 'block';
 			document.getElementById("categorySearch").style.display = 'none';
-			/* document.getElementById("colorSearch").style.display='none'; */
+			document.getElementById("colorSearch").style.display='none'; 
 			document.getElementById("styleSearch").style.display='none';
 			document.getElementById("brandSearch").style.display='none';
 			document.getElementById("userSearch").style.display='none'; 
@@ -91,7 +91,7 @@
 
 					<div class="mm-3column">
 						<span class="menu-list"> <span>
-								<button class="menuBtn" id="categoryBtn" value="카테고리: "
+								<button class="menuBtn" id="categoryBtn" value="카테고리:"
 									onclick="changeSearchMod('categoryBtn')">카테고리</button>
 						</span>
 						</span>
@@ -100,14 +100,15 @@
 					<div class="mm-3column">
 						<span class="menu-list"> <span>
 
-								<button class="menuBtn" id="colorBtn" value="색상: ">색상</button>
+								<button class="menuBtn" id="colorBtn" value="색상:"
+								onclick="changeSearchMod('colorBtn')">색상</button>
 						</span>
 						</span>
 					</div>
 
 					<div class="mm-3column">
 						<span class="menu-list"> <span>
-								<button class="menuBtn" id="styleBtn" value="스타일: "
+								<button class="menuBtn" id="styleBtn" value="스타일:"
 									onclick="changeSearchMod('styleBtn')">스타일</button>
 						</span>
 						</span>
@@ -115,7 +116,7 @@
 
 					<div class="mm-3column">
 						<span class="menu-list"> <span>
-								<button class="menuBtn" id="brandBtn" value="브랜드: "
+								<button class="menuBtn" id="brandBtn" value="브랜드:"
 									onclick="changeSearchMod('brandBtn')">브랜드</button>
 						</span>
 						</span>
@@ -123,7 +124,7 @@
 
 					<div class="mm-3column">
 						<span class="menu-list"> <span>
-								<button class="menuBtn" id="userBtn" value="유저: "
+								<button class="menuBtn" id="userBtn" value="유저:"
 									onclick="changeSearchMod('userBtn')">유저</button>
 						</span>
 						</span>
@@ -151,12 +152,29 @@
 
 				</div>
 			</li>
+			
+			<!-- 칼라 -->
+			<li class="drop-down" id='colorSearch' style="display: none">
+				<div class="mega-menu">
+					<div class="mm-6column">
+						<p>색상 검색</p>
+					</div>
+
+					<div class="mm-3column">
+						<span class="menu-list"> <span>
+							<div th:include="header/colorPicker"></div>
+						</span>
+						</span>
+					</div>
+
+				</div>
+			</li>
 
 			<!-- 스타일 -->
 			<li class="drop-down" id='styleSearch' style="display: none">
 				<div class="mega-menu">
 					<div class="mm-6column">
-						<p>카테고리 검색</p>
+						<p>스타일 검색</p>
 					</div>
 
 					<div class="mm-3column">
@@ -177,7 +195,7 @@
 			<li class="drop-down" id='brandSearch' style="display: none">
 				<div class="mega-menu">
 					<div class="mm-6column">
-						<p>카테고리 검색</p>
+						<p>브랜드 검색</p>
 					</div>
 
 					<div class="mm-3column">
@@ -204,13 +222,21 @@
 				</div>
 			</li>
 
-			<div>
+		
+		<div>
 		</ul>
-		<button id="searchButton">
-			<svg>
-				<path
-					d="M6.162 10.035a3.877 3.877 0 0 1-3.873-3.873A3.877 3.877 0 0 1 6.162 2.29a3.877 3.877 0 0 1 3.873 3.872 3.877 3.877 0 0 1-3.873 3.873m9.363 3.196l-3.081-3.08a1.614 1.614 0 0 0-1.23-.468 6.127 6.127 0 0 0 1.11-3.521 6.162 6.162 0 1 0-6.162 6.162 6.13 6.13 0 0 0 3.521-1.109c-.022.442.13.891.467 1.229l3.081 3.081a1.622 1.622 0 0 0 2.294-2.294"></path></svg>
-		</button>
+			
+		<form id="searchButton" name="searchButton" action="/searchTest" method="post">
+			<input type="hidden" name="searchWords" id="searchWords" value="검색 내용 없음" >
+			<button  value="form-data">
+				<svg>
+					<path
+						d="M6.162 10.035a3.877 3.877 0 0 1-3.873-3.873A3.877 3.877 0 0 1 6.162 2.29a3.877 3.877 0 0 1 3.873 3.872 3.877 3.877 0 0 1-3.873 3.873m9.363 3.196l-3.081-3.08a1.614 1.614 0 0 0-1.23-.468 6.127 6.127 0 0 0 1.11-3.521 6.162 6.162 0 1 0-6.162 6.162 6.13 6.13 0 0 0 3.521-1.109c-.022.442.13.891.467 1.229l3.081 3.081a1.622 1.622 0 0 0 2.294-2.294">
+					</path>
+				</svg>
+			</button>
+		</form>
+		
 		
 		<a href=""><i class="glyphicon glyphicon-plus"></i></a> 
 		<a href=""><i class="glyphicon glyphicon-king"></i></a>     
@@ -219,11 +245,7 @@
 	</nav>
 
 	</div>
-	<br>
-	<br>
-
-	<br>
-	<div class="form-data"></div>
+	<div class="form-data" id="form-data"></div> 
 
 
 	<script src="js/header.js"></script>
