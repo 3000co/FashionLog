@@ -7,8 +7,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.fashionlog.model.dao.MemberRepository;
-
-import java.util.Optional;
 import com.fashionlog.model.dto.Member;
 
 @Service

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Style;
@@ -72,8 +71,8 @@ public class MemberController {
 		public String doStyleSelect(Member member, HttpSession session) {
 			System.out.println(" 스타일 번호: " + member.getStyleNo1());
 			System.out.println("Member2::" + member);
-			int getStyleInfo = member.getStyleNo1();
-			if (getStyleInfo == 0) {
+			Style getStyleInfo = member.getStyleNo1();
+			if (getStyleInfo.getStyleNo() == 0) {
 				session.setAttribute("style", null);
 				return "member/styleSelect";
 			} else {

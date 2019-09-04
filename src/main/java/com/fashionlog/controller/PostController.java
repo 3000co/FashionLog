@@ -23,7 +23,6 @@ import com.fashionlog.model.dao.PostRepository;
 import com.fashionlog.model.dao.StyleRepository;
 import com.fashionlog.model.dto.Category;
 import com.fashionlog.model.dto.File;
-import com.fashionlog.model.dto.Follow;
 import com.fashionlog.model.dto.Item;
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Post;
