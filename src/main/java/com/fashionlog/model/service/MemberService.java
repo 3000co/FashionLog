@@ -1,17 +1,25 @@
 package com.fashionlog.model.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.fashionlog.model.dto.Member;
+import com.fashionlog.model.dto.Style;
 
 public interface MemberService {
 	
 	Member findByIdAndPassword(String Id, String Password);
-
-//	Member getMemberInfo(Member member);
-
+	
+	Member findByPassword(String Password);
+	
+	Member findById(String Id);
+	
+	Style findById(int styleNo);
+	
 	void doJoin(Member member);
+
+	void doLogout(Member member);
+
+	
+
+
 	
 	public void countLikes();
 	

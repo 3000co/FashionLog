@@ -20,7 +20,7 @@ public class Style {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int styleNo;
 	
-	@Column(columnDefinition = "char")
+	@Column(columnDefinition = "char" , insertable = false, updatable = false)
 	String name;
 
 }

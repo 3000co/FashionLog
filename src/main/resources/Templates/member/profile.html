@@ -1,0 +1,43 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="//code.jquery.com/jquery.min.js"></script>
+</head>
+
+<style>
+
+</style>
+
+<body>
+<div class="profile-menu-bar">
+	<ul class="profile-menu">
+	  <a><img src="images/settingIcon.png" width="50" height="50"/></a>
+       <ul class="list">
+        <li><a href="modProfile">프로필 변경</a></li>
+        <li><a href="modPassword">비밀번호 변경</a></li>
+        <li><a href="#3A">스타일 변경</a></li>
+        <li><a href="logout.do">로그아웃</a></li>
+       </ul>
+    </li> 
+	</ul>
+</div>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(".profile-menu>a").click(function() {
+				var submenu = $(this).next("ul");
+				
+				if (submenu.is(":visible")) {
+					submenu.slideUp();
+				} else {
+					submenu.slideDown();
+				}
+			}).mouseclick(function() {
+				$(this).next("ul").slideDown();
+			});
+
+			
+		});
+	</script>
+</body> 
+</html>
