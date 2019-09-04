@@ -19,7 +19,7 @@ function handleImgFileSelect(e) {
 
 		var reader = new FileReader();
 		reader.onload = function(e) {
-			$("#img").attr("src", e.target.result);
+			$("#postImage").attr("src", e.target.result);
 		}
 		reader.readAsDataURL(f);
 	});

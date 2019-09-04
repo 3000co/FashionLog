@@ -1,58 +1,65 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>Post</title>
+<meta charset="UTF-8">
+<title>Post</title>
 
-	<link rel="stylesheet" href="css/post.css">
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="css/post.css">
+<!-- <link rel="stylesheet" href="/css/colorPicker.css"> -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
 </head>
 <body>
+	<div th:include="header/header"></div>
 
-	<div class="post" id="post">
-		<input id="memberNo" name="memberNo" class="memberNo" th:value="${member.memberNo}" hidden="true">
-		<div class="leftWrap">	
+	<div id="postWrite" class="postWrite">
+		<input id="memberNo" name="memberNo" class="memberNo"
+			th:value="${member.memberNo}" hidden="true">
+		<div class="leftWrap">
 			<form id="imgWrap" class="imgWrap" action="/item" method="post" enctype="multipart/form-data">
-				<input type="hidden" id="type" name="type" value="post">
-				<input type="file" id="selectImg" name="mulFile"/>
+				<input type="hidden" id="type" name="type" value="post"> 
+				<input type="file" id="selectImg" name="mulFile" />
 				<div class="imgMold">
-					<img id="img"><br>
+					<img id="postImage" class="postImage"><br>
 				</div>
 			</form>
-			<div class="contents">
-				<textarea id="contents" rows="13" cols="39" placeholder="#해시태그 #글내용작성"></textarea>
+			<div class="postContents">
+				<textarea id="contents" rows="10" cols="39" placeholder="#해시태그 #글내용작성"></textarea>
 			</div>
 		</div>
 		<div class="itemWrap">
 			<!-- 스타일 -->
 			<div class="style">
-				<label for="style">스 타 일</label>
-				<select id="styleNo" name="styleNo">
-						<option value="0" selected>스타일 선택</option>
-						<option th:each="style:${style}" th:text="${style.name}"
-							th:value="${style.styleNo}"></option>
+				<label for="style">스 타 일</label> <select id="styleNo" name="styleNo">
+					<option value="0" selected>스타일 선택</option>
+					<option th:each="style:${style}" th:text="${style.name}"
+						th:value="${style.styleNo}"></option>
 				</select><br> 
-				&emsp;&emsp;
-				&emsp;<input type="text" id="styleText1" name="styleText1" class="styleText">
-				<input type="number" id="styleNo1" name="styleNo1" class="styleNo" hidden="true">
+				&emsp;&emsp;&nbsp;
+				<input type="text" id="styleText1" class="styleText"> 
+				<span id="1" class="styleUndo">&times;</span>
+				<input type="number" id="styleNo1" class="styleNo" hidden="true">
 				
-				&emsp;<input type="text" id="styleText2" name="styleText2" class="styleText">
-				<input type="number" id="styleNo2" name="styleNo2" class="styleNo" hidden="true">
+				<input type="text" id="styleText2" class="styleText"> 
+				<span id="2" class="styleUndo">&times;</span> 
+				<input type="number" id="styleNo2" class="styleNo" hidden="true"> 
 				
-				&emsp;<input type="text" id="styleText3" name="styleText3" class="styleText">
-				<input type="number" id="styleNo3" name="styleNo3" class="styleNo" hidden="true">
-			</div><hr>
+				<input type="text" id="styleText3" class="styleText"> 
+				<span id="3" class="styleUndo">&times;</span> 
+				<input type="number" id="styleNo3" class="styleNo" hidden="true">
+			</div>
+			<hr>
 			<!-- 태그 -->
 			<div id="itemTagWrap" class="itemTagWrap">
 				<div id="itemTag1" class="itemTag">
 					<div class="tag">
-						<label for="tagNo">태그번호</label>
-						<input type="number" id="tagNo" name="tagNo" value="1"><br>
-				
-						<label for="name">상 품 명</label>
-						<input type="text" id="name" name="name" value="노랑파워"><br>
-				
+						<label for="tagNo">태그번호</label> 
+						<input type="number" id="tagNo" name="tagNo" value="1" disabled="disabled"><br> 
+						
+						<label for="name">상 품 명</label> 
+						<input type="text" id="name" name="name" placeholder="상품명 입력"><br> 
+						
 						<label for="categoryNo">카테고리</label>
 						<select id="categoryNo" name="categoryNo">
 							<option value="0" selected>카테고리 선택</option>
@@ -60,23 +67,24 @@
 								th:value="${category.categoryNo}"></option>
 						</select><br> 
 						
-						<label for="brandNo">브 랜 드</label>
+						<label for="brandNo">브 랜 드</label> 
 						<select id="brandNo" name="brandNo">
 							<option value="0" selected>브랜드 선택</option>
 							<option th:each="brand:${brand}" th:text="${brand[1]}"
 								th:value="${brand[0]}"></option>
 						</select><br> 
 						
-						<label for="color">색상</label>
-						<input type="text" id="color" name="color" value="#cdcdcd">
-						<button type="button" id="paletteBtn">Palette</button><br>
-				
-						<label for="store">구 매 처</label>
-						<input type="text" id="store" name="store" value="default">
-						<button type="button" id="mapBtn">지도</button> <br>
-				
-						<input type="number" id="xCoordinate" name="xCoordinate" hidden="true"><br> 
-						<input type="number" id="yCoordinate" name="yCoordinate" hidden="true"><br> 
+						<label for="color">색상</label> 
+						<div class="colorSquare"></div>
+						<input type="text" id="color" name="color" placeholder="색상 선택" disabled="disabled">
+						<button type="button" id="paletteBtn" class="paletteBtn"><i class="fas fa-palette"></i></button><br> 
+						
+						<label for="store">구 매 처</label> 
+						<input type="text" id="store" name="store" placeholder="구매처 입력">
+						<button type="button" id="mapBtn">지도</button><br> 
+						
+						<input type="number" id="xCoordinate" name="xCoordinate" hidden="true"> 
+						<input type="number" id="yCoordinate" name="yCoordinate" hidden="true">
 						<button type="button" id="exitBtn">&times;</button>
 					</div>
 				</div>
@@ -84,14 +92,18 @@
 		</div>
 
 		<button type="submit" id="submit">등록</button>
-	
+
 		<div id="paletteModal" class="modal">
 			<div class="modalContent">
 				<span class="close">&times;</span>
 				<p>팔렛트트트</p>
+				<div th:include="post/palette"></div><br>
+				<div class="imgMold">
+					<img id="imgClone" class="imgClone"><br>
+				</div>
 			</div>
 		</div>
-		
+
 		<div id="mapModal" class="modal">
 			<div class="modalContent">
 				<span class="close">&times;</span>
@@ -99,9 +111,11 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/previewImage.js"></script>
-	<script src="js/tag.js"></script>
-	<script src="js/post.js"></script>
+
+	<script src="js/post/previewImage.js"></script>
+	<script src="js/post/tag.js"></script>
+	<script src="js/post/post.js"></script>
+	<script src="js/post/styleSelect.js"></script>
 </body>
 
 </html>
