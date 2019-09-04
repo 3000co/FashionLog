@@ -1,6 +1,7 @@
 package com.fashionlog.model.service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,7 @@ import com.fashionlog.model.dto.File;
 import com.fashionlog.model.dto.Follow;
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Post;
+import com.fashionlog.model.dto.Style;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -76,15 +78,53 @@ public class PostServiceImpl implements PostService {
 			System.out.println("post likes count : " + post);
 		}
 	}
+	
+	//팔로우하는 사람들의 글을 피드로 가져옴
 	@Override
 	public Map<Integer, Post> getFeedByFollowee(Member user, Pageable paging) {
 		Map<Integer, Post> followeesPosts = new HashMap<>();
 		for (Follow followee : user.getFollowees()) {
-			List<Post> postList = postRepository.findByMemberNoOrderByUploadTimeDesc(followee.getFolloweeMemNo(), paging);
+			List<Post> postList = postRepository.findByMemberNoOrderByUploadTimeDesc(followee.getFolloweeMemNo(),
+					paging);
 			for (Post post : postList) {
 				followeesPosts.put(post.getPostNo(), post);
 			}
 		}
 		return followeesPosts;
+	}
+	
+	//나의 글을 피드로 가져옴
+	@Override
+	public Map<Integer, Post> getFeedByMe(Member user, Pageable paging) {
+		Map<Integer, Post> myPosts = new HashMap<>();
+		List<Post> postList = postRepository.findByMemberNoOrderByUploadTimeDesc(user, paging);
+		for (Post post : postList) {
+			myPosts.put(post.getPostNo(), post);
+		}
+		return myPosts;
+	}
+
+	//나의 선호 스타일인 글을 피드로 가져옴
+	@Override
+	public Map<Integer, Post> getFeedByStyle(Member user, Pageable paging) {
+		Map<Integer, Post> favStylePosts = new HashMap<>();
+		List<Post> postList = getPostByStyle(user.getStyleNo1(), paging);
+		postList.addAll(getPostByStyle(user.getStyleNo2(), paging));
+		postList.addAll(getPostByStyle(user.getStyleNo3(), paging));
+		for (Post post : postList) {
+			favStylePosts.put(post.getPostNo(), post);
+		}
+		return favStylePosts;
+	}
+
+	//getFeedByStyle 내에서 스타일 null을 체크하고 반복작업 수행
+	private List<Post> getPostByStyle(Style style, Pageable paging) {
+		List<Post> postList = new ArrayList<>();
+		if (style != null) {
+			postList.addAll(postRepository.findByStyleNo1OrderByUploadTimeDesc(style, paging));
+			postList.addAll(postRepository.findByStyleNo2OrderByUploadTimeDesc(style, paging));
+			postList.addAll(postRepository.findByStyleNo3OrderByUploadTimeDesc(style, paging));
+		}
+		return postList;
 	}
 }

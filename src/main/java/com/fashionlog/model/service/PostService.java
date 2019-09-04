@@ -17,7 +17,15 @@ public interface PostService {
 	public File insertFile(MultipartFile mulFile, Model model, HttpServletRequest request) throws Exception;
 
 	public void countLikes();
-
+	//팔로이 글 5개
 	Map<Integer, Post> getFeedByFollowee(Member user, Pageable paging);
+
+	//내글 5개
+	Map<Integer, Post> getFeedByMe(Member user, Pageable paging);
+	
+	//스타일 글 5개
+	Map<Integer, Post> getFeedByStyle(Member user, Pageable paging);
+
+	
 
 }

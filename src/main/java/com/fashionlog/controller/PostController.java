@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,7 +64,14 @@ public class PostController {
 		return "post/post";
 	}
 
-	//1. file 올리기
+	/**
+	 * 1. file 올리기
+	 * @param mulFile (파일)
+	 * @param model
+	 * @param request
+	 * @return FileNo
+	 * @throws Exception
+	 */
 	@RequestMapping("/fileInsert")
 	@ResponseBody
 	public int fileInsert(MultipartFile mulFile, Model model, HttpServletRequest request) throws Exception {
@@ -69,7 +79,11 @@ public class PostController {
 		return file.getFileNo();
 	}
 	
-	//2. fileNo를 받아서 post 올리기
+	/**
+	 * 2. fileNo를 받아서 post 올리기
+	 * @param post
+	 * @return postNo
+	 */
 	@RequestMapping("/postInsert")
 	@ResponseBody
 	public int postTest(Post post) {
@@ -82,7 +96,10 @@ public class PostController {
 	}
 	
 	
-	//3. postNo를 받아서 item 올리기
+	/**
+	 * 3. postNo를 받아서 item만들고(view에서 작업함) 올리기
+	 * @param item
+	 */
 	@RequestMapping("/itemInsert")
 	@ResponseBody
 	public void itemTest(Item item) {
@@ -91,16 +108,20 @@ public class PostController {
 	}
 	
 	@RequestMapping("/feed")
-	public String getPost(Model model, HttpSession session) {
+	public String getPost(Model model, HttpSession session, @PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 5)Pageable paging) {
+		//로그인한 사람 user
 		Member user = (Member) session.getAttribute("member");
 		user = memberRepository.findById(user.getMemberNo()).get();
+		//가져오는 값들을 저장하기 위한 map 생성, 중복되는 것은 map에 담으면서 덮어씌워짐
 		Map<Integer,Post> feed = new HashMap<>();
-		//페이징 하는중
-		feed.putAll(postService.getFeedByFollowee(user, null));
-		
+		//팔로이 글 페이징해서 map에 담기
+		feed.putAll(postService.getFeedByFollowee(user, paging));
+		//내글 페이징해서 map에 담기 
+		feed.putAll(postService.getFeedByMe(user, paging));
+		//스타일 글 페이징해서 map에 담기
+		feed.putAll(postService.getFeedByStyle(user, paging));
 		model.addAttribute("feed",feed);
 		return "feed";
 	}
-	
 	
 }
