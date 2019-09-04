@@ -35,11 +35,12 @@ nav {
 
 #searchButton{
 
-    height: fit-content;
+    height: 35px;
+  width: 35px;
 
 }
  
-button > svg {
+button svg {
   margin-top: 10px;
   margin-left: 2px;
   height: 20px;
@@ -48,7 +49,7 @@ button > svg {
   
 }
 
-.fashion > a > i {  
+.fashion  a > i {  
   font-size:20px;
   padding: 7px 0px 0px 9px;
   color: #bbb;
@@ -57,7 +58,7 @@ button > svg {
   
   
 }
-.fashion > a > i:hover {  
+.fashion  a > i:hover {  
   font-size: 20px;
   
   border-radius: 50%;

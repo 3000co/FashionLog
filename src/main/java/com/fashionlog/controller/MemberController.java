@@ -1,4 +1,4 @@
-﻿package com.fashionlog.controller;
+package com.fashionlog.controller;
 
 import javax.persistence.criteria.SetJoin;
 import javax.servlet.http.HttpServletRequest;
@@ -67,6 +67,4 @@ public class MemberController {
 		
 		return "redirect:login";
 	}
-
-
 }
