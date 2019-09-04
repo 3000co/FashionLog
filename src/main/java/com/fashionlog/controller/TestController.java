@@ -1,5 +1,6 @@
 package com.fashionlog.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,11 +48,52 @@ public class TestController {
 	
 	  @RequestMapping("/searchTest") 
 	  public String startTest2(HttpServletRequest request){ 
-		  System.out.println("안됨");
-		  System.out.println(request.getParameter("searchWords"));
+		  ArrayList<String> searchTokenList=new ArrayList<>();
+		  ArrayList<String[]> searchTokenArrayList=new ArrayList<>();
+		  
+		  splitWordsByAmp(request.getParameter("searchWords"), searchTokenList);
+		  splitWordsByColon(searchTokenList,searchTokenArrayList);
+		  
+		  System.out.println(searchTokenArrayList);
+		  
+		  for(int i=0; i<=searchTokenArrayList.size()-1;i++) {
+			  String[] temp = searchTokenArrayList.get(i);
+			  for(String t:temp) {
+				  System.out.println(t);
+			  }
+		  }
+		  
 		  System.err.println(itemRepository.getItemPost("검은", "겨울"));
 		  
 		  return "view"; 
 	 }
+	  
+	  private List<String> splitWordsByAmp(String searchWords, ArrayList<String> searchTokenList){
+		  String[] searchTokenArray;
+		 
+		  
+		  searchTokenArray = searchWords.split("&");
+		  
+		  for(String temp:searchTokenArray) {
+			  searchTokenList.add(temp);
+			  		  }
+		  return searchTokenList;
+	  }
+	  
+	  private List<String[]> splitWordsByColon(ArrayList<String> searchTokenList, ArrayList<String[]> searchTokenArrayList){
+		
+		  for(String temp: searchTokenList) {
+			  String[] searchToken = new String[2];
+			  searchToken= temp.split(":");
+			  searchTokenArrayList.add(searchToken);
+		  }
+		  
+		  
+		  return searchTokenArrayList;
+	  }
+	  
+	  
+	  
+	 
 	 
 }
