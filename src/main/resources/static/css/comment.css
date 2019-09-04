@@ -29,7 +29,7 @@ section.all {
 	padding: 20px 10px;
 }
 
-button {
+.commentInput button {
 	/*     float:right; */
 	background: #1bd5a7;
 	border: none;

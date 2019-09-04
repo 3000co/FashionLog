@@ -13,6 +13,6 @@ public interface MemberService {
 
 	void doJoin(Member member);
 	
-	
+	public void countLikes();
 	
 }

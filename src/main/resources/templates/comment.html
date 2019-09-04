@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">  
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" href="comment.css">
+<link rel="stylesheet" href="css/comment.css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -18,7 +18,7 @@
         <div class="comments">
         <table>
 		<tr th:each="comment:${commentList}">
-			<td><p th:text="${comment}"></p>
+			<td>
 			<img th:src="@{${comment[4]}}"/>
 			<a th:href="@{/report(tagetCommentNo=${comment[0]})}"
 				th:text="${comment[2]}"></a></span>
@@ -43,6 +43,7 @@
 </div>
 
 <span><a th:href="@{/file}">파일로</span>
+
 
 
 <script type="text/javascript" th:inline="javascript">
