@@ -96,12 +96,9 @@ public class PostController {
 		Member user = (Member) session.getAttribute("member");
 		user = memberRepository.findById(user.getMemberNo()).get();
 		Map<Integer,Post> feed = new HashMap<>();
-		for(Follow followee:user.getFollowees()) {
-			List<Post> postList = postRepository.findTop5ByMemberNoOrderByUploadTimeDesc(followee.getFolloweeMemNo()); 
-			for(Post post:postList) {
-			feed.put(post.getPostNo(),post);
-			}
-		}
+		//페이징 하는중
+		feed.putAll(postService.getFeedByFollowee(user, null));
+		
 		model.addAttribute("feed",feed);
 		return "feed";
 	}
