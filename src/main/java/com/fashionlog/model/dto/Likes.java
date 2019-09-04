@@ -3,25 +3,23 @@ package com.fashionlog.model.dto;
 import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode(callSuper=false)
+@ToString(exclude = "notification")
 @Entity
 public class Likes implements SocialEvent{
 
@@ -41,7 +39,7 @@ public class Likes implements SocialEvent{
 	@CreationTimestamp
 	Timestamp likesTime;
 	
-//	@OneToOne(mappedBy = "notiNo", cascade = CascadeType.REMOVE)
-//	Notification notification;
+	@OneToOne(mappedBy = "likesNo", cascade = CascadeType.REMOVE)
+	Notification notification;
 	
 }

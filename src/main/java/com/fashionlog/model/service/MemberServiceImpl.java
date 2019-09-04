@@ -24,7 +24,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member findByIdAndPassword(String Id, String Password) {
-		return memberRepo.findByIdAndPassword(Id, Password);
+		Member mem = memberRepo.findByIdAndPassword(Id, Password);
+		memberRepo.save(mem);
+		return mem;
 	}
 
 	@Override

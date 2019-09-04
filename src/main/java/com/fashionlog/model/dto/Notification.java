@@ -17,15 +17,18 @@ import org.hibernate.annotations.CreationTimestamp;
 
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @Table
 public class Notification {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
-	@Column
 	private int notiNo;
 	
 	@ManyToOne

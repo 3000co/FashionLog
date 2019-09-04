@@ -1,20 +1,22 @@
 package com.fashionlog.controller;
 
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Style;
 import com.fashionlog.model.service.MemberService;
 
-@SessionAttributes("member")
 @Controller
 public class MemberController {
 	@Autowired
 	MemberService memberService;
+	
 
 	@RequestMapping(value = "/")
 	public String main() {
@@ -92,7 +94,6 @@ public class MemberController {
 	public String doModPassword(Member member, HttpSession session) {
 		
 			return "redirect:/";
-		
 	}
 	
 
