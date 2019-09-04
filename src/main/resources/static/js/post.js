@@ -3,10 +3,7 @@ $(document).ready(function() {
 	var mapModal = $("#mapModal");
 
 	$(document).on("click", "#paletteBtn", function(event) {
-		var src = $("#postImage").attr("src");
-		
 		$(palModal).show();
-		$("#imgClone").attr("src", src);
 	});
 
 	$(document).on("click", "#mapBtn", function(event) {
@@ -57,6 +54,7 @@ function postInsert(fileNo){
 function itemInsert(postNo){
 	$("div[class=itemTag]").each(function(index) {
 		var eqValue = $("div[class=itemTag]:eq(" + index + ")");
+		
 		$.ajax({
 			type : "post",
 			url : "/itemInsert",
