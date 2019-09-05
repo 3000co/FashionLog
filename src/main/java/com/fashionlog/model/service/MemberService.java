@@ -17,10 +17,6 @@ public interface MemberService {
 
 	void doLogout(Member member);
 
-	
-
-
-	
 	public void countLikes();
 	
 }
