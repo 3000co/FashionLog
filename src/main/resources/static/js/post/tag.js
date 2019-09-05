@@ -23,7 +23,7 @@ $(document).ready( function() {
 		var clickIndex = $("span[class=styleUndo]").index(event.target);
 
 		$("input[class=styleText]").each(function(index) {
-			console.log(index);
+//			console.log(index);
 			var i = index - 1;
 			console.log(i);
 			if(clickIndex < index) {
@@ -44,32 +44,34 @@ $(document).ready( function() {
 
 	});
 
-
+	var canvas = document.createElement("CANVAS");
+	var ctx = canvas.getContext("2d");
+	
 	$(document).on("click", "#postImage", function(event) {
 
-		var img = document.getElementById("postImage");
-		var canvas = document.createElement("CANVAS");
-		var ctx = canvas.getContext("2d");
-		canvas.width = 600;
-		canvas.height = 600;
-		ctx.drawImage(img, 0, 0);
- 
+//		document.body.appendChild(canvas);
 		if (count < 7) {
+			var img = document.getElementById("postImage");
+			canvas.width = img.width;
+			canvas.height = img.height;
+			ctx.drawImage(img, 0, 0, img.width, img.height);
+			
 			count++;
 			num++;
+			var offsetX = event.offsetX;
+			var offsetY = event.offsetY;
 			var eventX = event.clientX;
 			var eventY = event.clientY;
 			var tagStyle = $(newTag).css("display");
-			var pixelData = canvas.getContext("2d").getImageData(eventX, eventY, 1, 1).data;
+			var pixelData = canvas.getContext("2d").getImageData(offsetX, offsetY, 1, 1).data;
 			
-			var hex0 = pixelData[0].toString(16);
-			var hex1 = pixelData[1].toString(16);
-			var hex2 = pixelData[2].toString(16);
+			var hex0 = pad(pixelData[0].toString(16), 2);
+			var hex1 = pad(pixelData[1].toString(16), 2);
+			var hex2 = pad(pixelData[2].toString(16), 2);
 			var hex = "#" + hex0 + hex1 + hex2;
-			console.log(pixelData[0]);
-			console.log(hex0);
-			console.log(hex1);
-			console.log(hex2);
+			console.log(pixelData);
+			console.log(offsetX);
+			console.log(offsetY);
 			
 			if (tagStyle === "block") {
 				newTag = $(tagMold).clone().attr("id", "itemTag" + num);
@@ -88,6 +90,7 @@ $(document).ready( function() {
 				$("#xCoordinate").val(eventX);
 				$("#yCoordinate").val(eventY);
 				$("#color").val(hex);
+				$("#tagNo").val(count);
 				$(".colorSquare").css("background-color", hex);
 			}
 		}
@@ -98,7 +101,7 @@ $(document).ready( function() {
 		$("input[name=tagNo]").each(function(index) {
 			var eqValue = $("input[name=tagNo]:eq(" + index + ")").val();
 			var clickIndex = $(event.target).parents(".itemTag").index();
-
+			
 			if (clickIndex < index) {
 				$("input[name=tagNo]:eq(" + index + ")").val(eqValue - 1);
 			}
@@ -110,3 +113,8 @@ $(document).ready( function() {
 
 });
 
+
+function pad(n, width) {
+	  n = n + '';
+	  return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
+}
