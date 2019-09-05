@@ -51,12 +51,12 @@ public class PostController {
 	
 	
 	@RequestMapping("/postWrite")
-	public String startTest(Model model, HttpServletResponse response) {
+	public String startTest(Model model, HttpServletResponse response, HttpSession session) {
 		List<Style> style = styleRepository.findAll();
 		List<Category> category = categoryRepository.findAll();
 		List<Object[]> brand = brandRepository.findBrandQuery();
-		Member member = memberRepository.findById("a");
-		
+		Member user = (Member) session.getAttribute("member");
+		Member member = memberRepository.findById(user.getId());
 		model.addAttribute("style", style);
 		model.addAttribute("category", category);
 		model.addAttribute("brand", brand);
@@ -107,6 +107,12 @@ public class PostController {
 //		return i;
 	}
 	
+	@RequestMapping("/afterPostWrite")
+	public String afterPostWrite() {
+		
+		return "main";
+	}
+	
 	@RequestMapping("/feed")
 	public String getPost(Model model, HttpSession session, @PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 5)Pageable paging) {
 		//로그인한 사람 user
@@ -114,13 +120,20 @@ public class PostController {
 		user = memberRepository.findById(user.getMemberNo()).get();
 		//가져오는 값들을 저장하기 위한 map 생성, 중복되는 것은 map에 담으면서 덮어씌워짐
 		Map<Integer,Post> feed = new HashMap<>();
+		//스타일 글 페이징해서 map에 담기
+		feed.putAll(postService.getFeedByStyle(user, paging));
 		//팔로이 글 페이징해서 map에 담기
 		feed.putAll(postService.getFeedByFollowee(user, paging));
 		//내글 페이징해서 map에 담기 
 		feed.putAll(postService.getFeedByMe(user, paging));
-		//스타일 글 페이징해서 map에 담기
-		feed.putAll(postService.getFeedByStyle(user, paging));
 		model.addAttribute("feed",feed);
+		return "feed";
+	}
+	
+	@RequestMapping("/allFeed")
+	public String getPost(Model model, @PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 30)Pageable paging) {
+		
+		model.addAttribute("feed", postService.getAllFeed(paging));
 		return "feed";
 	}
 	

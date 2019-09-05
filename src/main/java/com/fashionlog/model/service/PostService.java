@@ -25,6 +25,9 @@ public interface PostService {
 	
 	//스타일 글 5개
 	Map<Integer, Post> getFeedByStyle(Member user, Pageable paging);
+	
+	
+	Map<Integer, Post> getAllFeed(Pageable paging);
 
 	
 

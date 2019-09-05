@@ -1,12 +1,17 @@
 package com.fashionlog.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fashionlog.model.dao.MemberRepository;
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Style;
 import com.fashionlog.model.service.MemberService;
@@ -14,9 +19,26 @@ import com.fashionlog.model.service.MemberService;
 @Controller
 public class MemberController {
 	@Autowired
-	MemberService memberService;
+	private MemberService memberService;
 	
-
+	@Autowired
+	private MemberRepository memberRepository;
+	
+	/**
+	 * 개발 편의를 위한 현재 맴버리스트 출력 메서드
+	 * @return
+	 */
+	@RequestMapping(value = "/getAllMember")
+	@ResponseBody
+	public String getAllMember(Model model) {
+		List<Member> memList = memberRepository.findAll();
+		String print = "";
+		for(Member mem:memList) {
+			print += (mem.getId() +"<br>");
+		}
+		return print;
+	}
+	
 	@RequestMapping(value = "/")
 	public String main() {
 		return "main";
@@ -40,7 +62,6 @@ public class MemberController {
 			return "member/login";
 		} else {
 			session.setAttribute("member", getMemberInfo);
-			session.setAttribute("id", member.getId());
 			System.out.println("로그인 성공" + getMemberInfo);
 			return "redirect:/";
 		}

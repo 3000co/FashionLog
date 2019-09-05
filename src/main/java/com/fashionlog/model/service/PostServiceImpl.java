@@ -60,8 +60,7 @@ public class PostServiceImpl implements PostService {
 
 	private String uploadFile(String originalName, byte[] fileData, Date now, MultipartFile mulFile) throws Exception {
 		SimpleDateFormat uid = new SimpleDateFormat("yyyyMMddhhmmss");
-		String savedName = uid.format(now) + "_";
-//		String savedName = uid.format(now)+"_"+originalName;		
+		String savedName = uid.format(now)+"_"+originalName;		
 
 		java.io.File target = new java.io.File(uploadPath, savedName);
 		System.out.println(target.getAbsolutePath());
@@ -86,9 +85,7 @@ public class PostServiceImpl implements PostService {
 		for (Follow followee : user.getFollowees()) {
 			List<Post> postList = postRepository.findByMemberNoOrderByUploadTimeDesc(followee.getFolloweeMemNo(),
 					paging);
-			for (Post post : postList) {
-				followeesPosts.put(post.getPostNo(), post);
-			}
+			followeesPosts.putAll(setFeedMap(postList));
 		}
 		return followeesPosts;
 	}
@@ -96,25 +93,23 @@ public class PostServiceImpl implements PostService {
 	//나의 글을 피드로 가져옴
 	@Override
 	public Map<Integer, Post> getFeedByMe(Member user, Pageable paging) {
-		Map<Integer, Post> myPosts = new HashMap<>();
-		List<Post> postList = postRepository.findByMemberNoOrderByUploadTimeDesc(user, paging);
-		for (Post post : postList) {
-			myPosts.put(post.getPostNo(), post);
-		}
-		return myPosts;
+		List<Post> myPostList = postRepository.findByMemberNoOrderByUploadTimeDesc(user, paging);
+		return setFeedMap(myPostList);
 	}
 
 	//나의 선호 스타일인 글을 피드로 가져옴
 	@Override
 	public Map<Integer, Post> getFeedByStyle(Member user, Pageable paging) {
-		Map<Integer, Post> favStylePosts = new HashMap<>();
-		List<Post> postList = getPostByStyle(user.getStyleNo1(), paging);
-		postList.addAll(getPostByStyle(user.getStyleNo2(), paging));
-		postList.addAll(getPostByStyle(user.getStyleNo3(), paging));
-		for (Post post : postList) {
-			favStylePosts.put(post.getPostNo(), post);
-		}
-		return favStylePosts;
+		List<Post> stylePostList = getPostByStyle(user.getStyleNo1(), paging);
+		stylePostList.addAll(getPostByStyle(user.getStyleNo2(), paging));
+		stylePostList.addAll(getPostByStyle(user.getStyleNo3(), paging));
+		return setFeedMap(stylePostList);
+	}
+	
+	@Override
+	public Map<Integer, Post> getAllFeed(Pageable paging) {
+		List<Post> allPost = postRepository.findAll();
+		return setFeedMap(allPost);
 	}
 
 	//getFeedByStyle 내에서 스타일 null을 체크하고 반복작업 수행
@@ -126,5 +121,14 @@ public class PostServiceImpl implements PostService {
 			postList.addAll(postRepository.findByStyleNo3OrderByUploadTimeDesc(style, paging));
 		}
 		return postList;
+	}
+	
+	//리스트 결과를 맵으로 바꿔서 저장
+	private Map<Integer, Post> setFeedMap(List<Post> posts) {
+		Map<Integer, Post> feedMap = new HashMap<>();
+		for (Post post : posts) {
+			feedMap.put(post.getPostNo(), post);
+		}
+		return feedMap;
 	}
 }
