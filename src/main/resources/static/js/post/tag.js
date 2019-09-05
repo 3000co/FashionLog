@@ -49,9 +49,9 @@ $(document).ready( function() {
 	
 	$(document).on("click", "#postImage", function(event) {
 
-//		document.body.appendChild(canvas);
 		if (count < 7) {
 			var img = document.getElementById("postImage");
+			var tagImg = document.createElement("img");
 			canvas.width = img.width;
 			canvas.height = img.height;
 			ctx.drawImage(img, 0, 0, img.width, img.height);
@@ -69,9 +69,6 @@ $(document).ready( function() {
 			var hex1 = pad(pixelData[1].toString(16), 2);
 			var hex2 = pad(pixelData[2].toString(16), 2);
 			var hex = "#" + hex0 + hex1 + hex2;
-			console.log(pixelData);
-			console.log(offsetX);
-			console.log(offsetY);
 			
 			if (tagStyle === "block") {
 				newTag = $(tagMold).clone().attr("id", "itemTag" + num);
@@ -83,6 +80,7 @@ $(document).ready( function() {
 				$("div[class=itemTag]").each(function(index) {
 					var clickIndex = $(this).index();
 					$(newTag).find('#tagNo').val(clickIndex + 1);
+					tagImg.setAttribute("src", "images/tag" + (clickIndex + 1) + ".png");
 				});
 			} else {
 				$(newTag).show();
@@ -92,7 +90,15 @@ $(document).ready( function() {
 				$("#color").val(hex);
 				$("#tagNo").val(count);
 				$(".colorSquare").css("background-color", hex);
+				tagImg.setAttribute("src", "images/tag1.png");
 			}
+			
+			tagImg.setAttribute("alt","tagNoImg");
+			tagImg.style.position = "absolute";
+			tagImg.style.left = (offsetX + 15) + "px";
+			tagImg.style.top = (offsetY + 30) + "px";
+			
+			$(newTag).append(tagImg);
 		}
 	});
 
@@ -104,10 +110,12 @@ $(document).ready( function() {
 			
 			if (clickIndex < index) {
 				$("input[name=tagNo]:eq(" + index + ")").val(eqValue - 1);
+				$("img[alt=tagNoImg]:eq(" + index + ")").attr("src", "images/tag" + (eqValue - 1) + ".png");
 			}
 		});
 
-		$(event.target).parents(".itemTag").detach();	
+		$(event.target).parents(".itemTag").detach();
+		$(event.target).parents(".itemTag").detach();
 		count--;
 	});
 

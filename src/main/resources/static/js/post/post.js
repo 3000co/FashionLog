@@ -3,10 +3,22 @@ $(document).ready(function() {
 	var mapModal = $("#mapModal");
 
 	$(document).on("click", "#paletteBtn", function(event) {
-		var src = $("#postImage").attr("src");
+//		var src = $("#postImage").attr("src");
+//		$("#imgClone").attr("src", src);
+
+//		console.log($(".colorSquare").css("background-color"));
+//		console.log($(".square.red").css("background-color"));
+		
+		var picker = $(event.target).parents(".colorSquare").css("background-color");
+		$(".selected-box").css("background-color", picker);
+//		$(event.target).find(".square.picker").css("background-color", picker);
+		$(".square.picker").css("background-color", picker);
+		
+		var hex = $("#color").val();
+		console.log(hex);
+		$(".square.picker").attr("color", hex);
 		
 		$(palModal).show();
-		$("#imgClone").attr("src", src);
 	});
 
 	$(document).on("click", "#mapBtn", function(event) {
