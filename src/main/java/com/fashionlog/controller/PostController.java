@@ -92,13 +92,22 @@ public class PostController {
 	
 	@RequestMapping("/feed")
 	public String getPost(Model model, HttpSession session) {
-		Member user = (Member) session.getAttribute("member");
-		user = memberRepository.findById(user.getMemberNo()).get();
-		Map<Integer,Post> feed = new HashMap<>();
-		//페이징 하는중
-		feed.putAll(postService.getFeedByFollowee(user, null));
 		
-		model.addAttribute("feed",feed);
+		List<Style> style = styleRepository.findAll();
+		List<Category> category = categoryRepository.findAll();
+		List<Object[]> brand = brandRepository.findBrandQuery();
+
+		model.addAttribute("style", style);
+		model.addAttribute("category", category);
+		model.addAttribute("brand", brand);
+		
+//		Member user = (Member) session.getAttribute("member");
+//		user = memberRepository.findById(user.getMemberNo()).get();
+//		Map<Integer,Post> feed = new HashMap<>();
+//		//페이징 하는중
+//		feed.putAll(postService.getFeedByFollowee(user, null));
+//		
+//		model.addAttribute("feed",feed);
 		return "feed";
 	}
 	

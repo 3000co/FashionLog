@@ -11,6 +11,7 @@
 <title>news feed</title>
 </head>
 <body>
+<div th:include="header/header"></div>
 <div id="container">
 <div th:each="postKey:${feed.keySet()}" th:class="@{item}">
 	<div th:with="post=${feed.get(postKey)}" class="postContainer">
@@ -62,7 +63,7 @@ for(var i = 0; i<uploadTime.length; i++) {
 		timeExp =Math.floor(timeDiff/31536000)+'년 전'
 	}
 	$(uploadTime[i]).text(timeExp);
-}
+} 
 
 </script>
 </body>
