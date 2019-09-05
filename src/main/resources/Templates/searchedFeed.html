@@ -4,28 +4,26 @@
 <meta charset="utf-8">
 <link rel="stylesheet" href="/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/feed.css">
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/jquery.grid-a-licious.js"></script>
+
+
 <title>Insert title here</title>
 </head>
 <body>
 
 <div th:include="header/header"></div>
 <div id="container">
-<div th:each="post:${searchedPost}" >
-	<div class="searchContainer">
+<div th:each="post:${searchedPost}" th:class="@{item}">
+	<div class="container">
 			<img th:alt="${post.postNo+'번 포스트의 사진'}" th:src="${post.postImageNo.path}">
 			<span class="uploadTime" th:text="${post.uploadTime}"> </span>
 			<span class="uploader" th:text="${post.memberNo.nickname}"> </span>
 	</div>
 </div>
 </div>
-안녕?
-<img src="C:/Users/jhe/Documents/GitHub/FashionLog/src/main/resources/static/images/20190902102307_01.jpeg"/>
 
 <script type="text/javascript">
+$(document).ready(function(){
 $("#container").gridalicious({
 	  animate: true,
 	  animationOptions: {
@@ -38,7 +36,9 @@ $("#container").gridalicious({
 	    }
 	  }
 	});
+});
 //현재 시간 기준으로 업로드 시간 표현
+$(document).ready(function(){
 var uploadTime = $('.uploadTime');
 for(var i = 0; i<uploadTime.length; i++) {
 	var uploadTimeStamp = new Date($(uploadTime[i]).text());
@@ -67,7 +67,11 @@ for(var i = 0; i<uploadTime.length; i++) {
 	}
 	$(uploadTime[i]).text(timeExp);
 } 
+});
+</script>
 
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.grid-a-licious.js"></script>
 
 </body>
 </html>
