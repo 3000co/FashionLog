@@ -28,16 +28,16 @@ public class Member {
 
 	@Column(columnDefinition = "char")
 	private String id;
-	 
+
 	@Column(columnDefinition = "char")
 	private String password;
-	
+
 	@Column(columnDefinition = "char")
 	private String nickname;
-	
+
 	@Column(columnDefinition = "char")
 	private String phonenumber;
-	
+
 	@Column(columnDefinition = "char")
 	private String email;
 
@@ -52,27 +52,27 @@ public class Member {
   @ManyToOne
 	@JoinColumn(name = "STYLE_NO1")
 	private Style styleNo1;
-  
+
 	@ManyToOne
 	@JoinColumn(name = "STYLE_NO2")
 	private Style styleNo2;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "STYLE_NO3")
 	private Style styleNo3;
 
 	@OneToMany(mappedBy = "memberNo")
 	private List<Post> posts = new ArrayList<Post>();
-	
+
 	@Transient
 	private Long likesCount;
-	
+
 	@OneToMany(mappedBy = "followeeMemNo")
 	private List<Follow> followers;
 
 	@OneToMany(mappedBy = "followerMemNo")
 	private List<Follow> followees;
-	
+
 	@Transient
 	public void setLikesCount() {
 		Long count = (long) 0;
@@ -83,4 +83,3 @@ public class Member {
 	}
 
 }
-
