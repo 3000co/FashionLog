@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>지도..</title>
+
+<link rel="stylesheet" th:href="@{/css/map.css}">
+</head>
+<body>
+
+	<!-- 지도를 표시할 div 입니다 -->
+	<div class="map_wrap">
+		<div id="map"></div>
+
+		<div id="menu_wrap" class="bg_white">
+			<div class="option">
+				<div>
+					<form onsubmit="searchPlaces(); return false;">
+						<label for="keyword"> 키워드 : </label> 
+						<input type="text" placeholder="키워드 검색" id="keyword" size="15">
+						<button type="submit" id="searchBtn">검색하기</button>
+					</form>
+				</div>
+			</div>
+			<hr>
+			<ul id="placesList"></ul>
+			<div id="pagination"></div>
+		</div>
+		
+		<div>
+			<span id="road"></span>
+<!-- 			<input id="road" type="text" disabled="disabled"> -->
+		</div>
+	</div>
+
+
+	<script th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=db4e0d13d5fa7c3ebc8ba0a74eb272e1&libraries=services,clusterer}"></script>
+	<script th:src="@{/js/map/mapContainer.js}"></script>
+</html>

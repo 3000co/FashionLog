@@ -4,15 +4,13 @@
 	<meta charset="UTF-8">
 	<title>Post</title>
 	
-	<link rel="stylesheet" href="css/post.css">
+	<link rel="stylesheet" th:href="@{/css/post.css}">
 	<script th:src="@{https://code.jquery.com/jquery-3.3.1.min.js}"></script>
-	<script th:src="@{https://use.fontawesome.com/releases/v5.2.0/js/all.js}"></script>
 	<th:block th:include="header/header"></th:block>
 </head>
 <body>
 	<div id="postWrite" class="postWrite">
-		<input id="memberNo" name="memberNo" class="memberNo"
-			th:value="${member.memberNo}" hidden="true">
+		<input id="memberNo" name="memberNo" class="memberNo" th:value="${member.memberNo}" hidden="true">
 		<div class="leftWrap">
 			<form id="imgWrap" class="imgWrap" action="/item" method="post" enctype="multipart/form-data">
 				<input type="hidden" id="type" name="type" value="post"> 
@@ -74,7 +72,8 @@
 						<label for="color">색상</label> 
 						<div class="colorSquare"></div>
 						<input type="text" id="color" name="color" disabled="disabled">
-						<button type="button" id="paletteBtn" class="paletteBtn"><i class="fas fa-palette"></i></button><br> 
+						<button type="button" id="paletteBtn" class="paletteBtn">pa</button><br> 
+<!-- 						<button type="button" id="paletteBtn" class="paletteBtn"><i class="fas fa-palette"></i></button><br>  -->
 						
 						<label for="store">구 매 처</label> 
 						<input type="text" id="store" name="store" placeholder="구매처 입력">
@@ -95,7 +94,7 @@
 				<span class="close">&times;</span>
 				<p>팔렛트트트</p>
 				<div th:include="post/palette"></div><br>
-				<button type="button" id="modalBtn" class="modalBtn">확인</button>
+				<button type="button" class="modalBtn">확인</button>
 			</div>
 		</div>
 
@@ -103,14 +102,18 @@
 			<div class="modalContent">
 				<span class="close">&times;</span>
 				<p>지도지도도</p>
+				<div th:include="post/map"></div><br>
+				<button type="button" id="mapModalBtn" class="modalBtn">확인</button>
 			</div>
 		</div>
 	</div>
 
-	<script th:src="@{js/post/previewImage.js}"></script>
-	<script th:src="@{js/post/tag.js}"></script>
-	<script th:src="@{js/post/post.js}"></script>
-	<script th:src="@{js/post/styleSelect.js}"></script>
+	<script th:src="@{/js/post/modal.js}"></script>
+	<script th:src="@{/js/post/palette.js}"></script>
+	<script th:src="@{/js/post/previewImage.js}"></script>
+	<script th:src="@{/js/post/styleSelect.js}"></script>
+	<script th:src="@{/js/post/tag.js}"></script>
+	<script th:src="@{/js/post/post.js}"></script>
 </body>
 
 </html>

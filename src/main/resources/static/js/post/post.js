@@ -1,41 +1,10 @@
 $(document).ready(function() {
-	var palModal = $("#paletteModal");
-	var mapModal = $("#mapModal");
-
-	$(document).on("click", "#paletteBtn", function(event) {
-//		var src = $("#postImage").attr("src");
-//		$("#imgClone").attr("src", src);
-
-//		console.log($(".colorSquare").css("background-color"));
-//		console.log($(".square.red").css("background-color"));
-		
-		var picker = $(event.target).parents(".colorSquare").css("background-color");
-		$(".selected-box").css("background-color", picker);
-//		$(event.target).find(".square.picker").css("background-color", picker);
-		$(".square.picker").css("background-color", picker);
-		
-		var hex = $("#color").val();
-		console.log(hex);
-		$(".square.picker").attr("color", hex);
-		
-		$(palModal).show();
-	});
-
-	$(document).on("click", "#mapBtn", function(event) {
-		$(mapModal).show();
-	});
-
-	$(document).on("click", ".close", function(event) {
-		$(palModal).hide();
-		$(mapModal).hide();
-	});
-
 	$("#submit").click(function() {
 		fileInsert();
 	});
 });
 
-function fileInsert(){
+function fileInsert() {
 	var form = new FormData(document.getElementById('imgWrap')); 
 	$.ajax({ 
 		type: 'POST',
@@ -49,7 +18,7 @@ function fileInsert(){
 	});
 }
 
-function postInsert(fileNo){
+function postInsert(fileNo) {
 	$.ajax({
 		type : "post",
 		url : "/postInsert",
@@ -66,7 +35,7 @@ function postInsert(fileNo){
 		}
 	});
 }
-function itemInsert(postNo){
+function itemInsert(postNo) {
 	$("div[class=itemTag]").each(function(index) {
 		var eqValue = $("div[class=itemTag]:eq(" + index + ")");
 		$.ajax({
