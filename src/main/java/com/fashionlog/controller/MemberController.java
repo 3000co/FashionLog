@@ -18,6 +18,7 @@ import com.fashionlog.model.service.MemberService;
 
 @Controller
 public class MemberController {
+	Member newMember = new Member();
 	@Autowired
 	private MemberService memberService;
 	
@@ -84,20 +85,27 @@ public class MemberController {
 	public String doJoin(Member member, HttpSession session) {
 		System.out.println("아이디: " + member.getId() + " 비밀번호: " + member.getPassword());
 		System.out.println("Member1::" + member);
+		newMember.setId(member.getId());
+		newMember.setPassword(member.getPassword());
+		newMember.setNickname(member.getNickname());
+		newMember.setPhonenumber(member.getPhonenumber());
+		newMember.setEmail(member.getEmail());
 		return "member/styleSelect";
 	}
 	
 	// 회원가입 스타일 처리
 		@RequestMapping(value = "/styleSelect.do", method = RequestMethod.POST)
 		public String doStyleSelect(Member member, HttpSession session) {
-			System.out.println(" 스타일 번호: " + member.getStyleNo1());
-			System.out.println("Member2::" + member);
+			newMember.setStyleNo1(member.getStyleNo1());
+			newMember.setStyleNo2(member.getStyleNo2());
+			newMember.setStyleNo3(member.getStyleNo3());
+			System.out.println(newMember);
 			Style getStyleInfo = member.getStyleNo1();
 			if (getStyleInfo.getStyleNo() == 0) {
 				session.setAttribute("style", null);
 				return "member/styleSelect";
 			} else {
-				memberService.doJoin(member);
+				memberService.doJoin(newMember);
 				System.out.println("회원가입 성공" + getStyleInfo);
 				return "redirect:/login";
 			}

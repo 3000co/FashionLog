@@ -1,14 +1,10 @@
 package com.fashionlog.controller;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -120,7 +116,7 @@ public class PostController {
 	}
 	
 	@RequestMapping("/feed")
-	public String getPost(Model model, HttpSession session, @PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 5)Pageable paging) {
+	public String getFeed(Model model, HttpSession session, @PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 5)Pageable paging) {
 		//로그인한 사람 user
 		Member user = (Member) session.getAttribute("member");
 		if(user == null) return "redirect:/login";
@@ -136,7 +132,21 @@ public class PostController {
 		List<Post> feed = new ArrayList<Post>(feedSet);
 		Collections.sort(feed);
 		model.addAttribute("feed",feed);
-		return "feed";
+  		return "feed";
+	}
+  
+  @RequestMapping("/post")
+	public String getPost(Model model, HttpSession session) {
+		
+		List<Style> style = styleRepository.findAll();
+		List<Category> category = categoryRepository.findAll();
+		List<Object[]> brand = brandRepository.findBrandQuery();
+
+		model.addAttribute("style", style);
+		model.addAttribute("category", category);
+		model.addAttribute("brand", brand);
+    //postview 페이지가 생기면 바꿔줄것
+		return "post/post";
 	}
 	
 	@RequestMapping("/allFeed")

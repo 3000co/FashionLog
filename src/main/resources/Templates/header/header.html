@@ -162,7 +162,7 @@
 
 					<div class="mm-3column">
 						<span class="menu-list"> <span>
-							<div th:include="header/colorPicker"></div>
+							<div th:include="/header/colorPicker"></div>
 						</span>
 						</span>
 					</div>
@@ -226,7 +226,7 @@
 		<div>
 		</ul>
 			
-		<form id="searchButton" name="searchButton" action="/searchTest" method="post">
+		<form id="searchButton" name="searchButton" action="/feed/searched" method="post">
 			<input type="hidden" name="searchWords" id="searchWords" value="검색 내용 없음" >
 			<button  value="form-data">
 				<svg>
@@ -248,7 +248,7 @@
 	<div class="form-data" id="form-data"></div> 
 
 
-	<script src="js/header.js"></script>
+	<script src="/js/header.js"></script>
 
 </body>
 </html>

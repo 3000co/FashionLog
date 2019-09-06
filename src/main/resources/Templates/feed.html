@@ -11,6 +11,7 @@
 <title>news feed</title>
 </head>
 <body>
+<div th:include="header/header"></div>
 <div id="container">
 	<div th:each="post:${feed}" th:class="@{item}" th:id="${'p'+post.postNo}">
 			<img th:alt="${post.postNo+'번 포스트의 사진'}" th:src="${post.postImageNo.path}">
@@ -61,7 +62,7 @@ for(var i = 0; i<uploadTime.length; i++) {
 		timeExp =Math.floor(timeDiff/31536000)+'년 전'
 	}
 	$(uploadTime[i]).text(timeExp);
-}
+} 
 
 </script>
 </body>

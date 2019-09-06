@@ -55,10 +55,12 @@
 	padding-bottom: 10px;
 	border: 1px solid #bcbcbc;
 	border-radius: 5px;
+	overflow: hidden;
 }
 
 .itemTagWrap {
-	float: right;
+	overflow: auto;
+	height: 510px;
 }
 
 .itemTagWrap label {
@@ -81,11 +83,6 @@
 
 .styleUndo {
 	display: none;
-}
-
-.itemTagWrap {
-	overflow: auto;
-	height: 510px;
 }
 
 .itemTag {
