@@ -1,18 +1,13 @@
 package com.fashionlog.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -41,7 +36,7 @@ public class CommentController {
 	//		return "view";
 	//	}
 
-	@RequestMapping("/commnet")
+	@RequestMapping("/comment")
 	public String getCommentList(Model model) {
 
 		List<Object[]> commentList = commentRepository.getCommentList();
@@ -66,13 +61,13 @@ public class CommentController {
 		comment.setPostNo(post);
 		commentRepository.save(comment);
 
-		return "redirect:/";
+		return "redirect:/comment";
 	}
 
 	@RequestMapping("/deleteComment")
 	public String deleteComment(@RequestParam("commentNo")int commentNo) {
 		commentRepository.deleteById(commentNo);
-		return "redirect:/";
+		return "redirect:/comment";
 	}
 
 

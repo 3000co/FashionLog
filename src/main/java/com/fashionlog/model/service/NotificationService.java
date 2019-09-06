@@ -9,4 +9,6 @@ public interface NotificationService {
 
 	public void checkNotification(Notification noti);
 	
+	public String moveToEvent(Notification noti);
+	
 }

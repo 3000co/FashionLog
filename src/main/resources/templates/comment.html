@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">  
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" href="comment.css">
+<link rel="stylesheet" href="/css/comment.css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -18,14 +18,34 @@
         <div class="comments">
         <table>
 		<tr th:each="comment:${commentList}">
-			<td><img th:src="@{${comment[4]}}"/>
-			<a th:href="@{/report(tagetCommentNo=${comment[0]})}"
-				th:text="${comment[2]}"></a></span>
-			<span th:text="${comment[1]}"></span>
-			<span><a th:href="@{/deleteComment(commentNo=${comment[0]})}"/>x</span>
+			<td>
+			<img th:src="@{${comment[4]}}"/>
+			 <!-- <span><a th:href="@{/report(tagetCommentNo=${comment[0]})}"
+				th:text="${comment[2]}"></a></span> -->
+			<span th:text="${comment[2]}"></span>
+			<span  id="commentContents" th:text="${comment[1]}"></span>
+			<span><a th:href="@{/deleteComment(commentNo=${comment[0]})}"/>&times;</span>
 			</td>
 		</tr>  
 		</table>
+		<form id="reportModal" class="modal" method="post">
+			<div class="modalContents">
+				<span class="close">&times;</span>
+				<button class="reportBtn" id="reportBtn1">유해한 내용</button>
+				<button class="reportBtn" id="reportBtn2">광고성 내용</button>
+				
+				<script>
+					var formObj =$("form[role='form']");
+					
+					$("#reportBtn1").on("click",function(){
+						formObj.attr("action", "/report");
+						formObj.attr("method","get");
+						formObj.submit();
+					})
+				</script>
+			</div>
+		
+		</form>
         </div> 
       </section> 
     </div>
@@ -44,6 +64,7 @@
 <span><a th:href="@{/file}">파일로</span>
 
 
+
 <script type="text/javascript" th:inline="javascript">
 	document.getElementById("insertBtn").disabled = true;
 	document.onkeyup = InputProcess;
@@ -60,6 +81,14 @@
 		}
 		/*]]>*/
 	}
+	
+	$(document).on("click", "#commentContents", function(event) {
+		$(reportModal).show();
+	});
+	
+	$(document).on("click", ".close", function(event) {
+		$(reportModal).hide();
+	});
 
 </script>	
 

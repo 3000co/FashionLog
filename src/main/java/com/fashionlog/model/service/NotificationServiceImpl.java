@@ -53,6 +53,18 @@ public class NotificationServiceImpl implements NotificationService {
 		notificationRepository.save(noti);
 	}
 	
+	@Override
+	public String moveToEvent(Notification noti) {
+		switch(noti.getType()) {
+		case EventType.LIKES: 
+			return "post/" + noti.getLikesNo().getPostNo();
+		case EventType.COMMENT: 
+			return "post/" + noti.getCommentNo().getPostNo(); 
+		default:
+			return "profile/" + noti.getFollowNo().getFollowerMemNo().getMemberNo();
+		}
+	}
+	
 	private int assortEvent(SocialEvent event) {
 		int type;
 		if(event instanceof Likes) {

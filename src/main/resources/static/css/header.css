@@ -1,0 +1,170 @@
+@charset "utf-8";
+
+
+nav {
+  display:flex;
+  box-sizing: border-box;
+}
+
+.fashion {
+  flex-direction: row;
+  height: 30px;
+  padding: 20px;
+  background: #fff;
+  justify-content: space-around;
+  align-items: center;
+  flex: 1 1 auto;
+  margin-top: 1em;
+  padding-bottom: 2em;
+  border-bottom: 1px solid #ccc;
+}
+
+.fashion > img {
+  width: 50px;
+  height:auto;
+}
+
+.fashion .form-control {
+ 
+ margin: 20px;
+ flex: 5;
+ justify-content: flex-start;
+} 
+
+
+
+#searchButton{
+
+    height: 35px;
+  width: 35px;
+
+}
+ 
+button svg {
+  margin-top: 10px;
+  margin-left: 2px;
+  height: 20px;
+  width: 20px;
+  fill: #aaa;
+  
+}
+
+.fashion  a > i {  
+  font-size:20px;
+  padding: 7px 0px 0px 9px;
+  color: #bbb;
+  width: 40px;
+  height: 40px; 
+  
+  
+}
+.fashion  a > i:hover {  
+  font-size: 20px;
+  
+  border-radius: 50%;
+   background: #eee;
+ 
+ 
+}
+
+.fashion .searchBoard > div input{
+  flex-grow: 1;
+  font-size: 18px;
+  background: #65545400;
+  border-radius: 5px;
+  padding-left: 16px;
+  padding-right: 100px;
+  border:none;
+}
+
+.fashion .searchBoard {
+  display: flex;
+  flex-flow: row;
+  margin: 20px;
+  flex: 5;
+  justify-content: flex-start;
+}
+
+
+input:focus {
+  outline:0;
+}
+
+button:focus {
+  outline:0;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+
+.active{
+	background:#ff2e2e !important;
+	
+}
+
+.mega-menu {
+   background: none repeat scroll 0 0 #888;
+    left: 0;
+    margin-top: 48px;
+    position: absolute;
+    width: 100%;
+    height: auto;
+	padding:15px;
+	display:none;
+	 transition-duration: 0.9s;
+    
+}
+#menutoggle i {
+    color: #fff;
+    font-size: 33px;
+    margin: 0;
+    padding: 0;
+}
+
+
+/*--column--*/
+.mm-6column:after, .mm-6column:before, .mm-3column:after, .mm-3column:before{
+content:"";
+display:table;
+clear:both;
+
+
+}
+.mm-6column, .mm-3column {
+ float: left;
+ position: relative;
+ }
+.mm-6column {
+    width: 25%;
+}
+.mm-3column {
+        width: 15%;
+}
+
+.menu-list button {
+    font-size: 20px;
+    padding-bottom: 15px;
+  
+}
+
+.display-on{
+display:block;
+ transition-duration: 0.9s;
+}
+.drop-down > a:after{
+content:"\f103";
+color:#ffffff;
+font-family: FontAwesome;
+font-style: normal;
+margin-left: 50px;
+ 
+
+}
+
+
+
+
