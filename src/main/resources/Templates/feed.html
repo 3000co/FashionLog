@@ -13,13 +13,12 @@
 <body>
 <div th:include="header/header"></div>
 <div id="container">
-<div th:each="postKey:${feed.keySet()}" th:class="@{item}">
-	<div th:with="post=${feed.get(postKey)}" class="postContainer">
+	<div th:each="post:${feed}" th:class="@{item}" th:id="${'p'+post.postNo}">
 			<img th:alt="${post.postNo+'번 포스트의 사진'}" th:src="${post.postImageNo.path}">
 			<span class="uploadTime" th:text="${post.uploadTime}"> </span>
 			<span class="uploader" th:text="${post.memberNo.nickname}"> </span>
+		
 	</div>
-</div>
 </div>
 
 <script type="text/javascript">
