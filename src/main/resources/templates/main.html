@@ -8,6 +8,8 @@
 	<h3 align="center">게시판</h3>
 	<hr>
 	<h4 th:unless="${session.member==null}" th:text="|환영합니다 ${session.member.id}(${session.member.nickname})님|">환영합니다 </h4>
+	<p align="center"><a href="feed">피드보기</a></p>
+	<p align="center"><a href="allFeed">모든피드보기</a></p>
 	<p align="center"><a href="login">로그인</a></p>
 	<p align="center"><a href="join">새 계정 만들기</a></p>
 	<p align="center"><a href="postWrite">포스트 쓰기</a></p>

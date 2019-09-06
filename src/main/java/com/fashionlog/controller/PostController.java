@@ -1,8 +1,14 @@
 package com.fashionlog.controller;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -117,23 +123,27 @@ public class PostController {
 	public String getPost(Model model, HttpSession session, @PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 5)Pageable paging) {
 		//로그인한 사람 user
 		Member user = (Member) session.getAttribute("member");
+		if(user == null) return "redirect:/login";
 		user = memberRepository.findById(user.getMemberNo()).get();
-		//가져오는 값들을 저장하기 위한 map 생성, 중복되는 것은 map에 담으면서 덮어씌워짐
-		Map<Integer,Post> feed = new HashMap<>();
-		//스타일 글 페이징해서 map에 담기
-		feed.putAll(postService.getFeedByStyle(user, paging));
-		//팔로이 글 페이징해서 map에 담기
-		feed.putAll(postService.getFeedByFollowee(user, paging));
-		//내글 페이징해서 map에 담기 
-		feed.putAll(postService.getFeedByMe(user, paging));
+		//가져오는 값들을 중복없이 저장하기 위해 set 생성
+		Set<Post> feedSet = new HashSet<>();
+		//스타일 글 페이징해서 담기
+		feedSet.addAll(postService.getFeedByStyle(user, paging));
+		//팔로이 글 페이징해서 담기
+		feedSet.addAll(postService.getFeedByFollowee(user, paging));
+		//내글 페이징해서 담기 
+		feedSet.addAll(postService.getFeedByMe(user, paging));
+		List<Post> feed = new ArrayList<Post>(feedSet);
+		Collections.sort(feed);
 		model.addAttribute("feed",feed);
 		return "feed";
 	}
 	
 	@RequestMapping("/allFeed")
 	public String getPost(Model model, @PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 30)Pageable paging) {
-		
-		model.addAttribute("feed", postService.getAllFeed(paging));
+		List<Post> allFeed = new ArrayList<>(postService.getAllFeed(paging));
+		Collections.sort(allFeed);
+		model.addAttribute("feed", allFeed);
 		return "feed";
 	}
 	

@@ -1,6 +1,6 @@
 package com.fashionlog.model.service;
 
-import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,16 +18,16 @@ public interface PostService {
 
 	public void countLikes();
 	//팔로이 글 5개
-	Map<Integer, Post> getFeedByFollowee(Member user, Pageable paging);
+	Set<Post> getFeedByFollowee(Member user, Pageable paging);
 
 	//내글 5개
-	Map<Integer, Post> getFeedByMe(Member user, Pageable paging);
+	Set<Post> getFeedByMe(Member user, Pageable paging);
 	
 	//스타일 글 5개
-	Map<Integer, Post> getFeedByStyle(Member user, Pageable paging);
+	Set<Post> getFeedByStyle(Member user, Pageable paging);
 	
 	
-	Map<Integer, Post> getAllFeed(Pageable paging);
+	Set<Post> getAllFeed(Pageable paging);
 
 	
 
