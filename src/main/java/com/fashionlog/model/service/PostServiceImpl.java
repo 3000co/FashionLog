@@ -1,5 +1,6 @@
 package com.fashionlog.model.service;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,7 +16,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.fashionlog.controller.FileController;
 import com.fashionlog.model.dao.FileRepository;
 import com.fashionlog.model.dao.LikesRepository;
 import com.fashionlog.model.dao.PostRepository;
@@ -36,7 +39,7 @@ public class PostServiceImpl implements PostService {
 	private LikesRepository likesRepository;
 
 	/**
-	 * uploadPath 변수가 상대경로일 필요성 uploadPath 가 db저장 될 때, 이미지를 뿌려줄 때도 쓸 수 있는 형태인지 파일명이나
+	 * uploadPath 가 db저장 될 때, 이미지를 뿌려줄 때도 쓸 수 있는 형태인지 파일명이나
 	 * 경로가 너무 길어서 db에 안들어갈 때 handling
 	 */
 	@Override
@@ -47,25 +50,41 @@ public class PostServiceImpl implements PostService {
 		File file = new File();
 		file.setType(request.getParameter("type"));
 		file.setName(savedName);
-		file.setPath(uploadPath + "/" + savedName);
+		file.setPath( "images/" + savedName);
 		file.setSize((int) mulFile.getSize());
 		fileRepository.save(file);
-
 		File fileName = fileRepository.findByName(savedName);
 
 		return fileName;
 	}
+	
+	//로컬별 src 폴더 풀 패스 리턴
+		public String getDefaultPath() {
+			
+			java.io.File file = new java.io.File(uploadPath);
+			String defalutPath = null;
+			try {
+				defalutPath = file.getCanonicalPath();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			System.err.println(defalutPath);
+			return defalutPath;
+		}
 
 	private String uploadFile(String originalName, byte[] fileData, Date now, MultipartFile mulFile) throws Exception {
 		SimpleDateFormat uid = new SimpleDateFormat("yyyyMMddhhmmss");
-		String savedName = uid.format(now) + "_";
-//		String savedName = uid.format(now)+"_"+originalName;		
-
-		java.io.File target = new java.io.File(uploadPath, savedName);
-		System.out.println(target.getAbsolutePath());
+		//String savedName = uid.format(now) + "_";
+		String savedName = uid.format(now)+"_"+originalName;	
+		String defaultPath = getDefaultPath();
+		java.io.File target = new java.io.File(defaultPath, savedName);
+		System.err.println(target.getAbsolutePath());
 		FileCopyUtils.copy(fileData, target);
 		return savedName;
 	}
+	
 
 	@Override
 	public void countLikes() {

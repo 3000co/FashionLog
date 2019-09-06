@@ -15,7 +15,7 @@
 <div id="container">
 <div th:each="post:${searchedPost}" th:class="@{item}">
 	<div class="container">
-			<img th:alt="${post.postNo+'번 포스트의 사진'}" th:src="${post.postImageNo.path}">
+			<img  th:src="@{${post.postImageNo.path}}">
 			<span class="uploadTime" th:text="${post.uploadTime}"> </span>
 			<span class="uploader" th:text="${post.memberNo.nickname}"> </span>
 	</div>
