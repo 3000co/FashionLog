@@ -9,18 +9,22 @@ import javax.persistence.PostRemove;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fashionlog.model.dao.CommentRepository;
+import com.fashionlog.model.dao.FollowRepository;
 import com.fashionlog.model.dao.TestRepository;
 import com.fashionlog.model.dto.Comment;
+import com.fashionlog.model.dto.Follow;
 import com.fashionlog.model.dto.Post;
 
 @RestController
 public class TestController {
 	@Autowired
-	private TestRepository testRepository;
+	private FollowRepository followRepository;
 	
 //	@RequestMapping("/add")
 //	public Post insertPost() {
@@ -28,7 +32,7 @@ public class TestController {
 //		post.setMemberNo(3);
 //		post.setUploadTime(new Date());
 //		post.setPostImageNo(1);
-//		post.setContents("테스트로 작성한 포스트 내용");
+//		post.setContents("테스트로 작uiouio성한 포스트 내용");
 //		post.setStyleNo1(1);
 //		post.setStyleNo2(1);
 //		
@@ -36,24 +40,23 @@ public class TestController {
 //		return post;
 //	}
 	
-	@RequestMapping("/joinTest")
+/*	@RequestMapping("/joinTest")
 	public List<Comment> joinTest() {
 		
 		List<Comment> commentList =testRepository.findAll();
 		
 		return commentList;
-	}
+	}	*/
 	
-	@RequestMapping("/test1")
-	public List<Object[]> queryTest() {
+	@RequestMapping("/follow")
+	public String list(Model model) {
+		List<Follow> followlist = followRepository.findAll();
 		
-		List<Object[]> commentList = testRepository.test1();
-		for(Object[] row : commentList) {
-			System.out.println(Arrays.toString(row));
-		}
+		model.addAttribute("followlist",followlist);
 		
-		return commentList;
+		return "follow";
+		
 	}
-	
-	
+
+
 }
