@@ -9,6 +9,78 @@
 <div th:include="header/header"></div>
 <div th:include="comment"></div>
 
+<!--포스트 용 모달 -->
+<!-- <button id="reportBtn"></button>
+
+
+ 		<form id="reportModal" class="modal" method=post>
+			<div class="modalContents">
+				<span class="close">&times;</span>
+				<input id = "reportType" name="reportType" th:value="2" hidden="true"/>
+				<input id = "targetPostNo" hidden="true"/>
+				<input id = "targetMemName" hidden="true"/>
+				<button class="reportBtn" id="reportBtn1" name="reportBtn1">유해한 내용</button>
+				<button class="reportBtn" id="reportBtn2" name="reportBtn2">권리 침해</button>
+			</div>
+			
+			<script>
+
+$("#reportBtn").click( function() {
+	
+	$(reportModal).show();
+	
+	targetCommentNo = $(this).children('td.commentNo').attr('id');
+	console.log("타겟넘버: " + targetCommentNo);
+	$("#targetCommentNo").val(targetCommentNo);
+	
+	targetMemName = $(this).children('td.targetMemName').attr('id');
+	console.log("라이터명: " + targetMemName);
+	$("#targetMemName").val(targetMemName);
+	
+});
+
+$(".close").click(function(event) {
+	$(reportModal).hide();
+});
+
+$("#reportBtn1").on("click", function(){
+	$(".reportBtn").val("유해한 내용")
+	});
+	
+$("#reportBtn2").on("click", function(){
+	$(".reportBtn").val("광고성 내용")
+});
+
+$(".reportBtn").on("click", function(){
+	var targetCommentNo = $("#targetCommentNo").val();
+	var type='1';
+	var reason = $(".reportBtn").val();
+
+	
+	$.ajax({
+		type: 'post',
+		url: '/insertReport',
+		data : {
+			"targetCommentNo" : targetCommentNo,
+			"type" : type,
+			"reason" : reason
+			
+		},
+		
+		sucess : function(result) {
+			if(result == 'SUCCESS'){
+				alert("등록 되었습니다.");
+			}
+		}
+	
+	});
+});
+
+</script>
+		
+		</form>
+ -->
+
 
 
 

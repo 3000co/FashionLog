@@ -1,6 +1,7 @@
 package com.fashionlog.model.dto;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,7 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.transaction.Transactional;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -42,6 +45,7 @@ public class Comment implements SocialEvent{
 	
 	@OneToOne(mappedBy = "commentNo", cascade = CascadeType.REMOVE)
 	Notification notification;
+
 
 
 	
