@@ -1,6 +1,10 @@
 package com.fashionlog.controller;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -96,7 +100,7 @@ public class ReportController {
 			commentRepository.deleteById(targetCommentNo);
 			changeCheckHistory(reportNo, "삭제");
 		}
-		return "redirect:/adminReport";
+		return "redirect:/admin/report";
 	}
 	
 	@RequestMapping("/lgnoreReport")
@@ -107,7 +111,12 @@ public class ReportController {
 	
 	public Report changeCheckHistory(int reportNo,String contents) {
 		Report report = reportRepository.findById(reportNo).get();
+		long time = System.currentTimeMillis(); 
+
+		Timestamp now = new Timestamp(time);
+		
 		report.setCheckHistory(contents);
+		report.setCheckTime((Timestamp) now);
 		
 		return reportRepository.save(report);
 	}

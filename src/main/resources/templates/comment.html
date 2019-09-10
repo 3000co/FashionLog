@@ -17,14 +17,18 @@
       <section>
         <div class="comments">
         <table>
-		<tr th:each="comment:${commentList}" class="commentRow">
+		<tr th:each="comment:${commentList}" class="commentRow" onload="sessionCheck()">
 			<td th:id="${comment[0]}" class="commentNo">
 			<img th:src="@{${comment[4]}}"/>
 			</td>
+			
 			<td th:id ="${comment[2]}" class="targetMemName">
 			<span th:text="${comment[2]}"></span>
 			<span  id="commentContents" th:text="${comment[1]}"></span>
-			<span><a th:href="@{/deleteComment(commentNo=${comment[0]})}"/>&times;</span>
+			</td>
+			
+			<td th:id="${session.nickname}" class="commentDeleteBtn" >
+			<span><a th:href="@{/deleteComment(commentNo=${comment[0]})}"/>   &times;</span>
 			</td>
 		</tr>  
 		</table>
@@ -145,8 +149,22 @@ $(".reportBtn").on("click", function(){
 			document.getElementById("insertBtn").disabled = false;
 		}
 		/*]]>*/
-	}
-
+	};
+	
+	function sessionCheck(){
+		console.log($(".commentDeleteBtn").attr("id"));
+		console.log($(".targetMemName").attr("id"));
+		/*<![CDATA[*/
+		if($(".commentDeleteBtn").attr("id") == $(".targetMemName").attr("id")){
+		    $(".commentDeleteBtn").show();
+		} else {
+		    $(".commentDeleteBtn").hide();
+		}
+		/*]]>*/
+		
+	};
+	
+	
 </script>	
 
 

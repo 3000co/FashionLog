@@ -41,7 +41,8 @@ public class MemberController {
 			return "member/login";
 		} else {
 			session.setAttribute("member", getMemberInfo);
-			session.setAttribute("id", member.getId());
+			session.setAttribute("nickname", getMemberInfo.getNickname());
+			session.setAttribute("id", getMemberInfo.getId());
 			System.out.println("로그인 성공" + getMemberInfo);
 			return "redirect:/";
 		}
