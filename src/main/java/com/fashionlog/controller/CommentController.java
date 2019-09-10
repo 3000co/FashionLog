@@ -3,6 +3,7 @@ package com.fashionlog.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,9 +60,9 @@ public class CommentController {
 
 
 	@RequestMapping("/insertComment")
-	public String insertComment(HttpServletRequest request) {
+	public String insertComment(HttpServletRequest request, HttpSession session) {
 		Comment comment = new Comment();
-		Member member = memberRepository.findById(3).get();
+		Member member = memberRepository.findById(session.getAttribute("id")+"");
 		Post post = postRepository.findById(9).get();
 		
 		//postNo은 샘플 데이터를 넣어둠. 세션에서 받을 예정. 

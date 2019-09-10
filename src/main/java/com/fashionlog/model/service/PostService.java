@@ -14,8 +14,6 @@ import com.fashionlog.model.dto.Post;
 
 public interface PostService {
 	
-	public File insertFile(MultipartFile mulFile, Model model, HttpServletRequest request) throws Exception;
-
 	public void countLikes();
 	//팔로이 글 5개
 	Set<Post> getFeedByFollowee(Member user, Pageable paging);
