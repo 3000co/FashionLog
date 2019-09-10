@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<th:block th:include="header/header"></th:block>
 </head>
 <body>
 
-<div th:include="header/header"></div>
 <div th:include="comment"></div>
 
 <!--포스트 용 모달 -->
@@ -80,9 +80,6 @@ $(".reportBtn").on("click", function(){
 		
 		</form>
  -->
-
-
-
 
 </body>
 </html>
