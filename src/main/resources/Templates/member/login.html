@@ -3,6 +3,24 @@
 <title>회원 로그인</title>
  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+ <script type="text/javascript">
+ $(function() {
+	 $("#hiddenDevBtn").click(function(){
+		 $.ajax({
+		type : 'post',
+		url : '/getAllMember',
+		dataType : 'text',
+		data : {},
+		success : function(idList) {
+		$('#nowMems').html(idList);	
+		},
+		error : function(result) {
+			alert("연결 상태를 확인해주세요");
+		}
+	});
+	 })
+ });
+ </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 
@@ -34,14 +52,16 @@
   	naver_id_login.setPopup();
   	naver_id_login.init_naver_id_login();
   </script>
-  <div th:if="${session.id}">
-			<span th:text="${session.id}"></span>
+  <div th:if="${session.member}">
+			<span th:text="${session.member.id}"></span>
 			<a href="logout.do">로그아웃</a>
-		</div>
-		<div th:unless="${session.id}">
+  </div>
+		<div th:unless="${session.member}">
 			로그인안됨
 		</div>
-  
+	<button id="hiddenDevBtn">&nbsp;&nbsp;</button>
+	<div id="nowMems">
+  	</div>
   
 </body>
 </html>
