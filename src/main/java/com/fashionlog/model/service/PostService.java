@@ -2,13 +2,8 @@ package com.fashionlog.model.service;
 
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.data.domain.Pageable;
-import org.springframework.ui.Model;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.fashionlog.model.dto.File;
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Post;
 

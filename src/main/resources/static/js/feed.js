@@ -14,8 +14,8 @@ $(function() {
 			}
 		}
 	});
-	$(".postSum").click(function() {
-		var pId = $(this).attr('id');
+	$(".postImg").click(function() {
+		var pId = $(this).parent().attr('id');
 		location.href= "/post/"+pId.slice(1);
 	});
 
