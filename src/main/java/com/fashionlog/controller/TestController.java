@@ -33,18 +33,7 @@ public class TestController {
 	@Autowired
 	ItemRepository itemRepository;
 
-//	@RequestMapping("/test")
-//	public String startTest(Model model) {
-//		// DB에서 목록을 가져와서 SelectBox에 이용
-//		List<Style> style = styleRepository.findAll();
-//		List<Category> category = categoryRepository.findAll();
-//		List<Object[]> brand = brandRepository.findBrandQuery();
-//
-//		model.addAttribute("style", style);
-//		model.addAttribute("category", category);
-//		model.addAttribute("brand", brand);
-//		return "view";
-//	}
+	
 
 }
 

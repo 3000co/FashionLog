@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	$("#submit").click(function() {
 		fileInsert();
+		location.href='/afterPostWrite';
 	});
 });
 
