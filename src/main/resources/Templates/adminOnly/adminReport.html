@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">  
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/comment.css">
+<title>신고 관리</title>
+</head>
+<body>
+<p>신고</p>
+
+<table style="width:80%">
+  <tr>
+    <th>신고번호</th>
+    <th>신고분류</th> 
+    <th>신고자</th>
+    <th>신고글</th>
+    <th>신고 일자</th>
+    <th>처리 상태</th>
+    <th>처리 일자</th>
+  </tr>
+  <tr th:each="report:${reportedThingsList}">
+		<td th:id="${report.reportNo}">
+		<span th:text = "${report.reportNo}"></span>
+		</td>
+		
+		<td th:id="${report.type}">
+		<span th:text = "${report.type}"></span>
+		<span>-</span>
+		<span th:text = "${report.reason}"></span>
+		</td>
+		
+		<td th:id="${report.reportMemNo.memberNo}">
+		<span th:text = "${report.reportMemNo.nickname}"></span>
+		</td>
+		<!-- 신고글 분기처리 -->
+		<td th:id="jj">
+		<span th:text = "hi"></span>
+		</td> 
+		
+		<td th:id="${report.reportTime}">
+		<span th:text = "${report.reportTime}"></span>
+		</td>
+		
+		<td th:id="${report.checkHistory}">
+		<span th:text = "${report.checkHistory}"></span>
+		</td>
+		
+		<td th:id="${report.checkTime}">
+		<span th:text = "${report.checkTime}"></span>
+		</td>
+		
+		<td th:id="deleteBtn" >
+		<span style="background-color: coral"><a th:href="@{/deleteReportedThing(reportNo=${report.reportNo})}"/>삭제</span>
+		</td>
+		
+		<td th:id="ignoreBtn" >
+		<span style="background-color: cyan"><a th:href="@{/lgnoreReport(reportNo=${report.reportNo})}"/>무시</span>
+		</td>
+		
+		<!-- <span><a th:href="@{/deleteComment(commentNo=${comment[0]})}"/>&times;</span> -->
+	</tr>  
+</table>
+
+
+</body>
+</html>
