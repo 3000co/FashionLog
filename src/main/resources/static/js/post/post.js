@@ -6,16 +6,23 @@ $(document).ready(function() {
 
 function fileInsert() {
 	var form = new FormData(document.getElementById('imgWrap')); 
-	$.ajax({ 
-		type: 'POST',
-		url: "/fileInsert",
-		data: form,
-		processData: false, 
-		contentType: false, 
-		success: function (fileNo) { 
-			postInsert(fileNo)
-		}
-	});
+	
+	if ($("#selectImg").val() == "") {
+		alert("사진을 올려주세요");
+	}else if ($("#styleText1").val() == "") {
+		alert("스타일을 1개 이상 선택해주세요");
+	}else {
+		$.ajax({ 
+			type: 'POST',
+			url: "/fileInsert",
+			data: form,
+			processData: false, 
+			contentType: false, 
+			success: function (fileNo) { 
+				postInsert(fileNo)
+			}
+		});
+	}
 }
 
 function postInsert(fileNo) {
@@ -47,12 +54,12 @@ function itemInsert(postNo) {
 				"name" : $(eqValue).find("#name").val(),
 				"categoryNo" : $(eqValue).find("#categoryNo").val(),
 				"brandNo" : $(eqValue).find("#brandNo").val(),
-				"color" : $(eqValue).find("#color").val(),
+				"color" : $(eqValue).find("#color").text(),
 				"store" : $(eqValue).find("#store").val(),
 				"xCoordinate" : $(eqValue).find("#xCoordinate").val(),
 				"yCoordinate" : $(eqValue).find("#yCoordinate").val()
 			}
 		});
-	
 	});
+	location.replace("/feed");
 }

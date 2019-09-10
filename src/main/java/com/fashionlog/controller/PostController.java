@@ -1,8 +1,6 @@
 package com.fashionlog.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +25,7 @@ import com.fashionlog.model.dto.Item;
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Post;
 import com.fashionlog.model.dto.Style;
+import com.fashionlog.model.service.FileService;
 import com.fashionlog.model.service.PostService;
 
 @Controller
@@ -45,6 +44,8 @@ public class PostController {
 	private MemberRepository memberRepository;
 	@Autowired
 	private PostService postService;
+	@Autowired
+	private FileService fileService;
 	
 	
 	@RequestMapping("/postWrite")
@@ -65,7 +66,7 @@ public class PostController {
 	@RequestMapping("/fileInsert")
 	@ResponseBody
 	public int fileInsert(MultipartFile mulFile, Model model, HttpServletRequest request) throws Exception {
-		File file = postService.insertFile(mulFile, model, request);
+		File file = fileService.insertFile(mulFile, model, request);
 		return file.getFileNo();
 	}
 	
@@ -86,8 +87,8 @@ public class PostController {
 	@RequestMapping("/itemInsert")
 	@ResponseBody
 	public void itemTest(Item item) {
-		Item getItem = itemRepository.save(item);
-//		return i;
+		itemRepository.save(item);
+//		return "/feed";
 	}
 	
 	@RequestMapping("/feed")

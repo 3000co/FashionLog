@@ -1,9 +1,9 @@
+//cache jquery objects to reduce dom traversal
+var container =  $('.container');
+var selectedBox = $('.selected-box');
+var selectedNode = {};
 $(function() {
   
-  //cache jquery objects to reduce dom traversal
-  var container =  $('.container');
-  var selectedBox = $('.selected-box');
-  var selectedNode = {};
   
   //per child node on click listener
   container.children().on('click', function(event) {
@@ -22,15 +22,15 @@ $(function() {
 
     //set selected-box background color to selected color
     selectedBox.css('background-color', color);
+    selectedBox.attr('color', color);
     
   });
   
-  
   //select default color
-  var red = $('.red');
-  red.addClass('selected');
-  selectedNode = red;
-  var defaultcolor = red.attr('color');
+  var picker = $('.picker');
+  picker.addClass('selected');
+  selectedNode = picker;
+  var defaultcolor = picker.attr('color');
   selectedBox.css('background-color', defaultcolor);
   
 });
