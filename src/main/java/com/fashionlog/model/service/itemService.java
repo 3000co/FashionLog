@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface itemService {
 	public List<Object> getItemPost(String itemName);
-	public List<Object> getSearchResult(List<String[]> searchTokenArrayList);
+	public Integer[] getSearchResult(List<String[]> searchTokenArrayList);
 }

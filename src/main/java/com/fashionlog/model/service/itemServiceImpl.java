@@ -31,12 +31,13 @@ public class itemServiceImpl extends QuerydslRepositorySupport implements itemSe
 
 	
 @Override
-public List<Object> getSearchResult(List<String[]> searchTokenArrayList) {
+public Integer[] getSearchResult(List<String[]> searchTokenArrayList) {
 	 List<Object> searchResult = new ArrayList<>();
+	 Integer[] searchResultToController;
 	
 	JPQLQuery searchQuery = from(item);
 	setJoinConnection(searchTokenArrayList, searchQuery);
-	searchQuery.select(item.name,post.postNo,post.contents); 
+	searchQuery.select(post.postNo); 
 	setSearchCondition(searchTokenArrayList, searchQuery);
 //	searchQuery.where(
 //			ctCategoryName("하의")
@@ -51,7 +52,9 @@ public List<Object> getSearchResult(List<String[]> searchTokenArrayList) {
 
 	
 	searchResult =  searchQuery.fetch();
-	return searchResult;
+	searchResultToController = searchResult.toArray(new Integer[0]);
+	
+	return searchResultToController;
 	
 	
 }@Override

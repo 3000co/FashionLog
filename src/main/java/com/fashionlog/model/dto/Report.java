@@ -2,6 +2,7 @@ package com.fashionlog.model.dto;
 
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +23,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
+@DynamicInsert
 public class Report {
 	
 	@Id
@@ -52,6 +56,7 @@ public class Report {
 	
 	private Timestamp checkTime;
 	
+	@ColumnDefault("미확인")
 	private String checkHistory;
 	
 }
