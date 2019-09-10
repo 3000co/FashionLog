@@ -30,7 +30,6 @@ public class Member {
 	@Column(columnDefinition = "char")
 	private String id;
 
-	@Column(columnDefinition = "char")
 	private String password;
 
 	@Column(columnDefinition = "char")
