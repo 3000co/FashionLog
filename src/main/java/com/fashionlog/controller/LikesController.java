@@ -69,5 +69,4 @@ public class LikesController {
 			return "likesNotFound";
 		}
 	}
-
 }

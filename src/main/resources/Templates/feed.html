@@ -10,7 +10,7 @@
 <body>
 <div th:include="header/header"></div>
 <div id="container">
-	<div th:each="post:${feed}" th:class="@{item}" th:id="${'p'+post.postNo}">
+	<div th:each="post:${feed}" class="item postSum" th:id="${'p'+post.postNo}">
 			<img th:alt="${post.postNo+'번 포스트의 사진'}" th:src="${post.postImageNo.path}">
 			<span class="uploadTime" th:text="${post.uploadTime}"> </span>
 			<span class="uploader" th:text="${post.memberNo.nickname}"> nickname </span>
