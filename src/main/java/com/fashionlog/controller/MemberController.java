@@ -3,11 +3,19 @@ package com.fashionlog.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fashionlog.model.dao.FileRepository;
+import com.fashionlog.model.dao.Member2Repository;
+import com.fashionlog.model.dao.StyleRepository;
+import com.fashionlog.model.dto.File;
 import com.fashionlog.model.dto.Member;
+import com.fashionlog.model.dto.Member2;
+import com.fashionlog.model.dto.Role;
 import com.fashionlog.model.dto.Style;
 import com.fashionlog.model.service.MemberService;
 
@@ -16,8 +24,37 @@ public class MemberController {
 	Member newMember = new Member();
 	@Autowired
 	MemberService memberService;
+	@Autowired
+	private PasswordEncoder encoder;
 	
-
+	
+	///////jaebum///////
+	@Autowired
+	private FileRepository fileRepo;
+	@Autowired
+	private StyleRepository styleRepo;
+	@Autowired
+	private Member2Repository member2Repo;
+	
+	@RequestMapping("/createAdmin")
+	@ResponseBody
+	public String createAdmin() {
+		Member2 member = new Member2();
+		member.setId("admin");
+		member.setPassword(encoder.encode("admin"));
+		member.setRole(Role.ROLE_ADMIN);
+		member.setNickname("권권권");
+		member.setPhonenumber("01012345678");
+		member.setEmail("jaeb@hanmail.net");
+//		File file = fileRepo.findById(2).get();
+//		member.setProfileImageNo(file);
+		Style style = styleRepo.findById(1);
+		member.setStyleNo1(style);
+		member2Repo.save(member);
+		return "어드민생성";
+	}
+	///////////////////////////
+	
 	@RequestMapping(value = "/")
 	public String main() {
 		return "main";
@@ -93,7 +130,7 @@ public class MemberController {
 	// 비밀번호 변경 화면
 	@RequestMapping("/modPassword")
 	public String modPassword() {
-		return "member/modPassword";
+		return "user/modPassword";
 	}
 
 	// 비밀번호 변경 처리
@@ -113,7 +150,7 @@ public class MemberController {
 	//프로필 화면
 	@RequestMapping("/modProfile")
 	public String modProfile() {
-		return "member/modProfile";
+		return "user/modProfile";
 	}	
 	// 프로필 변경
 		@RequestMapping(value = "/modProfile.do", method = RequestMethod.POST)
@@ -121,9 +158,6 @@ public class MemberController {
 			
 			return "redirect:/profile";
 		}
-		
-		
-		
 		
 		
 		

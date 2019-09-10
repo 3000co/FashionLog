@@ -1,52 +1,25 @@
 package com.fashionlog.security;
 
-import java.util.Collection;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.fashionlog.model.dto.Member2;
 
-public class SecurityUser implements UserDetails {
+public class SecurityUser extends User {
+	private static final long serialVersionUID = 1L;
+	
+	private Member2 member2;
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	   public SecurityUser(Member2 member2) {
+	      super(member2.getId(), member2.getPassword(), AuthorityUtils.createAuthorityList(member2.getRole().toString()));
 
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	      this.member2 = member2;
+	   }
 
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	   public Member2 getMember2() {
+	      return member2;
+	   }
 
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	   
 
 }

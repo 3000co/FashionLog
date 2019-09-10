@@ -7,8 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,11 +21,9 @@ import lombok.ToString;
 @Setter
 @ToString(exclude = {"posts","followers","followees"})
 @Entity
-public class Member {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int memberNo;
+public class Member2 {
 	
+	@Id
 	@Column(columnDefinition = "char")
 	private String id;
 

@@ -52,12 +52,12 @@ public class PostController {
 		List<Style> style = styleRepository.findAll();
 		List<Category> category = categoryRepository.findAll();
 		List<Object[]> brand = brandRepository.findBrandQuery();
-		Member member = memberRepository.findById("a");
+//		Member member = memberRepository.findById("a").;
 		
 		model.addAttribute("style", style);
 		model.addAttribute("category", category);
 		model.addAttribute("brand", brand);
-		model.addAttribute("member", member);
+//		model.addAttribute("member", member);
 		return "post/post";
 	}
 
