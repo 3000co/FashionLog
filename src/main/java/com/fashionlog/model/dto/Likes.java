@@ -30,7 +30,7 @@ public class Likes implements SocialEvent{
 	
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_NO")
-	private Member MemberNo;
+	private Member memberNo;
 	
 	@ManyToOne
 	@JoinColumn(name = "POST_NO")

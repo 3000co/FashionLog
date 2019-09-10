@@ -1,5 +1,14 @@
 @charset "UTF-8";
 
+
+.postWrite, .postView{
+ 	width: 750px;
+	height: 800px;
+  padding: 10px;
+	margin: auto;
+	border: 1px dashed #a7a7a7;
+}
+
 label {
 	width: 80px;
 	text-align: justify; /* 왜안돼? */
@@ -7,15 +16,6 @@ label {
 
 select {
 	width: 175px;
-}
-
-.postWrite {
-	position: relative;
-	width: 750px;
-	height: 650px;
-	padding: 10px;
-	margin: auto;
-/* 	border: 1px dashed #a7a7a7; */
 }
 
 .leftWrap {
@@ -61,7 +61,7 @@ select {
 	float: right;
 	margin: 10px;
 	padding: 10px;
-	margin-top: 40px;
+	margin-top: 10px;
 	padding-bottom: 10px;
 	border: 1px solid #bcbcbc;
 	border-radius: 5px;
@@ -162,6 +162,17 @@ select {
 	margin-right: 5px;
 }
 
+
+.commentArea {
+	position: relative;
+	float: left;
+	bottom: 50;
+	/* 	margin:5px; */
+}
+
+/* .selected { */
+/* 	border: 5px solid orange !important; */
+/* } */
 .modalBtn {
 	background-color: transparent !important;
 	border-radius: 5px;
