@@ -3,7 +3,9 @@ package com.fashionlog.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -23,7 +25,9 @@ public class MemberController {
 	 * **** 결과 : 사용자2의 기본정보 + 사용자1의 스타일로 DB에 들어갑니다. ****
 	 * 전역변수를 쓰지않고 기본정보와 스타일을 저장할 수 있는 로직으로 바꿔주세요
 	 */
-	Member newMember = new Member();
+	
+	private BCryptPasswordEncoder encoder;
+	
 	@Autowired
 	private MemberService memberService;
 	
@@ -45,30 +49,32 @@ public class MemberController {
 	}
 	// 회원가입 처리
 	@RequestMapping(value = "/join.do", method = RequestMethod.POST)
-	public String doJoin(Member member, HttpSession session) {
+	public String doJoin(Member member, Model model, HttpSession session) {
 		System.out.println("아이디: " + member.getId() + " 비밀번호: " + member.getPassword());
 		System.out.println("Member1::" + member);
-		newMember.setId(member.getId());
-		newMember.setPassword(member.getPassword());
-		newMember.setNickname(member.getNickname());
-		newMember.setPhonenumber(member.getPhonenumber());
-		newMember.setEmail(member.getEmail());
+		member.setId(member.getId());
+		member.setPassword(encoder.encode(member.getPassword()));
+		member.setNickname(member.getNickname());
+		member.setPhonenumber(member.getPhonenumber());
+		member.setEmail(member.getEmail());
+		model.addAttribute(member);
 		return "member/styleSelect";
 	}
 	
 	// 회원가입 스타일 처리
 		@RequestMapping(value = "/styleSelect.do", method = RequestMethod.POST)
-		public String doStyleSelect(Member member, HttpSession session) {
-			newMember.setStyleNo1(member.getStyleNo1());
-			newMember.setStyleNo2(member.getStyleNo2());
-			newMember.setStyleNo3(member.getStyleNo3());
-			System.out.println(newMember);
+		public String doStyleSelect(Member member, Model model, HttpSession session) {
+			member.setStyleNo1(member.getStyleNo1());
+			member.setStyleNo2(member.getStyleNo2());
+			member.setStyleNo3(member.getStyleNo3());
+			model.addAttribute(member);
+			System.out.println("Member2::"+member);
 			Style getStyleInfo = member.getStyleNo1();
 			if (getStyleInfo.getStyleNo() == 0) {
 				session.setAttribute("style", null);
 				return "member/styleSelect";
 			} else {
-				memberService.doJoin(newMember);
+				memberService.doJoin(member);
 				System.out.println("회원가입 성공" + getStyleInfo);
 				return "redirect:/login";
 			}

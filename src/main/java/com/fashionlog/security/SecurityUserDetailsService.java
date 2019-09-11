@@ -16,10 +16,11 @@ public class SecurityUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-		try {
-			Member user = memberRepository.findById(id);
+
+		Member user = memberRepository.findById(id);
+		if (user != null) {
 			return new SecurityUser(user);
-		} catch (Exception e) {
+		} else {
 			throw new UsernameNotFoundException(id + " : 사용자 없음");
 		}
 
