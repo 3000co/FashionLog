@@ -32,46 +32,12 @@
 
 <body>
 	<script type="text/javascript">
-		function changeSearchMod(target) {
-			var defaultSearch = document.getElementById("defaultSearch");
-
-			console.log(target);
-			
-			switch(target){
-			case 'categoryBtn' :
-				defaultSearch.style.display = 'none';
-				document.getElementById("categorySearch").style.display = 'block';
-				break;
-			case 'colorBtn' :
-				defaultSearch.style.display = 'none';
-				document.getElementById("colorSearch").style.display = 'block';
-				break;
-			case 'styleBtn' :
-				defaultSearch.style.display = 'none';
-				document.getElementById("styleSearch").style.display = 'block';
-				break;
-			case 'brandBtn' :
-				defaultSearch.style.display = 'none';
-				document.getElementById("brandSearch").style.display = 'block';
-				break;
-			case 'userBtn' :
-				defaultSearch.style.display = 'none';
-				document.getElementById("userSearch").style.display = 'block';
-				break;
-			}
-		}
-
-		function returnDefaultMod() {
-			var defaultSearch = document.getElementById("defaultSearch");
-			defaultSearch.style.display = 'block';
-			document.getElementById("categorySearch").style.display = 'none';
-			document.getElementById("colorSearch").style.display='none'; 
-			document.getElementById("styleSearch").style.display='none';
-			document.getElementById("brandSearch").style.display='none';
-			document.getElementById("userSearch").style.display='none'; 
-
-		}
-
+		//$(document).ready.function({
+		//	getAttrList("styleBtnTable","/getAttrList/style");
+		//});
+		
+		
+		
 	</script>
 
 	<!--db가져오기 테스트 -->
@@ -145,10 +111,7 @@
 
 					<div class="mm-3column">
 						<span class="menu-list"> <span>
-								<table>
-									<td th:each="category:${category}"><input class="attrBtn"
-										th:type="button" th:value="${category.name}"
-										onclick="returnDefaultMod()"></input></td>
+								<table id="categoryBtnTable">
 								</table>
 						</span>
 						</span>
@@ -183,10 +146,7 @@
 
 					<div class="mm-3column">
 						<span class="menu-list"> <span>
-								<table>
-									<td th:each="style:${style}"><input class="attrBtn"
-										th:type="button" th:value="${style.name}"
-										onclick="returnDefaultMod()"></input></td>
+								<table id = styleBtnTable>
 								</table>
 						</span>
 						</span>
@@ -204,10 +164,7 @@
 
 					<div class="mm-3column">
 						<span class="menu-list"> <span>
-								<table>
-									<td th:each="brand:${brand}"><input class="attrBtn"
-										th:type="button" th:value="${brand[1]}"
-										onclick="returnDefaultMod()"></input></td>
+								<table id="brandBtnTable">
 								</table>
 						</span>
 						</span>

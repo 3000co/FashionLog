@@ -9,11 +9,11 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 import com.fashionlog.model.dto.Brand;
 import com.fashionlog.model.dto.Item;
-import com.fashionlog.model.service.itemService;
+import com.fashionlog.model.service.ItemService;
 import com.querydsl.core.QueryFactory;
 import com.querydsl.core.types.Projections;
 
-public interface ItemRepository extends JpaRepository<Item, Integer>, itemService{
+public interface ItemRepository extends JpaRepository<Item, Integer>, ItemService{
 	public Item findByPostNo(int postNo);
 	
 	public Item countByItemNo(int itemNo);//?어디에 사용하지? pk로 레코드갯수 세어봤자 1갠데,,?

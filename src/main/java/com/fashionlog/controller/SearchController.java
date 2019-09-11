@@ -1,23 +1,30 @@
 package com.fashionlog.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fashionlog.model.dao.BrandRepository;
 import com.fashionlog.model.dao.CategoryRepository;
 import com.fashionlog.model.dao.ItemRepository;
 import com.fashionlog.model.dao.PostRepository;
 import com.fashionlog.model.dao.StyleRepository;
+import com.fashionlog.model.dto.Brand;
 import com.fashionlog.model.dto.Category;
 import com.fashionlog.model.dto.Post;
 import com.fashionlog.model.dto.Style;
@@ -44,16 +51,47 @@ public class SearchController {
 	@RequestMapping("/test")
 	public String startTest(Model model) {
 		// DB에서 목록을 가져와서 SelectBox에 이용
-		List<Style> style = styleRepository.findAll();
-		List<Category> category = categoryRepository.findAll();
-		List<Object[]> brand = brandRepository.findBrandQuery();
-		
-
-		model.addAttribute("style", style);
-		model.addAttribute("category", category);
-		model.addAttribute("brand", brand);
+//		List<Style> style = styleRepository.findAll();
+//		List<Category> category = categoryRepository.findAll();
+//		List<Object[]> brand = brandRepository.findBrandQuery();
+//		
+//
+//		model.addAttribute("style", style);
+//		model.addAttribute("category", category);
+//		model.addAttribute("brand", brand);
 		return "view";
 	}
+	
+	@ResponseBody
+	@RequestMapping("/getAttrList/style")
+	private ModelAndView getStyleList(HttpServletRequest request) throws Exception{
+		ModelAndView modelAndView = new ModelAndView("jsonView");
+		List<Style> styleList = styleRepository.findAll();
+		modelAndView.addObject("attrList", styleList);
+		
+		return modelAndView;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getAttrList/brand")
+	private ModelAndView getBrandList(HttpServletRequest request) throws Exception{
+		ModelAndView modelAndView = new ModelAndView("jsonView");
+		List<Brand> brandList = brandRepository.findAll();
+		modelAndView.addObject("attrList", brandList);
+		
+		return modelAndView;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getAttrList/category")
+	private ModelAndView getCategoryList(HttpServletRequest request) throws Exception{
+		ModelAndView modelAndView = new ModelAndView("jsonView");
+		List<Category> categoryList = categoryRepository.findAll();
+		modelAndView.addObject("attrList", categoryList);
+		
+		return modelAndView;
+	}
+	
 
 	@RequestMapping("/searched")
 	public String searchProcess(HttpServletRequest request, Model model) {
