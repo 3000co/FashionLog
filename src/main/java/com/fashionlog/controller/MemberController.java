@@ -3,57 +3,29 @@ package com.fashionlog.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fashionlog.model.dao.FileRepository;
-import com.fashionlog.model.dao.Member2Repository;
-import com.fashionlog.model.dao.StyleRepository;
-import com.fashionlog.model.dto.File;
 import com.fashionlog.model.dto.Member;
-import com.fashionlog.model.dto.Member2;
-import com.fashionlog.model.dto.Role;
 import com.fashionlog.model.dto.Style;
 import com.fashionlog.model.service.MemberService;
 
 @Controller
 public class MemberController {
+	/**
+	 * 전역변수가 있으면 리퀘스트가 여러개 들어올 때 섞여버릴 수가 있습니다.
+	 * 상황 예시 )
+	 * 사용자1 사용자2가 있을 때, 사용자1이 먼저 기본정보를 입력 완료
+	 * 사용자1 스타일로 넘어감
+	 * 사용자2 기본정보 입력 완료 스타일로 넘어감 (이때 전역변수가 덮어씌워짐)
+	 * 사용자1 스타일 입력 완료, DB에 저장
+	 * **** 결과 : 사용자2의 기본정보 + 사용자1의 스타일로 DB에 들어갑니다. ****
+	 * 전역변수를 쓰지않고 기본정보와 스타일을 저장할 수 있는 로직으로 바꿔주세요
+	 */
 	Member newMember = new Member();
 	@Autowired
-	MemberService memberService;
-	@Autowired
-	private PasswordEncoder encoder;
-	
-	
-	///////jaebum///////
-	@Autowired
-	private FileRepository fileRepo;
-	@Autowired
-	private StyleRepository styleRepo;
-	@Autowired
-	private Member2Repository member2Repo;
-	
-	@RequestMapping("/createAdmin")
-	@ResponseBody
-	public String createAdmin() {
-		Member2 member = new Member2();
-		member.setId("admin");
-		member.setPassword(encoder.encode("admin"));
-		member.setRole(Role.ROLE_ADMIN);
-		member.setNickname("권권권");
-		member.setPhonenumber("01012345678");
-		member.setEmail("jaeb@hanmail.net");
-//		File file = fileRepo.findById(2).get();
-//		member.setProfileImageNo(file);
-		Style style = styleRepo.findById(1);
-		member.setStyleNo1(style);
-		member2Repo.save(member);
-		return "어드민생성";
-	}
-	///////////////////////////
+	private MemberService memberService;
 	
 	@RequestMapping(value = "/")
 	public String main() {
@@ -64,31 +36,6 @@ public class MemberController {
 	@RequestMapping("/login")
 	public String login() {
 		return "member/login";
-	}
-
-	// 로그인 처리
-	@RequestMapping(value = "/login.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String doLogin(Member member, HttpSession session) {
-		System.out.println("아이디: " + member.getId() + " 비밀번호: " + member.getPassword());
-		Member getMemberInfo = memberService.findByIdAndPassword(member.getId(), member.getPassword());
-		System.out.println("getMemberInfo: " + getMemberInfo);
-
-		if (getMemberInfo == null) {
-			session.setAttribute("member", null);
-			return "member/login";
-		} else {
-			session.setAttribute("member", getMemberInfo);
-			session.setAttribute("id", member.getId());
-			System.out.println("로그인 성공" + getMemberInfo);
-			return "redirect:/";
-		}
-	}
-
-	// 로그아웃 처리
-	@RequestMapping("/logout.do")
-	public String doLogout(Member member, HttpSession session) {
-		session.invalidate();
-		return "redirect:/login";
 	}
 
 	// 회원가입 화면

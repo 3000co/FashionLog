@@ -5,10 +5,6 @@ import com.fashionlog.model.dto.Style;
 
 public interface MemberService {
 	
-	Member findByIdAndPassword(String Id, String Password);
-	
-	Member findByPassword(String Password);
-	
 	Member findById(String Id);
 	
 	Style findById(int styleNo);
