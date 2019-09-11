@@ -9,7 +9,7 @@ body {
 
 #badge {
 	background-size: 100% 270px;
-	background-position: top;
+	/* background-position: top; */
 	background-repeat: no-repeat;
 	/* margin:5px auto; */
 	width: 400px;
@@ -19,18 +19,11 @@ body {
 	background-color: white;
 }
 
-header {
-	height: 270px;
-	padding: 0;
-	border-bottom: 5px solid #f96243;
-}
-
 section.all {
 	padding: 20px 10px;
 }
 
 .commentInput button {
-
 	/*     float:right; */
 	background: #1bd5a7;
 	border: none;
@@ -50,7 +43,7 @@ input {
 	margin-left: 1em;
 	border-radius: 3px;
 	border: 1px solid #BABABA;
-	display: inline-block
+	display: inline-block;
 }
 
 .mask {
@@ -64,10 +57,9 @@ input {
 		rgba(255, 255, 255, 0) 99%);
 	background-image: linear-gradient(bottom, rgba(255, 255, 255, 1) 45%,
 		rgba(255, 255, 255, 0) 99%);
-	position: absolute;
-	width: 350px;
+/* 	width: 350px;
 	height: 50px;
-	margin-top: 100px;
+	margin-top: 100px; */
 }
 
 .list {
@@ -84,7 +76,7 @@ input {
 	margin-bottom: 40px;
 }
 
-img {
+.memberProfileImg {
 	float: left;
 	width: 25px;
 	height: 25px;
@@ -114,11 +106,11 @@ a:hover {
 
 .modal {
   display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
+  /* position: fixed; */ /* Stay in place */
   z-index: 1; /* Sit on top */
   padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
+  /* left: 0;
+  top: 0; */
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */

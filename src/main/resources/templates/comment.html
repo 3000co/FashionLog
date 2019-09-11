@@ -1,12 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">  
-<head>
-<meta charset="utf-8">
-<link rel="stylesheet" href="/css/comment.css">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org">
 
+<body>
 <div id="badge">
   
   <section class="all">
@@ -17,34 +12,106 @@
       <section>
         <div class="comments">
         <table>
-		<tr th:each="comment:${commentList}">
-			<td>
-			<img th:src="@{${comment[4]}}"/>
-			 <!-- <span><a th:href="@{/report(tagetCommentNo=${comment[0]})}"
-				th:text="${comment[2]}"></a></span> -->
-			<span th:text="${comment[2]}"></span>
-			<span  id="commentContents" th:text="${comment[1]}"></span>
-			<span><a th:href="@{/deleteComment(commentNo=${comment[0]})}"/>&times;</span>
+		<tr th:each="comment:${commentList}" class="commentRow" onload="sessionCheck()">
+			<td th:id="${comment.commentNo}" class="commentNo">
+		  <img class="memberProfileImg" th:src="${comment.memberNo.profileImageNo.path}" />
+			</td>
+			
+			<td th:id ="${comment.memberNo.nickname}" class="targetMemName">
+			<span th:text="${comment.memberNo.nickname}"></span>
+			<span  id="commentContents" th:text="${comment.contents}"></span>
+			</td>
+			
+			<td th:id="${session.nickname}" class="commentDeleteBtn" >
+			<span><a th:href="@{/deleteComment(commentNo=${comment.commentNo})}"/>   &times;</span>
 			</td>
 		</tr>  
 		</table>
-		<form id="reportModal" class="modal" method="post">
-			<div class="modalContents">
-				<span class="close">&times;</span>
-				<button class="reportBtn" id="reportBtn1">유해한 내용</button>
-				<button class="reportBtn" id="reportBtn2">광고성 내용</button>
-				
-				<script>
-					var formObj =$("form[role='form']");
-					
-					$("#reportBtn1").on("click",function(){
-						formObj.attr("action", "/report");
-						formObj.attr("method","get");
-						formObj.submit();
-					})
-				</script>
-			</div>
 		
+		<!-- 모달 -->
+		<form id="reportModal" class="modal" method=post>
+			<div class="modalContents">
+				<h1>신고하기</h1>
+				<br>
+				<span class="close">&times;</span>
+				<input id = "reportType" name="reportType" th:value="1" hidden="true"/>
+				<input id = "targetCommentNo" hidden="true"/>
+				<input id = "targetMemName" hidden="true"/>
+				<button class="reportBtn" id="reportBtn1" name="reportBtn1">유해한 내용</button>
+				<button class="reportBtn" id="reportBtn2" name="reportBtn2">광고성 내용</button>
+			</div>
+			
+			<script>
+<!-- 모달 함수들  -->
+$(".commentRow").click( function() {
+	console.log($(this).children('td.commentNo').attr('id'));
+	$(reportModal).show();
+	
+	targetCommentNo = $(this).children('td.commentNo').attr('id');
+	console.log("타겟넘버: " + targetCommentNo);
+	$("#targetCommentNo").val(targetCommentNo);
+	
+	targetMemName = $(this).children('td.targetMemName').attr('id');
+	console.log("라이터명: " + targetMemName);
+	$("#targetMemName").val(targetMemName);
+	
+});
+
+$(".close").click(function(event) {
+	$(reportModal).hide();
+});
+
+$("#reportBtn1").on("click", function(){
+	$(".reportBtn").val("유해한 내용")
+	});
+	
+$("#reportBtn2").on("click", function(){
+	$(".reportBtn").val("광고성 내용")
+});
+
+$(".reportBtn").on("click", function(){
+	var targetCommentNo = $("#targetCommentNo").val();
+	var type='1';
+	var reason = $(".reportBtn").val();
+
+	
+	$.ajax({
+		type: 'post',
+		url: '/insertReport',
+		data : {
+			"targetCommentNo" : targetCommentNo,
+			"type" : type,
+			"reason" : reason
+			
+		},
+		
+		success : function(result) {
+			if(result == 'SUCCESS'){
+				console.log("신고 완료");
+				
+			}
+		}
+	
+	});
+	alert("신고가 접수되었습니다");
+	/* $(resultModal).show(); */
+});
+
+</script>
+		
+		</form>
+		
+		<form id="resultModal" class="modal" method=post>
+			<div class="modalContents">
+			<span class="close">&times;</span>
+				<h1>신고 접수 완료!</h1>
+				<p>신고되었습니다
+				곧 접수 예정입니다</p>
+				<br>
+				<p id="close">확인</p>
+				
+				
+			</div>
 		</form>
         </div> 
       </section> 
@@ -60,9 +127,6 @@
         </div>
   </section>
 </div>
-
-<span><a th:href="@{/file}">파일로</span>
-
 
 
 <script type="text/javascript" th:inline="javascript">
@@ -80,17 +144,22 @@
 			document.getElementById("insertBtn").disabled = false;
 		}
 		/*]]>*/
-	}
+	};
 	
-	$(document).on("click", "#commentContents", function(event) {
-		$(reportModal).show();
-	});
+	function sessionCheck(){
+		console.log($(".commentDeleteBtn").attr("id"));
+		console.log($(".targetMemName").attr("id"));
+		/*<![CDATA[*/
+		if($(".commentDeleteBtn").attr("id") == $(".targetMemName").attr("id")){
+		    $(".commentDeleteBtn").show();
+		} else {
+		    $(".commentDeleteBtn").hide();
+		}
+		/*]]>*/
+		
+	};
 	
-	$(document).on("click", ".close", function(event) {
-		$(reportModal).hide();
-	});
-
+	
 </script>	
-
 </body>
 </html>
