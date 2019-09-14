@@ -1,5 +1,6 @@
 package com.fashionlog.model.service;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,8 @@ public interface PostService {
 	
 	
 	Set<Post> getAllFeed(Pageable paging);
+	
+	List<Post> getPostToFeed(Member user, Pageable paging);
 
 	
 

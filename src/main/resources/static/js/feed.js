@@ -7,16 +7,15 @@ $(function() {
 		animationOptions : {
 			queue : true,
 			speed : 200,
-			duration : 300,
+			duration : 100,
 			effect : 'fadeInOnAppear',
 			complete : function() {
-				console.log("completed");
 			}
 		}
 	});
 	$(".postImg").click(function() {
 		var pId = $(this).parent().attr('id');
-		location.href= "/post/"+pId.slice(1);
+		location.href = "/post/" + pId.slice(1);
 	});
 
 	// 현재 시간 기준으로 업로드 시간 표현
@@ -46,11 +45,49 @@ $(function() {
 		}
 		$(e).text(timeExp);
 	}
-	
-	//전체 업로드시간 세팅
+
+	// 전체 업로드시간 세팅
 	var uploadTime = $('.uploadTime');
 	var nowTimeStamp = new Date();
 	for (var i = 0; i < uploadTime.length; i++) {
-		setTimeExp(uploadTime[i],nowTimeStamp);
+		setTimeExp(uploadTime[i], nowTimeStamp);
 	}
+	var makeItemBoxes = function(feedData) {
+		var boxes = new Array;
+		for(var attr in feedData) {
+//		var itemHtml = "<div class='item postSum' id='p"+attr+"'>";
+		var itemHtml = "<div class='item postSum' id='p"+attr+"'>";
+		itemHtml += "<img class='postImg' alt='"+attr+"번 포스트의 사진' src='"+feedData[attr].postImageNo+"'>";
+		itemHtml += "<span class='uploadTime'>"+feedData[attr].uploadTime+"</span>";
+		itemHtml += "<span class='uploader'>"+ feedData[attr].uploader +"</span>";
+		itemHtml +=	"<span class='likesCount'>"+ feedData[attr].likesCount+"</span>";
+		itemHtml += "<button class='likesBtn btn' style='display: none'> 좋아요 </button></div>";
+		boxes.push(itemHtml);
+		console.log(boxes);
+		}
+		return boxes;
+	}
+	
+	$('#more').click(function() {
+		$.ajax({
+			type : 'get',
+			url : '/getMoreFeed',
+			dataType : 'json',
+			data : {
+					page : 2,
+					size : 2,
+					memberNo : $('#userNo').text()
+			},
+			success : function(newFeed) {
+				$('#container').gridalicious('append', makeItemBoxes(newFeed));
+//				$('#container').append(makeItem(newFeed));
+				console.log()
+			},
+			error : function(err) {
+				console.log('error : ' + err);
+			}
+		});
+
+	});
+
 });

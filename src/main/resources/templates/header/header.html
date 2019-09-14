@@ -237,7 +237,7 @@
 		<a href="/postWrite"><i class="glyphicon glyphicon-plus"></i></a> 
 		<a href=""><i class="glyphicon glyphicon-king"></i></a>     
 		<a href=""><i class="glyphicon glyphicon-heart"></i></a> 
-		<a href=""><i class="glyphicon glyphicon-user"></i></a>
+		<a th:if="${session.member}" th:id="${session.member.id}" href=""><span id="userNo" th:text="${session.member.memberNo}" style="display: none;"></span><i class="glyphicon glyphicon-user"></i></a>
 	</nav>
 
 	<div class="form-data" id="form-data"></div> 
