@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,7 +50,7 @@ public class Member {
 //	private Role role;
 //	private boolean enabled;
 
-  @ManyToOne
+	@ManyToOne
 	@JoinColumn(name = "STYLE_NO1")
 	private Style styleNo1;
 
@@ -61,19 +62,18 @@ public class Member {
 	@JoinColumn(name = "STYLE_NO3")
 	private Style styleNo3;
 
-	@OneToMany(mappedBy = "memberNo", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "memberNo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Post> posts = new ArrayList<Post>();
 
 	@Transient
 	private Long likesCount;
 	
-	@OneToMany(mappedBy = "followeeMemNo", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "followeeMemNo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Follow> followers;
 
-	@OneToMany(mappedBy = "followerMemNo", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "followerMemNo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Follow> followees;
 
-	@Transient
 	public void setLikesCount() {
 		Long count = (long) 0;
 		for (Post post:posts) {

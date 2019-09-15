@@ -45,7 +45,6 @@ public class LikesController {
 		user = memberRepository.findById(user.getId());
 		Post post = postRepository.findById(postNo).get();
 		likesService.doLike(user, post);
-		post.setLikesCount(likesRepository.countByPostNo(post));
 		return post.getPostNo() + "";
 	}
 
@@ -63,7 +62,6 @@ public class LikesController {
 		}
 		try {
 			likesService.unLike(user, post);
-			post.setLikesCount(likesRepository.countByPostNo(post));
 			return post.getPostNo() + "";
 		} catch (NoSuchElementException e) {
 			return "likesNotFound";

@@ -22,18 +22,6 @@ import com.fashionlog.model.dto.Style;
 public class PostServiceImpl implements PostService {
 	@Autowired
 	private PostRepository postRepository;
-	@Autowired
-	private LikesRepository likesRepository;
-
-	@Override
-	public void countLikes() {
-		List<Post> posts = postRepository.findAll();
-		for (Post post : posts) {
-			post.setLikesCount(likesRepository.countByPostNo(post));
-			postRepository.save(post);
-			System.out.println("post likes count : " + post);
-		}
-	}
 	
 	//팔로우하는 사람들의 글을 피드로 가져옴
 	@Override

@@ -36,6 +36,7 @@ import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Post;
 import com.fashionlog.model.dto.Style;
 import com.fashionlog.model.service.FileService;
+import com.fashionlog.model.service.LikesService;
 import com.fashionlog.model.service.PostService;
 
 @Controller
@@ -58,6 +59,8 @@ public class PostController {
 	private PostService postService;
 	@Autowired
 	private FileService fileService;
+	@Autowired
+	private LikesService likesService;
 
 	@RequestMapping("/postWrite")
 	public String startTest(Model model, HttpServletResponse response, HttpSession session) {
@@ -175,10 +178,6 @@ public class PostController {
 //		Member user = (Member) session.getAttribute("member");
 		Member user = memberRepository.findById(memberNo).get();
 		Map<String, Object> newFeed = new HashMap<>();
-		System.out.println("request is in");		
-		System.out.println("memberNo : " + user.getMemberNo());
-		System.out.println("pageNo : " + paging.getPageNumber());
-		System.out.println("pageSize : " + paging.getPageSize());
 
 		List<Post> feedList = postService.getPostToFeed(user,paging);
 		for(Post post :feedList) {
@@ -187,10 +186,10 @@ public class PostController {
 			feedVo.put("postImageNo", post.getPostImageNo().getPath());
 			feedVo.put("uploadTime", post.getUploadTime());
 			feedVo.put("uploader", post.getMemberNo().getNickname());
+			likesService.countLikes(post);
 			feedVo.put("likesCount", post.getLikesCount());
 			newFeed.put(post.getPostNo()+"", feedVo);
 		}
-		System.out.println(newFeed);
 		return newFeed;
 	}
 

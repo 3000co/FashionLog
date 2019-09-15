@@ -12,7 +12,7 @@
 			<img class="postImg" th:alt="${post.postNo+'번 포스트의 사진'}" th:src="${post.postImageNo.path}">
 			<span class="uploadTime" th:text="${post.uploadTime}"> </span>
 			<span class="uploader" th:text="${post.memberNo.nickname}"> nickname </span>
-			<span class="likesCount" th:text="${post.likesCount}"> 0 </span>
+			<span class="likesCount" th:text="${post.likesCount}"></span>
 			<button class="likesBtn btn" style="display: none"> 좋아요 </button>
 	</div>
 </div>
