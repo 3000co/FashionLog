@@ -1,26 +1,40 @@
-<!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>랜덤 이미지 생성</title>
-<script language = "javascript">
-	var imgArray = new Array();
-	imgArray[0] = "images/20190915073324_casual1.png";
-	imgArray[1] = "images/20190915073341_casual2.png";
-	imgArray[2] = "images/20190915073355_chic1.png"
-	imgArray[3] = "images/20190915073413_chic2.png";
-	imgArray[4] = "images/20190915073434_formal1.png"
-	imgArray[5] = "images/20190915073449_formal2.png";
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>회원 가입</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
 	
-	function showImage(){
-		var imgNum = Math.round(Math.random()*6);
-		var objImg = document.getElementById("introImg");
-		objImg.src = imgArray[imgNum];
-	}
 </script>
 </head>
-<body onload = "showImage()">
-	<img id = "introImg" border="0">
+<body>
+	<div class="selectTable" >
+		<table>
+		<tr id="row1">
+			<td >
+				<img id = "styleImg0" border="1" >
+			</td>
+			<td >
+				<img id = "styleImg1" border="1" >
+			</td>
+			<td >
+				<img id = "styleImg2" border="1" >
+			</td>
+		</tr>
+		<tr id="row2">
+			<td >
+				<img id = "styleImg3" border="1" >
+			</td>
+			<td >
+				<img id = "styleImg4" border="1" >
+			</td>
+			<td >
+				<img id = "styleImg5" border="1" >
+			</td>
+		</tr>
+		
+	</div>
 
+	<script src="/js/styleSelect.js"></script>
 </body>
 </html>
