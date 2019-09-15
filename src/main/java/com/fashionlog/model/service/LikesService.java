@@ -7,9 +7,9 @@ import com.fashionlog.model.dto.Post;
 
 public interface LikesService {
 
-	public int doLike(Member member, Post post);
+	public Long doLike(Member member, Post post);
 
-	public int unLike(Member member, Post post) throws NoSuchElementException;
+	public Long unLike(Member member, Post post) throws NoSuchElementException;
 
 	public void countLikes();
 	public void countLikes(Post post);

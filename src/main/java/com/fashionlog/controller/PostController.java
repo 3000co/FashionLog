@@ -168,7 +168,11 @@ public class PostController {
 		if (user == null)
 			return "redirect:/login";
 		user = memberRepository.findById(user.getMemberNo()).get();
-		model.addAttribute("feed", postService.getPostToFeed(user,paging));
+		List<Post> feed = postService.getPostToFeed(user,paging);
+		for(Post post:feed) {
+			likesService.countLikes(post);
+		}
+		model.addAttribute("feed", feed);
 		return "feed";
 	}
 	
@@ -178,7 +182,6 @@ public class PostController {
 //		Member user = (Member) session.getAttribute("member");
 		Member user = memberRepository.findById(memberNo).get();
 		Map<String, Object> newFeed = new HashMap<>();
-
 		List<Post> feedList = postService.getPostToFeed(user,paging);
 		for(Post post :feedList) {
 			Map<String, Object> feedVo = new HashMap<>();

@@ -42,7 +42,7 @@ public class Member {
 	@Column(columnDefinition = "char")
 	private String email;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PROFILE_IMAGE_NO", insertable = false, updatable = false)
 	private File profileImageNo;
 
@@ -50,15 +50,15 @@ public class Member {
 //	private Role role;
 //	private boolean enabled;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "STYLE_NO1")
 	private Style styleNo1;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "STYLE_NO2")
 	private Style styleNo2;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "STYLE_NO3")
 	private Style styleNo3;
 

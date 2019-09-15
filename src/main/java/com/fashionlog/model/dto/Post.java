@@ -15,9 +15,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.fashionlog.model.dao.LikesRepository;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,9 +25,6 @@ import lombok.ToString;
 @ToString(exclude = {"itemList", "commentList"})
 @Entity
 public class Post implements Comparable<Post> {
-	@Transient
-	@Autowired
-	LikesRepository likesRepository;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,17 +63,6 @@ public class Post implements Comparable<Post> {
 	
 	@Transient
 	private Long likesCount;
-	
-//	public Long getLikesCount() {
-////		if(likesCount==null) {
-//		try {
-//			likesCount = likesRepository.countByPostNo(this);			
-//		} catch (Exception e) {
-//			System.err.print(e.getLocalizedMessage());
-//		}
-////		}
-//		return this.likesCount;
-//	}
 
 	@Override
 	public int compareTo(Post o) {
