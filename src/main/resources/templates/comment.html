@@ -1,12 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">  
-<head>
-<meta charset="utf-8">
-<link rel="stylesheet" href="/css/comment.css">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org">
 
+<body>
 <div id="badge">
   
   <section class="all">
@@ -17,18 +12,20 @@
       <section>
         <div class="comments">
         <table>
-		<tr th:each="comment:${commentList}" class="commentRow">
-			<td th:id="${comment[0]}" class="commentNo">
-			<img th:src="@{${comment[4]}}"/>
+
+		<tr th:each="comment:${commentList}" class="commentRow" onload="sessionCheck()">
+			<td th:id="${comment.commentNo}" class="commentNo">
+		  <img class="memberProfileImg" th:src="${comment.memberNo.profileImageNo.path}" />
 			</td>
 			
-			<td class="targetMemName">
-			<span th:text="${comment[2]}"></span>
-			<span  id="commentContents" th:text="${comment[1]}"></span>
+			<td th:id ="${comment.memberNo.nickname}" class="targetMemName">
+			<span th:text="${comment.memberNo.nickname}"></span>
+			<span  id="commentContents" th:text="${comment.contents}"></span>
 			</td>
 			
-			<td th:class="commentDeleteBtnRow" th:id="${session.nickname}" style="display:none">
-			<span th:class="commentDeleteBtn" th:id="${comment[2]}" ><a th:href="@{/deleteComment(commentNo=${comment[0]})}"/>   &times;</span>
+			<td th:id="${session.nickname}" class="commentDeleteBtn" >
+			<span><a th:href="@{/deleteComment(commentNo=${comment.commentNo})}"/>   &times;</span>
+
 			</td>
 		</tr>  
 		</table>
@@ -171,8 +168,5 @@ $(".reportBtn").on("click", function(){
 	
 	
 </script>	
-
-
-
 </body>
 </html>

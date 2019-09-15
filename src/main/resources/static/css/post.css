@@ -1,12 +1,21 @@
 @charset "UTF-8";
 
-.postWrite {
-	position: relative;
-	width: 750px;
-	height: 650px;
-	padding: 10px;
+
+.postWrite, .postView{
+ 	width: 750px;
+	height: 800px;
+  padding: 10px;
 	margin: auto;
 	border: 1px dashed #a7a7a7;
+}
+
+label {
+	width: 80px;
+	text-align: justify; /* 왜안돼? */
+}
+
+select {
+	width: 175px;
 }
 
 .leftWrap {
@@ -21,6 +30,7 @@
 	height: 400px;
 	float: left;
 	padding: 10px;
+	margin-bottom: 10px;
 	/* 	border: 1px dashed #bcbcbc; */
 }
 
@@ -51,7 +61,7 @@
 	float: right;
 	margin: 10px;
 	padding: 10px;
-	margin-top: 40px;
+	margin-top: 10px;
 	padding-bottom: 10px;
 	border: 1px solid #bcbcbc;
 	border-radius: 5px;
@@ -60,12 +70,7 @@
 
 .itemTagWrap {
 	overflow: auto;
-	height: 510px;
-}
-
-.itemTagWrap label {
-	width: 90px;
-	text-align: justify; /* 왜안돼? */
+	height: 470px;
 }
 
 .style {
@@ -95,11 +100,16 @@
 	padding: 10px;
 	margin-bottom: 10px;
 }
-
-.paletteBtn {
+#exitBtn {
 	background-color: transparent !important;
 	border-color: transparent;
+	
 }
+
+/* .paletteBtn { */
+/* 	background-color: transparent !important; */
+/* 	border-color: transparent; */
+/* } */
 
 /* The Modal (background) */
 .modal {
@@ -122,7 +132,7 @@
 	margin: auto;
 	padding: 20px;
 	border: 1px solid #888;
-	width: 80%;
+	width: 50%;
 }
 
 /* The Close Button */
@@ -143,17 +153,27 @@
 	margin: auto;
 }
 
-
 .colorSquare {
 	display: inline-block;
-/* 	margin: 8px 10px 3px 2px; */
 	border: 1px solid #bcbcbc;
-	border-radius: 5px;
-	width: 2em;
-	height: 2em;
-/* 	box-shadow: 1px 1px 5px grey; */
+	border-radius: 3px;
+	width: 110px;
+	height: 20px;
+	margin-right: 5px;
+}
+
+
+.commentArea {
+	position: relative;
+	float: left;
+	bottom: 50;
+	/* 	margin:5px; */
 }
 
 /* .selected { */
 /* 	border: 5px solid orange !important; */
 /* } */
+.modalBtn {
+	background-color: transparent !important;
+	border-radius: 5px;
+}
