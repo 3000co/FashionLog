@@ -79,6 +79,25 @@
 		console.log("searchword2 : "+searchWord);
 		$('#inputField-tokenfield').val(searchWord);
 	});
+	
+	//상세버튼 
+	
+	$(document).on("click",".attrBtn",function() {
+		 console.log("안녕?");
+			var attrWord = $(this).val();
+			
+			var searchWord = $('#inputField-tokenfield').val();
+			$('#inputField').tokenfield('createToken',searchWord + attrWord);
+			$('#inputField-tokenfield').val('');
+		});
+	  /* $('.attrBtn').click(function(){
+		   console.log("안녕?");
+			var attrWord = $(this).val();
+			
+			var searchWord = $('#inputField-tokenfield').val();
+			$('#inputField').tokenfield('createToken',searchWord + attrWord);
+			$('#inputField-tokenfield').val('');
+		});*/
 
 	
 	//검색 타입 선택 버튼(category류 버튼)
@@ -95,7 +114,7 @@
 	   var html = "";
 
 	   console.log(data);
-	  
+	   
 	    for(i=0; i<data.attrList.length; i++){
 	    	//attrName = data.styleList[i].name;
 	   		attrName = data.attrList[i].name;
@@ -105,23 +124,17 @@
 	    	html += "</input></td>"
 		   console.log("attrName: "+attrName);
 	   } 
+	   
 	   $("#obj").append(jsondata);
 	   $("#"+applyTargetId).html(html);
 	   
-	   //상세버튼 
-	   $('.attrBtn').click(function(){
-		   console.log("안녕?");
-			var attrWord = $(this).val();
-			
-			var searchWord = $('#inputField-tokenfield').val();
-			$('#inputField').tokenfield('createToken',searchWord + attrWord);
-			$('#inputField-tokenfield').val('');
-		});
-	   
 	   },
 	   error: function(data){console.log("오류 발생"); console.log("data: "+data);},
-	   beforeSend: function() {},
-	   complete: function() {}       
+	   beforeSend: function() {
+	   },
+	   complete: function() {
+
+	   }       
 	  });     
 	 }
 	

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>랜덤 이미지 생성</title>
+<script language = "javascript">
+	var imgArray = new Array();
+	imgArray[0] = "images/20190915073324_casual1.png";
+	imgArray[1] = "images/20190915073341_casual2.png";
+	imgArray[2] = "images/20190915073355_chic1.png"
+	imgArray[3] = "images/20190915073413_chic2.png";
+	imgArray[4] = "images/20190915073434_formal1.png"
+	imgArray[5] = "images/20190915073449_formal2.png";
+	
+	function showImage(){
+		var imgNum = Math.round(Math.random()*6);
+		var objImg = document.getElementById("introImg");
+		objImg.src = imgArray[imgNum];
+	}
+</script>
+</head>
+<body onload = "showImage()">
+	<img id = "introImg" border="0">
+
+</body>
+</html>

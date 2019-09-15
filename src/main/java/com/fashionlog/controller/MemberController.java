@@ -115,6 +115,13 @@ public class MemberController {
 			}
 		}
 		
+	//이미지 선택형 스타일 선택 
+		@RequestMapping(value="/styleSelectByImg", method=RequestMethod.GET)
+		public String doStyleSelctByImg() {
+			
+			return "/member/styleSelectByImage";
+		}
+		
 	// 비밀번호 변경 화면
 	@RequestMapping("/modPassword")
 	public String modPassword() {
@@ -146,6 +153,8 @@ public class MemberController {
 			
 			return "redirect:/profile";
 		}
+		
+	
 		
 		
 		
