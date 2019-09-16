@@ -5,39 +5,38 @@
 </head>
 
 <style>
-
 </style>
 
 <body>
-<div class="profile-menu-bar">
-	<ul class="profile-menu">
-	  <a><img src="images/settingIcon.png" width="50" height="50"/></a>
-       <ul class="list">
-        <li><a href="modProfile">프로필 변경</a></li>
-        <li><a href="modPassword">비밀번호 변경</a></li>
-        <li><a href="#3A">스타일 변경</a></li>
-        <li><a href="logout.do">로그아웃</a></li>
-       </ul>
-    </li> 
-	</ul>
-</div>
+	<div class="profile-menu-bar">
+		<ul class="profile-menu">
+			<a th:id="menu"><img src="images/settingIcon.png" width="50"
+				height="50" /></a>
+			<ul class="list">
+				<li><a href="modProfile">프로필 변경</a></li>
+				<li><a href="modPassword">비밀번호 변경</a></li>
+				<li><a href="#3A">스타일 변경</a></li>
+				<li><a href="logout.do">로그아웃</a></li>
+			</ul>
+			</li>
+		</ul>
+	</div>
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+			var submenu = $(".profile-menu>a").next("ul");
+			submenu.hide();
 			$(".profile-menu>a").click(function() {
-				var submenu = $(this).next("ul");
-				
 				if (submenu.is(":visible")) {
-					submenu.slideUp();
+					submenu.hide();
 				} else {
-					submenu.slideDown();
+					submenu.show();
 				}
 			}).mouseclick(function() {
-				$(this).next("ul").slideDown();
+				$(this).next("ul").show();
 			});
 
-			
 		});
 	</script>
-</body> 
+</body>
 </html>
