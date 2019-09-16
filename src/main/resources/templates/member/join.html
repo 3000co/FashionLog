@@ -7,7 +7,7 @@
 <script type="text/javascript">
     $(function(){
         $("#passwordFalse").hide();
-        $("input").keyup(function(){
+        $("#password2").keyup(function(){
             var password=$("#password").val();
             var password2=$("#password2").val();
             if(password != "" || password2 != ""){
@@ -36,7 +36,7 @@
 			<label>비밀번호</label><br> 
 			<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력해주세요" required="required" pattern="[a-zA-Z0-9]{6,20}" title="영문 숫자조합으로 6-15글자 입력"><br>
 			<input type="password" class="form-control" id="password2" placeholder="한 번 더 입력해주세요" required="required" pattern="[a-zA-Z0-9]{6,20}"><br>
-				<span id="passwordFalse">비밀번호가 일치하지 않습니다</span>
+				<div id="passwordFalse">비밀번호가 일치하지 않습니다</div>
 		</div>
 		<div class="form-group">
 			<label>닉네임</label><br> 

@@ -43,27 +43,6 @@ public class MemberController {
 		}
 		return print;
 	}
-
-	private MemberService memberService;
-	
-	@Autowired
-	private MemberRepository memberRepository;
-	
-	/**
-	 * 개발 편의를 위한 현재 맴버리스트 출력 메서드
-	 * @return
-	 */
-	@RequestMapping(value = "/getAllMember")
-	@ResponseBody
-	public String getAllMember(Model model) {
-		List<Member> memList = memberRepository.findAll();
-		String print = "";
-		for(Member mem:memList) {
-			print += (mem.getId() +"<br>");
-		}
-		return print;
-	}
-	
 	@RequestMapping(value = "/")
 	public String main() {
 		return "main";
