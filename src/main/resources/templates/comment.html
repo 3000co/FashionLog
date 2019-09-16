@@ -12,6 +12,7 @@
       <section>
         <div class="comments">
         <table>
+
 		<tr th:each="comment:${commentList}" class="commentRow" onload="sessionCheck()">
 			<td th:id="${comment.commentNo}" class="commentNo">
 		  <img class="memberProfileImg" th:src="${comment.memberNo.profileImageNo.path}" />
@@ -24,6 +25,7 @@
 			
 			<td th:id="${session.nickname}" class="commentDeleteBtn" >
 			<span><a th:href="@{/deleteComment(commentNo=${comment.commentNo})}"/>   &times;</span>
+
 			</td>
 		</tr>  
 		</table>
@@ -37,8 +39,8 @@
 				<input id = "reportType" name="reportType" th:value="1" hidden="true"/>
 				<input id = "targetCommentNo" hidden="true"/>
 				<input id = "targetMemName" hidden="true"/>
-				<button class="reportBtn" id="reportBtn1" name="reportBtn1">유해한 내용</button>
-				<button class="reportBtn" id="reportBtn2" name="reportBtn2">광고성 내용</button>
+				<button class="reportBtn" id="reportBtn1" name="reportBtn1">�쑀�빐�븳 �궡�슜</button>
+				<button class="reportBtn" id="reportBtn2" name="reportBtn2">愿묎퀬�꽦 �궡�슜</button>
 			</div>
 			
 			<script>
@@ -126,7 +128,9 @@ $(".reportBtn").on("click", function(){
 		</form>
         </div>
   </section>
+  
 </div>
+
 
 
 <script type="text/javascript" th:inline="javascript">
@@ -146,18 +150,21 @@ $(".reportBtn").on("click", function(){
 		/*]]>*/
 	};
 	
-	function sessionCheck(){
-		console.log($(".commentDeleteBtn").attr("id"));
-		console.log($(".targetMemName").attr("id"));
-		/*<![CDATA[*/
-		if($(".commentDeleteBtn").attr("id") == $(".targetMemName").attr("id")){
-		    $(".commentDeleteBtn").show();
-		} else {
-		    $(".commentDeleteBtn").hide();
-		}
-		/*]]>*/
+	$(".commentRow").each(function sessionCheck(){
+		var sessionNickName = $(this).children(".commentDeleteBtnRow").attr("id");
+		var commentWriter = $(this).children(".commentDeleteBtnRow").children(".commentDeleteBtn").attr("id");
+		var elems = document.getElementById(sessionNickName);
+
 		
-	};
+		console.log(sessionNickName +","+ commentWriter);
+		
+		/*<![CDATA[*/
+		if( sessionNickName == commentWriter ){
+			console.log("일치함!")
+			$(this).children(".commentDeleteBtnRow").css('display','block');
+			} 
+		/*]]>*/
+	});
 	
 	
 </script>	

@@ -2,28 +2,39 @@ package com.fashionlog.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.fashionlog.model.dao.FileRepository;
 import com.fashionlog.model.dao.MemberRepository;
+import com.fashionlog.model.dto.File;
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Style;
 import com.fashionlog.model.service.MemberService;
 
 @Controller
 public class MemberController {
-	Member newMember = new Member();
+	
+	@Autowired
+	private PasswordEncoder encoder;
+	
 	@Autowired
 	private MemberService memberService;
 	
 	@Autowired
 	private MemberRepository memberRepository;
+	
+	@Autowired
+	private FileRepository fileRepository;
 	
 	/**
 	 * 개발 편의를 위한 현재 맴버리스트 출력 메서드
@@ -39,7 +50,6 @@ public class MemberController {
 		}
 		return print;
 	}
-	
 	@RequestMapping(value = "/")
 	public String main() {
 		return "main";
@@ -50,6 +60,7 @@ public class MemberController {
 	public String login() {
 		return "member/login";
 	}
+
 
 	// 로그인 처리
 	@RequestMapping(value = "/login.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -84,36 +95,52 @@ public class MemberController {
 	public String join() {
 		return "member/join";
 	}
+	// 회원가입 화면
+		@RequestMapping("/styleSelect1")
+		public String styleSelect1() {
+			return "member/styleSelect1";
+		}
 	// 회원가입 처리
 	@RequestMapping(value = "/join.do", method = RequestMethod.POST)
-	public String doJoin(Member member, HttpSession session) {
+	public String doJoin(Member member, Model model, HttpSession session) {
 		System.out.println("아이디: " + member.getId() + " 비밀번호: " + member.getPassword());
-		System.out.println("Member1::" + member);
-		newMember.setId(member.getId());
-		newMember.setPassword(member.getPassword());
-		newMember.setNickname(member.getNickname());
-		newMember.setPhonenumber(member.getPhonenumber());
-		newMember.setEmail(member.getEmail());
+		System.out.println("패스워드"+encoder.encode(member.getPassword()));
+		model.addAttribute("id",member.getId());
+		model.addAttribute("password",encoder.encode(member.getPassword()));
+		model.addAttribute("nickname",member.getNickname());
+		model.addAttribute("phonenumber",member.getPhonenumber());
+		model.addAttribute("email",member.getEmail());
+		System.out.println("Model1::" + model);
 		return "member/styleSelect";
 	}
+	// 회원가입 스타일 처리1
+	@RequestMapping(value = "/styleSelect1.do", method = RequestMethod.POST)
+	public String doStyleSelect1(Member member, Model model, HttpSession session) {
+		return "member/styleSelect3";
+		
 	
-	// 회원가입 스타일 처리
-		@RequestMapping(value = "/styleSelect.do", method = RequestMethod.POST)
-		public String doStyleSelect(Member member, HttpSession session) {
-			newMember.setStyleNo1(member.getStyleNo1());
-			newMember.setStyleNo2(member.getStyleNo2());
-			newMember.setStyleNo3(member.getStyleNo3());
-			System.out.println(newMember);
+	}
+	
+	// 회원가입 스타일 처리2
+
+	// 회원가입 스타일 처리3
+		@RequestMapping(value = "/styleSelect3.do", method = RequestMethod.POST)
+		public String doStyleSelect3(Member member, Model model, HttpSession session) {
+			System.out.println("Model2::"+model);
+			model.addAttribute(member);
+			System.out.println("Model3::"+model);
+			System.out.println("Member2::"+member);
 			Style getStyleInfo = member.getStyleNo1();
 			if (getStyleInfo.getStyleNo() == 0) {
 				session.setAttribute("style", null);
-				return "member/styleSelect";
+				return "member/styleSelect3";
 			} else {
-				memberService.doJoin(newMember);
+				memberService.doJoin(member);
 				System.out.println("회원가입 성공" + getStyleInfo);
 				return "redirect:/login";
 			}
 		}
+
 		
 	// 비밀번호 변경 화면
 	@RequestMapping("/modPassword")
@@ -143,13 +170,26 @@ public class MemberController {
 	// 프로필 변경
 		@RequestMapping(value = "/modProfile.do", method = RequestMethod.POST)
 		public String doModProfile(Member member, HttpSession session) {
-			
 			return "redirect:/profile";
 		}
 		
 		
-		
-		
+	//이미지 선택형 스타일 선택 
+		@RequestMapping(value="/styleSelectByImg", method=RequestMethod.GET)
+		public String doStyleSelctByImg() {
+			
+			return "/member/styleSelectByImage";
+		}
+	//파일 가져오기
+		@ResponseBody
+		@RequestMapping("/getFileList")
+		private ModelAndView getStyleList(HttpServletRequest request) throws Exception{
+			ModelAndView modelAndView = new ModelAndView("jsonView");
+			List<File> sampleImgList = fileRepository.findByTypeContaining("sample");
+			modelAndView.addObject("sampleImgList", sampleImgList);
+			
+			return modelAndView;
+		}
 		
 		
 }

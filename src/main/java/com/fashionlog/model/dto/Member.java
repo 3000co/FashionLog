@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,7 +28,7 @@ public class Member {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int memberNo;
-
+	
 	@Column(columnDefinition = "char")
 	private String id;
 
@@ -45,9 +46,10 @@ public class Member {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PROFILE_IMAGE_NO", insertable = false, updatable = false)
 	private File profileImageNo;
-
-//	@Enumerated(EnumType.STRING)
-//	private Role role;
+	
+	@Column(columnDefinition = "char")
+	@Enumerated(EnumType.STRING)
+	private Role role;
 //	private boolean enabled;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -81,5 +83,4 @@ public class Member {
 		}
 		this.setLikesCount(count);
 	}
-
 }
