@@ -1,4 +1,4 @@
-ï»¿package com.fashionlog.controller;
+package com.fashionlog.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -78,9 +78,9 @@ public class PostController {
 	}
 
 	/**
-	 * 1. file ì˜¬ë¦¬ê¸°
+	 * 1. file ¿Ã¸®±â
 	 * 
-	 * @param mulFile (íŒŒì¼)
+	 * @param mulFile (ÆÄÀÏ)
 	 * @param model
 	 * @param request
 	 * @return FileNo
@@ -94,7 +94,7 @@ public class PostController {
 	}
 
 	/**
-	 * 2. fileNoë¥¼ ë°›ì•„ì„œ post ì˜¬ë¦¬ê¸°
+	 * 2. fileNo¸¦ ¹Ş¾Æ¼­ post ¿Ã¸®±â
 	 * 
 	 * @param post
 	 * @return postNo
@@ -103,7 +103,7 @@ public class PostController {
 	@ResponseBody
 	public int postTest(Post post) {
 		Post getPost = postRepository.save(post);
-		// Member.postsê°€ ìë™ìœ¼ë¡œ ë°˜ì˜ë˜ì§€ ì•Šì„ ê²½ìš°
+		// Member.posts°¡ ÀÚµ¿À¸·Î ¹İ¿µµÇÁö ¾ÊÀ» °æ¿ì
 //		Member writer = post.getMemberNo();
 //		writer.getPosts().add(post);
 //		memberRepository.save(writer);
@@ -111,7 +111,7 @@ public class PostController {
 	}
 
 	/**
-	 * 3. postNoë¥¼ ë°›ì•„ì„œ itemë§Œë“¤ê³ (viewì—ì„œ ì‘ì—…í•¨) ì˜¬ë¦¬ê¸°
+	 * 3. postNo¸¦ ¹Ş¾Æ¼­ item¸¸µé°í(view¿¡¼­ ÀÛ¾÷ÇÔ) ¿Ã¸®±â
 	 * 
 	 * @param item
 	 */
@@ -139,7 +139,7 @@ public class PostController {
 		model.addAttribute("style", style);
 		model.addAttribute("category", category);
 		model.addAttribute("brand", brand);
-		// postview í˜ì´ì§€ê°€ ìƒê¸°ë©´ ë°”ê¿”ì¤„ê²ƒ
+		// postview ÆäÀÌÁö°¡ »ı±â¸é ¹Ù²ãÁÙ°Í
 		return "post/post";
 	}
 
@@ -164,18 +164,18 @@ public class PostController {
 	@RequestMapping("/feed")
 	public String getFeed(Model model, HttpSession session,
 			@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 5) Pageable paging) {
-		// ë¡œê·¸ì¸í•œ ì‚¬ëŒ user
+		// ·Î±×ÀÎÇÑ »ç¶÷ user
 		Member user = (Member) session.getAttribute("member");
 		if (user == null)
 			return "redirect:/login";
 		user = memberRepository.findById(user.getMemberNo()).get();
-		// ê°€ì ¸ì˜¤ëŠ” ê°’ë“¤ì„ ì¤‘ë³µì—†ì´ ì €ì¥í•˜ê¸° ìœ„í•´ set ìƒì„±
+		// °¡Á®¿À´Â °ªµéÀ» Áßº¹¾øÀÌ ÀúÀåÇÏ±â À§ÇØ set »ı¼º
 		Set<Post> feedSet = new HashSet<>();
-		// ìŠ¤íƒ€ì¼ ê¸€ í˜ì´ì§•í•´ì„œ ë‹´ê¸°
+		// ½ºÅ¸ÀÏ ±Û ÆäÀÌÂ¡ÇØ¼­ ´ã±â
 		feedSet.addAll(postService.getFeedByStyle(user, paging));
-		// íŒ”ë¡œì´ ê¸€ í˜ì´ì§•í•´ì„œ ë‹´ê¸°
+		// ÆÈ·ÎÀÌ ±Û ÆäÀÌÂ¡ÇØ¼­ ´ã±â
 		feedSet.addAll(postService.getFeedByFollowee(user, paging));
-		// ë‚´ê¸€ í˜ì´ì§•í•´ì„œ ë‹´ê¸°
+		// ³»±Û ÆäÀÌÂ¡ÇØ¼­ ´ã±â
 		feedSet.addAll(postService.getFeedByMe(user, paging));
 		List<Post> feed = new ArrayList<Post>(feedSet);
 		Collections.sort(feed);
