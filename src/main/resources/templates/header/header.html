@@ -20,7 +20,7 @@
 	href="//sliptree.github.io/bootstrap-tokenfield/dist/css/tokenfield-typeahead.css">
 <link rel="stylesheet" href="/css/bootstrap.min.css">
 <!-- icon pack -->
-<link rel="stylesheet" 
+<link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/header.css">
 </head>
@@ -31,25 +31,25 @@
 			var defaultSearch = document.getElementById("defaultSearch");
 
 			console.log(target);
-			
-			switch(target){
-			case 'categoryBtn' :
+
+			switch (target) {
+			case 'categoryBtn':
 				defaultSearch.style.display = 'none';
 				document.getElementById("categorySearch").style.display = 'block';
 				break;
-			case 'colorBtn' :
+			case 'colorBtn':
 				defaultSearch.style.display = 'none';
 				document.getElementById("colorSearch").style.display = 'block';
 				break;
-			case 'styleBtn' :
+			case 'styleBtn':
 				defaultSearch.style.display = 'none';
 				document.getElementById("styleSearch").style.display = 'block';
 				break;
-			case 'brandBtn' :
+			case 'brandBtn':
 				defaultSearch.style.display = 'none';
 				document.getElementById("brandSearch").style.display = 'block';
 				break;
-			case 'userBtn' :
+			case 'userBtn':
 				defaultSearch.style.display = 'none';
 				document.getElementById("userSearch").style.display = 'block';
 				break;
@@ -60,24 +60,23 @@
 			var defaultSearch = document.getElementById("defaultSearch");
 			defaultSearch.style.display = 'block';
 			document.getElementById("categorySearch").style.display = 'none';
-			document.getElementById("colorSearch").style.display='none'; 
-			document.getElementById("styleSearch").style.display='none';
-			document.getElementById("brandSearch").style.display='none';
-			document.getElementById("userSearch").style.display='none'; 
+			document.getElementById("colorSearch").style.display = 'none';
+			document.getElementById("styleSearch").style.display = 'none';
+			document.getElementById("brandSearch").style.display = 'none';
+			document.getElementById("userSearch").style.display = 'none';
 
 		}
-
 	</script>
 
 	<!--db가져오기 테스트 -->
-	<nav class="fashion">
-		<div class="icon">
-			<a href="/feed">
-			<img src="https://i.ibb.co/MVr31h7/logo.png" alt="logo" /></a>
+	<header class="fashion">
+		<div class="icon component">
+			<a href="/feed"> <img src="https://i.ibb.co/MVr31h7/logo.png"
+				alt="logo" /></a>
 		</div>
-		
 
-		<ul class="searchBoard" style="margin: 0; padding: 0">
+
+		<ul class="searchBoard component" style="list-style: none;">
 			<input type="text" class="inputField" placeholder="" size="35"
 				id="inputField" value="" />
 
@@ -97,35 +96,30 @@
 					</div>
 
 					<div class="mm-3column">
-						<span class="menu-list"> <span>
-
-								<button class="menuBtn" id="colorBtn" value="색상:"
+						<span class="menu-list">
+							<button class="menuBtn" id="colorBtn" value="색상:"
 								onclick="changeSearchMod('colorBtn')">색상</button>
 						</span>
+					</div>
+
+					<div class="mm-3column">
+						<span class="menu-list">
+							<button class="menuBtn" id="styleBtn" value="스타일:"
+								onclick="changeSearchMod('styleBtn')">스타일</button>
 						</span>
 					</div>
 
 					<div class="mm-3column">
-						<span class="menu-list"> <span>
-								<button class="menuBtn" id="styleBtn" value="스타일:"
-									onclick="changeSearchMod('styleBtn')">스타일</button>
-						</span>
-						</span>
-					</div>
-
-					<div class="mm-3column">
-						<span class="menu-list"> <span>
-								<button class="menuBtn" id="brandBtn" value="브랜드:"
-									onclick="changeSearchMod('brandBtn')">브랜드</button>
-						</span>
+						<span class="menu-list">
+							<button class="menuBtn" id="brandBtn" value="브랜드:"
+								onclick="changeSearchMod('brandBtn')">브랜드</button>
 						</span>
 					</div>
 
 					<div class="mm-3column">
-						<span class="menu-list"> <span>
-								<button class="menuBtn" id="userBtn" value="유저:"
-									onclick="changeSearchMod('userBtn')">유저</button>
-						</span>
+						<span class="menu-list">
+							<button class="menuBtn" id="userBtn" value="유저:"
+								onclick="changeSearchMod('userBtn')">유저</button>
 						</span>
 					</div>
 				</div>
@@ -139,19 +133,18 @@
 					</div>
 
 					<div class="mm-3column">
-						<span class="menu-list"> <span>
-								<table>
-									<td th:each="category:${category}"><input class="attrBtn"
-										th:type="button" th:value="${category.name}"
-										onclick="returnDefaultMod()"></input></td>
-								</table>
-						</span>
-						</span>
+						<table class="menu-list">
+							<tr>
+								<td th:each="category:${category}"><input class="attrBtn"
+									th:type="button" th:value="${category.name}"
+									onclick="returnDefaultMod()"></input></td>
+							</tr>
+						</table>
 					</div>
 
 				</div>
 			</li>
-			
+
 			<!-- 칼라 -->
 			<li class="drop-down" id='colorSearch' style="display: none">
 				<div class="mega-menu">
@@ -160,9 +153,8 @@
 					</div>
 
 					<div class="mm-3column">
-						<span class="menu-list"> <span>
-							<div th:include="/header/colorPicker"></div>
-						</span>
+						<span class="menu-list"> <span
+							th:include="/header/colorPicker"></span>
 						</span>
 					</div>
 
@@ -177,16 +169,14 @@
 					</div>
 
 					<div class="mm-3column">
-						<span class="menu-list"> <span>
-								<table>
-									<td th:each="style:${style}"><input class="attrBtn"
-										th:type="button" th:value="${style.name}"
-										onclick="returnDefaultMod()"></input></td>
-								</table>
-						</span>
-						</span>
+						<table class="menu-list">
+							<tr>
+								<td th:each="style:${style}"><input class="attrBtn"
+									th:type="button" th:value="${style.name}"
+									onclick="returnDefaultMod()"></input></td>
+							</tr>
+						</table>
 					</div>
-
 				</div>
 			</li>
 
@@ -198,14 +188,13 @@
 					</div>
 
 					<div class="mm-3column">
-						<span class="menu-list"> <span>
-								<table>
-									<td th:each="brand:${brand}"><input class="attrBtn"
-										th:type="button" th:value="${brand[1]}"
-										onclick="returnDefaultMod()"></input></td>
-								</table>
-						</span>
-						</span>
+						<table class="menu-list">
+							<tr>
+								<td th:each="brand:${brand}"><input class="attrBtn"
+									th:type="button" th:value="${brand[1]}"
+									onclick="returnDefaultMod()"></input></td>
+							</tr>
+						</table>
 					</div>
 
 				</div>
@@ -221,28 +210,29 @@
 				</div>
 			</li>
 		</ul>
-			
-		<form id="searchButton" name="searchButton" action="/searched" method="post">
-			<input type="hidden" name="searchWords" id="searchWords" value="검색 내용 없음" >
-			<button  value="form-data">
-				<svg>
-					<path
-						d="M6.162 10.035a3.877 3.877 0 0 1-3.873-3.873A3.877 3.877 0 0 1 6.162 2.29a3.877 3.877 0 0 1 3.873 3.872 3.877 3.877 0 0 1-3.873 3.873m9.363 3.196l-3.081-3.08a1.614 1.614 0 0 0-1.23-.468 6.127 6.127 0 0 0 1.11-3.521 6.162 6.162 0 1 0-6.162 6.162 6.13 6.13 0 0 0 3.521-1.109c-.022.442.13.891.467 1.229l3.081 3.081a1.622 1.622 0 0 0 2.294-2.294">
-					</path>
-				</svg>
+
+		<form id="searchButton" name="searchButton" action="/searched"
+			method="post">
+			<input type="hidden" name="searchWords" id="searchWords"
+				value="검색 내용 없음">
+			<button value="form-data" class="component">
+				<svg> <path
+					d="M6.162 10.035a3.877 3.877 0 0 1-3.873-3.873A3.877 3.877 0 0 1 6.162 2.29a3.877 3.877 0 0 1 3.873 3.872 3.877 3.877 0 0 1-3.873 3.873m9.363 3.196l-3.081-3.08a1.614 1.614 0 0 0-1.23-.468 6.127 6.127 0 0 0 1.11-3.521 6.162 6.162 0 1 0-6.162 6.162 6.13 6.13 0 0 0 3.521-1.109c-.022.442.13.891.467 1.229l3.081 3.081a1.622 1.622 0 0 0 2.294-2.294">
+				</path> </svg>
 			</button>
 		</form>
-		
-		
-		<a href="/postWrite"><i class="glyphicon glyphicon-plus"></i></a> 
-		<a href=""><i class="glyphicon glyphicon-king"></i></a>     
-		<a href=""><i class="glyphicon glyphicon-heart"></i></a> 
-		<a th:if="${session.member}" th:id="${session.member.id}" href=""><span id="userNo" th:text="${session.member.memberNo}" style="display: none;"></span><i class="glyphicon glyphicon-user"></i></a>
-	</nav>
-
-	<div class="form-data" id="form-data"></div> 
 
 
+		<a href="/postWrite"><i class="glyphicon glyphicon-plus component"></i></a>
+		<a href=""><i class="glyphicon glyphicon-king component"></i></a> 
+		<a href=""><i class="glyphicon glyphicon-heart component"></i></a> 
+		<a th:if="${session.member}" th:id="${session.member.id}" href=""> <span
+			id="userNo" th:text="${session.member.memberNo}"
+			style="display: none;"></span> <i
+			class="glyphicon glyphicon-user component"></i></a>
+	</header>
+
+	<div class="form-data" id="form-data"></div>
 	<script src="/js/header.js"></script>
 
 </body>

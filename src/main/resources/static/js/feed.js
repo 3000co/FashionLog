@@ -55,32 +55,11 @@ $(function() {
 		setTimeExp(uploadTime[i]);
 	}
 	/**
-	 * 받아온 feedVo로 item box html 만들기
-	 * @return DOM Element Array
-	 */ 
-	var makeItemBoxes = function(feedData) {
-		var boxes = new Array;
-		for ( var attr in feedData) {
-			var itemDiv = $('<div></div>').addClass('item postSum').attr('id',
-					"p" + attr);
-			var itemHtml = "<img class='postImg' alt='" + attr
-					+ "번 포스트의 사진' src='" + feedData[attr].postImageNo + "'>";
-			itemHtml += "<span class='uploadTime'>" + feedData[attr].uploadTime
-					+ "</span>";
-			itemHtml += "<span class='uploader'>" + feedData[attr].uploader
-					+ "</span>";
-			itemHtml += "<span class='likesCount'>" + (feedData[attr].likesCount === null ? 0 : feedData[attr].likesCount)
-					+ "</span>";
-			itemHtml += "<button class='likesBtn btn' style='display: none'> 좋아요 </button></div>";
-			itemDiv.html(itemHtml);
-			boxes.push(itemDiv);
-		}
-		return boxes;
-	}
-	//page 초기화
+	 * 페이징된 피드를 불러오는 함수
+	 * page 변수가 먼저 선언되어야 함
+	 */
 	var page = 0;
-	//page 불러오기 이벤트
-	$('#more').click(function() {
+	var getMoreFeed = function() {
 		//다음 page로 세팅 
 		page += 1;
 		//서버에 요청
@@ -100,12 +79,12 @@ $(function() {
 				for(i=0; i<newItemArray.length; i++) {
 					var thisItem = newItemArray[i];
 					//좋아요 상태 세팅
-					var likesBtn = $(thisItem).children('button.likesBtn');
+					var likesBtn = $(thisItem).find('.likesBtn');
 					likesBtn.setLikesBtnStat($(thisItem).attr('id').slice(1));
 					//좋아요 누르기 세팅
 					likesBtn.click(function() {
 						var element = $(this);
-						var postNo = element.parent().attr("id").slice(1);
+						var postNo = element.parents(".item").attr("id").slice(1);
 						if (element.hasClass("stat-unLikes")) {
 							element.doLikes(postNo);
 						} else {
@@ -113,7 +92,7 @@ $(function() {
 						}
 					});
 					//날짜 형식 세팅
-					var uploadTime = $(thisItem).children('span.uploadTime');
+					var uploadTime = $(thisItem).find('.uploadTime');
 					setTimeExp(uploadTime);
 					//포스트 뷰로 이동 세팅
 					$(".postImg").click(function() {
@@ -128,5 +107,41 @@ $(function() {
 				console.log('error : ' + err);
 			}
 		});
+	}
+	/**
+	 * 받아온 feedVo로 item box html 만들기
+	 * @return DOM Element Array
+	 */ 
+	var makeItemBoxes = function(feedData) {
+		var boxes = new Array;
+		for ( var attr in feedData) {
+			var itemDiv = $('<div></div>').addClass('item').attr('id',
+					"p" + attr);
+			var itemHtml = "<img class='postImg' alt='" + attr
+					+ "번 포스트의 사진' src='" + feedData[attr].postImageNo + "'>";
+			itemHtml += "<div class='postSum'><div class='row1'><span class='uploader'>" + feedData[attr].uploader
+					+ "</span>";
+			itemHtml += "<span class='likesCount'>" + (feedData[attr].likesCount === null ? 0 : feedData[attr].likesCount)
+					+ "</span>";
+			itemHtml += "<button class='likesBtn btn' style='display: none'> 좋아요 </button></div>";
+			itemHtml += "<div class='row2'><span class='uploadTime'>" + feedData[attr].uploadTime
+			+ "</span></div></div></div>";
+			itemDiv.html(itemHtml);
+			boxes.push(itemDiv);
+		}
+		return boxes;
+	}
+	//page 불러오기 이벤트
+	$('#more').click(function(){
+		getMoreFeed()
+	});
+	
+	$(window).scroll(function() {
+		var scrollTop = $(this).scrollTop();
+		var feedHeight = $(this).height();
+		var contentHeight = $('#container').height();
+		if(scrollTop + feedHeight + 1 >= contentHeight) {
+			getMoreFeed();
+		}
 	});
 });
