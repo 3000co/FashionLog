@@ -9,10 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class FashionLogApplication {
 	
 	public static void main(String[] args) {
-		System.out.println("before running app");
 		SpringApplication.run(FashionLogApplication.class, args);
-		System.out.println("after running app");
-		
 	}
 
 }
