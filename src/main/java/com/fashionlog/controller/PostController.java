@@ -2,9 +2,9 @@ package com.fashionlog.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,6 +36,7 @@ import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Post;
 import com.fashionlog.model.dto.Style;
 import com.fashionlog.model.service.FileService;
+import com.fashionlog.model.service.LikesService;
 import com.fashionlog.model.service.PostService;
 
 @Controller
@@ -57,6 +59,8 @@ public class PostController {
 	private PostService postService;
 	@Autowired
 	private FileService fileService;
+	@Autowired
+	private LikesService likesService;
 
 	@RequestMapping("/postWrite")
 	public String startTest(Model model, HttpServletResponse response, HttpSession session) {
@@ -163,24 +167,38 @@ public class PostController {
 
 	@RequestMapping("/feed")
 	public String getFeed(Model model, HttpSession session,
-			@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 5) Pageable paging) {
+			@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 2) Pageable paging) {
 		// 로그인한 사람 user
 		Member user = (Member) session.getAttribute("member");
 		if (user == null)
 			return "redirect:/login";
 		user = memberRepository.findById(user.getMemberNo()).get();
-		// 가져오는 값들을 중복없이 저장하기 위해 set 생성
-		Set<Post> feedSet = new HashSet<>();
-		// 스타일 글 페이징해서 담기
-		feedSet.addAll(postService.getFeedByStyle(user, paging));
-		// 팔로이 글 페이징해서 담기
-		feedSet.addAll(postService.getFeedByFollowee(user, paging));
-		// 내글 페이징해서 담기
-		feedSet.addAll(postService.getFeedByMe(user, paging));
-		List<Post> feed = new ArrayList<Post>(feedSet);
-		Collections.sort(feed);
+		List<Post> feed = postService.getPostToFeed(user,paging);
+		for(Post post:feed) {
+			likesService.countLikes(post);
+		}
 		model.addAttribute("feed", feed);
 		return "feed";
+	}
+	
+	@RequestMapping(value = "/getMoreFeed", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getMoreFeed(Integer memberNo, Pageable paging) {
+//		Member user = (Member) session.getAttribute("member");
+		Member user = memberRepository.findById(memberNo).get();
+		Map<String, Object> newFeed = new HashMap<>();
+		List<Post> feedList = postService.getPostToFeed(user,paging);
+		for(Post post :feedList) {
+			Map<String, Object> feedVo = new HashMap<>();
+			feedVo.put("postNo", post.getPostNo());
+			feedVo.put("postImageNo", post.getPostImageNo().getPath());
+			feedVo.put("uploadTime", post.getUploadTime());
+			feedVo.put("uploader", post.getMemberNo().getNickname());
+			likesService.countLikes(post);
+			feedVo.put("likesCount", post.getLikesCount());
+			newFeed.put(post.getPostNo()+"", feedVo);
+		}
+		return newFeed;
 	}
 
 }

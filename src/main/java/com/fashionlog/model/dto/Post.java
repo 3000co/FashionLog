@@ -63,10 +63,6 @@ public class Post implements Comparable<Post> {
 	
 	@Transient
 	private Long likesCount;
-	
-	public void setLikesCount() {
-		
-	}
 
 	@Override
 	public int compareTo(Post o) {
