@@ -1,16 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8">
-<title>Insert title here</title>
+
+<meta charset="UTF-8">
+<title>Post</title>
+
+<link rel="stylesheet" href="/css/post.css">
+<link rel="stylesheet" href="/css/comment.css">
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <body>
-
-<div th:include="header/header"></div>
-<div th:include="comment"></div>
-
-
-
-
+	<div th:include="header/header"></div>
+	<div id="postView" class="postView">
+		<input id="memberNo" name="memberNo" class="memberNo"
+			th:value="${post.memberNo.memberNo}" hidden="true">
+		<div class="leftWrap">
+			<div class="imgMold">
+				<img id="postImage" class="postImage"
+					th:src="${post.postImageNo.path}"><br>
+			</div>
+			<div class="postContents">
+				<textarea id="contents" rows="10" cols="39"
+					th:text="${post.contents}" disabled="disabled"></textarea>
+			</div>
+		</div>
+		<div class="itemWrap">
+			<!-- 스타일 -->
+			<div class="style">
+				<label for="style">스 타 일</label> &emsp;&emsp;&nbsp; <input
+					th:if="${post.styleNo1}" type="text" id="style1" class="style"
+					th:value="${post.styleNo1.name}" disabled="disabled"> <input
+					th:if="${post.styleNo2}" type="text" id="style2" class="style"
+					th:value="${post.styleNo2.name}" disabled="disabled"> <input
+					th:if="${post.styleNo3}" type="text" id="style3" class="style"
+					th:value="${post.styleNo3.name}" disabled="disabled">
+			</div>
+			<hr>
+			<!-- 태그 -->
+			<div id="itemTagWrap" class="itemTagWrap accordion">
+				<th:block th:each="item:${itemList}">
+					<h3 th:id="|itemTag${item.tagNo}|" th:text="${item.tagNo}"></h3>
+					<div class="itemInfo">
+						<label for="name">상 품 명</label> <input type="text" class="name"
+							th:value="${item.name}" disabled="disabled"><br> <label
+							for="categoryNo">카테고리</label> <input type="text" class="category"
+							th:value="${item.categoryNo.name}" disabled="disabled"><br>
+						<br> <label for="brandNo">브 랜 드</label> <input type="text"
+							class="brand" th:value="${item.brandNo.name}" disabled="disabled"><br>
+						<br> <label for="color">색상</label>
+						<div class="colorSquare"></div>
+						<input type="text" class="color" th:value="${item.color}"
+							disabled="disabled"> <br> <label for="store">구
+							매 처</label> <input type="text" class="store" th:value="${item.store}"
+							disabled="disabled">
+						<button type="button" id="mapBtn">지도</button>
+						<br> <input type="number" class="xCoordinate" hidden="true"
+							th:value="${item.xCoordinate}"> <input type="number"
+							class="yCoordinate" hidden="true" th:value="${item.yCoordinate}">
+					</div>
+				</th:block>
+			</div>
+		</div>
+	<div th:include="comment" class="commentArea"></div>
+	</div>
+	<div id="mapModal" class="modal">
+		<div class="modalContent">
+			<span class="close">&times;</span>
+			<p>지도지도도</p>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$(".accordion").accordion({
+				animate : 200,
+				collapsible : true
+			});
+			$("#toggle").button().on("click", function() {
+				if ($("#accordion").accordion("option", "icons")) {
+					$("#accordion").accordion("option", "icons", null);
+				} else {
+					$("#accordion").accordion("option", "icons", icons);
+				}
+			});
+		});
+	</script>
 </body>
 </html>

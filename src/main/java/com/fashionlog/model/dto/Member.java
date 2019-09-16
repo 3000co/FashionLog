@@ -3,6 +3,7 @@ package com.fashionlog.model.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -31,7 +32,6 @@ public class Member {
 	@Column(columnDefinition = "char")
 	private String id;
 
-	@Column(columnDefinition = "char")
 	private String password;
 
 	@Column(columnDefinition = "char")
@@ -64,16 +64,16 @@ public class Member {
 	@JoinColumn(name = "STYLE_NO3")
 	private Style styleNo3;
 
-	@OneToMany(mappedBy = "memberNo")
+	@OneToMany(mappedBy = "memberNo", cascade = CascadeType.ALL)
 	private List<Post> posts = new ArrayList<Post>();
 
 	@Transient
 	private Long likesCount;
-
-	@OneToMany(mappedBy = "followeeMemNo")
+	
+	@OneToMany(mappedBy = "followeeMemNo", cascade = CascadeType.ALL)
 	private List<Follow> followers;
 
-	@OneToMany(mappedBy = "followerMemNo")
+	@OneToMany(mappedBy = "followerMemNo", cascade = CascadeType.ALL)
 	private List<Follow> followees;
 
 	@Transient

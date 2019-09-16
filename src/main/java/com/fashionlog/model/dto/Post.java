@@ -24,7 +24,7 @@ import lombok.ToString;
 @Setter
 @ToString(exclude = {"itemList", "commentList"})
 @Entity
-public class Post {
+public class Post implements Comparable<Post> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,5 +62,22 @@ public class Post {
 	private List<Item> itemList = new ArrayList<Item>();
 	
 	@Transient
-	private Long LikesCount;
+	private Long likesCount;
+	
+	public void setLikesCount() {
+		
+	}
+
+	@Override
+	public int compareTo(Post o) {
+		if(this.getPostNo()>o.getPostNo()) {
+			return -1;
+		}else if(this.getPostNo()<o.getPostNo()) {
+			return 1;
+		}
+		return 0;
+//		}else if(this.getUploadTime().getTime()>o.getUploadTime().getTime()) {
+//			return -1;
+//		}
+	}
 }
