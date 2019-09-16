@@ -9,26 +9,34 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	@Autowired
-	private BoardUserDetailsService boardUserDetailsService;
+public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
-	@Override
-	protected void configure(HttpSecurity security) throws Exception {
-		security.authorizeRequests().antMatchers("/").permitAll();
+   @Autowired
+   private SecurityUserDetailsService userDetailsService;
 
-		security.csrf().disable();
-		security.formLogin().loginPage("/login").defaultSuccessUrl("/", true);
-		security.exceptionHandling().accessDeniedPage("/login");
-		security.logout().invalidateHttpSession(true).logoutSuccessUrl("/");
+   @Override
+   protected void configure(HttpSecurity security) throws Exception {
 
-		security.userDetailsService(boardUserDetailsService);
+      security.userDetailsService(userDetailsService);
 
-	}
-	
-	@Bean 
-	public PasswordEncoder passwordEncoder() {
-		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-	}
+      security.authorizeRequests().antMatchers("/").permitAll();
+      security.authorizeRequests().antMatchers("/user/**").hasAnyRole("USER");
+      security.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
+      
+      security.csrf().disable();
 
+      security.formLogin().loginPage("/login").defaultSuccessUrl("/feed", true);
+      security.formLogin().loginPage("/login").failureUrl("/loginFail");
+      security.formLogin().usernameParameter("id");
+      security.exceptionHandling().accessDeniedPage("/accessDenied");
+      security.logout().logoutUrl("/logout").invalidateHttpSession(true).logoutSuccessUrl("/login");
+
+   }
+
+   @Bean
+   public PasswordEncoder passwordEncoder() {
+      return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+   }
 }
+
+            

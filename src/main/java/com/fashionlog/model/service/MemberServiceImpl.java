@@ -59,5 +59,5 @@ public class MemberServiceImpl implements MemberService {
 	public void doLogout(Member member) {
 		
 	}
-	
+
 }

@@ -1,0 +1,54 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>회원 가입</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+function btn() {
+	$(':checkbox').each(function(i){
+		if( $(':checkbox').eq(i).prop("checked") == true ){
+			$(':checked').each(function(j){
+	        $(':checked').eq(j).prop("name","styleNo"+(j+1));
+				});
+			}
+		});
+	} 
+	
+</script>
+</head>
+
+<body th:align="center">	
+	<h3>회원가입</h3>
+	<img src="images/google-logo.png" width="50" height="50" />
+	<h4>관심있는 스타일을 더 선택하세요.</h4>
+	<h5>이후 마이페이지에서 변경 가능</h5><br>
+		
+	<form th:action="@{/styleSelect3.do}" method="post">
+	<div class="form-group" >
+		<input type="hidden" name="id" th:value="${id}">
+		<input type="hidden" name="password" th:value="${password}">
+		<input type="hidden" name="nickname" th:value="${nickname}">
+		<input type="hidden" name="phonenumber" th:value="${phonenumber}">
+		<input type="hidden" name="email" th:value="${email}">
+			<input type="checkbox" value="1" name="styleNo"/><label for="1">Vintage</label>
+			<input type="checkbox" value="2" name="styleNo"/><label for="2">Casual</label> <br>
+			<input type="checkbox" value="3" name="styleNo"/><label for="3">Chic</label>
+			<input type="checkbox" value="4" name="styleNo"/><label for="4">Street</label> <br>
+			<input type="checkbox" value="5" name="styleNo"/><label for="5">Sporty</label>
+			<input type="checkbox" value="6" name="styleNo"/><label for="6">Formal</label> <br>
+			<input type="checkbox" value="7" name="styleNo"/><label for="7">Gothic</label>
+			<input type="checkbox" value="8" name="styleNo"/><label for="8">Punk</label> <br>
+			<input type="checkbox" value="9" name="styleNo"/><label for="9">Retro</label>
+			<input type="checkbox" value="10" name="styleNo"/><label for="10">Dandy</label> <br>
+	</div>		
+			
+		<p>
+			<input type="button" id="selectBtn" onclick="location.href='/join'"  value="돌아가기"/>
+			<span><input type="submit" value="가입" onclick="btn();"></span>
+		</p>
+
+	</form>
+	
+</body>
+</html>
