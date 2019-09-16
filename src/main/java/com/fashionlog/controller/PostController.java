@@ -73,9 +73,9 @@ public class PostController {
 	}
 
 	/**
-	 * 1. file ¿Ã¸®±â
+	 * 1. file ì˜¬ë¦¬ê¸°
 	 * 
-	 * @param mulFile (ÆÄÀÏ)
+	 * @param mulFile (íŒŒì¼)
 	 * @param model
 	 * @param request
 	 * @return FileNo
@@ -89,7 +89,7 @@ public class PostController {
 	}
 
 	/**
-	 * 2. fileNo¸¦ ¹Ş¾Æ¼­ post ¿Ã¸®±â
+	 * 2. fileNoë¥¼ ë°›ì•„ì„œ post ì˜¬ë¦¬ê¸°
 	 * 
 	 * @param post
 	 * @return postNo
@@ -98,7 +98,7 @@ public class PostController {
 	@ResponseBody
 	public int postTest(Post post) {
 		Post getPost = postRepository.save(post);
-		// Member.posts°¡ ÀÚµ¿À¸·Î ¹İ¿µµÇÁö ¾ÊÀ» °æ¿ì
+		// Member.postsê°€ ìë™ìœ¼ë¡œ ë°˜ì˜ë˜ì§€ ì•Šì„ ê²½ìš°
 //		Member writer = post.getMemberNo();
 //		writer.getPosts().add(post);
 //		memberRepository.save(writer);
@@ -106,7 +106,7 @@ public class PostController {
 	}
 
 	/**
-	 * 3. postNo¸¦ ¹Ş¾Æ¼­ item¸¸µé°í(view¿¡¼­ ÀÛ¾÷ÇÔ) ¿Ã¸®±â
+	 * 3. postNoë¥¼ ë°›ì•„ì„œ itemë§Œë“¤ê³ (viewì—ì„œ ì‘ì—…í•¨) ì˜¬ë¦¬ê¸°
 	 * 
 	 * @param item
 	 */
@@ -134,7 +134,7 @@ public class PostController {
 		model.addAttribute("style", style);
 		model.addAttribute("category", category);
 		model.addAttribute("brand", brand);
-		// postview ÆäÀÌÁö°¡ »ı±â¸é ¹Ù²ãÁÙ°Í
+		// postview í˜ì´ì§€ê°€ ìƒê¸°ë©´ ë°”ê¿”ì¤„ê²ƒ
 		return "post/post";
 	}
 
@@ -159,18 +159,18 @@ public class PostController {
 	@RequestMapping("/feed")
 	public String getFeed(Model model, HttpSession session,
 			@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 5) Pageable paging) {
-		// ·Î±×ÀÎÇÑ »ç¶÷ user
+		// ë¡œê·¸ì¸í•œ ì‚¬ëŒ user
 		Member user = (Member) session.getAttribute("member");
 		if (user == null)
 			return "redirect:/login";
 		user = memberRepository.findById(user.getMemberNo()).get();
-		// °¡Á®¿À´Â °ªµéÀ» Áßº¹¾øÀÌ ÀúÀåÇÏ±â À§ÇØ set »ı¼º
+		// ê°€ì ¸ì˜¤ëŠ” ê°’ë“¤ì„ ì¤‘ë³µì—†ì´ ì €ì¥í•˜ê¸° ìœ„í•´ set ìƒì„±
 		Set<Post> feedSet = new HashSet<>();
-		// ½ºÅ¸ÀÏ ±Û ÆäÀÌÂ¡ÇØ¼­ ´ã±â
+		// ìŠ¤íƒ€ì¼ ê¸€ í˜ì´ì§•í•´ì„œ ë‹´ê¸°
 		feedSet.addAll(postService.getFeedByStyle(user, paging));
-		// ÆÈ·ÎÀÌ ±Û ÆäÀÌÂ¡ÇØ¼­ ´ã±â
+		// íŒ”ë¡œì´ ê¸€ í˜ì´ì§•í•´ì„œ ë‹´ê¸°
 		feedSet.addAll(postService.getFeedByFollowee(user, paging));
-		// ³»±Û ÆäÀÌÂ¡ÇØ¼­ ´ã±â
+		// ë‚´ê¸€ í˜ì´ì§•í•´ì„œ ë‹´ê¸°
 		feedSet.addAll(postService.getFeedByMe(user, paging));
 		List<Post> feed = new ArrayList<Post>(feedSet);
 		Collections.sort(feed);
