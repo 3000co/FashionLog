@@ -111,18 +111,33 @@ public class MemberController {
 		model.addAttribute("phonenumber",member.getPhonenumber());
 		model.addAttribute("email",member.getEmail());
 		System.out.println("Model1::" + model);
-		return "member/styleSelect";
+		return "member/styleSelect1.do";
 	}
+	
 	// 회원가입 스타일 처리1
-	@RequestMapping(value = "/styleSelect1.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/styleSelect1.do", method = RequestMethod.GET)
 	public String doStyleSelect1(Member member, Model model, HttpSession session) {
-		return "member/styleSelect3";
+		
+		return "member/styleSelect1";
 		
 	
 	}
 	
+	//파일 가져오기
+	@ResponseBody
+	@RequestMapping("/getFileList")
+	private ModelAndView getStyleList(HttpServletRequest request) throws Exception{
+		ModelAndView modelAndView = new ModelAndView("jsonView");
+		List<File> sampleImgList = fileRepository.findByTypeContaining("sample");
+		modelAndView.addObject("sampleImgList", sampleImgList);
+		
+		return modelAndView;
+	}
+	
 	// 회원가입 스타일 처리2
-
+	
+		
+	
 	// 회원가입 스타일 처리3
 		@RequestMapping(value = "/styleSelect3.do", method = RequestMethod.POST)
 		public String doStyleSelect3(Member member, Model model, HttpSession session) {
@@ -173,23 +188,6 @@ public class MemberController {
 			return "redirect:/profile";
 		}
 		
-		
-	//이미지 선택형 스타일 선택 
-		@RequestMapping(value="/styleSelectByImg", method=RequestMethod.GET)
-		public String doStyleSelctByImg() {
-			
-			return "/member/styleSelectByImage";
-		}
-	//파일 가져오기
-		@ResponseBody
-		@RequestMapping("/getFileList")
-		private ModelAndView getStyleList(HttpServletRequest request) throws Exception{
-			ModelAndView modelAndView = new ModelAndView("jsonView");
-			List<File> sampleImgList = fileRepository.findByTypeContaining("sample");
-			modelAndView.addObject("sampleImgList", sampleImgList);
-			
-			return modelAndView;
-		}
-		
+
 		
 }
