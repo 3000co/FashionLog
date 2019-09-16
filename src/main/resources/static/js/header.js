@@ -7,11 +7,24 @@
 			//drop down menu	
 					$(".searchBoard").click(function() {
 						$('.mega-menu').addClass('display-on');
+						
 					});
-					$(".searchBoard").mouseleave(function() {
-						$('.mega-menu').removeClass('display-on');
-					});
-			
+//					$(".searchBoard").mouseleave(function() {
+//						$('.mega-menu').removeClass('display-on');
+//					});
+					
+					$('html').click(function(e) {
+						if(!( $(e.target).is(".menuBtn ") || $(e.target).is(".token-input") )) {
+							console.log(e.target);
+							$('.mega-menu').removeClass('display-on'); 
+							}
+						});
+					
+					//db에서 상세 속성 목록 불러오기
+					getAttrList("styleBtnTable","/getAttrList/style");
+					getAttrList("brandBtnTable","/getAttrList/brand");
+					getAttrList("categoryBtnTable","/getAttrList/category");
+
 			});
 	
 //button js 
@@ -66,15 +79,105 @@
 		console.log("searchword2 : "+searchWord);
 		$('#inputField-tokenfield').val(searchWord);
 	});
+	
+	//상세버튼 
+	
+	$(document).on("click",".attrBtn",function() {
+		 console.log("안녕?");
+			var attrWord = $(this).val();
+			
+			var searchWord = $('#inputField-tokenfield').val();
+			$('#inputField').tokenfield('createToken',searchWord + attrWord);
+			$('#inputField-tokenfield').val('');
+		});
+	  /* $('.attrBtn').click(function(){
+		   console.log("안녕?");
+			var attrWord = $(this).val();
+			
+			var searchWord = $('#inputField-tokenfield').val();
+			$('#inputField').tokenfield('createToken',searchWord + attrWord);
+			$('#inputField-tokenfield').val('');
+		});*/
 
-	//상세 속성 버튼 
-	$('.attrBtn').click(function(){
-		var attrWord = $(this).val();
-		var searchWord = $('#inputField-tokenfield').val();
-		$('#inputField').tokenfield('createToken',searchWord + attrWord);
-		$('#inputField-tokenfield').val('');
+	
+	//검색 타입 선택 버튼(category류 버튼)
+	function getAttrList(applyTargetId, url) {
+
+	  $.ajax({
+	   url : url,
+	   type : 'POST',    
+	   dataType: "json",    
+	   success : function(data){
+	   
+	   var jsondata = JSON.stringify(data);
+	   var attrName;
+	   var html = "";
+
+	   console.log(data);
+	   
+	    for(i=0; i<data.attrList.length; i++){
+	    	//attrName = data.styleList[i].name;
+	   		attrName = data.attrList[i].name;
+	    	html += "<td><input class='attrBtn'";
+	    	html += "type='button' value="+attrName+" ";
+	    	html += "onclick=returnDefaultMod()>";
+	    	html += "</input></td>"
+		   console.log("attrName: "+attrName);
+	   } 
+	   
+	   $("#obj").append(jsondata);
+	   $("#"+applyTargetId).html(html);
+	   
+	   },
+	   error: function(data){console.log("오류 발생"); console.log("data: "+data);},
+	   beforeSend: function() {
+	   },
+	   complete: function() {
+
+	   }       
+	  });     
+	 }
+	
+	function changeSearchMod(target) {
+		var defaultSearch = document.getElementById("defaultSearch");
+
+		console.log(target);
 		
-	});
+		switch(target){
+		case 'categoryBtn' :
+			defaultSearch.style.display = 'none';
+			document.getElementById("categorySearch").style.display = 'block';
+			break;
+		case 'colorBtn' :
+			defaultSearch.style.display = 'none';
+			document.getElementById("colorSearch").style.display = 'block';
+			break;
+		case 'styleBtn' :
+			defaultSearch.style.display = 'none';
+			document.getElementById("styleSearch").style.display = 'block';
+			break;
+		case 'brandBtn' :
+			defaultSearch.style.display = 'none';
+			document.getElementById("brandSearch").style.display = 'block';
+			break;
+		case 'userBtn' :
+			defaultSearch.style.display = 'none';
+			document.getElementById("userSearch").style.display = 'block';
+			break;
+		}
+	}
+
+	function returnDefaultMod() {
+		var defaultSearch = document.getElementById("defaultSearch");
+		defaultSearch.style.display = 'block';
+		document.getElementById("categorySearch").style.display = 'none';
+		document.getElementById("colorSearch").style.display='none'; 
+		document.getElementById("styleSearch").style.display='none';
+		document.getElementById("brandSearch").style.display='none';
+		document.getElementById("userSearch").style.display='none'; 
+
+	}
+
 
 
 			

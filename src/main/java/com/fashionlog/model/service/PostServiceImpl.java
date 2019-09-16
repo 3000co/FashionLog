@@ -23,6 +23,8 @@ public class PostServiceImpl implements PostService {
 	@Autowired
 	private LikesRepository likesRepository;
 
+	
+	
 	@Override
 	public void countLikes() {
 		List<Post> posts = postRepository.findAll();

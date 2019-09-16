@@ -2,6 +2,7 @@ package com.fashionlog.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,8 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.fashionlog.model.dao.FileRepository;
 import com.fashionlog.model.dao.MemberRepository;
+import com.fashionlog.model.dto.File;
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Style;
 import com.fashionlog.model.service.MemberService;
@@ -28,6 +32,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberRepository memberRepository;
+	
+	@Autowired
+	private FileRepository fileRepository;
 	
 	/**
 	 * 개발 편의를 위한 현재 맴버리스트 출력 메서드
@@ -134,6 +141,7 @@ public class MemberController {
 				return "redirect:/login";
 			}
 		}
+
 		
 	// 비밀번호 변경 화면
 	@RequestMapping("/modPassword")
@@ -166,6 +174,23 @@ public class MemberController {
 			return "redirect:/profile";
 		}
 		
+		
+	//이미지 선택형 스타일 선택 
+		@RequestMapping(value="/styleSelectByImg", method=RequestMethod.GET)
+		public String doStyleSelctByImg() {
+			
+			return "/member/styleSelectByImage";
+		}
+	//파일 가져오기
+		@ResponseBody
+		@RequestMapping("/getFileList")
+		private ModelAndView getStyleList(HttpServletRequest request) throws Exception{
+			ModelAndView modelAndView = new ModelAndView("jsonView");
+			List<File> sampleImgList = fileRepository.findByTypeContaining("sample");
+			modelAndView.addObject("sampleImgList", sampleImgList);
+			
+			return modelAndView;
+		}
 		
 		
 }

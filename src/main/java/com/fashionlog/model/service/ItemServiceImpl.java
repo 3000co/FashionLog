@@ -16,7 +16,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPQLQuery;
 
 @Service
-public class itemServiceImpl extends QuerydslRepositorySupport implements itemService{
+public class ItemServiceImpl extends QuerydslRepositorySupport implements ItemService{
 	
 	QItem item = QItem.item;
 	QPost post = QPost.post;
@@ -24,7 +24,7 @@ public class itemServiceImpl extends QuerydslRepositorySupport implements itemSe
 	QStyle style = QStyle.style;
 	QBrand brand = QBrand.brand;
 	
-	public  itemServiceImpl(){
+	public  ItemServiceImpl(){
 		super(Item.class);
 	}
 	
