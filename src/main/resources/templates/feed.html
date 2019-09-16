@@ -2,23 +2,67 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/feed.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.grid-a-licious.js"></script>
 <title>news feed</title>
 </head>
 <body>
 <div th:include="header/header"></div>
 <div id="container">
-	<div th:each="post:${feed}" class="item postSum" th:id="${'p'+post.postNo}">
-			<img class="postImg" th:alt="${post.postNo+'번 포스트의 사진'}" th:src="${post.postImageNo.path}">
+	<div th:each="post:${feed}" th:class="@{item}" th:id="${'p'+post.postNo}">
+			<img th:alt="${post.postNo+'번 포스트의 사진'}" th:src="${post.postImageNo.path}">
 			<span class="uploadTime" th:text="${post.uploadTime}"> </span>
-			<span class="uploader" th:text="${post.memberNo.nickname}"> nickname </span>
-			<span class="likeCount" th:text="${post.likesCount}"> 0 </span>
-			<button class="likesBtn btn" style="display: none"> 좋아요 </button>
+			<span class="uploader" th:text="${post.memberNo.nickname}"> </span>
+		
 	</div>
 </div>
 
-<script src="/js/jquery.grid-a-licious.js"></script>
-<script src="/js/feed.js"></script>
-<script src="/js/likes.js"></script>
+<script type="text/javascript">
+$("#container").gridalicious({
+	  animate: true,
+	  animationOptions: {
+	    queue: true,
+	    speed: 200,
+	    duration: 300,
+	    effect: 'fadeInOnAppear',
+	    complete: function(){
+	    	console.log("completed");
+	    }
+	  }
+	});
+//현재 시간 기준으로 업로드 시간 표현
+var uploadTime = $('.uploadTime');
+for(var i = 0; i<uploadTime.length; i++) {
+	var uploadTimeStamp = new Date($(uploadTime[i]).text());
+	var nowTimeStamp = new Date();
+	//초단위 시간차	
+	var timeDiff = (nowTimeStamp - uploadTimeStamp)/1000;
+	var timeExp = '';
+	//1분 미만일 때
+	if(timeDiff<60) {
+		timeExp = '방금 전'
+	//1시간 미만일 때
+	} else if(timeDiff<3600) {
+		timeExp = Math.floor(timeDiff/60)+'분 전';
+	//1일 미만일 때
+	} else if(timeDiff<86400) {
+		timeExp = Math.floor(timeDiff/3600)+'시간 전';
+	//30일 미만일 때
+	} else if(timeDiff<2592000) {
+		timeExp = Math.floor(timeDiff/86400)+'일 전'
+	//1년 미만일 때
+	} else if(timeDiff<31536000) {
+		timeExp ='약 '+Math.floor(timeDiff/2592000)+'달 전'
+	//년단위 넘을 때
+	} else {
+		timeExp =Math.floor(timeDiff/31536000)+'년 전'
+	}
+	$(uploadTime[i]).text(timeExp);
+} 
+
+</script>
 </body>
 </html>
