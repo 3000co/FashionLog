@@ -122,8 +122,7 @@ public class MemberController {
 	}
 	
 	// 회원가입 스타일 처리2
-	
-	
+
 	// 회원가입 스타일 처리3
 		@RequestMapping(value = "/styleSelect3.do", method = RequestMethod.POST)
 		public String doStyleSelect3(Member member, Model model, HttpSession session) {
