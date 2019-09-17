@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,6 +39,7 @@ import com.fashionlog.model.dto.Style;
 import com.fashionlog.model.service.FileService;
 import com.fashionlog.model.service.LikesService;
 import com.fashionlog.model.service.PostService;
+import com.fashionlog.security.SecurityUser;
 
 @Controller
 public class PostController {
@@ -63,7 +65,8 @@ public class PostController {
 	private LikesService likesService;
 
 	@RequestMapping("/postWrite")
-	public String startTest(Model model, HttpServletResponse response, HttpSession session) {
+	public String startTest(Model model, HttpServletResponse response, @AuthenticationPrincipal SecurityUser securityUser) {
+//		public String startTest(Model model, HttpServletResponse response, HttpSession session) {
 		List<Style> style = styleRepository.findAll();
 		List<Category> category = categoryRepository.findAll();
 		List<Object[]> brand = brandRepository.findBrandQuery();
@@ -71,8 +74,7 @@ public class PostController {
 //		Member member = memberRepository.findById("a").;
 		
 
-		Member user = (Member) session.getAttribute("member");
-		Member member = memberRepository.findById(user.getId());
+		Member user = securityUser.getMember();
 
 		model.addAttribute("style", style);
 		model.addAttribute("category", category);
@@ -132,23 +134,8 @@ public class PostController {
 		return "feed";
 	}
 
-
-	@RequestMapping("/post")
-	public String getPost(Model model, HttpSession session) {
-
-		List<Style> style = styleRepository.findAll();
-		List<Category> category = categoryRepository.findAll();
-		List<Object[]> brand = brandRepository.findBrandQuery();
-
-		model.addAttribute("style", style);
-		model.addAttribute("category", category);
-		model.addAttribute("brand", brand);
-		// postview 페이지가 생기면 바꿔줄것
-		return "post/post";
-	}
-
 	@RequestMapping("/post/{postNo}")
-	public String getPost(@PathVariable int postNo, Model model, HttpSession session) {
+	public String getPost(@PathVariable int postNo, Model model) {
 		Post post = postRepository.findById(postNo).get();
 		model.addAttribute("post", post);
 		model.addAttribute("itemList", itemRepository.findByPostNoOrderByTagNoAsc(post));
@@ -166,10 +153,10 @@ public class PostController {
 	}
 
 	@RequestMapping("/feed")
-	public String getFeed(Model model, HttpSession session,
-			@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 2) Pageable paging) {
+	public String getFeed(Model model, @AuthenticationPrincipal SecurityUser securityUser,
+			@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 5) Pageable paging) {
 		// 로그인한 사람 user
-		Member user = (Member) session.getAttribute("member");
+		Member user = securityUser.getMember();		
 		if (user == null)
 			return "redirect:/login";
 		user = memberRepository.findById(user.getMemberNo()).get();
@@ -183,9 +170,9 @@ public class PostController {
 	
 	@RequestMapping(value = "/getMoreFeed", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> getMoreFeed(Integer memberNo, Pageable paging) {
+	public Map<String, Object> getMoreFeed(Pageable paging, @AuthenticationPrincipal SecurityUser securityUser) {
 //		Member user = (Member) session.getAttribute("member");
-		Member user = memberRepository.findById(memberNo).get();
+		Member user = securityUser.getMember();
 		Map<String, Object> newFeed = new HashMap<>();
 		List<Post> feedList = postService.getPostToFeed(user,paging);
 		for(Post post :feedList) {

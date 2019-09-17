@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import com.fashionlog.model.dao.PostRepository;
 import com.fashionlog.model.dto.Comment;
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Post;
+import com.fashionlog.security.SecurityUser;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -60,15 +62,16 @@ public class CommentController {
 
 
 	@RequestMapping("/insertComment")
-	public String insertComment(HttpServletRequest request, HttpSession session) {
-		Comment comment = new Comment();
-		Member member = memberRepository.findById(session.getAttribute("id")+"");
-		Post post = postRepository.findById(9).get();
+	public String insertComment(Comment comment, @AuthenticationPrincipal SecurityUser securityUser) {
+//		Comment comment = new Comment();
+//		Member member = memberRepository.findById(session.getAttribute("id")+"");
+		Member user = securityUser.getMember();
+//		Post post = postRepository.findById(postNo).get();
 		
 		//postNo은 샘플 데이터를 넣어둠. 세션에서 받을 예정. 
-		comment.setMemberNo(member);
-		comment.setContents(request.getParameter("contents"));
-		comment.setPostNo(post);
+//		comment.setMemberNo(user);
+//		comment.setContents(request.getParameter("contents"));
+//		comment.setPostNo(post);
 		commentRepository.save(comment);
 
 		return "redirect:/comment";

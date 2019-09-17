@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,6 +17,7 @@ import com.fashionlog.model.dao.PostRepository;
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Post;
 import com.fashionlog.model.service.LikesService;
+import com.fashionlog.security.SecurityUser;
 
 @RestController
 public class LikesController {
@@ -30,8 +32,10 @@ public class LikesController {
 
 	// 내가 좋아요 했는지 안했는지 체크
 	@RequestMapping("/checkLikes")
-	public String checkLikes(Integer postNo, HttpSession session) {
-		Member user = (Member) session.getAttribute("member");
+	public String checkLikes(Integer postNo, @AuthenticationPrincipal SecurityUser securityUser) {
+//		public String checkLikes(Integer postNo, HttpSession session) {
+		Member user = securityUser.getMember();
+//		Member user = (Member) session.getAttribute("member");
 		user = memberRepository.findById(user.getId());
 		Post post = postRepository.findById(postNo).get();
 		return likesRepository.findByMemberNoAndPostNo(user, post).isPresent() ? "likes" : "unLikes";
@@ -39,8 +43,10 @@ public class LikesController {
 
 	// 좋아요 하기
 	@RequestMapping("/doLikes")
-	public String doLikes(Integer postNo, HttpSession session) throws Exception {
-		Member user = (Member) session.getAttribute("member");
+	public String doLikes(Integer postNo, @AuthenticationPrincipal SecurityUser securityUser) throws Exception {
+//		public String doLikes(Integer postNo, HttpSession session) throws Exception {
+		Member user = securityUser.getMember();
+//		Member user = (Member) session.getAttribute("member");
 		user = memberRepository.findById(user.getId());
 		Post post = postRepository.findById(postNo).get();
 		if (likesRepository.findByMemberNoAndPostNo(user, post).isPresent()) {
@@ -52,8 +58,10 @@ public class LikesController {
 
 	// 좋아요 취소
 	@RequestMapping("/unLikes")
-	public String unLikes(Integer postNo, HttpSession session) {
-		Member user = (Member) session.getAttribute("member");
+//	public String unLikes(Integer postNo, HttpSession session) {
+//		Member user = (Member) session.getAttribute("member");
+	public String unLikes(Integer postNo, @AuthenticationPrincipal SecurityUser securityUser) {
+		Member user = securityUser.getMember();
 		user = memberRepository.findById(user.getId());
 		Post post;
 		try {
