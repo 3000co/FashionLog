@@ -66,20 +66,14 @@ public class PostController {
 
 	@RequestMapping("/postWrite")
 	public String startTest(Model model, HttpServletResponse response, @AuthenticationPrincipal SecurityUser securityUser) {
-//		public String startTest(Model model, HttpServletResponse response, HttpSession session) {
 		List<Style> style = styleRepository.findAll();
 		List<Category> category = categoryRepository.findAll();
 		List<Object[]> brand = brandRepository.findBrandQuery();
-
-//		Member member = memberRepository.findById("a").;
-		
-
-		Member user = securityUser.getMember();
-
+		Member user = securityUser.getMember();		
 		model.addAttribute("style", style);
 		model.addAttribute("category", category);
 		model.addAttribute("brand", brand);
-//		model.addAttribute("member", member);
+		model.addAttribute("member", user);
 		return "post/post";
 	}
 
@@ -107,12 +101,8 @@ public class PostController {
 	 */
 	@RequestMapping("/postInsert")
 	@ResponseBody
-	public int postTest(Post post) {
+	public int postInsert(Post post) {
 		Post getPost = postRepository.save(post);
-		// Member.posts가 자동으로 반영되지 않을 경우
-//		Member writer = post.getMemberNo();
-//		writer.getPosts().add(post);
-//		memberRepository.save(writer);
 		return getPost.getPostNo();
 	}
 
@@ -123,9 +113,8 @@ public class PostController {
 	 */
 	@RequestMapping("/itemInsert")
 	@ResponseBody
-	public void itemTest(Item item) {
+	public void itemInsert(Item item) {
 		itemRepository.save(item);
-//		return "/feed";
 	}
 
 	@RequestMapping("/afterPostWrite")
@@ -171,7 +160,6 @@ public class PostController {
 	@RequestMapping(value = "/getMoreFeed", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> getMoreFeed(Pageable paging, @AuthenticationPrincipal SecurityUser securityUser) {
-//		Member user = (Member) session.getAttribute("member");
 		Member user = securityUser.getMember();
 		Map<String, Object> newFeed = new HashMap<>();
 		List<Post> feedList = postService.getPostToFeed(user,paging);

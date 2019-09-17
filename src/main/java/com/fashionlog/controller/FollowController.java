@@ -32,19 +32,10 @@ public class FollowController {
 	@Autowired
 	private NotificationService notificationService;
 	
-	
-
-	// 
 	@RequestMapping("/checkFollow")
 	@ResponseBody
 	public String checkFollow(Integer memberNo, @AuthenticationPrincipal SecurityUser securityUser) {
-//		public String checkFollow(Integer memberNo, HttpSession session) {
-		//가상 세션 데이터 , 6이 로그인 해있음.
-//		Member mockUser = memberRepository.findById(5).get();
-//		session.setAttribute("member", mockUser);
-		
 		Member user = securityUser.getMember();
-//		Member user = (Member) session.getAttribute("member");
 		Member followee = memberRepository.findByMemberNo(memberNo);
 		if(memberNo == user.getMemberNo()) {
 			return "self";
@@ -55,9 +46,7 @@ public class FollowController {
 	@RequestMapping("/doFollow")
 	@ResponseBody
 	public void follow(Integer memberNo, @AuthenticationPrincipal SecurityUser securityUser) {
-//		public void follow(Integer memberNo, HttpSession session) {
 		Member user = securityUser.getMember();
-//		Member user = (Member) session.getAttribute("member");
 		Member followee = memberRepository.findById(memberNo).get();
 		if(!followService.isFollowing(user, followee)) {
 			Follow follow = new Follow();

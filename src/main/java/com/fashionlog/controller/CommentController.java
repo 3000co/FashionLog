@@ -32,48 +32,21 @@ public class CommentController {
 	private MemberRepository memberRepository;
 	@Autowired
 	private PostRepository postRepository;
-	
 
-	//	@RequestMapping("/")
-	//	public String moveView() {
-	//		return "view";
-	//	}
 
 	@RequestMapping("/comment")
 	@ResponseBody
 	public List<Comment> getCommentList(Model model, Post postNo) {
-//		public String getCommentList(Model model, int postNo) {
-
 		List<Comment> commentList = commentRepository.findByPostNo(postNo);
-//		List<Comment> commentList = commentRepository.findAll();
 		model.addAttribute("commentList", commentList);
 		return commentList;
 	}
-	
-//	public String getCommentList(Model model) {
-//		
-//		List<Object[]> commentList = commentRepository.getCommentList();
-//		for(Object[] item : commentList) {
-//			System.out.println(Arrays.toString(item));
-//		}
-//		model.addAttribute("commentList", commentList);
-//		return "view";
-//	}
-
 
 	@RequestMapping("/insertComment")
 	public String insertComment(Comment comment, @AuthenticationPrincipal SecurityUser securityUser) {
-//		Comment comment = new Comment();
-//		Member member = memberRepository.findById(session.getAttribute("id")+"");
-		Member user = securityUser.getMember();
-//		Post post = postRepository.findById(postNo).get();
-		
-		//postNo은 샘플 데이터를 넣어둠. 세션에서 받을 예정. 
-//		comment.setMemberNo(user);
-//		comment.setContents(request.getParameter("contents"));
-//		comment.setPostNo(post);
+		Member user = securityUser.getMember(); 
+		comment.setMemberNo(user);
 		commentRepository.save(comment);
-
 		return "redirect:/comment";
 	}
 
@@ -82,6 +55,5 @@ public class CommentController {
 		commentRepository.deleteById(commentNo);
 		return "redirect:/comment";
 	}
-
 
 }

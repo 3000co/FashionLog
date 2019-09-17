@@ -79,8 +79,6 @@ public class ReportController {
 			Comment targetComment = commentRepository.findById(targetCommentNo).get();
 			report.setTargetMemNo(targetComment.getMemberNo());
 		}
-		//System.err.println("???????????????????????");
-		//System.err.println(report.toString());
 		reportRepository.save(report);
 
 		return "redirect:/comment";
