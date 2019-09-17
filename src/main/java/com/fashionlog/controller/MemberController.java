@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -95,11 +96,7 @@ public class MemberController {
 	public String join() {
 		return "member/join";
 	}
-	// 회원가입 화면
-		@RequestMapping("/styleSelect1")
-		public String styleSelect1() {
-			return "member/styleSelect1";
-		}
+	
 	// 회원가입 처리
 	@RequestMapping(value = "/join.do", method = RequestMethod.POST)
 	public String doJoin(Member member, Model model, HttpSession session) {
@@ -111,7 +108,7 @@ public class MemberController {
 		model.addAttribute("phonenumber",member.getPhonenumber());
 		model.addAttribute("email",member.getEmail());
 		System.out.println("Model1::" + model);
-		return "member/styleSelect1.do";
+		return "member/styleSelect1";
 	}
 	
 	// 회원가입 스타일 처리1
@@ -136,7 +133,17 @@ public class MemberController {
 	
 	// 회원가입 스타일 처리2
 	
+	@ResponseBody
+	@RequestMapping(value = "/styleSelect2.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String doStyleSelect2( Model model, HttpSession session, HttpServletRequest request,
+	           @RequestParam(value="arr")String[] arr) {
 		
+		for(String a : arr) {
+			System.err.println(a);
+		}
+		
+		return "member/styleSelect2";
+	}
 	
 	// 회원가입 스타일 처리3
 		@RequestMapping(value = "/styleSelect3.do", method = RequestMethod.POST)

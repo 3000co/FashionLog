@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,75 +11,74 @@
 
 <body th:align="center">
 	<h3>회원가입</h3>
-	<img src="images/google-logo.png" width="50" height="50" /> 마음에 드는 사진을
-	선택해주세요.
-	<br> 10장이 모이면 회원님의 선호 스타일을 알려드립니다.
+	<img src="images/google-logo.png" width="50" height="50" />
 
-	<form th:action="@{/styleSelect1.do}" method="post">
-		<div class="selectTable">
-			<!-- 	<table>
-		<tr id="row1">
-			<td class ="styleSample">
-				<p id="styleName0" class="styleName"></p>
-				<img id = "styleImg0">
-			</td>
-			<td class ="styleSample">
-				<p id="styleName1" class="styleName"></p>
-				<img id = "styleImg1">
-			</td>
-			<td class ="styleSample">
-				<p id="styleName2" class="styleName"></p>
-				<img id = "styleImg2">
-			</td>
-		</tr>
-		<tr id="row2">
-			<td class ="styleSample">
-				<p id="styleName3" class="styleName"></p>
-				<img id = "styleImg3">
-			</td>
-			<td class ="styleSample">
-				<p id="styleName4" class="styleName"></p>
-				<img id = "styleImg4">
-			</td>
-			<td class ="styleSample">
-				<p id="styleName5" class="styleName"></p>
-				<img id = "styleImg5">
-			</td>
-		</tr> -->
 
-			<ul>
-				<li class="styleSample"><input type="checkbox" id="cb0" /> <label
-					for="cb0" id="styleName0" class="styleName"
-					onclick="saveFavoriteStyle()"> <img id="styleImg0" src="" /></label>
-				</li>
-				<li class="styleSample"><input type="checkbox" id="cb1" /> <label
-					for="cb1" id="styleName1" class="styleName"> <img
-						id="styleImg1" src="" /></label></li>
-				<li class="styleSample"><input type="checkbox" id="cb2" /> <label
-					for="cb2" id="styleName2" class="styleName"> <img
-						id="styleImg2" src="" /></label></li>
-				<br>
-				<li class="styleSample"><input type="checkbox" id="cb3" /> <label
-					for="cb3" id="styleName3" class="styleName"> <img
-						id="styleImg3" src="" /></label></li>
-				<li class="styleSample"><input type="checkbox" id="cb4" /> <label
-					for="cb4" id="styleName4" class="styleName"> <img
-						id="styleImg4" src="" /></label></li>
-				<li class="styleSample"><input type="checkbox" id="cb5" /> <label
-					for="cb5" id="styleName5" class="styleName"> <img
-						id="styleImg5" src="" /></label></li>
-				<br>
-			</ul>
+	<!-- 두번째 페이지 -->
 
+	<div id="styleSelect2" class="page" style="display: none">
+
+		<br> 회원님의 선호 스타일은</br>
+
+		<table>
+					<tr id="row1">
+						<td class="styleSample"><label id="favoriteStyle0"
+							class="styleName"> <p></p> <img id="favoriteStyleImg0" src="">
+						</label></td>
+						<td class="styleSample"><label id="favoriteStyle1"
+							class="styleName"> <p></p> <img id="favoriteStyleImg1" src="">
+					</tr>
+		</table>
+		<form>
+			<input type="button" id="selectBtn" onclick="location.href='/join'"
+				value="돌아가기" /> <input type="submit" value="가입" onclick="btn();" />
+		</form>
+
+	</div>
+
+
+	<div id="styleSelect1" class="page" style="display: block">
+		<br> 마음에 드는사진을 선택해주세요. <br> 10장이 모이면 회원님의 선호 스타일을 알려드립니다.</br>
+
+		<div class="container">
+			<div class="progress">
+				<div class="progress-bar"></div>
+			</div>
 		</div>
 
-		<p>
-			<input type="button" id="selectBtn" onclick="location.href='/join'"
-				value="돌아가기" /> <span><input type="submit" value="가입"
-				onclick="btn();"></span>
-		</p>
+		<!-- 첫번째 페이지 -->
+		<form th:action="@{/styleSelect1.do}" method="post">
+			<div class="selectTable">
+				<table>
+					<tr id="row1">
+						<td class="styleSample"><label id="styleName0"
+							class="styleName"> <img id="styleImg0">
+						</label></td>
+						<td class="styleSample"><label id="styleName1"
+							class="styleName"> <img id="styleImg1">
+						</label></td>
+						<td class="styleSample"><label id="styleName2"
+							class="styleName"> <img id="styleImg2"></td>
+					</tr>
+					<tr id="row2">
+						<td class="styleSample"><label id="styleName3"
+							class="styleName"> <img id="styleImg3"></td>
+						<td class="styleSample"><label id="styleName4"
+							class="styleName"> <img id="styleImg4"></td>
+						<td class="styleSample"><label id="styleName5"
+							class="styleName"> <img id="styleImg5"></td>
+					</tr>
 
-	</form>
-	<script src="/js/styleSelect.js"></script>
+					</div>
+
+					<p>
+						<input type="button" id="selectBtn"
+							onclick="location.href='/join'" value="돌아가기" /> <span><input
+							type="submit" value="가입" onclick="btn();"></span>
+					</p>
+		</form>
+	</div>
+
+	<script src="/js/JoinStyleSelect.js"></script>
 </body>
 </html>
