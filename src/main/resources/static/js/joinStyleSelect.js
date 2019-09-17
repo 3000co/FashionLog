@@ -131,8 +131,8 @@
 		             secondFrequent = styles[i+1];
 		       }
 		    }
-		  console.log(mostFrequent);
-		  console.log(secondFrequent);
+		 // console.log(mostFrequent);
+		 // console.log(secondFrequent);
 		  insertFavoritesImage(mostFrequent,0);
 		  insertFavoritesImage(secondFrequent,1);
 		  
@@ -147,7 +147,7 @@
 				  $("#favoriteStyle"+num).children("p").text(pageSampleDataArr[i].name);
 			  }
 		  }
-		 
+
 	}
 
 	function shuffleRandom(length){
@@ -173,15 +173,41 @@
 	 $(document).on('click', "#refreshBtn", function(event){
 		  location.reload();
 	  });
+	 
 	  $(document).on('click', "#skipBtn", function(event){
+		  
 		    $("#styleSelect1").css("display", "none");
 		    $("#styleSelect2").css("display", "none");
 		    $("#styleSelect3").css("display", "block");
+		    console.log($("#favoriteStyle0").children("p").text());
+		    console.log($("#la3").text());
+		    
+		    var favoriteStyle0Name = $("#favoriteStyle0").children("p").text();
+		    var favoriteStyle1Name = $("#favoriteStyle1").children("p").text();
+		    cbCheck(favoriteStyle0Name);
+		    cbCheck(favoriteStyle1Name);
 	  });
 	
 	  
-	  //가입 버튼 
-	
+	  //가입 버튼 : 선호 스타일 2개가 selectStyle의 항목 중 하나와 같으면 체크시킴.
+	 // $(document).on('click', ".joinBtn", function(event){
+		  
+		   
+	 // });
+	  
+	  //선호 스타일로 설정된 스타일을 style3체크박스에 표시함.
+	  function cbCheck(favoriteStyleName){
+		  var i=0;
+		  console.log("#la"+i);
+		  var cbLabel = $("#la"+i).text();
+		  console.log(cbLabel);
+		  for(i=0; i<= pageSampleDataArr.length; i++ ){
+			   if(cbLabel == favoriteStyleName){
+				   console("여기에 체크!");
+				   $("#cb"+i).prop('checked', true);
+			   }
+		  }
+	  }
 	
 
 	

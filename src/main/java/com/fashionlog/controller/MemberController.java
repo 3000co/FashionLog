@@ -119,8 +119,9 @@ public class MemberController {
 		
 	
 	}
+
 	
-	//파일 가져오기
+	//샘플 타입 파일 가져오기
 	@ResponseBody
 	@RequestMapping("/getFileList")
 	private ModelAndView getStyleList(HttpServletRequest request) throws Exception{
@@ -130,22 +131,9 @@ public class MemberController {
 		
 		return modelAndView;
 	}
+
 	
-	// 회원가입 스타일 처리2
-	
-	@ResponseBody
-	@RequestMapping(value = "/styleSelect2.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String doStyleSelect2( Model model, HttpSession session, HttpServletRequest request,
-	           @RequestParam(value="arr")String[] arr) {
-		
-		for(String a : arr) {
-			System.err.println(a);
-		}
-		
-		return "member/styleSelect2";
-	}
-	
-	// 회원가입 스타일 처리3
+	// 최종적으로 db에 멤버정보 추가
 		@RequestMapping(value = "/styleSelect3.do", method = RequestMethod.POST)
 		public String doStyleSelect3(Member member, Model model, HttpSession session) {
 			System.out.println("Model2::"+model);
