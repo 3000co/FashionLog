@@ -76,11 +76,7 @@
 
 	<!--db가져오기 테스트 -->
 	<nav class="fashion">
-		<div class="icon">
-			<a href="/feed">
-			<img src="https://i.ibb.co/MVr31h7/logo.png" alt="logo" /></a>
-		</div>
-		
+		<img src="https://i.ibb.co/MVr31h7/logo.png" alt="logo" />
 
 		<ul class="searchBoard" style="margin: 0; padding: 0">
 			<input type="text" class="inputField" placeholder="" size="35"
@@ -230,7 +226,7 @@
 		<div>
 		</ul>
 			
-		<form id="searchButton" name="searchButton" action="/searched" method="post">
+		<form id="searchButton" name="searchButton" action="/feed/searched" method="post">
 			<input type="hidden" name="searchWords" id="searchWords" value="검색 내용 없음" >
 			<button  value="form-data">
 				<svg>
@@ -242,7 +238,7 @@
 		</form>
 		
 		
-		<a href="/postWrite"><i class="glyphicon glyphicon-plus"></i></a> 
+		<a href=""><i class="glyphicon glyphicon-plus"></i></a> 
 		<a href=""><i class="glyphicon glyphicon-king"></i></a>     
 		<a href=""><i class="glyphicon glyphicon-heart"></i></a> 
 		<a href=""><i class="glyphicon glyphicon-user"></i></a>

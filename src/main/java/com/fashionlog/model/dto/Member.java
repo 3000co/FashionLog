@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,11 +28,10 @@ public class Member {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int memberNo;
-
+	
 	@Column(columnDefinition = "char")
 	private String id;
 
-	@Column(columnDefinition = "char")
 	private String password;
 
 	@Column(columnDefinition = "char")
@@ -42,39 +43,39 @@ public class Member {
 	@Column(columnDefinition = "char")
 	private String email;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PROFILE_IMAGE_NO", insertable = false, updatable = false)
 	private File profileImageNo;
-
-//	@Enumerated(EnumType.STRING)
-//	private Role role;
+	
+	@Column(columnDefinition = "char")
+	@Enumerated(EnumType.STRING)
+	private Role role;
 //	private boolean enabled;
 
-  @ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "STYLE_NO1")
 	private Style styleNo1;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "STYLE_NO2")
 	private Style styleNo2;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "STYLE_NO3")
 	private Style styleNo3;
 
-	@OneToMany(mappedBy = "memberNo", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "memberNo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Post> posts = new ArrayList<Post>();
 
 	@Transient
 	private Long likesCount;
 	
-	@OneToMany(mappedBy = "followeeMemNo", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "followeeMemNo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Follow> followers;
 
-	@OneToMany(mappedBy = "followerMemNo", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "followerMemNo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Follow> followees;
 
-	@Transient
 	public void setLikesCount() {
 		Long count = (long) 0;
 		for (Post post:posts) {
@@ -82,5 +83,4 @@ public class Member {
 		}
 		this.setLikesCount(count);
 	}
-
 }

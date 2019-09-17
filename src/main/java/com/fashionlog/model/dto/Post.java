@@ -62,7 +62,7 @@ public class Post implements Comparable<Post> {
 	private List<Item> itemList = new ArrayList<Item>();
 	
 	@Transient
-	private Long LikesCount;
+	private Long likesCount;
 
 	@Override
 	public int compareTo(Post o) {

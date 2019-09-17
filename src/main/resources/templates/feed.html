@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/feed.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.grid-a-licious.js"></script>
+<title>news feed</title>
+</head>
+<body>
+	<div th:include="header/header" class="fashionHeader"
+		style="position: fixed; width: 100%;"></div>
+	<div id="feed">
+		<div id="container">
+			<div th:each="post:${feed}" class="item" th:id="${'p'+post.postNo}">
+				<img class="postImg" th:alt="${post.postNo+'번 포스트의 사진'}"
+					th:src="${post.postImageNo.path}">
+				<div class="postSum">
+					<div class="row1">
+						<span class="uploader" th:text="${post.memberNo.nickname}">
+							nickname </span> <span class="likesCount" th:text="${post.likesCount}"></span>
+						<button class="likesBtn btn" style="display: none">좋아요</button>
+					</div>
+					<div class="row2">
+						<span class="uploadTime" th:text="${post.uploadTime}"> </span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<button id="more">more feed</button>
+	</div>
+	<script src="/js/jquery.grid-a-licious.js"></script>
+	<script src="/js/feed.js"></script>
+	<script src="/js/likes.js"></script>
+
+</body>
+</html>
