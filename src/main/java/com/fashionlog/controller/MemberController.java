@@ -61,7 +61,6 @@ public class MemberController {
 		return "member/login";
 	}
 
-
 	// 로그인 처리
 	@RequestMapping(value = "/login.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String doLogin(Member member, HttpSession session) {
@@ -74,10 +73,8 @@ public class MemberController {
 			return "member/login";
 		} else {
 			session.setAttribute("member", getMemberInfo);
-
 			session.setAttribute("nickname", getMemberInfo.getNickname());
 			session.setAttribute("id", getMemberInfo.getId());
-
 			System.out.println("로그인 성공" + getMemberInfo);
 			return "redirect:/";
 		}
@@ -104,14 +101,13 @@ public class MemberController {
 	@RequestMapping(value = "/join.do", method = RequestMethod.POST)
 	public String doJoin(Member member, Model model, HttpSession session) {
 		System.out.println("아이디: " + member.getId() + " 비밀번호: " + member.getPassword());
-		System.out.println("패스워드"+encoder.encode(member.getPassword()));
 		model.addAttribute("id",member.getId());
 		model.addAttribute("password",encoder.encode(member.getPassword()));
 		model.addAttribute("nickname",member.getNickname());
 		model.addAttribute("phonenumber",member.getPhonenumber());
 		model.addAttribute("email",member.getEmail());
 		System.out.println("Model1::" + model);
-		return "member/styleSelect";
+		return "member/styleSelect3";
 	}
 	// 회원가입 스타일 처리1
 	@RequestMapping(value = "/styleSelect1.do", method = RequestMethod.POST)
@@ -150,9 +146,19 @@ public class MemberController {
 
 	// 비밀번호 변경 처리
 	@RequestMapping(value = "/modPassword.do", method = RequestMethod.POST)
-	public String doModPassword(Member member, HttpSession session) {
-		
+	public String doModPassword(Member member, Model model, HttpSession session) {
+		Member getMemberInfo = memberService.findByPassword(member.getPassword());
+		System.out.println("getMemberInfo: " + getMemberInfo);
+
+		if (getMemberInfo == null) {
+			session.setAttribute("member", null);
+			return "member/modPassword";
+		} else {
+			model.addAttribute("password",encoder.encode(member.getPassword()));
+			memberService.modPassword(member);
+			System.out.println("비밀번호 변경 성공" + getMemberInfo);
 			return "redirect:/";
+		}
 	}
 	
 

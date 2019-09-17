@@ -4,60 +4,79 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript">
-    $(function(){
-        $("#passwordFalse").hide();
-        $("#password2").keyup(function(){
-            var password=$("#password").val();
-            var password2=$("#password2").val();
-            if(password != "" || password2 != ""){
-                if(password == password2){
-                    $("#passwordFalse").hide();
-                    $("#submit").removeAttr("disabled");
-                }else{
-                    $("#passwordFalse").show();
-                    $("#submit").attr("disabled", "disabled");
-                }    
-            }
-        });
-    });
-</script>
 
 <body th:align="center">
 	<h3>회원가입</h3>
 	<img src="images/google-logo.png" width="50" height="50" />
-	<form th:action="@{/join.do}" method="post" >
+	<form th:action="@{/join.do}" method="post">
 		<div class="form-group">
-			<label>아이디</label><br> 
-			<input type="text" class="form-control" id="id" name="id" placeholder="아이디를 입력해주세요" required="required" pattern="[a-zA-Z0-9]{4,20}" title="영문 숫자조합으로 4-15글자 입력"><br>
+			<label>아이디</label><br>
+			<input type="text" class="form-control" id="id" name="id" placeholder="아이디 입력" required="required" pattern="[a-zA-Z0-9]{4,20}" title="영문 숫자조합으로 4-15자리 입력"><br>
 			<br>
 		</div>
 		<div class="form-group">
-			<label>비밀번호</label><br> 
-			<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력해주세요" required="required" pattern="[a-zA-Z0-9]{6,20}" title="영문 숫자조합으로 6-15글자 입력"><br>
-			<input type="password" class="form-control" id="password2" placeholder="한 번 더 입력해주세요" required="required" pattern="[a-zA-Z0-9]{6,20}"><br>
-				<div id="passwordFalse">비밀번호가 일치하지 않습니다</div>
+			<label>비밀번호</label><br>
+			<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호(8~32자리)" required="required" pattern="[a-zA-z!@#$%^&+=]{8,32}"  title="영문 숫자조합으로 8-32자리 입력"><br>
+			<input type="password" class="form-control" id="password2" placeholder="비밀번호 재입력" required="required"><br>
+			<div id="passwordFalse">비밀번호가 일치하지 않습니다</div>
 		</div>
 		<div class="form-group">
-			<label>닉네임</label><br> 
-			<input type="text" class="form-control" id="nickname" name="nickname" placeholder="닉네임을 입력해주세요" required="required" pattern="[a-zA-z가-힣]{4,10}"><br>
-			<br>
+			<label>닉네임</label><br>
+			<input type="text" class="form-control" id="nickname" name="nickname" placeholder="닉네임 입력" required="required" pattern="[a-zA-z가-힣]{4,10}"><br> <br>
 		</div>
 		<div class="form-group">
-			<label>휴대폰 번호</label><br> 
-			<input type="text" class="form-control" id="phonenumber" name="phonenumber" placeholder="번호를 입력해주세요" required="required" pattern="[0-9]{10,11}"><br>
+			<label>휴대폰 번호</label><br>
+			<input type="text" class="form-control" id="phonenumber" name="phonenumber" placeholder="번호 입력" required="required" pattern="[0-9]{10,11}"><br>
 			<br>
 		</div>
 		<div class="form-group">
 			<label>이메일</label><br>
-			<input type="text" class="form-control" id="email" name="email" placeholder="이메일을 입력해주세요" required="required" pattern="[a-zA-Z0-9]+@[a-zA-Z]+.[a-zA-Z]"><br>
+			<input type="email" class="form-control1" id="email" name="email" placeholder="이메일 주소 입력" required="required"><br>
+			<div id="emailFalse"></div>
 			<br>
 		</div>
-		<p>
-			<a href="/" class="btn btn-back">돌아가기</a>
-		</p>
-		
-		<span><input type="submit" id="submit" value="다음"></span>
+
+		<input type="button" onClick="location.href='/'" value="돌아가기">
+		<input type="submit" id="submit" value="다음">
 	</form>
-</body> 
+
+	<script type="text/javascript">
+		$(function() {
+			$("#passwordFalse").hide();
+			$("#password2").keyup(function() {
+				var password = $("#password").val();
+				var password2 = $("#password2").val();
+				if (password != "" || password2 != "") {
+					if (password == password2) {
+						$("#passwordFalse").hide();
+						$("#submit").removeAttr("disabled");
+					} else {
+						$("#passwordFalse").show();
+						$("#submit").attr("disabled", "disabled");
+					}
+				}
+			});
+		});
+
+		function email_check(email) {
+			var regex = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+			return (email != '' && email != 'undefined' && regex.test(email));
+		}
+		$(".form-control1").blur(function() {
+			var email = $(this).val();
+			if (email == '' || email == 'undefined')
+				return;
+
+			if (!email_check(email)) {
+				$("#submit").attr("disabled", "disabled");
+				$("#emailFalse").text('유효하지 않은 이메일 입니다');
+				$(this).focus();
+				return false;
+			} else {
+				$("#submit").removeAttr("disabled");
+				$("#emailFalse").text('유효한 이메일입니다');
+			}
+		});
+	</script>
+</body>
 </html>

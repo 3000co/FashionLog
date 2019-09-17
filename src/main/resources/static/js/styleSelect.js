@@ -1,9 +1,6 @@
-	
-
-
 	//샘플 이미지 가져오기
 	$(document).ready(function(){
-		//좋아하는 스타일 목록
+		// 좋아하는 스타일 목록
 		var FavoriteStyleArr = new Array(10);
 
 	  $.ajax({
@@ -23,21 +20,21 @@
 	   }       
 	  });  
 	  
-	  //이미지 html에 넣는 부분
+	  // 이미지 html에 넣는 부분
 	  function setImgArray(data){
 		  
 		  console.log(data);
 		  var length = data.sampleImgList.length;
 		  var sampleDataArray = new Array();
 		 
-		  //데이터 샘플을 배열에 저장
+		  // 데이터 샘플을 배열에 저장
 		  for(var i=0; i< length-1; i++){
 	
 			  var sampleData = data.sampleImgList[i];
 			  sampleDataArray[i] = sampleData;
 
 		  }
-		  //배열 값 중 6개를 랜덤으로 선택한 뒤 지정된 위치에 넣음
+		  // 배열 값 중 6개를 랜덤으로 선택한 뒤 지정된 위치에 넣음
 			var numArr = shuffleRandom();
 			var j=0
 			console.log(numArr);
@@ -47,17 +44,10 @@
 						objImg.src = sampleDataArray[num].path;
 						$("<p>"+styleName+"</p>").prependTo($("#styleName"+j));
 						j++;
-				}
-		  
+				}		  
 		 }
-	 
-	  
 	  });
 	
-	
-	  
-	
-
 	function shuffleRandom(){
         var numArr = new Array(6);
         
@@ -77,11 +67,11 @@
    	 	return numArr;
 	}
 	
-//	$(document).on('click',".styleSample", function(event){
-//		var styleName = $(this).children('label').html();
-//		console.log(styleName);
+// $(document).on('click',".styleSample", function(event){
+// var styleName = $(this).children('label').html();
+// console.log(styleName);
 //		
-//	});
+// });
 //	
 	function saveFavoriteStyle(){
 		var curNum;

@@ -57,7 +57,14 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void doLogout(Member member) {
+	}
+
+	@Override
+	public void modPassword(Member password) {
+		 memberRepo.save(password);
 		
 	}
+	
+	
 
 }

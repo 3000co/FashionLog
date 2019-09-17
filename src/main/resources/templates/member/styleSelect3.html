@@ -14,7 +14,6 @@ function btn() {
 			}
 		});
 	} 
-	
 </script>
 </head>
 
@@ -31,23 +30,23 @@ function btn() {
 		<input type="hidden" name="nickname" th:value="${nickname}">
 		<input type="hidden" name="phonenumber" th:value="${phonenumber}">
 		<input type="hidden" name="email" th:value="${email}">
-			<input type="checkbox" value="1" name="styleNo"/><label for="1">Vintage</label>
-			<input type="checkbox" value="2" name="styleNo"/><label for="2">Casual</label> <br>
-			<input type="checkbox" value="3" name="styleNo"/><label for="3">Chic</label>
-			<input type="checkbox" value="4" name="styleNo"/><label for="4">Street</label> <br>
-			<input type="checkbox" value="5" name="styleNo"/><label for="5">Sporty</label>
-			<input type="checkbox" value="6" name="styleNo"/><label for="6">Formal</label> <br>
-			<input type="checkbox" value="7" name="styleNo"/><label for="7">Gothic</label>
-			<input type="checkbox" value="8" name="styleNo"/><label for="8">Punk</label> <br>
-			<input type="checkbox" value="9" name="styleNo"/><label for="9">Retro</label>
-			<input type="checkbox" value="10" name="styleNo"/><label for="10">Dandy</label> <br>
+		<input type="checkbox" value="1" name="styleNo"/><label for="1">Vintage</label>
+		<input type="checkbox" value="2" name="styleNo"/><label for="2">Casual</label> <br>
+		<input type="checkbox" value="3" name="styleNo"/><label for="3">Chic</label>
+		<input type="checkbox" value="4" name="styleNo"/><label for="4">Street</label> <br>
+		<input type="checkbox" value="5" name="styleNo"/><label for="5">Sporty</label>
+		<input type="checkbox" value="6" name="styleNo"/><label for="6">Formal</label> <br>
+		<input type="checkbox" value="7" name="styleNo"/><label for="7">Gothic</label>
+		<input type="checkbox" value="8" name="styleNo"/><label for="8">Punk</label> <br>
+		<input type="checkbox" value="9" name="styleNo"/><label for="9">Retro</label>
+		<input type="checkbox" value="10" name="styleNo"/><label for="10">Dandy</label> <br>
 	</div>		
 			
 		<p>
-			<input type="button" id="selectBtn" onclick="location.href='/join'"  value="돌아가기"/>
+			<input type="button" id="selectBtn" location.href='/join' value="돌아가기"/>
 			<span><input type="submit" value="가입" onclick="btn();"></span>
+			<!-- <span><input type="submit" value="가입" th:attr="onclick=|btn();|"></span> -->
 		</p>
-
 	</form>
 	
 </body>
