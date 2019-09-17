@@ -6,14 +6,55 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" th:href="@{/css/styleSelect.css}">
+<script type="text/javascript">
 
+function joinBtn() {
+	$(':checkbox').each(function(i){
+		if( $(':checkbox').eq(i).prop("checked") == true ){
+			$(':checked').each(function(j){
+	        $(':checked').eq(j).prop("name","styleNo"+(j+1));
+				});
+			}
+		});
+	} 
+	
+</script>
 </head>
 
 <body th:align="center">
 	<h3>회원가입</h3>
 	<img src="images/google-logo.png" width="50" height="50" />
 
-
+	<form th:action="@{/styleSelect3.do}" method="post">
+	
+	<!-- 세번째 페이지 -->
+	<div id="styleSelect3" class="page" style="display: none">
+		<h4>관심있는 스타일을 더 선택하세요.</h4>
+		<h5>이후 마이페이지에서 변경 가능</h5><br>
+		
+		<div class="form-group" >
+			<input type="hidden" name="id" th:value="${id}">
+			<input type="hidden" name="password" th:value="${password}">
+			<input type="hidden" name="nickname" th:value="${nickname}">
+			<input type="hidden" name="phonenumber" th:value="${phonenumber}">
+			<input type="hidden" name="email" th:value="${email}">
+				<input type="checkbox" value="1" name="styleNo"/><label for="1">Vintage</label>
+				<input type="checkbox" value="2" name="styleNo"/><label for="2">Casual</label> <br>
+				<input type="checkbox" value="3" name="styleNo"/><label for="3">Chic</label>
+				<input type="checkbox" value="4" name="styleNo"/><label for="4">Street</label> <br>
+				<input type="checkbox" value="5" name="styleNo"/><label for="5">Sporty</label>
+				<input type="checkbox" value="6" name="styleNo"/><label for="6">Formal</label> <br>
+				<input type="checkbox" value="7" name="styleNo"/><label for="7">Gothic</label>
+				<input type="checkbox" value="8" name="styleNo"/><label for="8">Punk</label> <br>
+				<input type="checkbox" value="9" name="styleNo"/><label for="9">Retro</label>
+				<input type="checkbox" value="10" name="styleNo"/><label for="10">Dandy</label> <br>
+		</div>	
+		
+		<div class="page1Btns">
+			<input type="button" id="selectBtn" onclick="location.href='/join'"  value="돌아가기"/>
+			<span><input type="submit" value="가입" onclick="joinBtn();"></span>
+		</div>	
+	</div>
 	<!-- 두번째 페이지 -->
 
 	<div id="styleSelect2" class="page" style="display: none">
@@ -21,22 +62,27 @@
 		<br> 회원님의 선호 스타일은</br>
 
 		<table>
-					<tr id="row1">
-						<td class="styleSample"><label id="favoriteStyle0"
-							class="styleName"> <p></p> <img id="favoriteStyleImg0" src="">
-						</label></td>
-						<td class="styleSample"><label id="favoriteStyle1"
-							class="styleName"> <p></p> <img id="favoriteStyleImg1" src="">
-					</tr>
+			<tr id="row1">
+				<td class="styleSample"><label id="favoriteStyle0"
+					class="styleName">
+						<p></p> <img id="favoriteStyleImg0" src="">
+				</label></td>
+				<td class="styleSample"><label id="favoriteStyle1"
+					class="styleName">
+						<p></p> <img id="favoriteStyleImg1" src="">
+			</tr>
 		</table>
-		<form>
-			<input type="button" id="selectBtn" onclick="location.href='/join'"
-				value="돌아가기" /> <input type="submit" value="가입" onclick="btn();" />
-		</form>
+		
+		<div id="page2Btns">
+			<input type="button" id="refreshBtn" value="다시하기" /> 
+			<input type="button" id="skipBtn" value="더선택하기"/> 
+			<input type="submit" value="가입" onclick="joinBtn();" />
+		</div>
 
 	</div>
 
-
+	<!-- 첫번째 페이지 -->
+	
 	<div id="styleSelect1" class="page" style="display: block">
 		<br> 마음에 드는사진을 선택해주세요. <br> 10장이 모이면 회원님의 선호 스타일을 알려드립니다.</br>
 
@@ -46,8 +92,7 @@
 			</div>
 		</div>
 
-		<!-- 첫번째 페이지 -->
-		<form th:action="@{/styleSelect1.do}" method="post">
+		
 			<div class="selectTable">
 				<table>
 					<tr id="row1">
@@ -71,13 +116,14 @@
 
 					</div>
 
-					<p>
-						<input type="button" id="selectBtn"
-							onclick="location.href='/join'" value="돌아가기" /> <span><input
-							type="submit" value="가입" onclick="btn();"></span>
-					</p>
-		</form>
+					<div class="page1Btns">
+						<input type="button" id="skipBtn" value="건너 뛰기" /> <span>
+						<input type="button" id="refreshBtn" value="다른 사진"/></span>
+					</div>
+		
 	</div>
+	
+	</form>
 
 	<script src="/js/JoinStyleSelect.js"></script>
 </body>

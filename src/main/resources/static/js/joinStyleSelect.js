@@ -169,13 +169,19 @@
    	 	return numArr;
 	}
 	
+	//공용 버튼
+	 $(document).on('click', "#refreshBtn", function(event){
+		  location.reload();
+	  });
+	  $(document).on('click', "#skipBtn", function(event){
+		    $("#styleSelect1").css("display", "none");
+		    $("#styleSelect2").css("display", "none");
+		    $("#styleSelect3").css("display", "block");
+	  });
+	
+	  
+	  //가입 버튼 
+	
 	
 
-	
-//	$(document).on('click',".styleSample", function(event){
-//		var styleName = $(this).children('label').html();
-//		console.log(styleName);
-//		
-//	});
-//	
 	
