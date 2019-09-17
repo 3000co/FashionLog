@@ -1,22 +1,15 @@
 package com.fashionlog.controller;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fashionlog.model.dao.BrandRepository;
 import com.fashionlog.model.dao.CategoryRepository;
 import com.fashionlog.model.dao.ItemRepository;
 import com.fashionlog.model.dao.StyleRepository;
-import com.fashionlog.model.dto.Category;
-import com.fashionlog.model.dto.Style;
 
 @Controller
 public class TestController {
@@ -33,7 +26,11 @@ public class TestController {
 	@Autowired
 	ItemRepository itemRepository;
 
-	
+	@RequestMapping("/aa")
+	public String aa() {
+		System.out.println("sssssss");
+		return "test";
+	}
 
 }
 

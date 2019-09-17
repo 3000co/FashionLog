@@ -1,5 +1,18 @@
 $(document).ready(function() {
-	$("#selectImg").on("change", handleImgFileSelect);
+	$(document).on("change", "#selectImg", function(event) {
+		
+		// 선택이미지를 바꿨을 경우 태그 삭제
+		var total = $(".itemTag").length;
+		if (total > 1) {
+			$(".itemTag").each(function(index) {
+				index = total - index -1;
+				console.log(index);
+					$(".itemTag:eq(" + index + ")").detach();
+			});
+			count = 0;
+		}
+		handleImgFileSelect(event);
+	});
 });
 
 var selFile;
