@@ -1,11 +1,13 @@
 package com.fashionlog.model.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -20,20 +22,6 @@ import com.fashionlog.model.dto.Style;
 public class PostServiceImpl implements PostService {
 	@Autowired
 	private PostRepository postRepository;
-	@Autowired
-	private LikesRepository likesRepository;
-
-	
-	
-	@Override
-	public void countLikes() {
-		List<Post> posts = postRepository.findAll();
-		for (Post post : posts) {
-			post.setLikesCount(likesRepository.countByPostNo(post));
-			postRepository.save(post);
-			System.out.println("post likes count : " + post);
-		}
-	}
 	
 	//팔로우하는 사람들의 글을 피드로 가져옴
 	@Override
@@ -79,4 +67,19 @@ public class PostServiceImpl implements PostService {
 		}
 		return postList;
 	}
+	
+	public List<Post> getPostToFeed(Member user, Pageable paging){
+		// 가져오는 값들을 중복없이 저장하기 위해 set 생성
+				Set<Post> feedSet = new HashSet<>();
+				// 스타일 글 페이징해서 담기
+				feedSet.addAll(getFeedByStyle(user, paging));
+				// 팔로이 글 페이징해서 담기
+				feedSet.addAll(getFeedByFollowee(user, paging));
+				// 내글 페이징해서 담기
+				feedSet.addAll(getFeedByMe(user, paging));
+				List<Post> feed = new ArrayList<Post>(feedSet);
+				Collections.sort(feed);
+				return feed;
+	}
+
 }

@@ -16,16 +16,14 @@ public class RankingServiceImpl implements RankingService {
 	private ItemRepository itemRepository;
 	@Autowired
 	private BrandRepository brandRepository;
-
-	@Autowired
-	private PostService postService;
 	@Autowired
 	private MemberService memberService;
-
+	@Autowired
+	private LikesService likeService;
+	
 	// 매 새벽 3시마다 실행
 	@Scheduled(cron = "0 0 3 * * ?")
 	public void setBrandCount() {
-		System.out.println("brand counted");
 		List<Brand> brandList = brandRepository.findAll();
 		for (Brand brand : brandList) {
 			brand.setItemCount(itemRepository.countByBrandNo(brand));
@@ -35,8 +33,7 @@ public class RankingServiceImpl implements RankingService {
 	// 매 새벽 3시마다 실행
 	@Scheduled(cron = "0 0 3 * * ?")
 	public void setLikesCount() {
-		System.out.println("likes counted");
-		postService.countLikes();
+		likeService.countLikes();
 		memberService.countLikes();
 	}
 }
