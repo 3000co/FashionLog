@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+.imgno {
+	margin: 15px 15px 0;
+	padding: 0;
+}
+.imgno:last-child {
+	
+	
+	padding-bottom: 60px;
+}
+.imgno::after {
+	content: '';
+	clear: both;
+	display: block;
+}
+.imgno div {
+	position: relative;
+	float: left;
+	width: 125px;
+	height: 125px;
+	margin: 0 0 0 5px;
+	padding: 0;
+}
+.imgno div:first-child {
+	margin-left: 0;
+}
+.imgno div span {
+	position: absolute;
+	bottom: -20px;
+	left: 0;
+	z-index: -1;
+	display: block;
+	width: 300px;
+	margin: 0;
+	padding: 0;
+	color: #444;
+	font-size: 18px;
+	text-decoration: none;
+	text-align: center;
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+	opacity: 0;
+}
+figure {
+	margin: 0;
+	padding: 0;
+	background: #fff;
+	overflow: hidden;
+	
+}
+
+
+
+.profile-image {
+    float: left;
+    display: flex;
+	position: relative;
+    margin-right: 3rem;
+	width: auto;
+	height: 125px;
+    border-radius: 50%;
+	
+	z-index: 3;
+}
+
+
+@supports (display: grid) {
+    .profile {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(3, auto);
+        grid-column-gap: 3rem;
+        align-items: center;
+		padding: 5rem 0;
+    }
+
+
+
+
+
+.your-user-name {
+    display: inline-block;
+    font-weight: 300;
+}
+
+.your-edit-btn {
+    font-size: 1.4rem;
+    line-height: 1.8;
+	background-color: #43b7b8;
+    border: 0.1rem solid #43b7b8;
+    border-radius: 0.3rem;
+    padding: 0 2.4rem;
+    margin-left: 2rem;
+}
+
+	.imgno{transform: translateX(-90px);}
+	
