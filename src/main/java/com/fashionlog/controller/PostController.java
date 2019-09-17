@@ -54,7 +54,6 @@ public class PostController {
 	@Autowired
 	private FileService fileService;
 	
-	
 	@RequestMapping("/postWrite")
 	public String startTest(Model model, HttpServletResponse response, HttpSession session) {
 		List<Style> style = styleRepository.findAll();
@@ -138,20 +137,6 @@ public class PostController {
   		return "feed";
 	}
   
-  @RequestMapping("/post")
-	public String getPost(Model model, HttpSession session) {
-		
-		List<Style> style = styleRepository.findAll();
-		List<Category> category = categoryRepository.findAll();
-		List<Object[]> brand = brandRepository.findBrandQuery();
-
-		model.addAttribute("style", style);
-		model.addAttribute("category", category);
-		model.addAttribute("brand", brand);
-    //postview 페이지가 생기면 바꿔줄것
-		return "post/post";
-	}
-	
 	@RequestMapping("/allFeed")
 	public String getPost(Model model, @PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 30)Pageable paging) {
 		List<Post> allFeed = new ArrayList<>(postService.getAllFeed(paging));
