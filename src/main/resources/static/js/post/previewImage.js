@@ -12,16 +12,23 @@ $(document).ready(function() {
 			count = 0;
 		}
 		handleImgFileSelect(event);
+		
+		console.log($("#selectImg").val());
+		
+		if ($("#selectImg").val() != "") {
+			dd();	
+		}
+		
 	});
 });
 
 var selFile;
-
+var filesArr;
 function handleImgFileSelect(e) {
 
 	var files = e.target.files;
-	var filesArr = Array.prototype.slice.call(files);
-
+	filesArr = Array.prototype.slice.call(files);
+	
 	if (filesArr.length != 0) {
 		filesArr.forEach(function(f) {
 			if(!f.type.match("image.*")) {
@@ -36,8 +43,30 @@ function handleImgFileSelect(e) {
 				$("#postImage").attr("src", e.target.result);
 			}
 			reader.readAsDataURL(f);
+			
 		});
 	}else {
 		$("#postImage").attr("src", null);
 	}
+	
+}
+
+function dd() {
+	
+	var form = new FormData(document.getElementById('imgWrap')); 
+	
+	$.ajax({ 
+		type : "POST",
+		crossOrigin : true,
+		url: "http://127.0.0.1:5000/file",
+		data: form,
+		processData: false, 
+		contentType: false, 
+		success: function(data) { 
+			alert(data);
+		}, 
+		error : function() {
+	        alert("여기Error!");
+	    }
+	});
 }
