@@ -24,6 +24,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
       security.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
       
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+      security.csrf().disable();
+
+>>>>>>> parent of 76b434e... Merge branch 'master' into haneol
 =======
       security.csrf().disable();
 
