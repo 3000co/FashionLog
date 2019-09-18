@@ -139,7 +139,7 @@
 	}
 	  
 	function insertFavoritesImage(favoriteStyleName,num){
-		//html에 추가
+		//page2html에 추가
 		  
 		  for(var i=0; i<= pageSampleDataArr.length-1; i++){
 			  if(pageSampleDataArr[i].name == favoriteStyleName){
@@ -174,40 +174,81 @@
 		  location.reload();
 	  });
 	 
-	  $(document).on('click', "#skipBtn", function(event){
-		  
+	 //page2의 선호 스타일을 기입 & 체크박스에 db 등록 용 styleNo부여
+	  $(document).on('click', ".goPage3Btn", function(event){
+
 		    $("#styleSelect1").css("display", "none");
 		    $("#styleSelect2").css("display", "none");
 		    $("#styleSelect3").css("display", "block");
-		    console.log($("#favoriteStyle0").children("p").text());
-		    console.log($("#la3").text());
 		    
 		    var favoriteStyle0Name = $("#favoriteStyle0").children("p").text();
 		    var favoriteStyle1Name = $("#favoriteStyle1").children("p").text();
 		    cbCheck(favoriteStyle0Name);
 		    cbCheck(favoriteStyle1Name);
+		    
+		    $(':checkbox').each(function(i){
+				if( $(':checkbox').eq(i).prop("checked") == true ){
+					$(':checked').each(function(j){
+			        $(':checked').eq(j).prop("name","styleNo"+(j+1));
+						});
+					}
+				}); 
+	  });
+	  
+	  $(document).on('click', ".goPage2Btn", function(event){
+		  
+		    $("#styleSelect1").css("display", "none");
+		    $("#styleSelect2").css("display", "block");
+		    $("#styleSelect3").css("display", "none");
 	  });
 	
-	  
-	  //가입 버튼 : 선호 스타일 2개가 selectStyle의 항목 중 하나와 같으면 체크시킴.
-	 // $(document).on('click', ".joinBtn", function(event){
-		  
 		   
 	 // });
 	  
 	  //선호 스타일로 설정된 스타일을 style3체크박스에 표시함.
 	  function cbCheck(favoriteStyleName){
 		  var i=0;
-		  console.log("#la"+i);
-		  var cbLabel = $("#la"+i).text();
-		  console.log(cbLabel);
-		  for(i=0; i<= pageSampleDataArr.length; i++ ){
-			   if(cbLabel == favoriteStyleName){
-				   console("여기에 체크!");
+		  var cbLabel 
+		  
+		  for(i=0; i< 10; i++ ){
+			   cbLabel = $("#la"+i).text();
+			   console.log(i+"번째 라벨 : "+cbLabel.toLowerCase());
+			   console.log("체크 대상 :"+favoriteStyleName.toLowerCase());
+			   
+			   if(cbLabel.toLowerCase() == favoriteStyleName.toLowerCase()){
+				 
+				   console.log("여기에 체크!");
 				   $("#cb"+i).prop('checked', true);
+				   break;
+			   }else{
+				   console.log("찾지 못함");
 			   }
 		  }
 	  }
+	  
+	  //체크 1~3개까지
+	  function checkLimitProcess(){
+		  var checkCount = $("input:checkbox[name=styleNo]:checked").length;
+		  if(checkCount == 0){
+			  alert("스타일은 하나 이상 선택하셔야 합니다.");
+			  $(".joinBtn").prop("disabled",true);
+		  }else if(checkCount > 3){
+			  alert("세개 이상 선택하실 수 없습니다");
+			  $(".joinBtn").prop("disabled",true);
+		  }else{
+			  $(".joinBtn").prop("disabled",false);
+		  }
+	  }
+	  //체크박스 체인지 이벤트
+	  $(document).ready(function(){
+		    $(".cb").change(function(){
+		        if($(".cb").is(":checked")){
+		            checkLimitProcess();
+		        }else{
+		         
+		        }
+		    });
+		});
 	
 
 	

@@ -143,7 +143,7 @@ public class MemberController {
 			Style getStyleInfo = member.getStyleNo1();
 			if (getStyleInfo.getStyleNo() == 0) {
 				session.setAttribute("style", null);
-				return "member/styleSelect3";
+				return "member/styleSelect1";
 			} else {
 				memberService.doJoin(member);
 				System.out.println("회원가입 성공" + getStyleInfo);
