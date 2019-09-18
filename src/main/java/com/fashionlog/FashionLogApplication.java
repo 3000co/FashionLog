@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling
 public class FashionLogApplication {
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(FashionLogApplication.class, args);
 	}

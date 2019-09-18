@@ -18,18 +18,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
    protected void configure(HttpSecurity security) throws Exception {
 
       security.userDetailsService(userDetailsService);
-      
-      security.csrf().disable();
-      
+
       security.authorizeRequests().antMatchers("/").permitAll();
-      security.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
       security.authorizeRequests().antMatchers("/user/**").hasAnyRole("USER");
+      security.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
       
+<<<<<<< HEAD
+=======
+      security.csrf().disable();
+
+>>>>>>> parent of 76b434e... Merge branch 'master' into haneol
       security.formLogin().loginPage("/login").defaultSuccessUrl("/feed", true);
       security.formLogin().loginPage("/login").failureUrl("/loginFail");
       security.formLogin().usernameParameter("id");
       security.exceptionHandling().accessDeniedPage("/accessDenied");
       security.logout().logoutUrl("/logout").invalidateHttpSession(true).logoutSuccessUrl("/login");
+
    }
 
    @Bean

@@ -1,125 +1,89 @@
 @charset "utf-8";
 
-.fashionHeader {
-	width: 100%;
-	top: 0px;
-	z-index: 999;
-}
-
-#feed {
-	margin-top: 100px;
-}
-
 .item {
-	background: #FFFFFF;
-	color: #000000;
-	border-radius: 3px;
-	padding: 10px;
-	word-break: keep-all;
-	border: 1px solid #d7d7d7;
+  background: #bebebe;
+  color: #000000;
+  border-radius: 3px;
+  padding: 10px ;
+  word-break: break-all;
+  word-wrap: break-word;
+  white-space: pre;
+  white-space: pre-wrap;
 }
 
-.item:hover {
-	background: #F1F1F1;
-}
-
-.postImg {
-	vertical-align: top;
-	margin-bottom: 10px;
-	/* display: inline-block; */
-}
-
-.postImg:hover {
-	cursor: pointer;
-}
-
-.postSum .row1 {
-	display:flex; 
-	justify-content:space-between;
-}
-
-.uploader {
-	text-align: left;
-}
-
-.likesCount {
-	position: relative;
-	right: -20px;
-	vertical-align: text-bottom;
-	
-}
-
-.uploadTime {
-	color: #B1B1B1;
-}
-
-.browser {
-	height: 25px;
-	width: 36px;
-	text-indent: -9999px;
-	display: block;
-	background: url('../img/browser.png') top left no-repeat;
-	cursor: pointer;
-	float: left;
-	opacity: .3;
-}
 
 #resize_container {
-	position: fixed;
-	height: 50px;
-	margin: 0;
-	width: 146px;
-	left: 50%;
-	margin-left: -73px;
-	margin-top: 20px;
-	z-index: 99999;
+  position: fixed;
+  height: 50px;
+  margin: 0:
+  width: 146px;
+  left: 50%;
+  margin-left: -73px;
+  margin-top: 20px;
+  z-index: 99999;
 }
 
-.ipad-port {
-	height: 25px;
-	width: 31px;
-	text-indent: -9999px;
-	display: block;
-	background: url('../img/ipad_port.png') top left no-repeat;
-	cursor: pointer;
-	float: left;
-	opacity: .3;
+
+#resize a:hover {
+   opacity: 1; 
 }
 
-.ipad-land {
-	height: 25px;
-	width: 34px;
-	text-indent: -9999px;
-	display: block;
-	background: url('../img/ipad_land.png') top left no-repeat;
-	cursor: pointer;
-	float: left;
-	opacity: .3;
+.browser{
+  height: 25px;
+  width: 36px;
+  text-indent: -9999px;
+  display: block;
+  background: url('../img/browser.png') top left no-repeat;
+  cursor: pointer;
+  float: left;
+  opacity: .3;
 }
 
-.iphone-land {
-	height: 25px;
-	width: 20px;
-	text-indent: -9999px;
-	display: block;
-	background: url('../img/iphone_land.png') top left no-repeat;
-	cursor: pointer;
-	float: left;
-	opacity: .3;
+.ipad-port{
+  height: 25px;
+  width: 31px;
+  text-indent: -9999px;
+  display: block;
+  background: url('../img/ipad_port.png') top left no-repeat;
+  cursor: pointer;
+  float: left;
+  opacity: .3;
 }
 
-.iphone-port {
-	height: 25px;
-	width: 25px;
-	text-indent: -9999px;
-	display: block;
-	background: url('../img/iphone_port.png') top left no-repeat;
-	cursor: pointer;
-	float: left;
-	opacity: .3;
+.ipad-land{
+  height: 25px;
+  width: 34px;
+  text-indent: -9999px;
+  display: block;
+  background: url('../img/ipad_land.png') top left no-repeat;
+  cursor: pointer;
+  float: left;
+  opacity: .3;
+}
+
+.iphone-land{
+  height: 25px;
+  width: 20px;
+  text-indent: -9999px;
+  display: block;
+  background: url('../img/iphone_land.png') top left no-repeat;
+  cursor: pointer;
+  float: left;
+  opacity: .3;
+}
+
+.iphone-port{
+  height: 25px;
+  width: 25px;
+  text-indent: -9999px;
+  display: block;
+  background: url('../img/iphone_port.png') top left no-repeat;
+  cursor: pointer;
+  float: left;
+  opacity: .3;
 }
 
 .active {
-	opacity: 1;
-	cursor: default
+  opacity: 1;
+  cursor: default
 }

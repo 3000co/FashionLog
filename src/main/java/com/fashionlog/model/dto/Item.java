@@ -2,7 +2,6 @@ package com.fashionlog.model.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +22,7 @@ public class Item {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int itemNo;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "POST_NO")
 	private Post postNo;
 

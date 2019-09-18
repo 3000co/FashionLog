@@ -13,7 +13,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,7 +28,6 @@ import com.fashionlog.model.dto.Comment;
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Post;
 import com.fashionlog.model.dto.Report;
-import com.fashionlog.security.SecurityUser;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -62,12 +60,12 @@ public class ReportController {
 
 	@RequestMapping("/insertReport")
 	@ResponseBody
-	public String insertReport(@ModelAttribute("Report") Report report,HttpServletRequest request, 
-			@AuthenticationPrincipal SecurityUser securityUser) {
-		
+	public String insertReport(@ModelAttribute("Report") Report report,HttpServletRequest request, HttpSession session) {
+
 		//ReportMemNo
-		Member user = securityUser.getMember();
-		report.setReportMemNo(user);
+		String reportMemID = (String)session.getAttribute("id");
+		Member member = memberRepository.findById(reportMemID);
+		report.setReportMemNo(member);
 		
 		//targetMemNo
 		if(report.getTargetPostNo() != null) {
@@ -79,6 +77,8 @@ public class ReportController {
 			Comment targetComment = commentRepository.findById(targetCommentNo).get();
 			report.setTargetMemNo(targetComment.getMemberNo());
 		}
+		//System.err.println("???????????????????????");
+		//System.err.println(report.toString());
 		reportRepository.save(report);
 
 		return "redirect:/comment";

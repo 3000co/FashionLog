@@ -43,7 +43,7 @@ $.fn.setLikesBtnStat = function(postNo) {
 			}
 		},
 		error : function(result) {
-			console.log("좋아요 정보를 불러오는 데 실패했습니다.");
+			console.log("연결 상태를 확인해주세요");
 		}
 	});
 }
@@ -64,10 +64,9 @@ $.fn.doLikes = function(postNo) {
 		},
 		success : function(result) {
 			element.setLikesBtnStat(postNo);
-			element.siblings('.likesCount').text(result);
 		},
 		error : function(result) {
-			alert("이미 좋아요 하셨습니다.");
+			console.log("연결 상태를 확인해주세요");
 		}
 	});
 }
@@ -88,10 +87,9 @@ $.fn.unLikes = function(postNo) {
 		},
 		success : function(result) {
 			element.setLikesBtnStat(postNo);
-			element.siblings('.likesCount').text(result);
 		},
 		error : function(result) {
-			alert("이미 좋아요 취소되었습니다.");
+			console.log("연결 상태를 확인해주세요");
 		}
 	});
 }
@@ -103,10 +101,10 @@ $.fn.unLikes = function(postNo) {
 $(".likesBtn").ready(function() {
 	$(".item").each(function() {
 		var postNo = $(this).attr("id").slice(1);
-		var likesBtn = $(this).find(".likesBtn");
+		var likesBtn = $(this).children("button.likesBtn");
 		$(likesBtn).setLikesBtnStat(postNo);
 	});
- 	
+	
 	/**
 	 * 좋아요 버튼을 클릭했을 때, 현재 stat을 class를 통해 확인하고
 	 * 좋아요할지 안좋아요 할지 분기되는 
@@ -114,7 +112,7 @@ $(".likesBtn").ready(function() {
 	 */
 	$(".likesBtn").click(function() {
 		var element = $(this);
-		var postNo = element.parents('.item').attr("id").slice(1);
+		var postNo = element.parent().attr("id").slice(1);
 		if (element.hasClass("stat-unLikes")) {
 			element.doLikes(postNo);
 		} else {

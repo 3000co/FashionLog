@@ -30,11 +30,11 @@
 //button js 
 	$(document).ready(function() {   
 	    $('#inputField').tokenfield({
-//	      autocomplete: {
-//	        source: [],
-//	        
-//	        delay: 100
-//	      },
+	      autocomplete: {
+	        source: [],
+	        
+	        delay: 100
+	      },
 	      delimiter: '',
 	      showAutocompleteOnFocus: true,
 	      createTokensOnBlur: false

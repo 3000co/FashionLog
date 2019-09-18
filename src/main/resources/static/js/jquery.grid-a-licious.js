@@ -350,12 +350,12 @@
                 gridArr.push(value);
                 gridArrAppend.push(value);
             });
-            this._renderGrid('append', items, $(items).length);
+            this._renderGrid('append', items, $(items).size());
         },
 
         prepend: function (items) {
             this.ifCallback = false;
-            this._renderGrid('prepend', items, $(items).length);
+            this._renderGrid('prepend', items, $(items).size());
             this.ifCallback = true;
         },
     }

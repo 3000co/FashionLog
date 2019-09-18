@@ -2,6 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script
@@ -9,7 +12,6 @@
 <script
 	src="https://sliptree.github.io/bootstrap-tokenfield/dist/bootstrap-tokenfield.js"></script>
 <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<script src="/js/bootstrap.min.js"></script>
 
 
 <link rel="stylesheet"
@@ -18,30 +20,63 @@
 	href="//sliptree.github.io/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.css">
 <link rel="stylesheet"
 	href="//sliptree.github.io/bootstrap-tokenfield/dist/css/tokenfield-typeahead.css">
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<!-- icon pack -->
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 <link rel="stylesheet" 
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	
 <link rel="stylesheet" href="/css/header.css">
+
+
 </head>
 
 <body>
 	<script type="text/javascript">
-		//$(document).ready.function({
-		//	getAttrList("styleBtnTable","/getAttrList/style");
-		//});
-		
-		
-		
+		function changeSearchMod(target) {
+			var defaultSearch = document.getElementById("defaultSearch");
+
+			console.log(target);
+			
+			switch(target){
+			case 'categoryBtn' :
+				defaultSearch.style.display = 'none';
+				document.getElementById("categorySearch").style.display = 'block';
+				break;
+			case 'colorBtn' :
+				defaultSearch.style.display = 'none';
+				document.getElementById("colorSearch").style.display = 'block';
+				break;
+			case 'styleBtn' :
+				defaultSearch.style.display = 'none';
+				document.getElementById("styleSearch").style.display = 'block';
+				break;
+			case 'brandBtn' :
+				defaultSearch.style.display = 'none';
+				document.getElementById("brandSearch").style.display = 'block';
+				break;
+			case 'userBtn' :
+				defaultSearch.style.display = 'none';
+				document.getElementById("userSearch").style.display = 'block';
+				break;
+			}
+		}
+
+		function returnDefaultMod() {
+			var defaultSearch = document.getElementById("defaultSearch");
+			defaultSearch.style.display = 'block';
+			document.getElementById("categorySearch").style.display = 'none';
+			document.getElementById("colorSearch").style.display='none'; 
+			document.getElementById("styleSearch").style.display='none';
+			document.getElementById("brandSearch").style.display='none';
+			document.getElementById("userSearch").style.display='none'; 
+
+		}
+
 	</script>
 
 	<!--db가져오기 테스트 -->
 	<nav class="fashion">
-		<div class="icon">
-			<a href="/feed">
-			<img src="https://i.ibb.co/MVr31h7/logo.png" alt="logo" /></a>
-		</div>
-		
+		<img src="https://i.ibb.co/MVr31h7/logo.png" alt="logo" />
 
 		<ul class="searchBoard" style="margin: 0; padding: 0">
 			<input type="text" class="inputField" placeholder="" size="35"
@@ -106,7 +141,10 @@
 
 					<div class="mm-3column">
 						<span class="menu-list"> <span>
-								<table id="categoryBtnTable">
+								<table>
+									<td th:each="category:${category}"><input class="attrBtn"
+										th:type="button" th:value="${category.name}"
+										onclick="returnDefaultMod()"></input></td>
 								</table>
 						</span>
 						</span>
@@ -141,7 +179,10 @@
 
 					<div class="mm-3column">
 						<span class="menu-list"> <span>
-								<table id = styleBtnTable>
+								<table>
+									<td th:each="style:${style}"><input class="attrBtn"
+										th:type="button" th:value="${style.name}"
+										onclick="returnDefaultMod()"></input></td>
 								</table>
 						</span>
 						</span>
@@ -159,7 +200,10 @@
 
 					<div class="mm-3column">
 						<span class="menu-list"> <span>
-								<table id="brandBtnTable">
+								<table>
+									<td th:each="brand:${brand}"><input class="attrBtn"
+										th:type="button" th:value="${brand[1]}"
+										onclick="returnDefaultMod()"></input></td>
 								</table>
 						</span>
 						</span>
@@ -177,9 +221,12 @@
 					</div>
 				</div>
 			</li>
+
+		
+		<div>
 		</ul>
 			
-		<form id="searchButton" name="searchButton" action="/searched" method="post">
+		<form id="searchButton" name="searchButton" action="/feed/searched" method="post">
 			<input type="hidden" name="searchWords" id="searchWords" value="검색 내용 없음" >
 			<button  value="form-data">
 				<svg>
@@ -189,32 +236,18 @@
 				</svg>
 			</button>
 		</form>
-<<<<<<< HEAD
-		<a href="/postWrite"><i class="glyphicon glyphicon-plus component"></i></a>
-		<a href="/ranking/brand"><i class="glyphicon glyphicon-king component"></i></a> 
-		<a href=""><i class="glyphicon glyphicon-heart component"></i></a>
-		<div sec:authorize="isAuthenticated()" id="userInfo" style="display: none;">
-		<span id="userNo" sec:authentication="principal.member.memberNo"></span>
-		<span id="userNickname" sec:authentication="principal.member.nickname"></span> 
-			</div>
-		<a th:id="myProfile" href=""> <i
-			class="glyphicon glyphicon-user component"></i></a>
-	</header>
-
-	<div class="form-data" id="form-data"></div>
-=======
 		
 		
-		<a href="/postWrite"><i class="glyphicon glyphicon-plus"></i></a> 
+		<a href=""><i class="glyphicon glyphicon-plus"></i></a> 
 		<a href=""><i class="glyphicon glyphicon-king"></i></a>     
 		<a href=""><i class="glyphicon glyphicon-heart"></i></a> 
 		<a href=""><i class="glyphicon glyphicon-user"></i></a>
 	</nav>
 
+	</div>
 	<div class="form-data" id="form-data"></div> 
 
 
->>>>>>> parent of 76b434e... Merge branch 'master' into haneol
 	<script src="/js/header.js"></script>
 
 </body>
