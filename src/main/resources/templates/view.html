@@ -2,15 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 
-<meta charset="UTF-8">
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
 <title>Post</title>
 
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/post.css">
 <link rel="stylesheet" href="/css/comment.css">
+
+<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <body>
+
+	
 	<div th:include="header/header"></div>
+	
+	
+	<div class="row">
+	</div>
 	<div id="postView" class="postView">
 		<input id="memberNo" name="memberNo" class="memberNo"
 			th:value="${post.memberNo.memberNo}" hidden="true">

@@ -33,7 +33,7 @@ public class RankingController {
 	private BrandRepository brandRepository;
 	
 	@RequestMapping("ranking/user/likes")
-	public String memberRankingByLikes(Model model) {
+	public String memberRankingByLikes(Model model, HttpSession session) {
 		//테스트 끝나면 삭제 (스케줄링으로 구현)
 		rankingService.setLikesCount();
 		List<Member> countedMembers = memberRepository.findAll();
