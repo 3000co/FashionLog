@@ -13,27 +13,27 @@
         <div class="comments">
         <table>
 
-		<tr th:each="comment:${commentList}" class="commentRow" onload="sessionCheck()">
+		<tr th:each="comment:${commentList}" class="commentRow">
 			<td th:id="${comment.commentNo}" class="commentNo">
 		  <img class="memberProfileImg" th:src="${comment.memberNo.profileImageNo.path}" />
 			</td>
 			
-			<td th:id ="${comment.memberNo.nickname}" class="targetMemName">
-			<span th:text="${comment.memberNo.nickname}"></span>
+			<td>
+			<span class="targetMemName" th:text="${comment.memberNo.nickname}"></span>
 			<span  id="commentContents" th:text="${comment.contents}"></span>
 			</td>
 			
-			<td th:id="${session.nickname}" class="commentDeleteBtn" >
-			<span><a th:href="@{/deleteComment(commentNo=${comment.commentNo})}"/>   &times;</span>
+			<td class="commentDeleteBtn" >
+			<span><a th:href="@{/deleteComment(commentNo=${comment.commentNo})}">&times;</a></span>
 
 			</td>
 		</tr>  
 		</table>
 		
-		<!-- 紐⑤떖 -->
+		<!-- 모달 -->
 		<form id="reportModal" class="modal" method=post>
 			<div class="modalContents">
-				<h1>�떊怨좏븯湲�</h1>
+				<h1>신고하기</h1>
 				<br>
 				<span class="close">&times;</span>
 				<input id = "reportType" name="reportType" th:value="1" hidden="true"/>
@@ -44,17 +44,17 @@
 			</div>
 			
 			<script>
-<!-- 紐⑤떖 �븿�닔�뱾  -->
+<!-- 모달 함수들  -->
 $(".commentRow").click( function() {
 	console.log($(this).children('td.commentNo').attr('id'));
 	$(reportModal).show();
 	
 	targetCommentNo = $(this).children('td.commentNo').attr('id');
-	console.log("��寃잙꽆踰�: " + targetCommentNo);
+	console.log("타겟넘버: " + targetCommentNo);
 	$("#targetCommentNo").val(targetCommentNo);
 	
 	targetMemName = $(this).children('td.targetMemName').attr('id');
-	console.log("�씪�씠�꽣紐�: " + targetMemName);
+	console.log("라이터명: " + targetMemName);
 	$("#targetMemName").val(targetMemName);
 	
 });
@@ -64,11 +64,11 @@ $(".close").click(function(event) {
 });
 
 $("#reportBtn1").on("click", function(){
-	$(".reportBtn").val("�쑀�빐�븳 �궡�슜")
+	$(".reportBtn").val("유해한 내용")
 	});
 	
 $("#reportBtn2").on("click", function(){
-	$(".reportBtn").val("愿묎퀬�꽦 �궡�슜")
+	$(".reportBtn").val("광고성 내용")
 });
 
 $(".reportBtn").on("click", function(){
@@ -89,13 +89,13 @@ $(".reportBtn").on("click", function(){
 		
 		success : function(result) {
 			if(result == 'SUCCESS'){
-				console.log("�떊怨� �셿猷�");
+				console.log("신고 완료");
 				
 			}
 		}
 	
 	});
-	alert("�떊怨좉� �젒�닔�릺�뿀�뒿�땲�떎");
+	alert("신고가 접수되었습니다");
 	/* $(resultModal).show(); */
 });
 
@@ -106,11 +106,11 @@ $(".reportBtn").on("click", function(){
 		<form id="resultModal" class="modal" method=post>
 			<div class="modalContents">
 			<span class="close">&times;</span>
-				<h1>�떊怨� �젒�닔 �셿猷�!</h1>
-				<p>�떊怨좊릺�뿀�뒿�땲�떎
-				怨� �젒�닔 �삁�젙�엯�땲�떎</p>
+				<h1>신고 접수 완료!</h1>
+				<p>신고되었습니다
+				곧 접수 예정입니다</p>
 				<br>
-				<p id="close">�솗�씤</p>
+				<p id="close">확인</p>
 				
 				
 			</div>
@@ -123,8 +123,8 @@ $(".reportBtn").on("click", function(){
   <section>
         <div class="commentInput">
         <form name=commentInputForm action="/insertComment" method="post">
-			<td><input type="text" name="contents" id="contents" placeholder="�궡�슜�쓣 �엯�젰�빐二쇱꽭�슂" ></td>
-			<td><button type="submit" id="insertBtn" onchange="InputProcess()">�벑濡�</button></td>
+			<input type="text" name="contents" id="contents" placeholder="내용을 입력해주세요" >
+			<button type="submit" id="insertBtn" onchange="InputProcess()">등록</button>
 		</form>
         </div>
   </section>
@@ -150,23 +150,18 @@ $(".reportBtn").on("click", function(){
 		/*]]>*/
 	};
 	
-	$(".commentRow").each(function sessionCheck(){
-		var sessionNickName = $(this).children(".commentDeleteBtnRow").attr("id");
-		var commentWriter = $(this).children(".commentDeleteBtnRow").children(".commentDeleteBtn").attr("id");
-		var elems = document.getElementById(sessionNickName);
-
-		
+	$(".commentRow").each(function(){
+		var sessionNickName = $("#userNickname").text();
+		var commentWriter = $(this).find("#targetMemName").attr("id");
 		console.log(sessionNickName +","+ commentWriter);
 		
 		/*<![CDATA[*/
 		if( sessionNickName == commentWriter ){
-			console.log("�씪移섑븿!")
-			$(this).children(".commentDeleteBtnRow").css('display','block');
-			} 
+			console.log("일치함!")
+			$(this).find(".commentDeleteBtn").css('display','inline');
+			}
 		/*]]>*/
 	});
-	
-	
 </script>	
 </body>
 </html>
