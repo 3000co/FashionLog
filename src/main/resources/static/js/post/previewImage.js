@@ -46,7 +46,7 @@ function handleImgFileSelect(e) {
 			
 		});
 	}else {
-		$("#postImage").attr("src", null);
+		$("#postImage").attr("src", "undefind");
 	}
 	
 }
@@ -62,11 +62,20 @@ function dd() {
 		data: form,
 		processData: false, 
 		contentType: false, 
-		success: function(data) { 
-			alert(data);
+		success: function(data) {
+			colorSend(data);
 		}, 
 		error : function() {
 	        alert("여기Error!");
 	    }
 	});
+}
+
+function colorSend(data) {
+	
+	var colorArr = data.split(",");
+	console.log(colorArr[0]);
+	
+	$(".square").attr('color', colorArr[0]);
+	
 }

@@ -6,7 +6,7 @@
 	
 	<link rel="stylesheet" th:href="@{/css/post.css}">
 	<script th:src="@{https://code.jquery.com/jquery-3.3.1.min.js}"></script>
-	<script  th:src="@{/js/post/jquery.ajax-cross-origin.min.js}"></script>
+	
 <!-- 	<th:block th:include="header/header"></th:block> -->
 </head>
 <body>
@@ -17,7 +17,7 @@
 				<input type="hidden" id="type" name="type" value="post"> 
 				<input type="file" id="selectImg" name="mulFile" />
 				<div class="imgMold">
-					<img id="postImage" class="postImage" src="" alt="강아지"><br>
+					<img id="postImage" class="postImage"><br>
 				</div>
 			</form>
 			<div class="postContents">
@@ -116,7 +116,7 @@
 	<script th:src="@{/js/post/styleSelect.js}"></script>
 	<script th:src="@{/js/post/tag.js}"></script>
 	<script th:src="@{/js/post/post.js}"></script>
-	
+	<script th:src="@{/js/post/jquery.ajax-cross-origin.min.js}"></script>
 </body>
 
 </html>
