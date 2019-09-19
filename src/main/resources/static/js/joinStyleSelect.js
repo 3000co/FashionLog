@@ -170,13 +170,20 @@
 	}
 	
 	//공용 버튼
-	 $(document).on('click', "#refreshBtn", function(event){
+	 $(document).on('click', ".refreshBtn", function(event){
 		  location.reload();
 	  });
 	 
-	 //page2의 선호 스타일을 기입 & 체크박스에 db 등록 용 styleNo부여
+	//page2의 선호 스타일을 기입 & 체크박스에 db 등록 용 styleNo부여
 	  $(document).on('click', ".goPage3Btn", function(event){
-
+		  $(':checkbox').each(function(i){
+				if( $(':checkbox').eq(i).prop("checked") == true ){
+					$(':checked').each(function(j){
+			        $(':checked').eq(j).prop("name","styleNo"+(j+1));
+						});
+					}
+				}); 
+		  
 		    $("#styleSelect1").css("display", "none");
 		    $("#styleSelect2").css("display", "none");
 		    $("#styleSelect3").css("display", "block");
@@ -186,13 +193,7 @@
 		    cbCheck(favoriteStyle0Name);
 		    cbCheck(favoriteStyle1Name);
 		    
-		    $(':checkbox').each(function(i){
-				if( $(':checkbox').eq(i).prop("checked") == true ){
-					$(':checked').each(function(j){
-			        $(':checked').eq(j).prop("name","styleNo"+(j+1));
-						});
-					}
-				}); 
+		   
 	  });
 	  
 	  $(document).on('click', ".goPage2Btn", function(event){
@@ -226,17 +227,19 @@
 		  }
 	  }
 	  
-	  //체크 1~3개까지
+	//체크 1~3개까지
 	  function checkLimitProcess(){
 		  var checkCount = $("input:checkbox[name=styleNo]:checked").length;
 		  if(checkCount == 0){
 			  alert("스타일은 하나 이상 선택하셔야 합니다.");
-			  $(".joinBtn").prop("disabled",true);
-		  }else if(checkCount > 3){
-			  alert("세개 이상 선택하실 수 없습니다");
-			  $(".joinBtn").prop("disabled",true);
+			  $("#page3JoinBtn").prop("disabled",true);
 		  }else{
-			  $(".joinBtn").prop("disabled",false);
+			  $("#page3JoinBtn").prop("disabled",false);
+		  }
+		  
+		  if(checkCount > 3){
+			  alert("세개 이상 선택하실 수 없습니다");
+			  $("#page3JoinBtn").prop("disabled",true);
 		  }
 	  }
 	  //체크박스 체인지 이벤트

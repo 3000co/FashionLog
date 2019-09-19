@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
       security.userDetailsService(userDetailsService);
 
-      security.authorizeRequests().antMatchers("/").permitAll();
+      security.authorizeRequests().antMatchers("/**").permitAll();
       security.authorizeRequests().antMatchers("/user/**").hasAnyRole("USER");
       security.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
 

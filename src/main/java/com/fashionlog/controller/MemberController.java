@@ -19,6 +19,7 @@ import com.fashionlog.model.dao.FileRepository;
 import com.fashionlog.model.dao.MemberRepository;
 import com.fashionlog.model.dto.File;
 import com.fashionlog.model.dto.Member;
+import com.fashionlog.model.dto.Role;
 import com.fashionlog.model.dto.Style;
 import com.fashionlog.model.service.MemberService;
 
@@ -80,7 +81,7 @@ public class MemberController {
 			session.setAttribute("id", getMemberInfo.getId());
 
 			System.out.println("로그인 성공" + getMemberInfo);
-			return "redirect:/";
+			return "/feed";
 		}
 	}
 
@@ -107,6 +108,7 @@ public class MemberController {
 		model.addAttribute("nickname",member.getNickname());
 		model.addAttribute("phonenumber",member.getPhonenumber());
 		model.addAttribute("email",member.getEmail());
+		
 		System.out.println("Model1::" + model);
 		return "member/styleSelect1";
 	}
@@ -143,8 +145,10 @@ public class MemberController {
 			Style getStyleInfo = member.getStyleNo1();
 			if (getStyleInfo.getStyleNo() == 0) {
 				session.setAttribute("style", null);
-				return "member/styleSelect1";
+				return "/styleSelect1";
 			} else {
+				member.setRole(Role.ROLE_USER);
+				member.setProfileImageNo(fileRepository.findById(1).get());
 				memberService.doJoin(member);
 				System.out.println("회원가입 성공" + getStyleInfo);
 				return "redirect:/login";

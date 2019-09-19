@@ -166,8 +166,11 @@ public class PostController {
 			@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 5) Pageable paging) {
 		// 로그인한 사람 user
 		Member user = (Member) session.getAttribute("member");
-		if (user == null)
+		if (user == null) {
+			System.err.println("아무도 없다");
 			return "redirect:/login";
+		}
+			
 		user = memberRepository.findById(user.getMemberNo()).get();
 		// 가져오는 값들을 중복없이 저장하기 위해 set 생성
 		Set<Post> feedSet = new HashSet<>();
