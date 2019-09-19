@@ -1,7 +1,9 @@
 package com.fashionlog.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Collections;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,7 +24,7 @@ import com.fashionlog.model.dto.Style;
 public class PostServiceImpl implements PostService {
 	@Autowired
 	private PostRepository postRepository;
-	
+
 	//팔로우하는 사람들의 글을 피드로 가져옴
 	@Override
 	public Set<Post> getFeedByFollowee(Member user, Pageable paging) {
@@ -34,7 +36,7 @@ public class PostServiceImpl implements PostService {
 		}
 		return followeesPosts;
 	}
-	
+
 	//나의 글을 피드로 가져옴
 	@Override
 	public Set<Post> getFeedByMe(Member user, Pageable paging) {
@@ -50,7 +52,7 @@ public class PostServiceImpl implements PostService {
 		stylePostList.addAll(getPostByStyle(user.getStyleNo3(), paging));
 		return new HashSet<Post>(stylePostList);
 	}
-	
+
 	@Override
 	public Set<Post> getAllFeed(Pageable paging) {
 		List<Post> allPost = postRepository.findAll();
@@ -67,7 +69,7 @@ public class PostServiceImpl implements PostService {
 		}
 		return postList;
 	}
-	
+
 	public List<Post> getPostToFeed(Member user, Pageable paging){
 		// 가져오는 값들을 중복없이 저장하기 위해 set 생성
 				Set<Post> feedSet = new HashSet<>();

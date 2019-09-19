@@ -1,7 +1,7 @@
 var img;
+var count = 0;
 
 $(document).ready( function() {
-	var count = 0;
 	var num = 0;
 	var newTag = $("#itemTag1");
 	var tagMold;
@@ -97,8 +97,10 @@ $(document).ready( function() {
 				tagImg.setAttribute("alt","tagNoImg");
 				//태그이미지위치
 				tagImg.style.position = "absolute";
-				tagImg.style.left = (offsetX + 15) + "px";
-				tagImg.style.top = (offsetY + 30) + "px";
+				tagImg.style.left = (event.clientX) + "px";
+				tagImg.style.top = (event.clientY) + "px";
+//				tagImg.style.left = (offsetX + 15) + "px";
+//				tagImg.style.top = (offsetY + 30) + "px";
 				
 				//태그이미지를 해당 아이템태그 div에 append
 				$(newTag).append(tagImg);
