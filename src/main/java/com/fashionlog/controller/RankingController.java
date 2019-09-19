@@ -4,10 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +14,6 @@ import com.fashionlog.model.dao.MemberRepository;
 import com.fashionlog.model.dto.Brand;
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.service.RankingService;
-import com.fashionlog.security.SecurityUser;
 
 
 @Controller

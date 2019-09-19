@@ -9,10 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.fashionlog.model.dao.ItemRepository;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -22,9 +18,6 @@ import lombok.ToString;
 @ToString
 @Entity
 public class Brand implements Comparable<Brand> {
-	@Transient
-	@Autowired
-	ItemRepository itemRepo;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,14 +31,6 @@ public class Brand implements Comparable<Brand> {
 	
 	@Transient
 	private Long itemCount;
-
-	public Long getItemCount() {
-		if(this.itemCount==null) {
-			this.itemCount = itemRepo.countByBrandNo(this);
-			
-		}
-		return this.itemCount;
-	}
 	
 	@Override
 	public int compareTo(Brand otherBrand) {

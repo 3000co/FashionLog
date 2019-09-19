@@ -1,167 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
+<script src="/js/post/comment.js"></script>
 <body>
-<div id="badge">
-  
-  <section class="all">
+	<div id="badge">
+		<section class="all">
 
-    <div class="list">
-      <div class="mask"></div>
- 
-      <section>
-        <div class="comments">
-        <table>
+			<div class="list">
+				<div class="mask"></div>
 
-		<tr th:each="comment:${commentList}" class="commentRow">
-			<td th:id="${comment.commentNo}" class="commentNo">
-		  <img class="memberProfileImg" th:src="${comment.memberNo.profileImageNo.path}" />
-			</td>
-			
-			<td>
-			<span class="targetMemName" th:text="${comment.memberNo.nickname}"></span>
-			<span  id="commentContents" th:text="${comment.contents}"></span>
-			</td>
-			
-			<td class="commentDeleteBtn" >
-			<span><a th:href="@{/deleteComment(commentNo=${comment.commentNo})}">&times;</a></span>
+				<section>
+					<div class="comments">
+						<table>
+							<tr th:each="comment:${commentList}" class="commentRow">
+								<td th:id="${comment.commentNo}" class="commentNo"><img class="memberProfileImg"
+										th:src="${comment.memberNo.profileImageNo.path}" /></td>
+								<td><span class="targetMemName" th:text="${comment.memberNo.nickname}"></span> <span
+										id="commentContents" th:text="${comment.contents}"></span></td>
 
-			</td>
-		</tr>  
-		</table>
-		
-		<!-- 모달 -->
-		<form id="reportModal" class="modal" method=post>
-			<div class="modalContents">
-				<h1>신고하기</h1>
-				<br>
-				<span class="close">&times;</span>
-				<input id = "reportType" name="reportType" th:value="1" hidden="true"/>
-				<input id = "targetCommentNo" hidden="true"/>
-				<input id = "targetMemName" hidden="true"/>
-				<button class="reportBtn" id="reportBtn1" name="reportBtn1">�쑀�빐�븳 �궡�슜</button>
-				<button class="reportBtn" id="reportBtn2" name="reportBtn2">愿묎퀬�꽦 �궡�슜</button>
+								<td class="commentDeleteBtn" style="display: none"><a>&times;</a></td>
+							</tr>
+						</table>
+						<div class="commentInput">
+							<form id="commentInputForm" name="commentInputForm" method="post">
+								<input type="text" name="contents" id="inputCommentContents" placeholder="내용을 입력해주세요">
+							</form>
+							<button id="insertBtn">등록</button>
+						</div>
+						<!-- 모달 -->
+						<form id="reportModal" class="modal" method=post>
+							<div class="modalContents">
+								<h1>신고하기</h1>
+								<br> <span class="close">&times;</span> <input id="reportType" name="reportType"
+									th:value="1" hidden="true" />
+								<input id="targetCommentNo" hidden="true" /> <input id="targetMemName" hidden="true" />
+								<button class="reportBtn" id="reportBtn1" name="reportBtn1">유해한 내용</button>
+								<button class="reportBtn" id="reportBtn2" name="reportBtn2">광고성 내용</button>
+							</div>
+						</form>
+
+						<form id="resultModal" class="modal" method=post>
+							<div class="modalContents">
+								<span class="close">&times;</span>
+								<h1>신고 접수 완료!</h1>
+								<p>신고되었습니다 곧 접수 예정입니다</p>
+								<br>
+								<p id="close">확인</p>
+							</div>
+						</form>
+					</div>
+				</section>
 			</div>
-			
-			<script>
-<!-- 모달 함수들  -->
-$(".commentRow").click( function() {
-	console.log($(this).children('td.commentNo').attr('id'));
-	$(reportModal).show();
-	
-	targetCommentNo = $(this).children('td.commentNo').attr('id');
-	console.log("타겟넘버: " + targetCommentNo);
-	$("#targetCommentNo").val(targetCommentNo);
-	
-	targetMemName = $(this).children('td.targetMemName').attr('id');
-	console.log("라이터명: " + targetMemName);
-	$("#targetMemName").val(targetMemName);
-	
-});
+		</section>
 
-$(".close").click(function(event) {
-	$(reportModal).hide();
-});
-
-$("#reportBtn1").on("click", function(){
-	$(".reportBtn").val("유해한 내용")
-	});
-	
-$("#reportBtn2").on("click", function(){
-	$(".reportBtn").val("광고성 내용")
-});
-
-$(".reportBtn").on("click", function(){
-	var targetCommentNo = $("#targetCommentNo").val();
-	var type='1';
-	var reason = $(".reportBtn").val();
-
-	
-	$.ajax({
-		type: 'post',
-		url: '/insertReport',
-		data : {
-			"targetCommentNo" : targetCommentNo,
-			"type" : type,
-			"reason" : reason
-			
-		},
-		
-		success : function(result) {
-			if(result == 'SUCCESS'){
-				console.log("신고 완료");
-				
-			}
-		}
-	
-	});
-	alert("신고가 접수되었습니다");
-	/* $(resultModal).show(); */
-});
-
-</script>
-		
-		</form>
-		
-		<form id="resultModal" class="modal" method=post>
-			<div class="modalContents">
-			<span class="close">&times;</span>
-				<h1>신고 접수 완료!</h1>
-				<p>신고되었습니다
-				곧 접수 예정입니다</p>
-				<br>
-				<p id="close">확인</p>
-				
-				
-			</div>
-		</form>
-        </div> 
-      </section> 
-    </div>
-  </section>
-  
-  <section>
-        <div class="commentInput">
-        <form name=commentInputForm action="/insertComment" method="post">
-			<input type="text" name="contents" id="contents" placeholder="내용을 입력해주세요" >
-			<button type="submit" id="insertBtn" onchange="InputProcess()">등록</button>
-		</form>
-        </div>
-  </section>
-  
-</div>
+	</div>
 
 
 
-<script type="text/javascript" th:inline="javascript">
-	document.getElementById("insertBtn").disabled = true;
-	document.onkeyup = InputProcess;
-	document.onmouseup = InputProcess;
-	document.onmousedown = InputProcess;
 
-	function InputProcess(){
-		
-		/*<![CDATA[*/
-		if (document.getElementById("contents").value == ''){
-			document.getElementById("insertBtn").disabled = true;
-		} else {
-			document.getElementById("insertBtn").disabled = false;
-		}
-		/*]]>*/
-	};
-	
-	$(".commentRow").each(function(){
-		var sessionNickName = $("#userNickname").text();
-		var commentWriter = $(this).find("#targetMemName").attr("id");
-		console.log(sessionNickName +","+ commentWriter);
-		
-		/*<![CDATA[*/
-		if( sessionNickName == commentWriter ){
-			console.log("일치함!")
-			$(this).find(".commentDeleteBtn").css('display','inline');
-			}
-		/*]]>*/
-	});
-</script>	
 </body>
+
 </html>

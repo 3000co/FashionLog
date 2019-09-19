@@ -43,17 +43,24 @@ public class CommentController {
 	}
 
 	@RequestMapping("/insertComment")
+	@ResponseBody
 	public String insertComment(Comment comment, @AuthenticationPrincipal SecurityUser securityUser) {
 		Member user = securityUser.getMember(); 
 		comment.setMemberNo(user);
 		commentRepository.save(comment);
-		return "redirect:/comment";
+		return "abab";
 	}
 
 	@RequestMapping("/deleteComment")
-	public String deleteComment(@RequestParam("commentNo")int commentNo) {
-		commentRepository.deleteById(commentNo);
-		return "redirect:/comment";
+	@ResponseBody
+	public String deleteComment(int commentNo, @AuthenticationPrincipal SecurityUser securityUser) {
+		Member user = securityUser.getMember();
+		Comment comm = commentRepository.findById(commentNo).get();
+		if (comm.getMemberNo().getId() == user.getId()){
+			commentRepository.deleteById(commentNo);
+			return commentNo+" is deleted";
+		}
+		return "delete denied";
 	}
 
 }
