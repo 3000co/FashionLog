@@ -222,7 +222,7 @@
 				   $("#cb"+i).prop('checked', true);
 				   break;
 			   }else{
-				   console.log("찾지 못함");
+//				   console.log("찾지 못함");
 			   }
 		  }
 	  }
