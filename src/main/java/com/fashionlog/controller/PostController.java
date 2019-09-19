@@ -146,7 +146,7 @@ public class PostController {
 			@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 5) Pageable paging) {
 		// 로그인한 사람 user
 		Member user = securityUser.getMember();		
-		if (user == null)
+		if (user == null) {
 			return "redirect:/login";
 		}
 			
@@ -158,25 +158,7 @@ public class PostController {
 		model.addAttribute("feed", feed);
 		return "feed";
 	}
-	
-	@RequestMapping(value = "/getMoreFeed", method = RequestMethod.GET)
-	@ResponseBody
-	public Map<String, Object> getMoreFeed(Pageable paging, @AuthenticationPrincipal SecurityUser securityUser) {
-		Member user = securityUser.getMember();
-		Map<String, Object> newFeed = new HashMap<>();
-		List<Post> feedList = postService.getPostToFeed(user,paging);
-		for(Post post :feedList) {
-			Map<String, Object> feedVo = new HashMap<>();
-			feedVo.put("postNo", post.getPostNo());
-			feedVo.put("postImageNo", post.getPostImageNo().getPath());
-			feedVo.put("uploadTime", post.getUploadTime());
-			feedVo.put("uploader", post.getMemberNo().getNickname());
-			likesService.countLikes(post);
-			feedVo.put("likesCount", post.getLikesCount());
-			newFeed.put(post.getPostNo()+"", feedVo);
-		}
-		return newFeed;
-	}
+
 
 	@RequestMapping(value = "/getMoreFeed", method = RequestMethod.GET)
 	@ResponseBody
@@ -197,4 +179,4 @@ public class PostController {
 		return newFeed;
 	}
 
-}
+	}
