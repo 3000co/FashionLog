@@ -72,8 +72,5 @@ public class Post implements Comparable<Post> {
 			return 1;
 		}
 		return 0;
-//		}else if(this.getUploadTime().getTime()>o.getUploadTime().getTime()) {
-//			return -1;
-//		}
 	}
 }
