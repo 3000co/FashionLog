@@ -57,6 +57,7 @@ select {
 
 .itemWrap {
 	width: 380px;
+	height: 580px;
 	float: right;
 	margin: 10px;
 	padding: 10px;

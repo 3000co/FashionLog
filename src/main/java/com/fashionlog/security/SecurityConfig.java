@@ -28,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 
       security.formLogin().loginPage("/login").defaultSuccessUrl("/feed", true);
+
       security.formLogin().loginPage("/login").failureUrl("/loginFail");
       security.formLogin().usernameParameter("id");
       security.exceptionHandling().accessDeniedPage("/accessDenied");

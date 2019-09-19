@@ -170,25 +170,12 @@
 	}
 	
 	//공용 버튼
-	 $(document).on('click', ".refreshBtn", function(event){
+	 $(document).on('click', "#refreshBtn", function(event){
 		  location.reload();
 	  });
 	 
-	 //page3 이동 & 체크박스에 db 등록 용 styleNo부여
+	 //page2의 선호 스타일을 기입 & 체크박스에 db 등록 용 styleNo부여
 	  $(document).on('click', ".goPage3Btn", function(event){
-		    $("#styleSelect1").css("display", "none");
-		    $("#styleSelect2").css("display", "none");
-		    $("#styleSelect3").css("display", "block");
-
-		    var favoriteStyle0Name = $("#favoriteStyle0").children("p").text();
-		    var favoriteStyle1Name = $("#favoriteStyle1").children("p").text();
-		    cbCheck(favoriteStyle0Name);
-		    cbCheck(favoriteStyle1Name);
-		 
-	  });
-	  
-	//page2의 선호 스타일을 기입 & 체크박스에 db 등록 용 styleNo부여
-	  $(document).on('click', ".joinBtn", function(event){
 
 		    $("#styleSelect1").css("display", "none");
 		    $("#styleSelect2").css("display", "none");
@@ -225,44 +212,42 @@
 		  
 		  for(i=0; i< 10; i++ ){
 			   cbLabel = $("#la"+i).text();
-//			   console.log(i+"번째 라벨 : "+cbLabel.toLowerCase());
-//			   console.log("체크 대상 :"+favoriteStyleName.toLowerCase());
+			   console.log(i+"번째 라벨 : "+cbLabel.toLowerCase());
+			   console.log("체크 대상 :"+favoriteStyleName.toLowerCase());
 			   
 			   if(cbLabel.toLowerCase() == favoriteStyleName.toLowerCase()){
 				 
-//				   console.log("여기에 체크!");
+				   console.log("여기에 체크!");
 				   $("#cb"+i).prop('checked', true);
 				   break;
 			   }else{
-//				   console.log("찾지 못함");
+				   console.log("찾지 못함");
 			   }
 		  }
 	  }
 	  
 	  //체크 1~3개까지
 	  function checkLimitProcess(){
-		  console.log("감시중");
 		  var checkCount = $("input:checkbox[name=styleNo]:checked").length;
-		  console.log(checkCount);
-		  if(checkCount < 1){
+		  if(checkCount == 0){
 			  alert("스타일은 하나 이상 선택하셔야 합니다.");
-			  $("#page3JoinBtn").prop("disabled",true);
-		  }
-		  
-		  if(checkCount > 3){
+			  $(".joinBtn").prop("disabled",true);
+		  }else if(checkCount > 3){
 			  alert("세개 이상 선택하실 수 없습니다");
-			  $("#page3JoinBtn").prop("disabled",true);
+			  $(".joinBtn").prop("disabled",true);
 		  }else{
-			  $("#page3JoinBtn").prop("disabled",false);
+			  $(".joinBtn").prop("disabled",false);
 		  }
 	  }
 	  //체크박스 체인지 이벤트
 	  $(document).ready(function(){
-		  
-		  $("#page3JoinBtn").prop("disabled",true);
 		    $(".cb").change(function(){
-		        	checkLimitProcess();
-		        });
+		        if($(".cb").is(":checked")){
+		            checkLimitProcess();
+		        }else{
+		         
+		        }
+		    });
 		});
 	
 

@@ -83,6 +83,7 @@
 	//상세버튼 
 	
 	$(document).on("click",".attrBtn",function() {
+		 console.log("안녕?");
 			var attrWord = $(this).val();
 			
 			var searchWord = $('#inputField-tokenfield').val();
