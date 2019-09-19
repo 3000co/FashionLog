@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Role;
 import com.fashionlog.model.dto.Style;
 import com.fashionlog.model.service.MemberService;
+import com.fashionlog.security.SecurityUser;
 
 @Controller
 public class MemberController {
@@ -64,33 +66,34 @@ public class MemberController {
 	}
 
 
-	// 로그인 처리
-	@RequestMapping(value = "/login.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String doLogin(Member member, HttpSession session) {
-		System.out.println("아이디: " + member.getId() + " 비밀번호: " + member.getPassword());
-		Member getMemberInfo = memberService.findByIdAndPassword(member.getId(), member.getPassword());
-		System.out.println("getMemberInfo: " + getMemberInfo);
+//	// 로그인 처리
+//	@RequestMapping(value = "/login.do", method = { RequestMethod.GET, RequestMethod.POST })
+//	public String doLogin(Member member, HttpSession session) {
+//		System.out.println("아이디: " + member.getId() + " 비밀번호: " + member.getPassword());
+//		Member getMemberInfo = memberService.findByIdAndPassword(member.getId(), member.getPassword());
+//		System.out.println("getMemberInfo: " + getMemberInfo);
+//
+//		if (getMemberInfo == null) {
+//			session.setAttribute("member", null);
+//			return "member/login";
+//		} else {
+//			session.setAttribute("member", getMemberInfo);
+//
+//			session.setAttribute("nickname", getMemberInfo.getNickname());
+//			session.setAttribute("id", getMemberInfo.getId());
+//
+//			System.out.println("로그인 성공" + getMemberInfo);
+//			return "redirect:/";
+//		}
+//	}
 
-		if (getMemberInfo == null) {
-			session.setAttribute("member", null);
-			return "member/login";
-		} else {
-			session.setAttribute("member", getMemberInfo);
-
-			session.setAttribute("nickname", getMemberInfo.getNickname());
-			session.setAttribute("id", getMemberInfo.getId());
-
-			System.out.println("로그인 성공" + getMemberInfo);
-			return "/feed";
-		}
-	}
-
-	// 로그아웃 처리
-	@RequestMapping("/logout.do")
-	public String doLogout(Member member, HttpSession session) {
-		session.invalidate();
-		return "redirect:/login";
-	}
+//	// 로그아웃 처리
+//	@RequestMapping("/logout.do")
+//	public String doLogout(Member member, @AuthenticationPrincipal SecurityUser securityUser) {
+//		
+//		session.invalidate();
+//		return "redirect:/login";
+//	}
 
 	// 회원가입 화면
 	@RequestMapping("/join")
