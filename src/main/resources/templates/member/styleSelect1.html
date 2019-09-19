@@ -1,29 +1,132 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원 가입</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" th:href="@{/css/styleSelect.css}">
 <script type="text/javascript">
 
+/* function endueStyleNo() {
+	
+	$(':checkbox').each(function(i){
+		if( $(':checkbox').eq(i).prop("checked") == true ){
+			$(':checked').each(function(j){
+	        $(':checked').eq(j).prop("name","styleNo"+(j+1));
+				});
+			}
+		});
+	}  */
 	
 </script>
 </head>
 
-<body th:align="center">	
+<body th:align="center">
 	<h3>회원가입</h3>
 	<img src="images/google-logo.png" width="50" height="50" />
-	마음에 드는 사진을 선택해주세요.<br>
-	10장이 모이면 회원님의 선호 스타일을 알려드립니다.
-		
-	<form th:action="@{/styleSelect1.do}" method="post">
-	
-			
-		<p>
-			<input type="button" id="selectBtn" onclick="location.href='/join'"  value="돌아가기"/>
-			<span><input type="submit" value="가입" onclick="btn();"></span>
-		</p>
 
-	</form>
+	<form th:action="@{/styleSelect3.do}" method="post">
 	
+	<!-- 세번째 페이지 -->
+	<div id="styleSelect3" class="page" style="display: none">
+		<h4>관심있는 스타일을 더 선택하세요.</h4>
+		<h5>이후 마이페이지에서 변경 가능</h5><br>
+		<h6>1~3개의 스타일을 선택하면 회원가입이 가능합니다</h6><br>
+		
+		<div class="form-group" >
+			<input type="hidden" name="id" th:value="${id}">
+			<input type="hidden" name="password" th:value="${password}">
+			<input type="hidden" name="nickname" th:value="${nickname}">
+			<input type="hidden" name="phonenumber" th:value="${phonenumber}">
+			<input type="hidden" name="email" th:value="${email}">
+				<input type="checkbox" class ="cb" id="cb0" value="1" name="styleNo"/><label id="la0" for="1">Vintage</label>
+				<input type="checkbox" class ="cb"id="cb1" value="2" name="styleNo"/><label id="la1" for="2">Casual</label> <br>
+				<input type="checkbox" class ="cb"id="cb2" value="3" name="styleNo"/><label id="la2" for="3">Chic</label>
+				<input type="checkbox" class ="cb"id="cb3" value="4" name="styleNo"/><label id="la3" for="4">Street</label> <br>
+				<input type="checkbox" class ="cb"id="cb4" value="5" name="styleNo"/><label id="la4" for="5">Sporty</label>
+				<input type="checkbox" class ="cb"id="cb5" value="6" name="styleNo"/><label id="la5" for="6">Formal</label> <br>
+				<input type="checkbox" class ="cb"id="cb6" value="7" name="styleNo"/><label id="la6" for="7">Gothic</label>
+				<input type="checkbox" class ="cb"id="cb7" value="8" name="styleNo"/><label id="la7" for="8">Punk</label> <br>
+				<input type="checkbox" class ="cb"id="cb8" value="9" name="styleNo"/><label id="la8" for="9">Retro</label>
+				<input type="checkbox" class ="cb"id="cb9" value="10" name="styleNo"/><label id="la9" for="10">Dandy</label> <br>
+		</div>	
+		
+		<div class="page1Btns">
+			<input type="button" class="refreshBtn" value="돌아가기"/>
+			<span><input type="submit" class="goPage3Btn" id="page3JoinBtn"  value="가입" /></span>
+		</div>	
+	</div>
+	<!-- 두번째 페이지 -->
+
+	<div id="styleSelect2" class="page" style="display: none">
+		
+		<br> 회원님의 선호 스타일은</br>
+
+		<table>
+			<tr id="row1">
+				<td class="styleSample"><label id="favoriteStyle0"
+					class="styleName">
+						<p></p> <img id="favoriteStyleImg0" src="">
+				</label></td>
+				<td class="styleSample"><label id="favoriteStyle1"
+					class="styleName">
+						<p></p> <img id="favoriteStyleImg1" src="">
+			</tr>
+		</table>
+		
+		<div id="page2Btns">
+			<input type="button" class="refreshBtn" value="다시하기" /> 
+			<input type="button" class="goPage3Btn" value="더선택하기"/> 
+			<span><input type="submit" class="joinBtn" value="가입" /></span>
+		</div>
+
+	</div>
+
+	<!-- 첫번째 페이지 -->
+	
+	<div id="styleSelect1" class="page" style="display: block">
+		<br> 마음에 드는사진을 선택해주세요. <br> 10장이 모이면 회원님의 선호 스타일을 알려드립니다.</br>
+
+		<div class="container">
+			<div class="progress">
+				<div class="progress-bar"></div>
+			</div>
+		</div>
+
+		
+			<div class="selectTable">
+				<table>
+					<tr id="row1">
+						<td class="styleSample"><label id="styleName0"
+							class="styleName"> <img id="styleImg0">
+						</label></td>
+						<td class="styleSample"><label id="styleName1"
+							class="styleName"> <img id="styleImg1">
+						</label></td>
+						<td class="styleSample"><label id="styleName2"
+							class="styleName"> <img id="styleImg2"></td>
+					</tr>
+					<tr id="row2">
+						<td class="styleSample"><label id="styleName3"
+							class="styleName"> <img id="styleImg3"></td>
+						<td class="styleSample"><label id="styleName4"
+							class="styleName"> <img id="styleImg4"></td>
+						<td class="styleSample"><label id="styleName5"
+							class="styleName"> <img id="styleImg5"></td>
+					</tr>
+
+					</div>
+
+					<div class="page1Btns">
+						<input type="button" class="goPage3Btn" value="건너 뛰기" /> <span>
+						<input type="button" class="refreshBtn" value="다른 사진"/></span>
+					</div>
+		
+	</div>
+	
+	</form>
+
+	<script src="/js/JoinStyleSelect.js"></script>
 </body>
 </html>

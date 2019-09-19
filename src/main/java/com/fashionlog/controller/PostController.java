@@ -150,6 +150,8 @@ public class PostController {
 		Member user = securityUser.getMember();		
 		if (user == null)
 			return "redirect:/login";
+		}
+			
 		user = memberRepository.findById(user.getMemberNo()).get();
 		List<Post> feed = postService.getPostToFeed(user,paging);
 		for(Post post:feed) {

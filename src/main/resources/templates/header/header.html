@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>회원 가입</title>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script
@@ -133,13 +135,27 @@
 					</div>
 				</div>
 			</li>
-
-			<!-- 브랜드 -->
-			<li class="drop-down" id='brandSearch' style="display: none">
-				<div class="mega-menu">
-					<div class="mm-6column">
-						<p>브랜드 검색</p>
-					</div>
+		
+			<div class="selectTable">
+				<table>
+					<tr id="row1">
+						<td class="styleSample"><label id="styleName0"
+							class="styleName"> <img id="styleImg0">
+						</label></td>
+						<td class="styleSample"><label id="styleName1"
+							class="styleName"> <img id="styleImg1">
+						</label></td>
+						<td class="styleSample"><label id="styleName2"
+							class="styleName"> <img id="styleImg2"></td>
+					</tr>
+					<tr id="row2">
+						<td class="styleSample"><label id="styleName3"
+							class="styleName"> <img id="styleImg3"></td>
+						<td class="styleSample"><label id="styleName4"
+							class="styleName"> <img id="styleImg4"></td>
+						<td class="styleSample"><label id="styleName5"
+							class="styleName"> <img id="styleImg5"></td>
+					</tr>
 
 					<div class="mm-3column">
 						<table class="menu-list" id="brandBtnTable">
@@ -149,13 +165,13 @@
 				</div>
 			</li>
 
-			<!-- 유저 -->
-			<li class="drop-down" id='userSearch' style="display: none">
-				<div class="mega-menu">
-					<div class="mm-6column">
-						<p>유저 검색</p>
-
 					</div>
+
+					<div class="page1Btns">
+						<input type="button" class="goPage3Btn" value="건너 뛰기" /> <span>
+						<input type="button" class="refreshBtn" value="다른 사진"/></span>
+					</div>
+
 				</div>
 			</li>
 		</ul>
@@ -173,7 +189,7 @@
 		<a href="/postWrite"><i class="glyphicon glyphicon-plus component"></i></a>
 		<a href="/ranking/brand"><i class="glyphicon glyphicon-king component"></i></a> 
 		<a href=""><i class="glyphicon glyphicon-heart component"></i></a>
-		<div sec:authorize="isAutorize()" id="userInfo" style="display: none;">
+		<div sec:authorize="isAuthenticated()" id="userInfo" style="display: none;">
 		<span id="userNo" sec:authentication="principal.member.memberNo"></span>
 		<span id="userNickname" sec:authentication="principal.member.nickname"></span> 
 			</div>
@@ -183,6 +199,5 @@
 
 	<div class="form-data" id="form-data"></div>
 	<script src="/js/header.js"></script>
-
 </body>
 </html>
