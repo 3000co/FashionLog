@@ -64,22 +64,20 @@ public class PostController {
 		List<Category> category = categoryRepository.findAll();
 		List<Object[]> brand = brandRepository.findBrandQuery();
 
-//		Member member = memberRepository.findById("a").;
-		
 
-		Member user = (Member) session.getAttribute("member");
-		Member member = memberRepository.findById(user.getId());
-
+		Member user = securityUser.getMember();		
 		model.addAttribute("style", style);
 		model.addAttribute("category", category);
 		model.addAttribute("brand", brand);
-//		model.addAttribute("member", member);
+		model.addAttribute("member", user);
+
+
 		return "post/post";
 	}
 
 	/**
 	 * 1. file 올리기
-	 * 
+	 *
 	 * @param mulFile (파일)
 	 * @param model
 	 * @param request
@@ -95,7 +93,7 @@ public class PostController {
 
 	/**
 	 * 2. fileNo를 받아서 post 올리기
-	 * 
+	 *
 	 * @param post
 	 * @return postNo
 	 */
@@ -112,7 +110,7 @@ public class PostController {
 
 	/**
 	 * 3. postNo를 받아서 item만들고(view에서 작업함) 올리기
-	 * 
+	 *
 	 * @param item
 	 */
 	@RequestMapping("/itemInsert")
@@ -184,6 +182,25 @@ public class PostController {
 		Collections.sort(feed);
 		model.addAttribute("feed", feed);
 		return "feed";
+	}
+
+	@RequestMapping(value = "/getMoreFeed", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getMoreFeed(Pageable paging, @AuthenticationPrincipal SecurityUser securityUser) {
+		Member user = securityUser.getMember();
+		Map<String, Object> newFeed = new HashMap<>();
+		List<Post> feedList = postService.getPostToFeed(user,paging);
+		for(Post post :feedList) {
+			Map<String, Object> feedVo = new HashMap<>();
+			feedVo.put("postNo", post.getPostNo());
+			feedVo.put("postImageNo", post.getPostImageNo().getPath());
+			feedVo.put("uploadTime", post.getUploadTime());
+			feedVo.put("uploader", post.getMemberNo().getNickname());
+			likesService.countLikes(post);
+			feedVo.put("likesCount", post.getLikesCount());
+			newFeed.put(post.getPostNo()+"", feedVo);
+		}
+		return newFeed;
 	}
 
 }
