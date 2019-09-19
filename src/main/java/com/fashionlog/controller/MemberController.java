@@ -5,13 +5,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,8 +20,6 @@ import com.fashionlog.model.dto.File;
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Style;
 import com.fashionlog.model.service.MemberService;
-import com.fashionlog.security.SecurityUser;
-
 @Controller
 public class MemberController {
 	
@@ -144,43 +141,59 @@ public class MemberController {
 		}
 
 		
-	// 비밀번호 변경 화면
-	@RequestMapping("/modPassword")
-	public String modPassword() {
-		return "member/modPassword";
+	// 정보 변경 화면
+	@RequestMapping("user/checkPassword")
+	public String checkPassword() {
+		return "member/checkPassword";
 	}
-
-	// 비밀번호 변경 처리
-	@RequestMapping(value = "/modPassword.do", method = RequestMethod.POST)
-	public String doModPassword(Member member, Model model, HttpSession session) {
+	//정보 변경 전 비밀번호 확인
+	@RequestMapping(value = "user/checkPassword.do", method = RequestMethod.POST)
+	public String doCheckPassword(Member member, HttpSession session) {
 		Member getMemberInfo = memberService.findByPassword(member.getPassword());
 		System.out.println("getMemberInfo: " + getMemberInfo);
-
 		if (getMemberInfo == null) {
 			session.setAttribute("member", null);
-			return "member/modPassword";
+			System.out.println("비밀번호 확인 실패");
+			return "member/checkPassword";
 		} else {
-			model.addAttribute("password",encoder.encode(member.getPassword()));
-			memberService.modPassword(member);
-			System.out.println("비밀번호 변경 성공" + getMemberInfo);
-			return "redirect:/";
+			session.setAttribute("member", getMemberInfo);
+			session.setAttribute("password", getMemberInfo.getPassword());
+			System.out.println("비밀번호 확인 성공" + getMemberInfo);
+			return "redirect:/member/modProfileAll";
 		}
+	}
+	// 정보 변경 화면
+		@RequestMapping("user/modProfileAll")
+		public String modProfileAll() {
+			return "member/modProfileAll";
+		}
+	// 정보 변경 처리
+	@RequestMapping(value = "user/modProfileAll.do", method = RequestMethod.POST)
+	public String doModProfileAll(Member member, Model model, HttpSession session) {
+		Member getMemberInfo = memberService.findByPassword(member.getPassword());
+		System.out.println("getMemberInfo: " + getMemberInfo);
+//		model.addAttribute("password",encoder.encode(member.getPassword()));
+//		model.addAttribute("nickname",member.getNickname());
+//		model.addAttribute("phonenumber",member.getPhonenumber());
+//		model.addAttribute("email",member.getEmail());
+		model.addAttribute(member);
+		return "member/profile";
 	}
 	
 
 	// 마이프로필 화면
-	@RequestMapping("/profile")
+	@RequestMapping("user/profile")
 	public String profileSetting() {
 		return "member/profile";
 	}
 	
 	//프로필 화면
-	@RequestMapping("/modProfile")
+	@RequestMapping("user/modProfile")
 	public String modProfile() {
 		return "member/modProfile";
 	}	
 	// 프로필 변경
-		@RequestMapping(value = "/modProfile.do", method = RequestMethod.POST)
+		@RequestMapping(value = "user/modProfile.do", method = RequestMethod.POST)
 		public String doModProfile(Member member, HttpSession session) {
 			return "redirect:/profile";
 		}
