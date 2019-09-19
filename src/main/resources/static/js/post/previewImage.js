@@ -15,6 +15,7 @@ $(document).ready(function() {
 		if (tagDisplay === "block") {
 			var len = $(".itemTag").length;
 			console.log(len);
+			
 			for (var i = 0; i < len; i++) {
 				console.log("들어왔어" + i);
 				$(".itemTag:eq(" + i + ")").detach();
