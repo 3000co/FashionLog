@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import com.fashionlog.model.dao.MemberRepository;
 import com.fashionlog.model.dto.Brand;
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.service.RankingService;
+import com.fashionlog.security.SecurityUser;
 
 
 @Controller
@@ -31,7 +33,7 @@ public class RankingController {
 	private BrandRepository brandRepository;
 	
 	@RequestMapping("ranking/user/likes")
-	public String memberRankingByLikes(Model model, HttpSession session) {
+	public String memberRankingByLikes(Model model) {
 		//테스트 끝나면 삭제 (스케줄링으로 구현)
 		rankingService.setLikesCount();
 		List<Member> countedMembers = memberRepository.findAll();
@@ -54,7 +56,7 @@ public class RankingController {
 	}
 
 	@RequestMapping("ranking/user/followers")
-	public String memberRankingByFollowers(Model model, HttpSession session) {
+	public String memberRankingByFollowers(Model model) {
 		List<Member> members = memberRepository.findAll();
 		Collections.sort(members,new Comparator<Member>() {
 			public int compare(Member m1, Member m2) {

@@ -18,19 +18,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
    protected void configure(HttpSecurity security) throws Exception {
 
       security.userDetailsService(userDetailsService);
-
-      security.authorizeRequests().antMatchers("/").permitAll();
-      security.authorizeRequests().antMatchers("/user/**").hasAnyRole("USER");
-      security.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
       
       security.csrf().disable();
-
-      security.formLogin().loginPage("/login").defaultSuccessUrl("/feed", true);
+      
+      security.authorizeRequests().antMatchers("/").permitAll();
+      security.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
+      security.authorizeRequests().antMatchers("/user/**").hasAnyRole("USER");
+      
+      security.formLogin().loginPage("/login").defaultSuccessUrl("/", true);
       security.formLogin().loginPage("/login").failureUrl("/loginFail");
       security.formLogin().usernameParameter("id");
       security.exceptionHandling().accessDeniedPage("/accessDenied");
       security.logout().logoutUrl("/logout").invalidateHttpSession(true).logoutSuccessUrl("/login");
-
    }
 
    @Bean
