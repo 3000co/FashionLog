@@ -69,11 +69,13 @@ public class PostController {
 		List<Style> style = styleRepository.findAll();
 		List<Category> category = categoryRepository.findAll();
 		List<Object[]> brand = brandRepository.findBrandQuery();
+
 		Member user = securityUser.getMember();		
 		model.addAttribute("style", style);
 		model.addAttribute("category", category);
 		model.addAttribute("brand", brand);
 		model.addAttribute("member", user);
+
 		return "post/post";
 	}
 
@@ -179,4 +181,5 @@ public class PostController {
 		return newFeed;
 	}
 
-	}
+}
+
