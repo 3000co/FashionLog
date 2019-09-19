@@ -3,18 +3,17 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Post</title>
-	
+
 	<link rel="stylesheet" th:href="@{/css/post.css}">
 	<script th:src="@{https://code.jquery.com/jquery-3.3.1.min.js}"></script>
-	
-<!-- 	<th:block th:include="header/header"></th:block> -->
+	<th:block th:include="header/header"></th:block>
 </head>
 <body>
 	<div id="postWrite" class="postWrite">
 		<input id="memberNo" name="memberNo" class="memberNo" th:value="${member.memberNo}" hidden="true">
 		<div class="leftWrap">
 			<form id="imgWrap" class="imgWrap" action="/item" method="post" enctype="multipart/form-data">
-				<input type="hidden" id="type" name="type" value="post"> 
+				<input type="hidden" id="type" name="type" value="post">
 				<input type="file" id="selectImg" name="mulFile" />
 				<div class="imgMold">
 					<img id="postImage" class="postImage"><br>
@@ -27,23 +26,23 @@
 		<div class="itemWrap">
 			<!-- 스타일 -->
 			<div class="style">
-				<label for="style">스 타 일</label> 
+				<label for="style">스 타 일</label>
 				<select id="styleNo" name="styleNo">
 					<option value="0" selected>스타일 선택</option>
 					<option th:each="style:${style}" th:text="${style.name}"
 						th:value="${style.styleNo}"></option>
-				</select><br> 
+				</select><br>
 				&emsp;&emsp;&nbsp;
-				<input type="text" id="styleText1" class="styleText"> 
+				<input type="text" id="styleText1" class="styleText">
 				<span id="1" class="styleUndo">&times;</span>
 				<input type="number" id="styleNo1" class="styleNo" hidden="true">
-				
-				<input type="text" id="styleText2" class="styleText"> 
-				<span id="2" class="styleUndo">&times;</span> 
-				<input type="number" id="styleNo2" class="styleNo" hidden="true"> 
-				
-				<input type="text" id="styleText3" class="styleText"> 
-				<span id="3" class="styleUndo">&times;</span> 
+
+				<input type="text" id="styleText2" class="styleText">
+				<span id="2" class="styleUndo">&times;</span>
+				<input type="number" id="styleNo2" class="styleNo" hidden="true">
+
+				<input type="text" id="styleText3" class="styleText">
+				<span id="3" class="styleUndo">&times;</span>
 				<input type="number" id="styleNo3" class="styleNo" hidden="true">
 			</div>
 			<hr>
@@ -53,37 +52,37 @@
 					<div class="tag">
 					<button type="button" id="exitBtn">&times;</button>
 <!-- 						<label for="tagNo" >태그번호</label>  -->
-						<input type="number" id="tagNo" name="tagNo" disabled="disabled" hidden="true"><br> 
-						
-						<label for="name">상 품 명</label> 
-						<input type="text" id="name" name="name" placeholder="상품명 입력"><br> 
-						
+						<input type="number" id="tagNo" name="tagNo" disabled="disabled" hidden="true"><br>
+
+						<label for="name">상 품 명</label>
+						<input type="text" id="name" name="name" placeholder="상품명 입력"><br>
+
 						<label for="categoryNo">카테고리</label>
 						<select id="categoryNo" name="categoryNo">
 							<option value="0" selected>카테고리 선택</option>
 							<option th:each="category:${category}" th:text="${category.name}"
 								th:value="${category.categoryNo}"></option>
-						</select><br> 
-						
-						<label for="brandNo">브 랜 드</label> 
+						</select><br>
+
+						<label for="brandNo">브 랜 드</label>
 						<select id="brandNo" name="brandNo">
 							<option value="0" selected>브랜드 선택</option>
 							<option th:each="brand:${brand}" th:text="${brand[1]}"
 								th:value="${brand[0]}"></option>
-						</select><br> 
-						
-						<label for="color">색상</label> 
+						</select><br>
+
+						<label for="color">색상</label>
 						<div class="colorSquare"></div>
 						<span id="color"> </span>
-						<button type="button" id="paletteBtn" class="paletteBtn">pa</button><br> 
-						
-						<label for="store">구 매 처</label> 
+						<button type="button" id="paletteBtn" class="paletteBtn">pa</button><br>
+
+						<label for="store">구 매 처</label>
 						<input type="text" id="store" name="store" placeholder="구매처 입력">
-						<button type="button" id="mapBtn">지도</button><br> 
-						
-						<input type="number" id="xCoordinate" name="xCoordinate" hidden="true"> 
+						<button type="button" id="mapBtn">지도</button><br>
+
+						<input type="number" id="xCoordinate" name="xCoordinate" hidden="true">
 						<input type="number" id="yCoordinate" name="yCoordinate" hidden="true">
-						
+
 					</div>
 				</div>
 			</div>
