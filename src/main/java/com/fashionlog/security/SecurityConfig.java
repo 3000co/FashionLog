@@ -22,10 +22,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
       security.authorizeRequests().antMatchers("/").permitAll();
       security.authorizeRequests().antMatchers("/user/**").hasAnyRole("USER");
       security.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
-      
-
 
       security.csrf().disable();
+
 
 
       security.formLogin().loginPage("/login").defaultSuccessUrl("/feed", true);

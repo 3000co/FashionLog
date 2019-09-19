@@ -1,7 +1,5 @@
 @charset "utf-8";
 
-
-
 header {
 	display: flex;
 	top: 0;
@@ -14,6 +12,7 @@ header {
 	background: white;
 	border-bottom: 1px solid #ccc;
 }
+
 
 nav {
   display:flex;
@@ -45,7 +44,6 @@ nav {
  justify-content: flex-start;
 } 
 
-
 .fashion  a>i {
 	position: relative;
 	font-size: 20px;
@@ -72,15 +70,6 @@ button svg {
   
 }
 
-.fashion  a > i {  
-  font-size:20px;
-  padding: 7px 0px 0px 9px;
-  color: #bbb;
-  width: 40px;
-  height: 40px; 
-  
-  
-}
 .fashion  a > i:hover {  
   font-size: 20px;
   
