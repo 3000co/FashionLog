@@ -148,7 +148,7 @@ public class PostController {
 			@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 5) Pageable paging) {
 		// 로그인한 사람 user
 		Member user = securityUser.getMember();		
-		if (user == null)
+		if (user == null) {
 			return "redirect:/login";
 		}
 			
@@ -160,6 +160,7 @@ public class PostController {
 		model.addAttribute("feed", feed);
 		return "feed";
 	}
+
 
 	@RequestMapping(value = "/getMoreFeed", method = RequestMethod.GET)
 	@ResponseBody
@@ -181,3 +182,4 @@ public class PostController {
 	}
 
 }
+
