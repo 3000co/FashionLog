@@ -1,6 +1,35 @@
 $(document).ready(function() {
 	$("#selectImg").on("change", handleImgFileSelect);
+	$("#selectImg").on("change", function(){
+		if($("#postImage").attr('src') !== 'undefined'){
+		colorPick();
+		}
+	});
 });
+
+function colorPick() {
+	
+	//get form
+	var form = $('#imgWrap')[0];
+	
+	//create an form data object
+	var data = new FormData(form);
+	
+	$.ajax({
+		type : 'POST',
+		crossOrigin : true,
+		url : "http://127.0.0.1:5000/autoColorPick",
+		contentType: false,
+		processData: false,
+		data : data,
+		success : function(str){
+			console.log(str);
+		},
+		error: function(e){
+			
+		}
+	});
+}
 
 var selFile;
 
@@ -24,6 +53,7 @@ function handleImgFileSelect(e) {
 			}
 			reader.readAsDataURL(f);
 		});
+		
 	}else {
 		$("#postImage").attr("src", null);
 	}
