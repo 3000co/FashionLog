@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <script
@@ -170,14 +170,14 @@
 				</path> </svg>
 			</button>
 		</form>
+
+
 		<a href="/postWrite"><i class="glyphicon glyphicon-plus component"></i></a>
-		<a href="/ranking/brand"><i class="glyphicon glyphicon-king component"></i></a> 
-		<a href=""><i class="glyphicon glyphicon-heart component"></i></a>
-		<div sec:authorize="isAutorize()" id="userInfo" style="display: none;">
-		<span id="userNo" sec:authentication="principal.member.memberNo"></span>
-		<span id="userNickname" sec:authentication="principal.member.nickname"></span> 
-			</div>
-		<a th:id="myProfile" href=""> <i
+		<a href=""><i class="glyphicon glyphicon-king component"></i></a> 
+		<a href=""><i class="glyphicon glyphicon-heart component"></i></a> 
+		<a th:if="${session.member}" th:id="${session.member.id}" href=""> <span
+			id="userNo" th:text="${session.member.memberNo}"
+			style="display: none;"></span> <i
 			class="glyphicon glyphicon-user component"></i></a>
 	</header>
 

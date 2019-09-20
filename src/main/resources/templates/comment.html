@@ -13,18 +13,18 @@
         <div class="comments">
         <table>
 
-		<tr th:each="comment:${commentList}" class="commentRow">
+		<tr th:each="comment:${commentList}" class="commentRow" onload="sessionCheck()">
 			<td th:id="${comment.commentNo}" class="commentNo">
 		  <img class="memberProfileImg" th:src="${comment.memberNo.profileImageNo.path}" />
 			</td>
 			
-			<td>
-			<span class="targetMemName" th:text="${comment.memberNo.nickname}"></span>
+			<td th:id ="${comment.memberNo.nickname}" class="targetMemName">
+			<span th:text="${comment.memberNo.nickname}"></span>
 			<span  id="commentContents" th:text="${comment.contents}"></span>
 			</td>
 			
-			<td class="commentDeleteBtn" >
-			<span><a th:href="@{/deleteComment(commentNo=${comment.commentNo})}">&times;</a></span>
+			<td th:id="${session.nickname}" class="commentDeleteBtn" >
+			<span><a th:href="@{/deleteComment(commentNo=${comment.commentNo})}"/>   &times;</span>
 
 			</td>
 		</tr>  
@@ -123,8 +123,8 @@ $(".reportBtn").on("click", function(){
   <section>
         <div class="commentInput">
         <form name=commentInputForm action="/insertComment" method="post">
-			<input type="text" name="contents" id="contents" placeholder="내용을 입력해주세요" >
-			<button type="submit" id="insertBtn" onchange="InputProcess()">등록</button>
+			<td><input type="text" name="contents" id="contents" placeholder="내용을 입력해주세요" ></td>
+			<td><button type="submit" id="insertBtn" onchange="InputProcess()">등록</button></td>
 		</form>
         </div>
   </section>
@@ -150,18 +150,23 @@ $(".reportBtn").on("click", function(){
 		/*]]>*/
 	};
 	
-	$(".commentRow").each(function(){
-		var sessionNickName = $("#userNickname").text();
-		var commentWriter = $(this).find("#targetMemName").attr("id");
+	$(".commentRow").each(function sessionCheck(){
+		var sessionNickName = $(this).children(".commentDeleteBtnRow").attr("id");
+		var commentWriter = $(this).children(".commentDeleteBtnRow").children(".commentDeleteBtn").attr("id");
+		var elems = document.getElementById(sessionNickName);
+
+		
 		console.log(sessionNickName +","+ commentWriter);
 		
 		/*<![CDATA[*/
 		if( sessionNickName == commentWriter ){
 			console.log("일치함!")
-			$(this).find(".commentDeleteBtn").css('display','inline');
-			}
+			$(this).children(".commentDeleteBtnRow").css('display','block');
+			} 
 		/*]]>*/
 	});
+	
+	
 </script>	
 </body>
 </html>
