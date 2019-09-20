@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -11,7 +11,7 @@
 <body> 
 
 <h1>ranking : <span th:text="${rankType}">type</span></h1>
-<h2>로그인 됨 : <span id="loginUserNickname" th:text="${session.member.nickname}"></span></h2>
+<h2>로그인 됨 : <span id="loginUserNickname" sec:authentication="principal.member.nickname"></span></h2>
 
 <div th:switch="${rankType}">
 	<div th:case="brand">

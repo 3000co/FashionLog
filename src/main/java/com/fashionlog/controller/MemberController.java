@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,6 +18,7 @@ import com.fashionlog.model.dao.FileRepository;
 import com.fashionlog.model.dao.MemberRepository;
 import com.fashionlog.model.dto.File;
 import com.fashionlog.model.dto.Member;
+import com.fashionlog.model.dto.Role;
 import com.fashionlog.model.dto.Style;
 import com.fashionlog.model.service.MemberService;
 @Controller
@@ -59,46 +61,13 @@ public class MemberController {
 		return "member/login";
 	}
 
-//	// 로그인 처리
-//	@RequestMapping(value = "/login.do", method = { RequestMethod.GET, RequestMethod.POST })
-//	public String doLogin(Member member, HttpSession session) {
-//		System.out.println("아이디: " + member.getId() + " 비밀번호: " + member.getPassword());
-//		Member getMemberInfo = memberService.findByIdAndPassword(member.getId(), member.getPassword());
-//		System.out.println("getMemberInfo: " + getMemberInfo);
-//
-//		if (getMemberInfo == null) {
-//			session.setAttribute("member", null);
-//			return "member/login";
-//		} else {
-//			session.setAttribute("member", getMemberInfo);
-//
-//			session.setAttribute("nickname", getMemberInfo.getNickname());
-//			session.setAttribute("id", getMemberInfo.getId());
-//
-//			System.out.println("로그인 성공" + getMemberInfo);
-//			return "redirect:/";
-//		}
-//	}
-
-//	// 로그아웃 처리
-//	@RequestMapping("/logout.do")
-//	public String doLogout(Member member, @AuthenticationPrincipal SecurityUser securityUser) {
-//		
-//		session.invalidate();
-//		return "redirect:/login";
-//	}
-
 
 	// 회원가입 화면
 	@RequestMapping("/join")
 	public String join() {
 		return "member/join";
 	}
-	// 회원가입 화면
-		@RequestMapping("/styleSelect1")
-		public String styleSelect1() {
-			return "member/styleSelect1";
-		}
+	
 	// 회원가입 처리
 	@RequestMapping(value = "/join.do", method = RequestMethod.POST)
 	public String doJoin(Member member, Model model, HttpSession session) {
@@ -108,20 +77,34 @@ public class MemberController {
 		model.addAttribute("nickname",member.getNickname());
 		model.addAttribute("phonenumber",member.getPhonenumber());
 		model.addAttribute("email",member.getEmail());
+		
 		System.out.println("Model1::" + model);
-		return "member/styleSelect3";
+		return "member/styleSelect1";
 	}
+	
 	// 회원가입 스타일 처리1
-	@RequestMapping(value = "/styleSelect1.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/styleSelect1.do", method = RequestMethod.GET)
 	public String doStyleSelect1(Member member, Model model, HttpSession session) {
-		return "member/styleSelect3";
+		
+		return "member/styleSelect1";
 		
 	
 	}
-	
-	// 회원가입 스타일 처리2
 
-	// 회원가입 스타일 처리3
+	
+	//샘플 타입 파일 가져오기
+	@ResponseBody
+	@RequestMapping("/getFileList")
+	private ModelAndView getStyleList(HttpServletRequest request) throws Exception{
+		ModelAndView modelAndView = new ModelAndView("jsonView");
+		List<File> sampleImgList = fileRepository.findByTypeContaining("sample");
+		modelAndView.addObject("sampleImgList", sampleImgList);
+		
+		return modelAndView;
+	}
+
+	
+	// 최종적으로 db에 멤버정보 추가
 		@RequestMapping(value = "/styleSelect3.do", method = RequestMethod.POST)
 		public String doStyleSelect3(Member member, Model model, HttpSession session) {
 			System.out.println("Model2::"+model);
@@ -131,8 +114,10 @@ public class MemberController {
 			Style getStyleInfo = member.getStyleNo1();
 			if (getStyleInfo.getStyleNo() == 0) {
 				session.setAttribute("style", null);
-				return "member/styleSelect3";
+				return "/styleSelect1";
 			} else {
+				member.setRole(Role.ROLE_USER);
+				member.setProfileImageNo(fileRepository.findById(1).get());
 				memberService.doJoin(member);
 				System.out.println("회원가입 성공" + getStyleInfo);
 				return "redirect:/login";
@@ -203,23 +188,6 @@ public class MemberController {
 			return "redirect:/profile";
 		}
 		
-		
-	//이미지 선택형 스타일 선택 
-		@RequestMapping(value="/styleSelectByImg", method=RequestMethod.GET)
-		public String doStyleSelctByImg() {
-			
-			return "/member/styleSelectByImage";
-		}
-	//파일 가져오기
-		@ResponseBody
-		@RequestMapping("/getFileList")
-		private ModelAndView getStyleList(HttpServletRequest request) throws Exception{
-			ModelAndView modelAndView = new ModelAndView("jsonView");
-			List<File> sampleImgList = fileRepository.findByTypeContaining("sample");
-			modelAndView.addObject("sampleImgList", sampleImgList);
-			
-			return modelAndView;
-		}
-		
+
 		
 }

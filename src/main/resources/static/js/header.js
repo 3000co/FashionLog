@@ -15,15 +15,15 @@
 					
 					$('html').click(function(e) {
 						if(!( $(e.target).is(".menuBtn ") || $(e.target).is(".token-input") )) {
-							console.log(e.target);
+//							console.log(e.target);
 							$('.mega-menu').removeClass('display-on'); 
 							}
 						});
 					
 					//db에서 상세 속성 목록 불러오기
 					getAttrList("styleBtnTable","/getAttrList/style");
-					getAttrList("brandBtnTable","/getAttrList/brand");
 					getAttrList("categoryBtnTable","/getAttrList/category");
+					getAttrList("brandBtnTable","/getAttrList/brand");
 
 			});
 	
@@ -80,10 +80,9 @@
 		$('#inputField-tokenfield').val(searchWord);
 	});
 	
-	//상세버튼 
+	//상세버튼 누를 시 검색창에 토큰 추가
 	
 	$(document).on("click",".attrBtn",function() {
-		 console.log("안녕?");
 			var attrWord = $(this).val();
 			
 			var searchWord = $('#inputField-tokenfield').val();

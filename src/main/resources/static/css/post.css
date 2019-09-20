@@ -1,12 +1,11 @@
 @charset "UTF-8";
 
-
-.postWrite, .postView{
- 	width: 750px;
+.postWrite, .postView {
+	width: 750px;
 	height: 800px;
-  padding: 10px;
+	padding: 10px;
 	margin: auto;
-	border: 1px dashed #a7a7a7;
+	/* 	border: 1px dashed #a7a7a7; */
 }
 
 label {
@@ -61,7 +60,7 @@ select {
 	float: right;
 	margin: 10px;
 	padding: 10px;
-	margin-top: 10px;
+	margin-top: 40px;
 	padding-bottom: 10px;
 	border: 1px solid #bcbcbc;
 	border-radius: 5px;
@@ -100,10 +99,10 @@ select {
 	padding: 10px;
 	margin-bottom: 10px;
 }
+
 #exitBtn {
 	background-color: transparent !important;
 	border-color: transparent;
-	
 }
 
 /* .paletteBtn { */
@@ -161,7 +160,6 @@ select {
 	height: 20px;
 	margin-right: 5px;
 }
-
 
 .commentArea {
 	position: relative;

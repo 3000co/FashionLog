@@ -32,3 +32,6 @@ build/
 
 ### MacOS ###
 *.DS_Store
+src/main/java/com/fashionlog/security/SecurityConfig.java
+src/main/resources/static/css/header.css
+src/main/resources/templates/header/header.html
