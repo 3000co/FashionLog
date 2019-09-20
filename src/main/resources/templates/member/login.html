@@ -27,8 +27,6 @@
 <body th:align="center">
 	<h3>로그인</h3>
 	<img src="images/google-logo.png" width="50" height="50" />
-	
-	<div sec:authorize="isAnonymous()">
 	<form method="post">
 		<div class="form-group">
 			<input type="text" class="form-control" id="id" name="id" placeholder="아이디"><br><br>
@@ -44,7 +42,6 @@
 		또는<br>
 
 	</form>
-	</div>
 	<!-- 네이버아이디로로그인 버튼 노출 영역 -->
 	<div id="naver_id_login"></div>
 	<script type="text/javascript">
@@ -56,14 +53,15 @@
   	naver_id_login.setPopup();
   	naver_id_login.init_naver_id_login();
   </script>
-
-	<div sec:authorize="isAuthenticated()">
-		<span sec:authentication="name"></span>님 <a href="/logout">로그아웃</a>
-	</div>
-	<div sec:authorize="isAnonymous()">로그인 안 됨</div>
-
+  <div th:if="${session.member}">
+			<span th:text="${session.member.id}"></span>
+			<a href="logout.do">로그아웃</a>
+  </div>
+		<div th:unless="${session.member}">
+			로그인안됨
+		</div>
 	<button id="hiddenDevBtn">&nbsp;&nbsp;</button>
-	<div id="nowMems"></div>
-	
+	<div id="nowMems">
+  	</div>
 </body>
 </html>
