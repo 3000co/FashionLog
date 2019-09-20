@@ -75,12 +75,13 @@ public class PostController {
 		model.addAttribute("category", category);
 		model.addAttribute("brand", brand);
 		model.addAttribute("member", user);
+
 		return "post/post";
 	}
 
 	/**
 	 * 1. file 올리기
-	 * 
+	 *
 	 * @param mulFile (파일)
 	 * @param model
 	 * @param request
@@ -96,7 +97,7 @@ public class PostController {
 
 	/**
 	 * 2. fileNo를 받아서 post 올리기
-	 * 
+	 *
 	 * @param post
 	 * @return postNo
 	 */
@@ -109,7 +110,7 @@ public class PostController {
 
 	/**
 	 * 3. postNo를 받아서 item만들고(view에서 작업함) 올리기
-	 * 
+	 *
 	 * @param item
 	 */
 	@RequestMapping("/itemInsert")
@@ -147,8 +148,10 @@ public class PostController {
 			@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 5) Pageable paging) {
 		// 로그인한 사람 user
 		Member user = securityUser.getMember();		
-		if (user == null)
+		if (user == null) 
 			return "redirect:/login";
+		
+			
 		user = memberRepository.findById(user.getMemberNo()).get();
 		List<Post> feed = postService.getPostToFeed(user,paging);
 		for(Post post:feed) {
@@ -157,7 +160,8 @@ public class PostController {
 		model.addAttribute("feed", feed);
 		return "feed";
 	}
-	
+
+
 	@RequestMapping(value = "/getMoreFeed", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> getMoreFeed(Pageable paging, @AuthenticationPrincipal SecurityUser securityUser) {
@@ -178,3 +182,4 @@ public class PostController {
 	}
 
 }
+

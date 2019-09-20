@@ -128,7 +128,7 @@
 					</div>
 
 					<div class="mm-3column">
-						<table class="menu-list" id="categoryBtnTable">
+						<table class="menu-list" id="styleBtnTable">
 						</table>
 					</div>
 				</div>
@@ -173,11 +173,13 @@
 
 
 		<a href="/postWrite"><i class="glyphicon glyphicon-plus component"></i></a>
-		<a href=""><i class="glyphicon glyphicon-king component"></i></a> 
-		<a href=""><i class="glyphicon glyphicon-heart component"></i></a> 
-		<a th:if="${session.member}" th:id="${session.member.id}" href=""> <span
-			id="userNo" th:text="${session.member.memberNo}"
-			style="display: none;"></span> <i
+		<a href="/ranking/brand"><i class="glyphicon glyphicon-king component"></i></a> 
+		<a href=""><i class="glyphicon glyphicon-heart component"></i></a>
+		<div sec:authorize="isAuthenticated()" id="userInfo" style="display: none;">
+		<span id="userNo" sec:authentication="principal.member.memberNo"></span>
+		<span id="userNickname" sec:authentication="principal.member.nickname"></span> 
+			</div>
+		<a th:id="myProfile" href=""> <i
 			class="glyphicon glyphicon-user component"></i></a>
 	</header>
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
+<script src="/js/post/comment.js"></script>
 <body>
 <div id="badge">
   
@@ -13,95 +13,35 @@
         <div class="comments">
         <table>
 
-		<tr th:each="comment:${commentList}" class="commentRow" onload="sessionCheck()">
-			<td th:id="${comment.commentNo}" class="commentNo">
+		<tr th:each="comment:${commentList}" class="commentRow">
+			<td th:id="${comment.commentNo}" class="reportable">
 		  <img class="memberProfileImg" th:src="${comment.memberNo.profileImageNo.path}" />
-			</td>
-			
-			<td th:id ="${comment.memberNo.nickname}" class="targetMemName">
-			<span th:text="${comment.memberNo.nickname}"></span>
+			<span class="commentWriter" th:text="${comment.memberNo.nickname}"></span>
 			<span  id="commentContents" th:text="${comment.contents}"></span>
 			</td>
 			
-			<td th:id="${session.nickname}" class="commentDeleteBtn" >
-			<span><a th:href="@{/deleteComment(commentNo=${comment.commentNo})}"/>   &times;</span>
-
+			<td class="commentDeleteBtn" style="display: block">
+			<input class="targetCommentNo" hidden="true" th:value="${comment.commentNo}"></input>
+			<input class="targetMemName" hidden="true" th:value="${comment.memberNo.nickname}"></input>
+			<span><a>&times;</a></span>
 			</td>
 		</tr>  
 		</table>
 		
 		<!-- 모달 -->
-		<form id="reportModal" class="modal" method=post>
+		<div id="reportModal" class="modal" method=post>
 			<div class="modalContents">
 				<h1>신고하기</h1>
 				<br>
 				<span class="close">&times;</span>
 				<input id = "reportType" name="reportType" th:value="1" hidden="true"/>
-				<input id = "targetCommentNo" hidden="true"/>
-				<input id = "targetMemName" hidden="true"/>
-				<button class="reportBtn" id="reportBtn1" name="reportBtn1">�쑀�빐�븳 �궡�슜</button>
-				<button class="reportBtn" id="reportBtn2" name="reportBtn2">愿묎퀬�꽦 �궡�슜</button>
-			</div>
+				<input id = "targetCommentNo" hidden="false"/>
+				<button class="reportBtn" id="reportBtn1" name="reportBtn1">유해성 내용</button>
+				<button class="reportBtn" id="reportBtn2" name="reportBtn2">광고성 내용</button>
+			</div>	
 			
-			<script>
-<!-- 모달 함수들  -->
-$(".commentRow").click( function() {
-	console.log($(this).children('td.commentNo').attr('id'));
-	$(reportModal).show();
-	
-	targetCommentNo = $(this).children('td.commentNo').attr('id');
-	console.log("타겟넘버: " + targetCommentNo);
-	$("#targetCommentNo").val(targetCommentNo);
-	
-	targetMemName = $(this).children('td.targetMemName').attr('id');
-	console.log("라이터명: " + targetMemName);
-	$("#targetMemName").val(targetMemName);
-	
-});
-
-$(".close").click(function(event) {
-	$(reportModal).hide();
-});
-
-$("#reportBtn1").on("click", function(){
-	$(".reportBtn").val("유해한 내용")
-	});
-	
-$("#reportBtn2").on("click", function(){
-	$(".reportBtn").val("광고성 내용")
-});
-
-$(".reportBtn").on("click", function(){
-	var targetCommentNo = $("#targetCommentNo").val();
-	var type='1';
-	var reason = $(".reportBtn").val();
-
-	
-	$.ajax({
-		type: 'post',
-		url: '/insertReport',
-		data : {
-			"targetCommentNo" : targetCommentNo,
-			"type" : type,
-			"reason" : reason
 			
-		},
-		
-		success : function(result) {
-			if(result == 'SUCCESS'){
-				console.log("신고 완료");
-				
-			}
-		}
-	
-	});
-	alert("신고가 접수되었습니다");
-	/* $(resultModal).show(); */
-});
-
-</script>
-		
-		</form>
+		</div>
 		
 		<form id="resultModal" class="modal" method=post>
 			<div class="modalContents">
@@ -110,7 +50,7 @@ $(".reportBtn").on("click", function(){
 				<p>신고되었습니다
 				곧 접수 예정입니다</p>
 				<br>
-				<p id="close">확인</p>
+				<p class="close">확인</p>
 				
 				
 			</div>
@@ -122,51 +62,15 @@ $(".reportBtn").on("click", function(){
   
   <section>
         <div class="commentInput">
-        <form name=commentInputForm action="/insertComment" method="post">
-			<td><input type="text" name="contents" id="contents" placeholder="내용을 입력해주세요" ></td>
-			<td><button type="submit" id="insertBtn" onchange="InputProcess()">등록</button></td>
+        <form name=commentInsertForm>
+			<input type="text" name="commentContents" id="commentContents" placeholder="내용을 입력해주세요" >
 		</form>
+			<button type="submit" id="insertBtn">등록</button>
         </div>
   </section>
   
 </div>
-
-
-
-<script type="text/javascript" th:inline="javascript">
-	document.getElementById("insertBtn").disabled = true;
-	document.onkeyup = InputProcess;
-	document.onmouseup = InputProcess;
-	document.onmousedown = InputProcess;
-
-	function InputProcess(){
-		
-		/*<![CDATA[*/
-		if (document.getElementById("contents").value == ''){
-			document.getElementById("insertBtn").disabled = true;
-		} else {
-			document.getElementById("insertBtn").disabled = false;
-		}
-		/*]]>*/
-	};
-	
-	$(".commentRow").each(function sessionCheck(){
-		var sessionNickName = $(this).children(".commentDeleteBtnRow").attr("id");
-		var commentWriter = $(this).children(".commentDeleteBtnRow").children(".commentDeleteBtn").attr("id");
-		var elems = document.getElementById(sessionNickName);
-
-		
-		console.log(sessionNickName +","+ commentWriter);
-		
-		/*<![CDATA[*/
-		if( sessionNickName == commentWriter ){
-			console.log("일치함!")
-			$(this).children(".commentDeleteBtnRow").css('display','block');
-			} 
-		/*]]>*/
-	});
-	
-	
-</script>	
+<script src="/js/post/comment.js"></script>
 </body>
+
 </html>

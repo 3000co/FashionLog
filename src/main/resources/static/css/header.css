@@ -1,5 +1,10 @@
 @charset "utf-8";
 
+.tokenfield.form-control{
+	width: 100%;
+	
+}
+
 header {
 	display: flex;
 	top: 0;
