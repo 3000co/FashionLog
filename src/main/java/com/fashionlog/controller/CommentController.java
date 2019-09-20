@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -30,33 +33,28 @@ public class CommentController {
 	private PostRepository postRepository;
 
 
-	@RequestMapping("/comment")
-	@ResponseBody
-	public List<Comment> getCommentList(Model model, Post postNo) {
-		List<Comment> commentList = commentRepository.findByPostNo(postNo);
-		model.addAttribute("commentList", commentList);
-		return commentList;
-	}
+	/*
+	 * @RequestMapping("/comment")
+	 * 
+	 * @ResponseBody public List<Comment> getCommentList(Model model, Post postNo) {
+	 * List<Comment> commentList = commentRepository.findByPostNo(postNo);
+	 * model.addAttribute("commentList", commentList); return commentList; }
+	 */
 
 	@RequestMapping("/insertComment")
 	@ResponseBody
-	public String insertComment(Comment comment, @AuthenticationPrincipal SecurityUser securityUser) {
-		Member user = securityUser.getMember(); 
+	public void insertComment(@ModelAttribute Comment comment, @AuthenticationPrincipal SecurityUser securityUser) {
+		Member user = memberRepository.findById(securityUser.getMember().getId());
+		System.out.println(user);
 		comment.setMemberNo(user);
 		commentRepository.save(comment);
-		return "abab";
 	}
 
-	@RequestMapping("/deleteComment")
+	@RequestMapping("/deleteComment/{commentNo}")
 	@ResponseBody
-	public String deleteComment(int commentNo, @AuthenticationPrincipal SecurityUser securityUser) {
-		Member user = securityUser.getMember();
-		Comment comm = commentRepository.findById(commentNo).get();
-		if (comm.getMemberNo().getId() == user.getId()){
-			commentRepository.deleteById(commentNo);
-			return commentNo+" is deleted";
-		}
-		return "delete denied";
+	public String deleteComment(@PathVariable int commentNo) {
+		commentRepository.deleteById(commentNo);
+		return "redirect:/comment";
 	}
 
 }

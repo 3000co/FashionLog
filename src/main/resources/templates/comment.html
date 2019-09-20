@@ -2,61 +2,75 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <script src="/js/post/comment.js"></script>
 <body>
-	<div id="badge">
-		<section class="all">
+<div id="badge">
+  
+  <section class="all">
 
-			<div class="list">
-				<div class="mask"></div>
+    <div class="list">
+      <div class="mask"></div>
+ 
+      <section>
+        <div class="comments">
+        <table>
 
-				<section>
-					<div class="comments">
-						<table>
-							<tr th:each="comment:${commentList}" class="commentRow">
-								<td th:id="${comment.commentNo}" class="commentNo"><img class="memberProfileImg"
-										th:src="${comment.memberNo.profileImageNo.path}" /></td>
-								<td><span class="targetMemName" th:text="${comment.memberNo.nickname}"></span> <span
-										id="commentContents" th:text="${comment.contents}"></span></td>
-
-								<td class="commentDeleteBtn" style="display: none"><a>&times;</a></td>
-							</tr>
-						</table>
-						<div class="commentInput">
-							<form id="commentInputForm" name="commentInputForm" method="post">
-								<input type="text" name="contents" id="inputCommentContents" placeholder="내용을 입력해주세요">
-							</form>
-							<button id="insertBtn">등록</button>
-						</div>
-						<!-- 모달 -->
-						<form id="reportModal" class="modal" method=post>
-							<div class="modalContents">
-								<h1>신고하기</h1>
-								<br> <span class="close">&times;</span> <input id="reportType" name="reportType"
-									th:value="1" hidden="true" />
-								<input id="targetCommentNo" hidden="true" /> <input id="targetMemName" hidden="true" />
-								<button class="reportBtn" id="reportBtn1" name="reportBtn1">유해한 내용</button>
-								<button class="reportBtn" id="reportBtn2" name="reportBtn2">광고성 내용</button>
-							</div>
-						</form>
-
-						<form id="resultModal" class="modal" method=post>
-							<div class="modalContents">
-								<span class="close">&times;</span>
-								<h1>신고 접수 완료!</h1>
-								<p>신고되었습니다 곧 접수 예정입니다</p>
-								<br>
-								<p id="close">확인</p>
-							</div>
-						</form>
-					</div>
-				</section>
+		<tr th:each="comment:${commentList}" class="commentRow">
+			<td th:id="${comment.commentNo}" class="reportable">
+		  <img class="memberProfileImg" th:src="${comment.memberNo.profileImageNo.path}" />
+			<span class="commentWriter" th:text="${comment.memberNo.nickname}"></span>
+			<span  id="commentContents" th:text="${comment.contents}"></span>
+			</td>
+			
+			<td class="commentDeleteBtn" style="display: block">
+			<input class="targetCommentNo" hidden="true" th:value="${comment.commentNo}"></input>
+			<input class="targetMemName" hidden="true" th:value="${comment.memberNo.nickname}"></input>
+			<span><a>&times;</a></span>
+			</td>
+		</tr>  
+		</table>
+		
+		<!-- 모달 -->
+		<div id="reportModal" class="modal" method=post>
+			<div class="modalContents">
+				<h1>신고하기</h1>
+				<br>
+				<span class="close">&times;</span>
+				<input id = "reportType" name="reportType" th:value="1" hidden="true"/>
+				<input id = "targetCommentNo" hidden="false"/>
+				<button class="reportBtn" id="reportBtn1" name="reportBtn1">유해성 내용</button>
+				<button class="reportBtn" id="reportBtn2" name="reportBtn2">광고성 내용</button>
+			</div>	
+			
+			
+		</div>
+		
+		<form id="resultModal" class="modal" method=post>
+			<div class="modalContents">
+			<span class="close">&times;</span>
+				<h1>신고 접수 완료!</h1>
+				<p>신고되었습니다
+				곧 접수 예정입니다</p>
+				<br>
+				<p class="close">확인</p>
+				
+				
 			</div>
-		</section>
-
-	</div>
-
-
-
-
+		</form>
+        </div> 
+      </section> 
+    </div>
+  </section>
+  
+  <section>
+        <div class="commentInput">
+        <form name=commentInsertForm>
+			<input type="text" name="commentContents" id="commentContents" placeholder="내용을 입력해주세요" >
+		</form>
+			<button type="submit" id="insertBtn">등록</button>
+        </div>
+  </section>
+  
+</div>
+<script src="/js/post/comment.js"></script>
 </body>
 
 </html>
