@@ -1,35 +1,18 @@
+
 $(document).ready(function() {
 
 	$(document).on("change", "#selectImg", function(event) {
-		
 		handleImgFileSelect(event);
 
-//		if($("#postImage").attr('src') !== 'undefined'){
-//			colorPick();
-//		}
-		
-		// 선택이미지를 바꿨을 경우 태그 삭제
-		var tagDisplay = $(".itemTag").css("display");
-		console.log(tagDisplay);
-		
-		if (tagDisplay === "block") {
-			var len = $(".itemTag").length;
-			console.log(len);
-			
-			for (var i = 0; i < len; i++) {
-				console.log("들어왔어" + i);
-				$(".itemTag:eq(" + i + ")").detach();
-				console.log("나갈거야" + i);
-			}
-
-			count = 0;
+		if($("#postImage").attr('src') !== 'undefined'){
+			var date = new Date();
+			colorPick(date.getSeconds());
 		}
-
+		tagDetach();
 	});
 });
 
-function colorPick() {
-	
+function colorPick(dates) {
 	//create an form data object
 	var data = new FormData($('#imgWrap')[0]);
 
@@ -42,10 +25,9 @@ function colorPick() {
 		data : data,
 		success : function(str){
 			console.log(str);
+			var date = new Date();
+			console.log(date.getSeconds() - dates);
 			colorSend(str);
-		},
-		error: function(e){
-
 		}
 	});
 }
@@ -85,4 +67,20 @@ function colorSend(data) {
 }
 
 
+function tagDetach() {
+	// 선택이미지를 바꿨을 경우 태그 삭제
+	var tagDisplay = $(".itemTag").css("display");
+	
+	if (tagDisplay === "block") {
+		
+		var len = $(".itemTag").length;
+		var num;
+		
+		for (var i = 0; i < len; i++) {
+			num = len - i - 1;
+			$(".itemTag:eq(" + num + ")").detach();
+		}
+		count = 0;
+	}
+}
 
