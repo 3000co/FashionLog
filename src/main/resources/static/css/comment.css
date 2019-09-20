@@ -23,7 +23,7 @@ section.all {
 	padding: 20px 10px;
 }
 
-.commentInput button {
+.commentInput #insertBtn {
 	/*     float:right; */
 	background: #1bd5a7;
 	border: none;

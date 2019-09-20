@@ -116,7 +116,7 @@ private JPQLQuery setSearchCondition(List<String[]> searchTokenArrayList, JPQLQu
 		switch(tokenType) {
 		
 		case "통합검색":
-			//post.contents 제외
+
 			searchQuery.where(ctItemName(tokenValue).or(ctContents(tokenValue)));
 			break;
 			
