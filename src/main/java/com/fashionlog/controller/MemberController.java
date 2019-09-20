@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -168,16 +167,22 @@ public class MemberController {
 			return "member/modProfileAll";
 		}
 	// 정보 변경 처리
-	@RequestMapping(value = "user/modProfileAll.do", method = RequestMethod.POST)
-	public String doModProfileAll(Member member, Model model, HttpSession session) {
-		Member getMemberInfo = memberService.findByPassword(member.getPassword());
-		System.out.println("getMemberInfo: " + getMemberInfo);
-//		model.addAttribute("password",encoder.encode(member.getPassword()));
-//		model.addAttribute("nickname",member.getNickname());
-//		model.addAttribute("phonenumber",member.getPhonenumber());
-//		model.addAttribute("email",member.getEmail());
-		model.addAttribute(member);
-		return "member/profile";
+	@RequestMapping(value = "modProfileAll.do", method = RequestMethod.POST)
+	public String doModProfileAll(Member member, Model model, HttpSession session) {		
+		model.addAttribute("password",encoder.encode(member.getPassword()));
+		
+		model.addAttribute(member.getStyleNo1());
+		
+		System.out.println("model2::"+model);
+		Style getStyleInfo = member.getStyleNo1();
+		if (getStyleInfo.getStyleNo() == 0) {
+			session.setAttribute("style", null);
+			return "member/modProfileAll";
+		} else {
+			memberService.doJoin(member);
+			System.out.println("회원가입 성공" + getStyleInfo);
+			return "redirect:/profile";
+		}
 	}
 	
 
