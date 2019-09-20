@@ -15,7 +15,6 @@
 					
 					$('html').click(function(e) {
 						if(!( $(e.target).is(".menuBtn ") || $(e.target).is(".token-input") )) {
-//							console.log(e.target);
 							$('.mega-menu').removeClass('display-on'); 
 							}
 						});
@@ -74,9 +73,7 @@
 	//메뉴 버튼
 	$('.menuBtn').click(function(){
 		var searchWord = $('#inputField-tokenfield').val();
-		console.log($(this).val());
 		searchWord += ($(this).val());
-		console.log("searchword2 : "+searchWord);
 		$('#inputField-tokenfield').val(searchWord);
 	});
 	
@@ -84,7 +81,6 @@
 	
 	$(document).on("click",".attrBtn",function() {
 			var attrWord = $(this).val();
-			
 			var searchWord = $('#inputField-tokenfield').val();
 			$('#inputField').tokenfield('createToken',searchWord + attrWord);
 			$('#inputField-tokenfield').val('');
@@ -111,8 +107,6 @@
 	   var jsondata = JSON.stringify(data);
 	   var attrName;
 	   var html = "";
-
-	   console.log(data);
 	   
 	    for(i=0; i<data.attrList.length; i++){
 	    	//attrName = data.styleList[i].name;
@@ -121,14 +115,15 @@
 	    	html += "type='button' value="+attrName+" ";
 	    	html += "onclick=returnDefaultMod()>";
 	    	html += "</input></td>"
-		   console.log("attrName: "+attrName);
 	   } 
 	   
 	   $("#obj").append(jsondata);
 	   $("#"+applyTargetId).html(html);
 	   
 	   },
-	   error: function(data){console.log("오류 발생"); console.log("data: "+data);},
+	   error: function(data){
+		   console.log("오류 발생"); 
+		   console.log("data: "+data);},
 	   beforeSend: function() {
 	   },
 	   complete: function() {
@@ -139,8 +134,6 @@
 	
 	function changeSearchMod(target) {
 		var defaultSearch = document.getElementById("defaultSearch");
-
-		console.log(target);
 		
 		switch(target){
 		case 'categoryBtn' :

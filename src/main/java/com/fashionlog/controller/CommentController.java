@@ -2,9 +2,6 @@ package com.fashionlog.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -13,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fashionlog.model.dao.CommentRepository;
@@ -47,11 +43,8 @@ public class CommentController {
 
 	@RequestMapping("/insertComment")
 	@ResponseBody
-	public void insertComment(@ModelAttribute Comment comment, @AuthenticationPrincipal SecurityUser securityUser, HttpServletRequest request) {
-		//System.err.println("들어는 갔다"+comment);
+	public void insertComment(@ModelAttribute Comment comment, @AuthenticationPrincipal SecurityUser securityUser) {
 		Member user = memberRepository.findById(securityUser.getMember().getId());
-		//System.out.println("사용중인 유저:"+user);
-		
 		System.out.println(user);
 		comment.setMemberNo(user);
 		commentRepository.save(comment);
