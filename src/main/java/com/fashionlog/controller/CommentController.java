@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,24 +37,29 @@ public class CommentController {
 	private PostRepository postRepository;
 
 
-	@RequestMapping("/comment")
-	@ResponseBody
-	public List<Comment> getCommentList(Model model, Post postNo) {
-		List<Comment> commentList = commentRepository.findByPostNo(postNo);
-		model.addAttribute("commentList", commentList);
-		return commentList;
-	}
+	/*
+	 * @RequestMapping("/comment")
+	 * 
+	 * @ResponseBody public List<Comment> getCommentList(Model model, Post postNo) {
+	 * List<Comment> commentList = commentRepository.findByPostNo(postNo);
+	 * model.addAttribute("commentList", commentList); return commentList; }
+	 */
 
 	@RequestMapping("/insertComment")
-	public String insertComment(Comment comment, @AuthenticationPrincipal SecurityUser securityUser) {
-		Member user = securityUser.getMember(); 
+	@ResponseBody
+	public void insertComment(@ModelAttribute Comment comment, @AuthenticationPrincipal SecurityUser securityUser, HttpServletRequest request) {
+		//System.err.println("들어는 갔다"+comment);
+		Member user = memberRepository.findById(securityUser.getMember().getId());
+		//System.out.println("사용중인 유저:"+user);
+		
+		System.out.println(user);
 		comment.setMemberNo(user);
 		commentRepository.save(comment);
-		return "redirect:/comment";
 	}
 
-	@RequestMapping("/deleteComment")
-	public String deleteComment(@RequestParam("commentNo")int commentNo) {
+	@RequestMapping("/deleteComment/{commentNo}")
+	@ResponseBody
+	public String deleteComment(@PathVariable int commentNo) {
 		commentRepository.deleteById(commentNo);
 		return "redirect:/comment";
 	}

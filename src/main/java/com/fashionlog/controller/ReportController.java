@@ -62,11 +62,11 @@ public class ReportController {
 
 	@RequestMapping("/insertReport")
 	@ResponseBody
-	public String insertReport(@ModelAttribute("Report") Report report,HttpServletRequest request, 
+	public void insertReport(@ModelAttribute("Report") Report report,HttpServletRequest request, 
 			@AuthenticationPrincipal SecurityUser securityUser) {
 		
 		//ReportMemNo
-		Member user = securityUser.getMember();
+		Member user = memberRepository.findById(securityUser.getMember().getId());
 		report.setReportMemNo(user);
 		
 		//targetMemNo
@@ -80,8 +80,6 @@ public class ReportController {
 			report.setTargetMemNo(targetComment.getMemberNo());
 		}
 		reportRepository.save(report);
-
-		return "redirect:/comment";
 	}
 
 	@Transactional

@@ -41,7 +41,6 @@ public class Comment implements SocialEvent{
 	Timestamp uploadTime;
 	
 	String contents;
-
 	
 	@OneToOne(mappedBy = "commentNo", cascade = CascadeType.REMOVE)
 	Notification notification;
