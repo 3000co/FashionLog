@@ -136,6 +136,30 @@ public class MemberController {
 			return "redirect:/";
 		}
 	}
+	// 정보 변경 화면
+		@RequestMapping("user/modProfileAll")
+		public String modProfileAll() {
+			return "member/modProfileAll";
+		}
+	// 정보 변경 처리
+	@RequestMapping(value = "modProfileAll.do", method = RequestMethod.POST)
+	public String doModProfileAll(Member member, Model model, HttpSession session) {		
+		model.addAttribute("password",encoder.encode(member.getPassword()));
+		
+		model.addAttribute(member.getStyleNo1());
+		
+		System.out.println("model2::"+model);
+		Style getStyleInfo = member.getStyleNo1();
+		if (getStyleInfo.getStyleNo() == 0) {
+			session.setAttribute("style", null);
+			return "member/modProfileAll";
+		} else {
+			memberService.doJoin(member);
+			System.out.println("회원가입 성공" + getStyleInfo);
+			return "redirect:/profile";
+		}
+	}
+	
 
 	// 마이프로필 화면
 	@RequestMapping("/profile")
@@ -150,9 +174,11 @@ public class MemberController {
 	}
 
 	// 프로필 변경
-	@RequestMapping(value = "/modProfile.do", method = RequestMethod.POST)
-	public String doModProfile(Member member, HttpSession session) {
-		return "redirect:/profile";
-	}
+		@RequestMapping(value = "user/modProfile.do", method = RequestMethod.POST)
+		public String doModProfile(Member member, HttpSession session) {
+			return "redirect:/profile";
+		}
+		
 
+		
 }
