@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div id="postWrite" class="postWrite">
-		<input id="memberNo" name="memberNo" class="memberNo" th:value="${member.memberNo}" hidden="true">
+<!-- 		<input id="memberNo" name="memberNo" class="memberNo" th:value="${member.memberNo}" hidden="true"> -->
 		<div class="leftWrap">
 			<form id="imgWrap" class="imgWrap" action="/item" method="post" enctype="multipart/form-data">
 				<input type="hidden" id="type" name="type" value="post">
@@ -20,7 +20,7 @@
 				</div>
 			</form>
 			<div class="postContents">
-				<textarea id="contents" rows="10" cols="39" placeholder="#해시태그 #글내용작성"></textarea>
+				<textarea id="contents" rows="10" cols="39" placeholder="글내용작성"></textarea>
 			</div>
 		</div>
 		<div class="itemWrap">

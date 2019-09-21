@@ -102,9 +102,11 @@ function getAttrList(applyTargetId, url) {
 	$.ajax({
 		url : url,
 		type : 'POST',    
-		dataType: "json",    
+		dataType: "json",  
+		contentType: false,
+		processData: false,
 		success : function(data){
-
+//			console.log("data를 받아봅시다: " + data);
 			var jsondata = JSON.stringify(data);
 			var attrName;
 			var html = "";
@@ -115,7 +117,7 @@ function getAttrList(applyTargetId, url) {
 				html += "<td><input class='attrBtn'";
 				html += "type='button' value="+attrName+" ";
 				html += "onclick=returnDefaultMod()>";
-				html += "</input></td>"
+				html += "</input></td>";
 			} 
 
 			$("#obj").append(jsondata);

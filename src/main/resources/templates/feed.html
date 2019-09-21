@@ -1,18 +1,19 @@
 ﻿<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8">
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/feed.css">
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/jquery.grid-a-licious.js"></script>
-<title>news feed</title>
+	<meta charset="utf-8">
+	<title>news feed</title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/feed.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/jquery.grid-a-licious.js"></script>
+	<th:block th:include="header/header"></th:block>
 </head>
 <body>
-	<div th:include="header/header" class="fashionHeader"
-		style="position: fixed; width: 100%;"></div>
+<!-- 	<div th:include="header/header" class="fashionHeader" -->
+<!-- 		style="position: fixed; width: 100%;"></div> -->
 	<div id="feed">
 		<div id="container">
 			<div th:each="post:${feed}" class="item" th:id="${'p'+post.postNo}">
