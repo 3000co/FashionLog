@@ -365,6 +365,7 @@ img {
     border-radius: 0.3rem;
     padding: 0 2.4rem;
     margin-left: 2rem;
+
 }
 
 .profile-settings-btn {
@@ -516,6 +517,7 @@ img {
         padding: 0;
         text-align: center;
         margin-top: 1rem;
+
     }
 
     .profile-edit-btn {
@@ -631,6 +633,70 @@ Remove or comment-out the code block below to see how the browser will fall-back
             margin: 0;
         }
     }
+}
+
+/* Important styles */
+#toggle {
+  width: 28px;
+  height: 30px;
+	margin-top: -35%;
+	margin-left: 95%
+}
+
+#toggle span:after,
+#toggle span:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -9px;
+}
+#toggle span:after{
+  top: 9px;
+}
+#toggle span {
+  position: relative;
+  display: block;
+}
+
+#toggle span,
+#toggle span:after,
+#toggle span:before {
+  width: 100%;
+  height: 5px;
+  background-color: #888;
+  transition: all 0.3s;
+  backface-visibility: hidden;
+  border-radius: 2px;
+	
+}
+
+/* on activation */
+#toggle.on span {
+  background-color: transparent;
+}
+#toggle.on span:before {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+#toggle.on span:after {
+  transform: rotate(-45deg) translate(7px, -8px);
+}
+#toggle.on + #menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 프로필 이미지 변경 */
+.imgMold {
+	width: 380px;
+	height: 380px;
+	margin-top: 5px;
+	border: 1px solid #bcbcbc;
+}
+
+.postImage, .imgClone {
+	background:url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);
+	width: 100%;
+	height: 100%;
 }
 
 

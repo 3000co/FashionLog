@@ -2,6 +2,7 @@ package com.fashionlog.controller;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -139,6 +140,7 @@ public class MemberController {
 			return "redirect:/member/modProfileAll";
 		}
 	}
+	
 	// 정보 변경 화면
 		@RequestMapping("user/modProfileAll")
 		public String modProfileAll() {
@@ -149,9 +151,6 @@ public class MemberController {
 	public String doModProfileAll(Member member, Model model, HttpSession session) {		
 		model.addAttribute("password",encoder.encode(member.getPassword()));
 		
-		model.addAttribute(member.getStyleNo1());
-		
-		System.out.println("model2::"+model);
 		Style getStyleInfo = member.getStyleNo1();
 		if (getStyleInfo.getStyleNo() == 0) {
 			session.setAttribute("style", null);
@@ -159,31 +158,27 @@ public class MemberController {
 		} else {
 			memberService.doJoin(member);
 			System.out.println("회원가입 성공" + getStyleInfo);
-			return "redirect:/profile";
-		}
-	}
-
-	// 마이프로필 화면
-	@RequestMapping("/user/{userNickname}")
-	public String profileSetting(@PathVariable String userNickname, Model model) {
-		model.addAttribute("userInfo", memberRepository.findByNickname(userNickname));
-		System.err.println("!!!!!!!!!!!!!!!!!!!");
-		System.out.println(memberRepository.findByNickname(userNickname));
-		return "/member/profile";
-	}
-	
-	//프로필 화면
-	@RequestMapping("user/modProfile")
-	public String modProfile() {
-		return "member/modProfile";
-	}
-
-	// 프로필 변경
-		@RequestMapping(value = "user/modProfile.do", method = RequestMethod.POST)
-		public String doModProfile(Member member, HttpSession session) {
-			
 			return "redirect:/user/profile";
 		}
+	}
+
+	/**
+	 * 2. fileNo를 받아서 member.profileImageNo 변경하기
+	 *
+	 * @param member
+	 * @return void
+	 */
+	@RequestMapping("/modProfile")
+	@ResponseBody
+	public void modProfile(Member member) {
+		System.out.println(member);
+		Member userInfo = memberRepository.findById(member.getMemberNo()).get();
+		File profileImg = fileRepository.findById(member.getProfileImageNo().getFileNo()).get();
+		userInfo.setProfileImageNo(profileImg);
+		memberRepository.save(userInfo);
+		memberRepository.flush();
+
+	}
 		
 	
 		

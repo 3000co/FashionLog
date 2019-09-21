@@ -173,7 +173,6 @@
 	$('#myProfile').click(function(){
 		var userNickname = $("#userNickname").text();
 		$(this).attr("href","/user/"+userNickname)
-		alert("여기로 이동:"+"/user/"+userNickname);
 	});
 
 

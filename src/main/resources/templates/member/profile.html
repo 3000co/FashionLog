@@ -8,21 +8,6 @@
 <!-- 
 </head>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		var submenu = $(".profile-menu>a").next("ul");
-		submenu.hide();
-		$(".profile-menu>a").click(function() {
-
-			if (submenu.is(":visible")) {
-				submenu.hide();
-			} else {
-				submenu.show();
-			}
-		})
-
-	});
-</script>
 
 li에 css적용하기
 <body th:align="center">
@@ -42,32 +27,39 @@ li에 css적용하기
 </body> 
 </html> -->
 
-
-
-
   <title>Fashion Log</title>  
 </head>
 <body>
-
-	<div class="profile-menu-bar">
-	<ul class="profile-menu">
-	  <a><img src="/images/settingIcon.png" width="50" height="50"/></a>
-       <ul class="list">
-        <li><a class="modProfile">프로필 변경</a></li>
-        <li><a href="modProfileAll">비밀번호 변경</a></li>
-        <li><a href="#3A">스타일 변경</a></li>
-        <li><a href="logout.do">로그아웃</a></li>
-       </ul>
-    </li> 
-	</ul>
-</div>
   	<nav>
 	<div class="fashion">
 		<div th:include="header/header" class="fashionHeader"
 		style="position: fixed; width: 100%;"></div>
 	</nav>
-		<div class="profile">
+	
+	<!-- 이용자 정보 -->
+	<div sec:authorize="isAuthenticated()" id="userInfo" hidden="true" >
+	<span id="userNo" sec:authentication="principal.member.memberNo"></span>
+	<span id="userId" sec:authentication="principal.member.id"></span>
+	<span id="userNickname" sec:authentication="principal.member.nickname"></span>
+	<span id="userPhonenumber" sec:authentication="principal.member.phonenumber"></span>
+	<span id="userEmail" sec:authentication="principal.member.email"></span>
+	</div>
+	
+	<div class="profile">
+		
+			<a href="#menu" id="toggle"><span></span></a>
+
+<div class="option" id="menu">
+  <ul>
+    <li><button id="modProfile">프로필 변경</button></li>
+    <li><a href="modProfileAll">회원정보 변경</a></li>
+    <li><a href="#contact">스타일 변경</a></li>
+    <li><a href="logout.do">로그 아웃</a></li>
+  </ul>
+</div>
+
 			<div class="profile-image">
+
 				<img th:src="${userInfo.profileImageNo.path}" alt="">
 
 			</div>
@@ -77,9 +69,6 @@ li에 css적용하기
 				<h1 class="profile-user-name">janedoe_</h1>
 
 				<button class="btn profile-edit-btn">팔로우</button>
-
-				<button class="btn profile-settings-btn" aria-label="profile settings">
-				<i class="fas fa-cog" aria-hidden="true"></i></button>
 				
 
 			</div>
@@ -123,7 +112,7 @@ li에 css적용하기
 
 			</div>
 
-			<!-- <div class="gallery-item" tabindex="0">
+			<div class="gallery-item" tabindex="0">
 
 				<img src="https://images.unsplash.com/photo-1497445462247-4330a224fdb1?w=500&h=500&fit=crop" class="gallery-image" alt="">
 
@@ -188,23 +177,42 @@ li에 css적용하기
 
 
 		</div>
-		End of gallery
+		<!-- End of gallery -->
 
-		<div class="loader"></div> -->
+		<div class="loader"></div>
 
 	</div>
 	<!-- End of container -->
+		
 	
 	<!-- 회원정보 변경-->
-		<div id="profileChangeModal" class="modal" method=post>
+		<div id="modProfileModal" class="modal" method=post>
 			<div class="modalContents">
-				<h1>신고하기</h1>
+				<h1>회원정보 변경</h1>
 				<br>
-				<span class="close">&times;</span>
-	
-		</div>	
-</div>
-</div>
-</main>
+				<!-- <input type="file" id="selectImg" name="mulFile" />
+				<div class="imgMold">
+					<img id="postImage" class="postImage"><br>
+				</div>
+				<input id="profileImageModBtn" type="button" th:value="등록하기"/>
+				<label class="close">&times;</label> -->
+				<label class="close">&times;</label>
+				<form id="imgWrap" class="imgWrap" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="type" name="type" value="profile"> 
+				<input type="file" id="selectImg" name="mulFile" />
+				<div class="imgMold">
+					<img id="postImage" class="postImage" src=""><br>
+				</div>
+			</form>
+				
+				<button type="submit" id="submit">프로필 사진 등록</button>
+				
+				</div>
+				
+			</div>	
+
+<script src="/js/profile.js"></script>
+<script src="/js/profileMenu.js"></script>
+<script th:src="@{/js/post/previewImage.js}"></script>
 </body>
 </html>
