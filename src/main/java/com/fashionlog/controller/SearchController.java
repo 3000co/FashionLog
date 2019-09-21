@@ -1,21 +1,14 @@
 package com.fashionlog.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -50,16 +43,9 @@ public class SearchController {
 
 	@RequestMapping("/test")
 	public String startTest(Model model) {
-		// DB에서 목록을 가져와서 SelectBox에 이용
-//		List<Style> style = styleRepository.findAll();
-//		List<Category> category = categoryRepository.findAll();
-//		List<Object[]> brand = brandRepository.findBrandQuery();
-//		
-//
-//		model.addAttribute("style", style);
-//		model.addAttribute("category", category);
-//		model.addAttribute("brand", brand);
-		return "view";
+		List<Brand> brand = brandRepository.findAll();
+		System.out.println("brand:"+ brand);
+		return "/";
 	}
 	
 	@ResponseBody
@@ -78,7 +64,6 @@ public class SearchController {
 		ModelAndView modelAndView = new ModelAndView("jsonView");
 		List<Brand> brandList = brandRepository.findAll();
 		modelAndView.addObject("attrList", brandList);
-		
 		return modelAndView;
 	}
 	
