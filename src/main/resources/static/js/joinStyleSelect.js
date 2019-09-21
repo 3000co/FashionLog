@@ -14,7 +14,6 @@ $(document).ready(function () {
 		type: 'POST',
 		dataType: "json",
 		success: function (data) {
-
 			setImgArray(data);
 		},
 		error: function (data) {

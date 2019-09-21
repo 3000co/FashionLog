@@ -17,6 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -25,6 +28,7 @@ import lombok.ToString;
 @Setter
 @ToString(exclude = {"posts","followers","followees"})
 @Entity
+@JsonIgnoreProperties(value={"hibernateLazyInitializer", "handler"})
 public class Member {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,8 +48,8 @@ public class Member {
 	@Column(columnDefinition = "char")
 	private String email;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PROFILE_IMAGE_NO", insertable = false, updatable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "PROFILE_IMAGE_NO")
 	private File profileImageNo;
 	
 	@Column(columnDefinition = "char")
@@ -53,27 +57,30 @@ public class Member {
 	private Role role;
 //	private boolean enabled;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "STYLE_NO1")
 	private Style styleNo1;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "STYLE_NO2")
 	private Style styleNo2;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "STYLE_NO3")
 	private Style styleNo3;
 
+	@JsonBackReference
 	@OneToMany(mappedBy = "memberNo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Post> posts = new ArrayList<Post>();
 
 	@Transient
 	private Long likesCount;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "followeeMemNo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Follow> followers;
 
+	@JsonBackReference
 	@OneToMany(mappedBy = "followerMemNo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Follow> followees;
 

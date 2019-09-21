@@ -3,27 +3,9 @@
 <head>
 <meta charset="UTF-8">
 
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/notiList.js"></script>
-
-<title>Noti Test</title>
-
 </head>
 <body>
-		<div th:each="noti : ${notiList}" th:attr="id=notiNo+${noti.notiNo}">
-			<span th:switch="${noti.type}"> 
-				<span th:case="1" class="likesNoti">
-					<span th:text="${noti.senderMemNo.nickname}">Sender Nickname</span>님이 회원님의 포스트를 좋아합니다.</span>
-				<span th:case="2" class="commentNoti">
-					<span th:text="${noti.senderMemNo.nickname}">Sender Nickname</span>님이 회원님의 글에 댓글을 남겼습니다.</span> 
-				<span th:case="3" class="followNoti">
-					<span th:text="${noti.senderMemNo.nickname}">Sender Nickname</span>님이 이제 회원님을 팔로우합니다.</span>
-			</span>
-			<div class="notiSendTime" th:text="${noti.sendTime}"> event time </div>
-			<div class="notiCheckTime" th:text="${noti.checkTime}"> checked time </div>
-			<hr>
-		</div>
+	<div class='notiDiv'></div>
+	<script type="text/javascript" src="/js/notiList.js"></script>
 </body>
 </html>

@@ -14,6 +14,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Getter;
@@ -24,12 +28,14 @@ import lombok.ToString;
 @Setter
 @ToString(exclude = {"itemList", "commentList"})
 @Entity
+@JsonIgnoreProperties(value={"hibernateLazyInitializer", "handler"})
 public class Post implements Comparable<Post> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int postNo;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_NO")
 	private Member memberNo;
@@ -58,6 +64,7 @@ public class Post implements Comparable<Post> {
 	@OneToMany(mappedBy = "postNo")
 	private List<Comment> commentList = new ArrayList<Comment>();
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "postNo")
 	private List<Item> itemList = new ArrayList<Item>();
 	

@@ -2,9 +2,33 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://sliptree.github.io/bootstrap-tokenfield/docs-assets/js/typeahead.bundle.min.js"></script>
+<script
+	src="https://sliptree.github.io/bootstrap-tokenfield/dist/bootstrap-tokenfield.js"></script>
+<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+
+
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet"
+	href="//sliptree.github.io/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.css">
+<link rel="stylesheet"
+	href="//sliptree.github.io/bootstrap-tokenfield/dist/css/tokenfield-typeahead.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<!-- icon pack -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/header.css">
+<link rel="stylesheet" href="/css/feed.css">
+
+<script src="/js/jquery.grid-a-licious.js"></script>
+  <script src="/js/feed.js"></script>
+  
 <title>Noti Test</title>
 </head>
 <body>
@@ -16,12 +40,11 @@
 
 <div class="container">
   <!-- Button to Open the Modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  <a class="btn btn-primary" data-toggle="modal" data-target="#notiModal">
     알림
-  </button>
-
+  </a>
   <!-- The Modal -->
-  <div class="modal fade" id="myModal">
+  <div class="modal" id="notiModal">
     <div class="modal-dialog">
       <div class="modal-content">
       
@@ -44,8 +67,6 @@
       </div>
     </div>
   </div>
-  
 </div>
-
 </body>
 </html>

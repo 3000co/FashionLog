@@ -10,6 +10,7 @@
  */
 $.fn.setFollowBtnStat = function(memberNo) {
 	var element = this;
+	console.log(memberNo)
 	$.ajax({
 		type : 'post',
 		url : '/checkFollow',
@@ -97,10 +98,11 @@ $.fn.unFollow = function(memberNo) {
  * 팔로우 버튼이 전부 로드되면 작동.
  * 팔로우 상태를 버튼에 반영
  */
-$(".followToggleBtn").ready(function() {
+$(function() {
 	$(".profileUnit").each(function(index) {
 		var memNo = $("input[class=unitMemberNo]:eq(" + index + ")").val();
 		var followBtn = $("button[class=followToggleBtn]:eq(" + index + ")");
+		console.log("팔로버튼 수 "+followBtn.length)
 		$(followBtn).setFollowBtnStat(memNo);
 	});
 	
@@ -118,4 +120,21 @@ $(".followToggleBtn").ready(function() {
 			element.unFollow(memNo);
 		}
 	});
+
+	/**
+	 * 사용자의 최근 포스트 이미지들 클릭시, 해당 포스트 보기로 이동
+	 */
+	$(".profileUnitPost").click(function() {
+		location.href = '/post/'+$(this).children('.postNo').val();
+	});
+	/**
+	 * 사용자닉네임/프사 클릭시, 해당 유저페이지로 이동
+	 */
+	$('.profileUnitNickname').click(function() {
+		location.href = '/user/'+$(this).text();
+	});
+	$('.profileUnitMemImg').click(function() {
+		location.href = '/user/'+$(this).siblings('.profileUnitNickname').text();
+	});
+
 });
