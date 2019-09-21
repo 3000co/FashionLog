@@ -1,4 +1,4 @@
-﻿package com.fashionlog.controller;
+package com.fashionlog.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -182,4 +182,3 @@ public class PostController {
 	}
 
 }
-
