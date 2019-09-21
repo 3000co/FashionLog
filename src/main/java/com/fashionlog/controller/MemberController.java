@@ -99,8 +99,9 @@ public class MemberController {
 	// 최종적으로 db에 멤버정보 추가
 	@RequestMapping(value = "/styleSelect2.do", method = RequestMethod.POST)
 	public String doStyleSelect3(Member member, Model model) {
+		System.err.println("들어온 멤버" + member);
 		if (member.getStyleNo1() == null) {
-			return "/styleSelect";
+			return "/member/styleSelect";
 		} else {
 			//ㄷㅣ폴트를 생성
 			member.setRole(Role.ROLE_USER);
