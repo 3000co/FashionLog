@@ -102,7 +102,6 @@ $(function() {
 	$(".profileUnit").each(function(index) {
 		var memNo = $("input[class=unitMemberNo]:eq(" + index + ")").val();
 		var followBtn = $("button[class=followToggleBtn]:eq(" + index + ")");
-		console.log("팔로버튼 수 "+followBtn.length)
 		$(followBtn).setFollowBtnStat(memNo);
 	});
 	
@@ -136,5 +135,4 @@ $(function() {
 	$('.profileUnitMemImg').click(function() {
 		location.href = '/user/'+$(this).siblings('.profileUnitNickname').text();
 	});
-
 });
