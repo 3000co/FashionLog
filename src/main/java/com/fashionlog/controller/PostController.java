@@ -157,10 +157,10 @@ public class PostController {
 	}
 
 	@RequestMapping("/profile/{userId}")
-	public String profileFeed(Model model, @PathVariable int userId, 
+	public String profileFeed(Model model, @PathVariable String userId, 
 		@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 10) Pageable paging) {
 		// 로그인한 사람 user
-		Member user = memberRepository.findById(userId).get();
+		Member user = memberRepository.findById(userId);
 		List<Post> feed = postService.getProfileFeed(user, paging);
 		model.addAttribute("feed", likesService.setLikeCount(feed));
 		return "profile";
