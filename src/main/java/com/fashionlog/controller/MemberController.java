@@ -7,9 +7,12 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -140,30 +143,9 @@ public class MemberController {
 			return "redirect:/member/modProfileAll";
 		}
 	}
-	
-	// 정보 변경 화면
-		@RequestMapping("user/modProfileAll")
-		public String modProfileAll() {
-			return "member/modProfileAll";
-		}
-	// 정보 변경 처리
-	@RequestMapping(value = "modProfileAll.do", method = RequestMethod.POST)
-	public String doModProfileAll(Member member, Model model, HttpSession session) {		
-		model.addAttribute("password",encoder.encode(member.getPassword()));
-		
-		Style getStyleInfo = member.getStyleNo1();
-		if (getStyleInfo.getStyleNo() == 0) {
-			session.setAttribute("style", null);
-			return "member/modProfileAll";
-		} else {
-			memberService.doJoin(member);
-			System.out.println("회원가입 성공" + getStyleInfo);
-			return "redirect:/user/profile";
-		}
-	}
 
 	/**
-	 * 2. fileNo를 받아서 member.profileImageNo 변경하기
+	 * 1. fileNo를 받아서 member.profileImageNo 변경하기
 	 *
 	 * @param member
 	 * @return void
@@ -179,9 +161,40 @@ public class MemberController {
 		memberRepository.flush();
 
 	}
-		
+	/**
+	 * 2. 비밀번호, id 제외한 memberInfo 받아서 member컬럼 변경하기
+	 *
+	 * @param member
+	 * @return void
+	 */	
 	
-		
-
+	// 비밀 번호 제외한 회원 정보 변경 처리
+		@RequestMapping(value = "modProfileAll.do", method = RequestMethod.POST)
+		@ResponseBody
+		public void doModProfileAll(@ModelAttribute Member member) {
+			Member user = memberRepository.findById(member.getMemberNo()).get();
+			user.setNickname(member.getNickname());
+			user.setEmail(member.getEmail());
+			user.setPhonenumber(member.getPhonenumber());
+			user.setStyleNo1(member.getStyleNo1());
+			user.setStyleNo2(member.getStyleNo2());
+			user.setStyleNo3(member.getStyleNo3());
+			System.err.println("받아온 멤버:"+user.toString());
+			memberRepository.save(user);
+		}
+		/**
+		 * 2. 비밀번호, id 제외한 memberInfo 받아서 member컬럼 변경하기
+		 *
+		 * @param member
+		 * @return void
+		 */	
+		// 비밀 번호 변경 처리
+				@RequestMapping(value = "modPassword.do", method = RequestMethod.POST)
+				public void doModPassword(Member member, Model model, HttpSession session) {		
+					model.addAttribute("password",encoder.encode(member.getPassword()));
+					
+				}
+			
+	
 		
 }
