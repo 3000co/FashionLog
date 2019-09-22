@@ -8,7 +8,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -65,12 +64,13 @@ public class PostController {
 	private LikesService likesService;
 
 	@RequestMapping("/postWrite")
-	public String startTest(Model model, HttpServletResponse response, @AuthenticationPrincipal SecurityUser securityUser) {
+	public String startTest(Model model, HttpServletResponse response,
+			@AuthenticationPrincipal SecurityUser securityUser) {
 		List<Style> style = styleRepository.findAll();
 		List<Category> category = categoryRepository.findAll();
 		List<Object[]> brand = brandRepository.findBrandQuery();
 
-		Member user = securityUser.getMember();		
+		Member user = securityUser.getMember();
 		model.addAttribute("style", style);
 		model.addAttribute("category", category);
 		model.addAttribute("brand", brand);
@@ -122,16 +122,20 @@ public class PostController {
 	@RequestMapping("/afterPostWrite")
 	public String afterPostWrite() {
 
-		return "feed";
+		return "newsFeed";
 	}
 
-	@RequestMapping("/post/{postNo}")
-	public String getPost(@PathVariable int postNo, Model model) {
-		Post post = postRepository.findById(postNo).get();
+
+	// 마이프로필 화면
+	@RequestMapping("/user/{userNickname}")
+	public String profileSetting(@PathVariable String userNickname, Model model) {
+		Member userInfo = memberRepository.findByNickname(userNickname);
+		model.addAttribute("userInfo", userInfo);
+		Post post = postRepository.findById(userInfo.getMemberNo()).get();
 		model.addAttribute("post", post);
 		model.addAttribute("itemList", itemRepository.findByPostNoOrderByTagNoAsc(post));
 		model.addAttribute("commentList", commentRepository.findByPostNo(post));
-		return "view";
+		return "/member/profile";
 	}
 
 	@RequestMapping("/allFeed")
@@ -143,32 +147,37 @@ public class PostController {
 		return "feed";
 	}
 
-	@RequestMapping("/feed")
+	@RequestMapping("/myFeed")
 	public String getFeed(Model model, @AuthenticationPrincipal SecurityUser securityUser,
 			@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 5) Pageable paging) {
 		// 로그인한 사람 user
-		Member user = securityUser.getMember();		
-		if (user == null) 
+		Member user = securityUser.getMember();
+		if (user == null)
 			return "redirect:/login";
-		
-			
 		user = memberRepository.findById(user.getMemberNo()).get();
-		List<Post> feed = postService.getPostToFeed(user,paging);
-		for(Post post:feed) {
-			likesService.countLikes(post);
-		}
-		model.addAttribute("feed", feed);
-		return "feed";
+		List<Post> feed = postService.getPostToFeed(user, paging);
+		model.addAttribute("feed", likesService.setLikeCount(feed));
+		return "newsFeed";
 	}
 
+	@RequestMapping("/profile/{userId}")
+	public String profileFeed(Model model, @PathVariable int userId, 
+		@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 10) Pageable paging) {
+		// 로그인한 사람 user
+		Member user = memberRepository.findById(userId).get();
+		List<Post> feed = postService.getProfileFeed(user, paging);
+		model.addAttribute("feed", likesService.setLikeCount(feed));
+		return "profile";
+	}
 
 	@RequestMapping(value = "/getMoreFeed", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> getMoreFeed(Pageable paging, @AuthenticationPrincipal SecurityUser securityUser) {
 		Member user = securityUser.getMember();
+		user = memberRepository.findById(user.getId());
 		Map<String, Object> newFeed = new HashMap<>();
-		List<Post> feedList = postService.getPostToFeed(user,paging);
-		for(Post post :feedList) {
+		List<Post> feedList = postService.getPostToFeed(user, paging);
+		for (Post post : feedList) {
 			Map<String, Object> feedVo = new HashMap<>();
 			feedVo.put("postNo", post.getPostNo());
 			feedVo.put("postImageNo", post.getPostImageNo().getPath());
@@ -176,10 +185,9 @@ public class PostController {
 			feedVo.put("uploader", post.getMemberNo().getNickname());
 			likesService.countLikes(post);
 			feedVo.put("likesCount", post.getLikesCount());
-			newFeed.put(post.getPostNo()+"", feedVo);
+			newFeed.put(post.getPostNo() + "", feedVo);
 		}
 		return newFeed;
 	}
 
 }
-

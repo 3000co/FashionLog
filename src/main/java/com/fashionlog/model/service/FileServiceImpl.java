@@ -21,6 +21,9 @@ public class FileServiceImpl implements FileService {
 	private FileRepository fileRepository;
 	@Value("${file.uploadPath}")
 	private String uploadPath;
+	@Value("${file.appPath}")
+	private String appPath;
+
 
 	/**
 	 * uploadPath 변수가 상대경로일 필요성 uploadPath 가 db저장 될 때, 이미지를 뿌려줄 때도 쓸 수 있는 형태인지 파일명이나
@@ -29,27 +32,24 @@ public class FileServiceImpl implements FileService {
 	@Override
 	public File insertFile(MultipartFile mulFile, Model model, HttpServletRequest request) throws Exception {
 		Date now = new Date();
-		String savedName = uploadFile(mulFile.getOriginalFilename(), mulFile.getBytes(), now, mulFile);
+		String savedName = uploadFile(mulFile.getOriginalFilename(), mulFile.getBytes(), now);
 
 		File file = new File();
 		file.setType(request.getParameter("type"));
 		file.setName(savedName);
 		file.setPath(uploadPath + "/" + savedName);
 		file.setSize((int) mulFile.getSize());
+		System.err.println("db용 파일 : " + file.toString());
 		fileRepository.save(file);
-
 		File fileName = fileRepository.findByName(savedName);
-
 		return fileName;
 	}
 
-	private String uploadFile(String originalName, byte[] fileData, Date now, MultipartFile mulFile) throws Exception {
+	private String uploadFile(String originalName, byte[] fileData, Date now) throws Exception {
 		SimpleDateFormat uid = new SimpleDateFormat("yyyyMMddhhmmss");
-//		String savedName = uid.format(now) + "_";
-		String savedName = uid.format(now) + "_" + originalName;		
-
-		java.io.File target = new java.io.File(uploadPath, savedName);
-		System.out.println(target.getAbsolutePath());
+		String savedName = uid.format(now) + "_" + originalName;
+		String absolutePath = new java.io.File("").getAbsolutePath();
+		java.io.File target = new java.io.File(absolutePath+appPath+uploadPath+"/"+savedName);
 		FileCopyUtils.copy(fileData, target);
 		return savedName;
 	}
