@@ -189,5 +189,7 @@ function password_check(password) {
 			}
 		}
 	});
-
-	
+	//비밀번호 변경 submit
+	$("#submit3").click(function() {
+		alert("비밀번호 변경에 성공하셨습니다!")
+	});
