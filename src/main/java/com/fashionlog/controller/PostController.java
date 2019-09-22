@@ -125,13 +125,17 @@ public class PostController {
 		return "newsFeed";
 	}
 
-	@RequestMapping("/post/{postNo}")
-	public String getPost(@PathVariable int postNo, Model model) {
-		Post post = postRepository.findById(postNo).get();
+
+	// 마이프로필 화면
+	@RequestMapping("/user/{userNickname}")
+	public String profileSetting(@PathVariable String userNickname, Model model) {
+		Member userInfo = memberRepository.findByNickname(userNickname);
+		model.addAttribute("userInfo", userInfo);
+		Post post = postRepository.findById(userInfo.getMemberNo()).get();
 		model.addAttribute("post", post);
 		model.addAttribute("itemList", itemRepository.findByPostNoOrderByTagNoAsc(post));
 		model.addAttribute("commentList", commentRepository.findByPostNo(post));
-		return "view";
+		return "/member/profile";
 	}
 
 	@RequestMapping("/allFeed")

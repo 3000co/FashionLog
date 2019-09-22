@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <script
@@ -41,8 +41,7 @@
 
 
 		<ul class="searchBoard component" style="list-style: none;">
-			<input type="text" class="inputField" placeholder="" size="35"
-				id="inputField" value="" />
+			<input type="text" class="inputField" placeholder="" size="35" id="inputField" value="" />
 
 			<li class="drop-down" id="defaultSearch">
 
@@ -170,15 +169,18 @@
 				</path> </svg>
 			</button>
 		</form>
+
+
 		<a href="/postWrite"><i class="glyphicon glyphicon-plus component"></i></a>
 		<a href="/ranking/brand"><i class="glyphicon glyphicon-king component"></i></a> 
 		<a href=""><i class="glyphicon glyphicon-heart component"></i></a>
 		<div sec:authorize="isAuthenticated()" id="userInfo" style="display: none;">
 		<span id="userNo" sec:authentication="principal.member.memberNo"></span>
-		<span id="userNickname" sec:authentication="principal.member.nickname"></span> 
+		<span id="userNickname" sec:authentication="principal.member.nickname"></span>
 			</div>
 		<a th:id="myProfile" href=""> <i
-			class="glyphicon glyphicon-user component"></i></a>
+			class="glyphicon glyphicon-user component"></i></a> 
+		
 	</header>
 
 	<div class="form-data" id="form-data"></div>
