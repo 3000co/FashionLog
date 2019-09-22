@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,7 @@ import com.fashionlog.model.dto.Post;
 import com.fashionlog.model.dto.Role;
 import com.fashionlog.model.dto.Style;
 import com.fashionlog.model.service.MemberService;
+import com.fashionlog.security.SecurityUser;
 @Controller
 public class MemberController {
 
@@ -42,6 +44,7 @@ public class MemberController {
 
 	@Autowired
 	private FileRepository fileRepository;
+	
 
 	/**
 	 * 개발 편의를 위한 현재 맴버리스트 출력 메서드
@@ -183,16 +186,20 @@ public class MemberController {
 			memberRepository.save(user);
 		}
 		/**
-		 * 2. 비밀번호, id 제외한 memberInfo 받아서 member컬럼 변경하기
+		 * 3. 비밀번호 변경하기
 		 *
-		 * @param member
-		 * @return void
 		 */	
 		// 비밀 번호 변경 처리
-				@RequestMapping(value = "modPassword.do", method = RequestMethod.POST)
-				public void doModPassword(Member member, Model model, HttpSession session) {		
-					model.addAttribute("password",encoder.encode(member.getPassword()));
-					
+				@RequestMapping(value = "/modPassword.do", method = RequestMethod.POST)
+				public String doModPassword(@RequestParam(value="password", required=true) String password,
+						@AuthenticationPrincipal SecurityUser securityUser) {
+					System.err.println("!!!!!"+password+" "+securityUser.getUsername());
+					String userNickname = securityUser.getUsername();
+					//비번 암호화
+					Member member = memberRepository.findByNickname(userNickname);
+					member.setPassword(encoder.encode(password));
+					memberRepository.save(member);
+					return "redirect:/user/"+securityUser.getUsername(); 
 				}
 			
 	

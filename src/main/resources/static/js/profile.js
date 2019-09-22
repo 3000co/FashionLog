@@ -8,9 +8,9 @@
 		cbCheck($("#userStyleNo1").text());
 		cbCheck($("#userStyleNo2").text());
 		cbCheck($("#userStyleNo3").text());
+		
 		$("#passwordFalse").hide();
-		//$("#submit").attr("disabled", "disabled");
-/*		alert($('[name="styleNo1"]').val());*/
+		$("#submit3").prop("disabled", true);
 			
 	});
 	
@@ -22,6 +22,9 @@ $("#modProfile").click( function() {
 });
 $("#modProfile2").click( function() {
 	$("#modProfileModal2").show();
+});
+$("#modProfile3").click( function() {
+	$("#modProfileModal3").show();
 });
 
 $(".close").click(function(event) {
@@ -72,22 +75,6 @@ function password_check(password) {
 	var regexP = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 	return (password != '' && email != 'undefined' && regexP.test(password));
 }
-
-
-$("#password2").keyup(function() {
-	var password = $("#password").val();
-	var password2 = $("#password2").val();
-	if (password != "" || password2 != "") {
-		if (password == password2) {
-			$("#passwordFalse").hide();
-			$("#submit").removeAttr("disabled");
-		} else {
-			$("#passwordFalse").show();
-			$("#submit").attr("disabled", "disabled");
-		}
-	}
-});
-
 
 	function email_check(email) {
 		var regex = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
@@ -185,5 +172,22 @@ $("#password2").keyup(function() {
 	            }
 			});
 	}
+	
+	//비밀번호 체크
+
+
+	$("#password2").keyup(function() {
+		var password = $("#password").val();
+		var password2 = $("#password2").val();
+		if (password != "" || password2 != "") {
+			if (password == password2) {
+				$("#passwordFalse").hide();
+				$("#submit3").prop("disabled",false);
+			} else {
+				$("#passwordFalse").show();
+				$("#submit3").prop("disabled",true);
+			}
+		}
+	});
 
 	
