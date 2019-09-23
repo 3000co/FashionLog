@@ -168,8 +168,8 @@ $(document).ready(function () {
 	}
 	//프로필 버튼 누르면 해당 유저 전용 url로 들어감.
 	$('#myProfile').click(function () {
-		var userNickname = $("#userNickname").text();
-		$(this).attr("href", "/user/" + userNickname)
+		var myUserNickname = $("#myUserNickname").text();
+		$(this).attr("href", "/user/" + myUserNickname)
 	});
 
 	console.log(target);

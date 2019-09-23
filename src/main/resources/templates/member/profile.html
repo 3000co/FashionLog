@@ -11,19 +11,19 @@
 <body>
 	<div th:include="header/header" class="fashionHeader"></div>
 	<!-- 이용자 정보 -->
-	<div sec:authorize="isAuthenticated()" id="myUserInfo" hidden="true">
-		<span id="myUserNo" sec:authentication="principal.member.memberNo"></span>
-		<span id="myUserId" sec:authentication="principal.member.id"></span>
-		<span id="myUserNickname" sec:authentication="principal.member.nickname"></span>
-		<span id="myUserPhonenumber" sec:authentication="principal.member.phonenumber"></span>
-		<span id="myUserEmail" sec:authentication="principal.member.email"></span>
-		<span id="myUserStyleNo1" class="userStyle" th:text="${principal.member.styleNo1.styleNo}"></span>
-		<span id="myUserStyleNo2" class="userStyle" th:text="${principal.member.styleNo2?.styleNo}"></span>
-		<span id="myUserStyleNo3" class="userStyle" th:text="${principal.member.styleNo3?.styleNo}"></span>
+	<div th:if="${myInfo}" id="myInfo" hidden="true">
+		<span id="myUserNo" th:text="${myInfo.memberNo}"></span>
+		<span id="myUserId" th:text="${myInfo.id}"></span>
+		<span id="myUserNickname" th:text="${myInfo.nickname}"></span>
+		<span id="myUserPhonenumber" th:text="${myInfo.phonenumber}"></span>
+		<span id="myUserEmail" th:text="${myInfo.email}"></span>
+		<span id="myUserStyleNo1" class="userStyle" th:text="${myInfo.styleNo1.styleNo}"></span>
+		<span id="myUserStyleNo2" class="userStyle" th:text="${myInfo.styleNo2.styleNo}"></span>
+		<span id="myUserStyleNo3" class="userStyle" th:text="${myInfo.styleNo3.styleNo}"></span>
 	</div>
 	
-	<div class="profile">
-		<a href="#menu" id="toggle"><span></span></a>
+	<div class="profile" th:with="info=${userInfo!=null?userInfo:myInfo}">
+		<a href="#menu" th:if="${userInfo==null}" id="toggle"><span></span></a>
 		<div class="option" id="menu">
 			<ul>
 				<li><button id="modProfile">프로필 변경</button></li>
@@ -33,11 +33,12 @@
 			</ul>
 		</div>
 		<div class="profile-image">
-			<img th:src="${userInfo.profileImageNo.path}" alt="">
+			<img th:src="${info.profileImageNo.path}" alt="">
 		</div>
-		<div class="profile-user-settings" th:with="userNickname=${userInfo.nickname}">
-			<h1 class="profile-user-name" th:text="${userNickname}"></h1>
-			<button class="btn profile-edit-btn followToggleBtn">팔로우</button>
+		<div class="profile-user-settings">
+			<input type="hidden" value="${info.memberNo}">
+			<h1 class="profile-user-name" th:text="${info.nickname}"></h1>
+			<button th:if="${userInfo}" class="btn profile-edit-btn followToggleBtn">팔로우</button>
 		</div>
 		<div class="profile-stats">
 			<ul>
@@ -169,6 +170,17 @@
 		<script src="/js/profileMenu.js"></script>
 		<script src="/js/profileUnit.js"></script>
 		<script th:src="@{/js/post/previewImage.js}"></script>
+		<script>
+		$(".followToggleBtn").click(function() {
+			var element = $(this);
+			var memNo = element.siblings(".unitMemberNo").val();
+			if (element.hasClass("stat-follow")) {
+				element.doFollow(memNo);
+			} else {
+				element.unFollow(memNo);
+			}
+		});
+	</script>
 </body>
 
 </html>
