@@ -61,6 +61,9 @@ public class Post implements Comparable<Post> {
 	@OneToMany(mappedBy = "postNo")
 	private List<Item> itemList = new ArrayList<Item>();
 	
+	@OneToMany(mappedBy = "postNo")
+	private List<Likes> likeList = new ArrayList<Likes>();
+	
 	@Transient
 	private Long likesCount;
 
@@ -73,4 +76,6 @@ public class Post implements Comparable<Post> {
 		}
 		return 0;
 	}
+	
+	
 }

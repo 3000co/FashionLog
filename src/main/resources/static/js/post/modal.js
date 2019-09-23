@@ -7,10 +7,12 @@ $(document).ready(function() {
 
 	$(document).on("click", "#paletteBtn", function(event) {
 		palette($(event.target));
+		paletteEvent = $(event.target);
 	});
 
 	$(document).on("click", ".colorSquare", function(event) {
 		palette($(event.target));
+		paletteEvent = $(event.target);
 	});
 
 	$(document).on("click", "#paletteCheckBtn", function() {
@@ -24,6 +26,7 @@ $(document).ready(function() {
 
 	$(document).on("click", "#mapBtn", function(event) {
 		$(mapModal).show();
+		mapCall();
 		mapEvent = $(event.currentTarget);
 	});
 
@@ -70,8 +73,6 @@ function palette(event) {
 	
 	var hex = colorHex(x, y);
 	
-	console.log(hex);
-	
 	$(".selected-box").css("background-color", hex);
 	$(".square.picker").css("background-color", hex);
 
@@ -85,7 +86,12 @@ function selectedColor() {
 	var className = $(paletteEvent).attr("class");
 	var selectedBackColor = $(".selected-box").css("background-color");
 	var selectedColor = $(".selected-box").attr("color");
-
+	
+	console.log("className : " + className);
+	console.log("selectedBackColor : " + selectedBackColor);
+	console.log("selectedColor : " + selectedColor);
+	
+	
 	if(className === "colorSquare") {
 		$(paletteEvent).css("background-color", selectedBackColor);
 	}else {

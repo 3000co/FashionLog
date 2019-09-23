@@ -49,23 +49,18 @@
 						<input type="text" class="category" th:value="${item.categoryNo.name}" disabled="disabled"><br>
 						<br>
 						<label for="brandNo">브 랜 드</label>
-						<input type="text"
-							class="brand" th:value="${item.brandNo.name}" disabled="disabled"><br>
-						<br>
+						<input type="text" class="brand" th:value="${item.brandNo.name}" disabled="disabled"><br><br>
+						
 						<label for="color">색상</label>
 						<div class="colorSquare"></div>
-						<input type="text" class="color" th:value="${item.color}"
-							disabled="disabled"> <br>
-							<label for="store">구
-							매 처</label>
-							<input type="text" class="store" th:value="${item.store}"
-							disabled="disabled">
-						<button type="button" id="mapBtn">지도</button>
-						<br>
-						<input type="number" class="xCoordinate" hidden="true"
-							th:value="${item.xCoordinate}">
-							<input type="number"
-							class="yCoordinate" hidden="true" th:value="${item.yCoordinate}">
+						<input type="text" class="color" th:value="${item.color}" disabled="disabled"> <br>
+							
+						<label for="store">구 매 처</label>
+						<input type="text" class="store" th:value="${item.store}" disabled="disabled">
+						<button type="button" id="mapBtn">지도</button><br>
+						
+						<input type="number" class="xCoordinate" hidden="true" th:value="${item.xCoordinate}">
+						<input type="number" class="yCoordinate" hidden="true" th:value="${item.yCoordinate}">
 					</div>
 				</th:block>
 			</div>

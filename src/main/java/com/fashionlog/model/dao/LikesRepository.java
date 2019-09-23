@@ -13,6 +13,6 @@ public interface LikesRepository extends JpaRepository<Likes, Integer> {
 	public Long countByPostNo(Post post);
 	
 	public Optional<Likes> findByMemberNoAndPostNo(Member member, Post post);
-	
-	
+
+	public void deleteByPostNo(Post postNo);
 }

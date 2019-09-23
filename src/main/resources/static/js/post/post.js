@@ -20,10 +20,7 @@ function fileInsert() {
 			processData: false, 
 			contentType: false, 
 			success: function(fileNo) { 
-				alert("ㅋㅋ" + fileNo);
 				postInsert(fileNo)
-			},error:function() {
-				alert("ㅜㅜ");
 			}
 		});
 	}

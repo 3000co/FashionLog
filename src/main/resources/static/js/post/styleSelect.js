@@ -1,5 +1,20 @@
 $(document).ready( function() {
-
+	for (var i = 0; i < 3; i++) {
+		if ($(".styleText:eq(" + i + ")").val() != undefined) {
+			$(".styleText:eq(" + i + ")").show();
+			$(".styleUndo:eq(" + i + ")").show();
+		}
+	}
+	console.log($("#itemList").val());
+		if ($("#itemList").val() != undefined) {
+			$(".itemTag").show();
+			$(".itemTag").each(function(index) {
+				var itemTag = $(".itemTag:eq(" + index + ")");
+				itemTag.attr("id", "itemTag" + index);
+				itemTag.find(".colorSquare").css("background-color", itemTag.find("#color").text());
+			});
+		}
+		
 	var style = 0;
 	$(document).on("change", "#styleNo", function(event) {
 		$("input[class=styleText]:eq(" + style + ")").show();

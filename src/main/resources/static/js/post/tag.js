@@ -53,9 +53,6 @@ $(document).ready( function() {
 			if (count < 7) {
 				img = document.getElementById("postImage");
 				
-				console.log("on img wi" + img.width);
-				console.log("on img he" + img.height);
-				
 				var tagNum = document.createElement("span");
 				var spanText;
 
@@ -134,16 +131,11 @@ $(document).ready( function() {
 function colorHex(x, y) {
 	var canvas = document.createElement("CANVAS");
 	var ctx = canvas.getContext("2d");
-	console.log("colorHex img wi " + img.width);
-	console.log("colorHex img he " + img.height);
-	console.log("XXXXXXXXXXXXXX " + x);
-	console.log("YYYYYYYYYYYYYYYYY " + y);
+
 	canvas.width = img.width;
 	canvas.height = img.height;
 	ctx.drawImage(img, 0, 0, img.width, img.height);
-	console.log("ctx " + ctx);
-	console.log("ctx.get " + ctx.getImageData(x, y, 1, 1).data);
-	
+
 	var pixelData = ctx.getImageData(x, y, 1, 1).data;
 
 	var hex0 = pad(pixelData[0].toString(16), 2);

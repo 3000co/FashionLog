@@ -154,8 +154,8 @@ $(document).ready(function() {
 			document.getElementById("userSearch").style.display = 'block';
 			break;
 		}
-	});
-}
+	}
+});
 
 function changeSearchMod(target) {
 	var defaultSearch = document.getElementById("defaultSearch");
