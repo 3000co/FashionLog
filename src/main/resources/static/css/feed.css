@@ -3,14 +3,144 @@
 .fashionHeader {
 	width: 100%;
 	top: 0px;
-	z-index: 999;
+	z-index: 1041;
 }
 
 #feed {
 	margin-top: 100px;
 }
 
-.item {
+.pin {
+	/* 	background: #f2f2f2; */
+	/* 	border: 2px solid #fcfcfc; */
+	/* 	box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4); */
+		margin: 0 0 10px 0;
+		transition: opacity .4s ease-in-out;
+	  display: inline-block;
+	  width: 340px;
+	  padding: 22px;
+	  height: auto;
+	  border-radius: 8px;
+	  position:relative;
+		width: 100%;
+		overflow: hidden;
+		background-color: #fff;
+		border-radius: 15px;
+		border: 2px solid #eee;
+	  
+	}
+	
+	.pin:hover img {
+	  opacity: .9;
+	  transition: all .2s ease-in-out;
+	  -moz-transition: all .2s ease-in-out;
+	  -webkit-transition: all .2s ease-in-out;
+	}
+	
+	.pin::after {
+	  content: "";
+	  width: 100%;
+	  height: 100%;
+	  display: block;
+	  background: #fff;
+	  transform: scale(.96);
+	  border-radius: 8px;
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  margin: auto;
+	  z-index: -1;
+	  transition: all .075s ease-in-out;
+	  -moz-transition: all .075s ease-in-out;
+	  -webkit-transition: all .075s ease-in-out;
+	}
+	
+	.description p {
+	  width: 185px;
+	  font-weight: normal;
+	  font-size: 11pt;
+	  padding-left: 8px;
+	}
+	
+	.pin:hover::after {
+	  background: #f2f2f2;
+	  transform: scale(1);
+	  transition: all .2s ease-in-out;
+	  -moz-transition: all .2s ease-in-out;
+	  -webkit-transition: all .2s ease-in-out;
+	}
+	
+	p.contributor {
+	  color: #a7a7a7;
+	  font-weight: bold;
+	  font-size: 12px !important;
+	  letter-spacing: -0.1px !important;
+	  line-height: 14px !important;
+	  word-spacing: 0 !important;
+	}
+	
+	.postImg {
+	  border-radius: 8px;
+	  width: 300px;
+	}
+	
+	.author {
+	  padding: 2px 8px;
+	  border-radius: 6px;
+	  transition: all .2s ease-in-out;
+	  -moz-transition: all .2s ease-in-out;
+	  -webkit-transition: all .2s ease-in-out;
+	}
+	
+	/* .profile {
+	  width: 27px;
+	  height: 27px;
+	  display: inline-block;
+	  background-color: #3E90A8;
+	  border-radius: 27px;
+	} */
+	
+	.name {
+		display: inline-block;
+	}
+	
+	.name p {
+	  color: #5a5a5a;
+	  font-size: 9pt !important;
+	  margin-left: 8px;
+	}
+	
+	li {
+	  list-style:none;
+	}
+	
+	.datetime {
+	  margin-left: 180px;
+	}
+	
+	.profileImg {
+		width: fit-content;
+    	height: fit-content;
+		/* float: left;
+		text-align:left;
+		width:33.33333%; */
+	}
+
+	.nickname {
+		float: left;
+		text-align:left;
+		width:33.33333%;
+	}
+	
+	.datetime {
+		float: right;
+		text-align:right;
+		width:33.33333%;
+	}
+
+/* .item {
 	background: #FFFFFF;
 	color: #000000;
 	border-radius: 3px;
@@ -21,12 +151,11 @@
 
 .item:hover {
 	background: #F1F1F1;
-}
+} */
 
-.postImg {
+/* .postImg {
 	vertical-align: top;
 	margin-bottom: 10px;
-	/* display: inline-block; */
 }
 
 .postImg:hover {
@@ -46,12 +175,11 @@
 	position: relative;
 	right: -20px;
 	vertical-align: text-bottom;
-	
 }
 
 .uploadTime {
 	color: #B1B1B1;
-}
+} */
 
 .browser {
 	height: 25px;

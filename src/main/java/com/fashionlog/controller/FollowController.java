@@ -46,7 +46,7 @@ public class FollowController {
 	@RequestMapping("/doFollow")
 	@ResponseBody
 	public void follow(Integer memberNo, @AuthenticationPrincipal SecurityUser securityUser) {
-		Member user = securityUser.getMember();
+		Member user = memberRepository.findById(securityUser.getMember().getId());
 		Member followee = memberRepository.findById(memberNo).get();
 		if(!followService.isFollowing(user, followee)) {
 			Follow follow = new Follow();
@@ -55,15 +55,12 @@ public class FollowController {
 			followRepository.save(follow);
 			notificationService.enrollNotification(follow);
 		}
-		
-		
 	}
 	
 	@RequestMapping("/unFollow")
 	@ResponseBody
 	public void unfollow(Integer memberNo, @AuthenticationPrincipal SecurityUser securityUser) {
-//		public void unfollow(Integer memberNo, HttpSession session) {
-		Member user = securityUser.getMember();
+		Member user = memberRepository.findById(securityUser.getMember().getId());
 		Member followee = memberRepository.findById(memberNo).get();
 		Optional<Follow> followEvent = followRepository.findByFollowerMemNoAndFolloweeMemNo(user, followee);
 		if(followEvent.isPresent()) {

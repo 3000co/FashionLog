@@ -18,7 +18,6 @@ import com.fashionlog.model.dao.MemberRepository;
 import com.fashionlog.model.dto.File;
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Role;
-import com.fashionlog.model.dto.Style;
 import com.fashionlog.model.service.MemberService;
 
 @Controller
@@ -99,9 +98,8 @@ public class MemberController {
 	// 최종적으로 db에 멤버정보 추가
 	@RequestMapping(value = "/styleSelect2.do", method = RequestMethod.POST)
 	public String doStyleSelect3(Member member, Model model) {
-		Style getStyleInfo = member.getStyleNo1();
-		if (getStyleInfo.getStyleNo() == 0) {
-			return "/styleSelect";
+		if (member.getStyleNo1() == null) {
+			return "/member/styleSelect";
 		} else {
 			//ㄷㅣ폴트를 생성
 			member.setRole(Role.ROLE_USER);

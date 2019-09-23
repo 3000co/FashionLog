@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -15,28 +16,32 @@
 		style="position: fixed; width: 100%;"></div>
 	<div id="feed">
 		<div id="container">
-			<div th:each="post:${feed}" class="item" th:id="${'p'+post.postNo}">
-				<img class="postImg" th:alt="${post.postNo+'번 포스트의 사진'}"
-					th:src="${post.postImageNo.path}">
-				<div class="postSum">
-					<div class="row1">
-						<span class="uploader" th:text="${post.memberNo.nickname}">
-							nickname </span> <span class="likesCount" th:text="${post.likesCount}"></span>
-						<button class="likesBtn btn" style="display: none">좋아요</button>
+			<div th:each="post:${feed}" class="item pin" th:id="${'p'+post.postNo}">
+					<div class="author">
+						<a th:href="|/profile/post/${post.memberNo.nickname}|"><img class="profileImg" th:src="${post.memberNo.profileImageNo.path}"/></a>
+						<div class="name">
+						<p class="uploader nickname" th:text="${post.memberNo.nickname}">
+								nickname </p> 
+								<p class="uploadTime datetime" th:text="${post.uploadTime}">날짜</p>
+							</div>
 					</div>
-					<div class="row2">
-						<span class="uploadTime" th:text="${post.uploadTime}"> </span>
+				<img class="postImg" th:alt="${post.postNo+'번 포스트의 사진'}" th:src="${post.postImageNo.path}">
+				<div class="description"></div>
+					<div class="author">
+						<span class="likesCount" th:text="${post.likesCount}"></span>
+							<a href=""><i class="glyphicon glyphicon-heart likesBtn" style="display: none"></i></a>
+							<a href=""><i class="glyphicon glyphicon-comment"></i></a>
+							<a href="" class="btn btn-primary followToggleBtn" role="button" style="display: none">팔로우</a>
 					</div>
-				</div>
 			</div>
 		</div>
 	</div>
-	<div>
-		<button id="more">more feed</button>
-	</div>
+	<script src="/js/profileUnit.js"></script>
 	<script src="/js/jquery.grid-a-licious.js"></script>
 	<script src="/js/feed.js"></script>
 	<script src="/js/likes.js"></script>
 
 </body>
+</html>
+
 </html>

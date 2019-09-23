@@ -3,7 +3,7 @@
 
 <head>
 <script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
 	src="https://sliptree.github.io/bootstrap-tokenfield/docs-assets/js/typeahead.bundle.min.js"></script>
 <script
@@ -22,40 +22,32 @@
 <!-- icon pack -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/header.css">
 </head>
 
 <body>
-	<script type="text/javascript">
-		//$(document).ready.function({
-		//	getAttrList("styleBtnTable","/getAttrList/style");
-		//});
-	</script>
 
-	<!--db가져오기 테스트 -->
 	<header class="fashion">
 		<div class="icon component">
-			<a href="/feed"> <img src="https://i.ibb.co/MVr31h7/logo.png"
+			<a href="/myFeed"> <img src="https://i.ibb.co/MVr31h7/logo.png"
 				alt="logo" /></a>
 		</div>
-
 
 		<ul class="searchBoard component" style="list-style: none;">
 			<input type="text" class="inputField" placeholder="" size="35"
 				id="inputField" value="" />
 
 			<li class="drop-down" id="defaultSearch">
-
 				<div class="mega-menu">
 					<div class="mm-6column">
 						<p>상세검색</p>
 					</div>
 
 					<div class="mm-3column">
-						<span class="menu-list"> <span>
-								<button class="menuBtn" id="categoryBtn" value="카테고리:"
-									onclick="changeSearchMod('categoryBtn')">카테고리</button>
-						</span>
+						<span class="menu-list"> 
+							<button class="menuBtn" id="categoryBtn" value="카테고리:"
+								onclick="changeSearchMod('categoryBtn')">카테고리</button>
 						</span>
 					</div>
 
@@ -97,10 +89,8 @@
 					</div>
 
 					<div class="mm-3column">
-						<table class="menu-list" id="categoryBtnTable">
-						</table>
+						<table class="menu-list" id="categoryBtnTable"></table>
 					</div>
-
 				</div>
 			</li>
 
@@ -112,11 +102,10 @@
 					</div>
 
 					<div class="mm-3column">
-						<span class="menu-list"> <span
-							th:include="/header/colorPicker"></span>
+						<span class="menu-list"> 
+							<span th:include="/header/colorPicker"></span>
 						</span>
 					</div>
-
 				</div>
 			</li>
 
@@ -145,7 +134,6 @@
 						<table class="menu-list" id="brandBtnTable">
 						</table>
 					</div>
-
 				</div>
 			</li>
 
@@ -154,7 +142,6 @@
 				<div class="mega-menu">
 					<div class="mm-6column">
 						<p>유저 검색</p>
-
 					</div>
 				</div>
 			</li>
@@ -172,7 +159,10 @@
 		</form>
 		<a href="/postWrite"><i class="glyphicon glyphicon-plus component"></i></a>
 		<a href="/ranking/brand"><i class="glyphicon glyphicon-king component"></i></a> 
-		<a href=""><i class="glyphicon glyphicon-heart component"></i></a>
+		<!-- Button to Open the Modal -->
+			<a data-toggle="modal" data-target="#notiModal">
+					<i class="glyphicon glyphicon-heart component"></i>
+			</a>
 		<div sec:authorize="isAuthenticated()" id="userInfo" style="display: none;">
 		<span id="userNo" sec:authentication="principal.member.memberNo"></span>
 		<span id="userNickname" sec:authentication="principal.member.nickname"></span> 
@@ -180,8 +170,34 @@
 		<a th:id="myProfile" href=""> <i
 			class="glyphicon glyphicon-user component"></i></a>
 	</header>
-
 	<div class="form-data" id="form-data"></div>
+	<div class="container">
+			<!-- The Modal -->
+			<div class="modal" id="notiModal">
+			  <div class="modal-dialog">
+				<div class="modal-content">
+				
+				  <!-- Modal Header -->
+				  <div class="modal-header">
+					<h4 class="modal-title">새로운 알림</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				  </div>
+				  
+				  <!-- Modal body -->
+				  <div class="modal-body" th:include="notification/notiList">
+					   알림 내용
+				  </div>
+				  
+				  <!-- Modal footer -->
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				  </div>
+				  
+				</div>
+			  </div>
+			</div>
+		  </div>
+
 	<script src="/js/header.js"></script>
 
 </body>

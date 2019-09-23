@@ -69,19 +69,16 @@ public class PostController {
 		List<Style> style = styleRepository.findAll();
 		List<Category> category = categoryRepository.findAll();
 		List<Object[]> brand = brandRepository.findBrandQuery();
-
-		Member user = securityUser.getMember();		
+		
 		model.addAttribute("style", style);
 		model.addAttribute("category", category);
 		model.addAttribute("brand", brand);
-		model.addAttribute("member", user);
 
 		return "post/post";
 	}
 
 	/**
 	 * 1. file 올리기
-	 *
 	 * @param mulFile (파일)
 	 * @param model
 	 * @param request
@@ -97,7 +94,6 @@ public class PostController {
 
 	/**
 	 * 2. fileNo를 받아서 post 올리기
-	 *
 	 * @param post
 	 * @return postNo
 	 */
@@ -110,7 +106,6 @@ public class PostController {
 
 	/**
 	 * 3. postNo를 받아서 item만들고(view에서 작업함) 올리기
-	 *
 	 * @param item
 	 */
 	@RequestMapping("/itemInsert")
@@ -119,19 +114,33 @@ public class PostController {
 		itemRepository.save(item);
 	}
 
+
+	//아이템 삭제
+	@RequestMapping("/itemDelete")
+	public String itemDelete() {
+		
+//		System.out.println(item.getPostNo());
+		postRepository.deleteById(39);
+	
+		return "redirect:/feed";
+	}
+	
 	@RequestMapping("/afterPostWrite")
 	public String afterPostWrite() {
 
 		return "feed";
 	}
 
-	@RequestMapping("/post/{postNo}")
-	public String getPost(@PathVariable int postNo, Model model) {
-		Post post = postRepository.findById(postNo).get();
-		model.addAttribute("post", post);
-		model.addAttribute("itemList", itemRepository.findByPostNoOrderByTagNoAsc(post));
-		model.addAttribute("commentList", commentRepository.findByPostNo(post));
-		return "view";
+
+	// 마이프로필 화면
+	@RequestMapping("/user/{userNickname}")
+	public String profileSetting(@PathVariable String userNickname, Model model,
+	@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 10) Pageable paging) {
+		Member userInfo = memberRepository.findByNickname(userNickname);
+		model.addAttribute("userInfo", userInfo);
+		List<Post> feed = postService.getProfileFeed(userInfo, paging);
+		model.addAttribute("feed", likesService.setLikeCount(feed));
+		return "/member/profile";
 	}
 
 	@RequestMapping("/allFeed")
@@ -160,7 +169,6 @@ public class PostController {
 		model.addAttribute("feed", feed);
 		return "feed";
 	}
-
 
 	@RequestMapping(value = "/getMoreFeed", method = RequestMethod.GET)
 	@ResponseBody

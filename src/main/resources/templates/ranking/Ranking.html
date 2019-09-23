@@ -18,7 +18,6 @@
 	<h3><a href='/ranking/user/followers'>user 랭킹 보기</a></h3>
 		<div th:each="brand,index : ${brandRankingList}">
 			<span th:text="${index.index+1}"> </span>
-			 <!-- <p th:include=""></p> --> 
 			 <img th:alt="${brand.name+'의 프로필 사진'}" th:src="${brand.brandImageNo.path}">&nbsp;&nbsp;
 			 <span th:text=${brand.name}> 브랜드 이름 </span>
 			 <p th:text="'등록된 아이템 수 : '+${brand.itemCount}"></p> 

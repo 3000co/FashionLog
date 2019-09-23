@@ -1,304 +1,173 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
-<link rel="stylesheet" href="/css/profile.css">
-<link rel="stylesheet" href="/css/modal.css">
-<!-- 
-</head>
-
-
-li에 css적용하기
-<body th:align="center">
-<div class="profile-menu-bar">
-	<ul class="profile-menu">
-	  <a><img src="/images/settingIcon.png" width="50" height="50"/></a>
-       <ul class="list">
-        <li><a href="modProfile">프로필 변경</a></li>
-        <li><a href="modProfileAll">비밀번호 변경</a></li>
-        <li><a href="#3A">스타일 변경</a></li>
-        <li><a href="logout.do">로그아웃</a></li>
-       </ul>
-    </li> 
-	</ul>
-</div>
-
-</body> 
-</html> -->
-
-  <title>Fashion Log</title>  
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+	<link rel="stylesheet" href="/css/profile.css">
+	<link rel="stylesheet" href="/css/modal.css">
 </head>
 <body>
-  	<nav>
-	<div class="fashion">
-		<div th:include="header/header" class="fashionHeader"
-		style="position: fixed; width: 100%;"></div>
-	</nav>
-	
+	<div th:include="header/header" class="fashionHeader"></div>
 	<!-- 이용자 정보 -->
-	<div sec:authorize="isAuthenticated()" id="userInfo" hidden="true" >
-	<span id="userNo" sec:authentication="principal.member.memberNo"></span>
-	<span id="userId" sec:authentication="principal.member.id"></span>
-	<span id="userNickname" sec:authentication="principal.member.nickname"></span>
-	<span id="userPhonenumber" sec:authentication="principal.member.phonenumber"></span>
-	<span id="userEmail" sec:authentication="principal.member.email"></span>
-	<span id="userStyleNo1" class="userStyle" th:text="${userInfo.styleNo1.styleNo}"></span>
-	<span id="userStyleNo2" class="userStyle" th:text="${userInfo.styleNo2?.styleNo}"></span>
-    <span id="userStyleNo3" class="userStyle" th:text="${userInfo.styleNo3?.styleNo}"></span> 
+	<div sec:authorize="isAuthenticated()" id="userInfo" hidden="true">
+		<span id="userNo" sec:authentication="principal.member.memberNo"></span>
+		<span id="userId" sec:authentication="principal.member.id"></span>
+		<span id="userNickname" sec:authentication="principal.member.nickname"></span>
+		<span id="userPhonenumber" sec:authentication="principal.member.phonenumber"></span>
+		<span id="userEmail" sec:authentication="principal.member.email"></span>
+		<span id="userStyleNo1" class="userStyle" th:text="${userInfo.styleNo1.styleNo}"></span>
+		<span id="userStyleNo2" class="userStyle" th:text="${userInfo.styleNo2?.styleNo}"></span>
+		<span id="userStyleNo3" class="userStyle" th:text="${userInfo.styleNo3?.styleNo}"></span>
 	</div>
-	
 	
 	<div class="profile">
-		
-			<a href="#menu" id="toggle"><span></span></a>
-
-<div class="option" id="menu">
-  <ul class="ddmenu">
-    <li><button id="modProfile">프로필 변경</button></li>
-    <li><button id="modProfile2">회원정보 변경</button></li>
-    <li><button id="modProfile3">비밀번호 변경</button></li>
-    <li><a href="/logout">로그아웃</a></li>
-  </ul>
-</div>
-
-			<div class="profile-image">
-
-				<img th:src="${userInfo.profileImageNo.path}" alt="">
-
-			</div>
-
-			<div class="profile-user-settings">
-
-				<h1 class="profile-user-name" th:text="${userInfo.nickname}"></h1>
-
-				<button class="btn profile-edit-btn">팔로우</button>
-				
-
-			</div>
-
-			<div class="profile-stats">
-
-				<ul>
-					<li><span class="profile-stat-count"> 게시물</span> 164</li>
-					<li><span class="profile-stat-count"> 팔로워</span> 188</li>
-					<li><span class="profile-stat-count"> 팔로잉</span> 206</li>
-				</ul>
-
-			</div>
-
+		<a href="#menu" id="toggle"><span></span></a>
+		<div class="option" id="menu">
+			<ul>
+				<li><button id="modProfile">프로필 변경</button></li>
+				<li><button id="modProfile2">회원정보 변경</button></li>
+				<li><button id="modProfile3">비밀번호 변경</button></li>
+				<li><a href="/logout">로그아웃</a></li>
+			</ul>
 		</div>
-		<!-- End of profile section -->
+		<div class="profile-image">
+			<img th:src="${userInfo.profileImageNo.path}" alt="">
+		</div>
+		<div class="profile-user-settings">
+			<h1 class="profile-user-name" th:text="${userInfo.nickname}"></h1>
+			<button class="btn profile-edit-btn">팔로우</button>
+		</div>
+		<div class="profile-stats">
+			<ul>
+				<li><span class="profile-stat-count"> 게시물</span> 164</li>
+				<li><span class="profile-stat-count"> 팔로워</span> 188</li>
+				<li><span class="profile-stat-count"> 팔로잉</span> 206</li>
+			</ul>
+		</div>
+	</div>
 
 	</div>
-	<!-- End of container -->
 
-</header>
+		<div class="container">
 
-<main>
+			<div th:include="post/feed" class="gallery"></div>
+			<!-- End of gallery -->
 
-	<div class="container">
-
-		<div class="gallery">
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop" class="gallery-image" alt="">
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 56</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1497445462247-4330a224fdb1?w=500&h=500&fit=crop" class="gallery-image" alt="">
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 89</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 5</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1515023115689-589c33041d3c?w=500&h=500&fit=crop" class="gallery-image" alt="">
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 94</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 3</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1515814472071-4d632dbc5d4a?w=500&h=500&fit=crop" class="gallery-image" alt="">
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 66</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1518481612222-68bbe828ecd1?w=500&h=500&fit=crop" class="gallery-image" alt="">
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 34</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 1</li>
-					</ul>
-
-				</div>
-
-			</div>
-
+			<!-- <div class="loader"></div> -->
 
 		</div>
-		<!-- End of gallery -->
+		<!-- End of container -->
 
-		<div class="loader"></div>
 
-	</div>
-	<!-- End of container -->
-		
-	
-	<!-- 프로필 변경 -->
+		<!-- 프로필 변경 -->
 		<div id="modProfileModal" class="modal" method=post>
 			<div class="modalContents">
 				<label class="close">&times;</label>
 				<h1>프로필 사진 변경</h1>
 				<br>
-			
+
 				<form id="imgWrap" class="imgWrap" method="post" enctype="multipart/form-data">
-				<input type="hidden" id="type" name="type" value="profile"> 
-				<input type="file" id="selectImg" name="mulFile" />
-				<div class="imgMold">
-					<img id="postImage" class="postImage" src=""><br>
-				</div>
-			</form>
-				
+					<input type="hidden" id="type" name="type" value="profile">
+					<input type="file" id="selectImg" name="mulFile" />
+					<div class="imgMold">
+						<img id="postImage" class="postImage" src=""><br>
+					</div>
+				</form>
+
 				<button type="submit" id="submit">프로필 사진 등록</button>
-				
-				</div>
-				
+
 			</div>
 
-	<div id="modProfileModal2" class="modal" method=post>
-		<div class="modalContents">
-			<label class="close">&times;</label>
-			<h1>유저 정보 수정</h1>
-			<br>
-			<form method="post" id="userInfoForm" name="userInfoForm">
-				<div class="form-group">
-					<label>아이디</label> <input id="id" name="id" value=""
-						readonly="readonly"/><br>
-				</div>
-				
-				<div class="form-group">
-					<label>닉네임(한글, 영문, 숫자 조합으로 4~10자)</label><br> <input type="text" class="form-control"
-						id="nickname" name="nickname" required="required"
-						pattern="[a-zA-z가-힣]{4,10}"/><br> <br>
-				</div>
-				<div class="form-group">
-					<label>휴대폰 번호</label><br> <input type="text"
-						class="form-control" id="phonenumber" name="phonenumber"
-						placeholder="번호 입력" required="required" pattern="[0-9]{10,11}"/><br>
-					<br>
-				</div>
-				<div class="form-group">
-					<label>이메일</label><br> <input type="email"
-						class="form-control1" id="email" name="email"
-						placeholder="이메일 주소 입력" required="required"/><br>
-					<div id="emailFalse"></div>
-					<br>
-				</div>
-				
-				<div class="form-group"> 
-				<label>선호 스타일</label> <div id="styleFalse"></div> <br>
-				<input type="checkbox" class="cb" id="cb0" value="1" name="styleNo" /><label id="la0"
-					for="1">Vintage</label>
-				<input type="checkbox" class="cb" id="cb1" value="2" name="styleNo" /><label id="la1"
-					for="2">Casual</label> <br>
-				<input type="checkbox" class="cb" id="cb2" value="3" name="styleNo" /><label id="la2"
-					for="3">Chic</label>
-				<input type="checkbox" class="cb" id="cb3" value="4" name="styleNo" /><label id="la3"
-					for="4">Street</label> <br>
-				<input type="checkbox" class="cb" id="cb4" value="5" name="styleNo" /><label id="la4"
-					for="5">Sporty</label>
-				<input type="checkbox" class="cb" id="cb5" value="6" name="styleNo" /><label id="la5"
-					for="6">Formal</label> <br>
-				<input type="checkbox" class="cb" id="cb6" value="7" name="styleNo" /><label id="la6"
-					for="7">Gothic</label>
-				<input type="checkbox" class="cb" id="cb7" value="8" name="styleNo" /><label id="la7"
-					for="8">Punk</label> <br>
-				<input type="checkbox" class="cb" id="cb8" value="9" name="styleNo" /><label id="la8"
-					for="9">Retro</label>
-				<input type="checkbox" class="cb" id="cb9" value="10" name="styleNo" /><label id="la9"
-					for="10">Dandy</label> <br>
-			</div>
-			</form>
-				<input type="submit" id="submit2" value="변경">
 		</div>
 
-	</div>
+		<div id="modProfileModal2" class="modal" method=post>
+			<div class="modalContents">
+				<label class="close">&times;</label>
+				<h1>유저 정보 수정</h1>
+				<br>
+				<form method="post" id="userInfoForm" name="userInfoForm">
+					<div class="form-group">
+						<label>아이디</label> <input id="id" name="id" value="" readonly="readonly" /><br>
+					</div>
+
+					<div class="form-group">
+						<label>닉네임(한글, 영문, 숫자 조합으로 4~10자)</label><br> <input type="text" class="form-control"
+							id="nickname" name="nickname" required="required" pattern="[a-zA-z가-힣]{4,10}" /><br> <br>
+					</div>
+					<div class="form-group">
+						<label>휴대폰 번호</label><br> <input type="text" class="form-control" id="phonenumber"
+							name="phonenumber" placeholder="번호 입력" required="required" pattern="[0-9]{10,11}" /><br>
+						<br>
+					</div>
+					<div class="form-group">
+						<label>이메일</label><br> <input type="email" class="form-control1" id="email" name="email"
+							placeholder="이메일 주소 입력" required="required" /><br>
+						<div id="emailFalse"></div>
+						<br>
+					</div>
+
+					<div class="form-group">
+						<label>선호 스타일</label>
+						<div id="styleFalse"></div> <br>
+						<input type="checkbox" class="cb" id="cb0" value="1" name="styleNo" /><label id="la0"
+							for="1">Vintage</label>
+						<input type="checkbox" class="cb" id="cb1" value="2" name="styleNo" /><label id="la1"
+							for="2">Casual</label> <br>
+						<input type="checkbox" class="cb" id="cb2" value="3" name="styleNo" /><label id="la2"
+							for="3">Chic</label>
+						<input type="checkbox" class="cb" id="cb3" value="4" name="styleNo" /><label id="la3"
+							for="4">Street</label> <br>
+						<input type="checkbox" class="cb" id="cb4" value="5" name="styleNo" /><label id="la4"
+							for="5">Sporty</label>
+						<input type="checkbox" class="cb" id="cb5" value="6" name="styleNo" /><label id="la5"
+							for="6">Formal</label> <br>
+						<input type="checkbox" class="cb" id="cb6" value="7" name="styleNo" /><label id="la6"
+							for="7">Gothic</label>
+						<input type="checkbox" class="cb" id="cb7" value="8" name="styleNo" /><label id="la7"
+							for="8">Punk</label> <br>
+						<input type="checkbox" class="cb" id="cb8" value="9" name="styleNo" /><label id="la8"
+							for="9">Retro</label>
+						<input type="checkbox" class="cb" id="cb9" value="10" name="styleNo" /><label id="la9"
+							for="10">Dandy</label> <br>
+					</div>
+				</form>
+				<input type="submit" id="submit2" value="변경">
+			</div>
+
+		</div>
 
 		<div id="modProfileModal3" class="modal" method=post>
 			<div class="modalContents">
 				<label class="close">&times;</label>
 				<h1>비밀번호 변경</h1>
 				<br>
-				<form method="post" th:action="@{/modPassword.do}"id="passwordModInfo" name="userInfoForm">
-				<div class="form-group">
-					<label>새 비밀번호 (영문, 숫자 조합으로 8~32자)</label> <input type="password" class="form-control"
-						id="password" name="password" placeholder="내용을 입력해주세요"
-						required="required" pattern="[a-zA-Z0-9]{8,32}" title="영문 숫자조합으로 8-32자리 입력"/><br>
-					<label>새 비밀번호 확인 </label> <input type="password"
-						class="form-control" id="password2" name="password2"
-						placeholder="내용을 입력해주세요" required="required"
-						pattern="[a-zA-Z0-9]{8,32}"/><br>
-					<div id="passwordFalse">비밀번호가 일치하지 않습니다</div>
-				</div>
-				
-				<button type="submit" id="submit3">비밀번호 변경</button>
-				</form>
-				
-				
-				</div>
-			</div>
-			</div>
-			
-			
-			</div>	
+				<form method="post" th:action="@{/modPassword.do}" id="passwordModInfo" name="userInfoForm">
+					<div class="form-group">
+						<label>새 비밀번호 (영문, 숫자 조합으로 8~32자)</label> <input type="password" class="form-control"
+							id="password" name="password" placeholder="내용을 입력해주세요" required="required"
+							pattern="[a-zA-Z0-9]{8,32}" title="영문 숫자조합으로 8-32자리 입력" /><br>
+						<label>새 비밀번호 확인 </label> <input type="password" class="form-control" id="password2"
+							name="password2" placeholder="내용을 입력해주세요" required="required"
+							pattern="[a-zA-Z0-9]{8,32}" /><br>
+						<div id="passwordFalse">비밀번호가 일치하지 않습니다</div>
+					</div>
 
-<script src="/js/profile.js"></script>
-<script src="/js/profileMenu.js"></script>
-<script th:src="@{/js/post/previewImage.js}"></script>
+					<button type="submit" id="submit3">비밀번호 변경</button>
+				</form>
+
+
+			</div>
+		</div>
+		</div>
+
+
+		</div>
+
+		<script src="/js/profile.js"></script>
+		<script src="/js/profileMenu.js"></script>
+		<script th:src="@{/js/post/previewImage.js}"></script>
 </body>
+
 </html>

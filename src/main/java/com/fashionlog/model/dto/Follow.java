@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Getter;
@@ -38,6 +40,7 @@ public class Follow implements SocialEvent{
 	@CreationTimestamp
 	Timestamp followTime;
 	
+	@JsonIgnore
 	@OneToOne(mappedBy = "followNo", cascade = CascadeType.REMOVE)
 	Notification notification;
 

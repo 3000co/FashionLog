@@ -14,7 +14,6 @@ $(document).ready(function () {
 		type: 'POST',
 		dataType: "json",
 		success: function (data) {
-
 			setImgArray(data);
 		},
 		error: function (data) {
@@ -212,16 +211,13 @@ function cbCheck(favoriteStyleName) {
 //체크 1~3개까지
 function checkLimitProcess(e) {
 	var checkCount = $("input:checkbox[name=styleNo]:checked").length;
-	if (checkCount == 0) {
-		alert("스타일은 하나 이상 선택하셔야 합니다.");
+	if (checkCount < 3) {
 		$(".finalJoinBtn").prop("disabled", true);
-	} else {
-		$(".finalJoinBtn").prop("disabled", false);
-	}
-	if (checkCount > 3) {
+	} else if (checkCount > 3) {
 		alert("세개 이상 선택하실 수 없습니다");
-		$(".finalJoinBtn").prop("disabled", true);
 		$(e).prop('checked', false);
+	} else {
+			$(".finalJoinBtn").prop("disabled", false);
 	}
 }
 
