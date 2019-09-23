@@ -63,6 +63,15 @@ public class PostController {
 	@Autowired
 	private LikesService likesService;
 
+	@RequestMapping("/post/{postNo}")
+	public String getPost(@PathVariable int postNo, Model model) {
+		Post post = postRepository.findById(postNo).get();
+		model.addAttribute("post", post);
+		model.addAttribute("itemList", itemRepository.findByPostNoOrderByTagNoAsc(post));
+		model.addAttribute("commentList", commentRepository.findByPostNo(post));
+		return "view";
+	}
+
 	@RequestMapping("/postWrite")
 	public String startTest(Model model, HttpServletResponse response,
 			@AuthenticationPrincipal SecurityUser securityUser) {
