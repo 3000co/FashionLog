@@ -2,14 +2,13 @@ package com.fashionlog.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fashionlog.model.dao.MemberRepository;
 import com.fashionlog.model.dao.NotificationRepository;
@@ -38,11 +37,21 @@ public class NotificationController {
 	
 	//확인되지 않은 알림 불러오기
 	@RequestMapping("/noti/unchecked")
-	public String uncheckedNotificationList(Model model, @AuthenticationPrincipal SecurityUser securityUser) {
-		Member user = securityUser.getMember();
+	@ResponseBody
+	public List<Notification> uncheckedNotificationList(@AuthenticationPrincipal SecurityUser securityUser) {
+		Member user = memberRepository.findById(securityUser.getMember().getId());
+		System.out.println(user);
 		List<Notification> notiList = notificiationRepository.findByRecieverMemNoAndCheckTimeIsNull(user);
-		model.addAttribute("notiList",notiList);
-		return "/notification/Notification";
+		return notiList;
+	}
+
+	//확인되지 않은 알림 불러오기
+	@RequestMapping("/noti")
+	public String notiTest(Model model, @AuthenticationPrincipal SecurityUser securityUser) {
+		Member user = memberRepository.findById(securityUser.getMember().getId());
+		List<Notification> notiList = notificiationRepository.findByRecieverMemNoAndCheckTimeIsNull(user);
+		model.addAttribute("notiList", notiList);
+		return "notification/notification";
 	}
 	
 	//알림을 확인

@@ -61,7 +61,7 @@ public class NotificationServiceImpl implements NotificationService {
 		case EventType.COMMENT: 
 			return "post/" + noti.getCommentNo().getPostNo(); 
 		default:
-			return "profile/" + noti.getFollowNo().getFollowerMemNo().getMemberNo();
+			return "profile/" + noti.getFollowNo().getFollowerMemNo().getNickname();
 		}
 	}
 	

@@ -1,9 +1,9 @@
-nav {
+header {
   display:flex;
   box-sizing: border-box;
 }
 
-.fashion {
+.fashionHeader {
   flex-direction: row;
   height: 70px;
   padding: 20px;
@@ -15,74 +15,6 @@ nav {
   padding-bottom: 2em;
   border-bottom: 1px solid #ccc;
 }
-
-.fashion > * {
- 
-}
-/* 
-.fashion > img {
-  width: 50px;
-}
-
-.fashion > #search {
- 
- margin: 20px;
- flex: 5;
- justify-content: flex-start;
-}
-
-.fashion > #search > button{
-  flex-shrink: 1;
-  padding: 0px 8px;
-  padding: 15px 10px 10px 15px;
-  border: none;
-  background: #eee;
-
-} 
-
-button > svg {
-  margin-top: 10px;
-  margin-left: 2px;
-  height: 20px;
-  width: 20px;
-  fill: #aaa;
-  
-}
-
-.fashion > #search > input{
-  flex-grow: 1;
-  font-size: 18px;
-  background: #eee;
-  border-radius: 5px;
-  padding-left: 16px;
-  padding-right: 100px;
-  border:none;
-}
-
-.fashion > div {
-  flex: 1;
-  display: flex;
-  flex-flow: row;
-  justify-content: space-around;
-}
-
-.fashion > div > a {  
-  font-size:20px;
-  padding: 7px 0px 0px 9px;
-  color: #bbb;
-  width: 40px;
-  height: 40px; 
-  
-  
-}
-.fashion > div > a:hover {  
-  font-size: 20px;
-  
-  border-radius: 50%;
-  background: #eee;
- 
- 
-} */
 
 input:focus {
   outline:0;
@@ -137,7 +69,7 @@ div#columns .pin {
 	border: 2px solid #eee;
   
 }
-
+/* 
 div#columns .pin:hover img {
   opacity: .9;
   transition: all .2s ease-in-out;
@@ -178,7 +110,7 @@ div#columns .pin:hover::after {
   transition: all .2s ease-in-out;
   -moz-transition: all .2s ease-in-out;
   -webkit-transition: all .2s ease-in-out;
-}
+} */
 
 p.contributor {
   color: #a7a7a7;
@@ -209,7 +141,7 @@ img {
 }
 
 .profile {
-  width: 27px;
+  width: 100%;
   height: 27px;
   display: inline-block;
   background-color: #3E90A8;
@@ -575,7 +507,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
 
 */
 
-@supports (display: grid) {
+/* @supports (display: grid) {
     .profile {
         display: grid;
         grid-template-rows: repeat(3, auto);
@@ -633,14 +565,16 @@ Remove or comment-out the code block below to see how the browser will fall-back
             margin: 0;
         }
     }
-}
+} */
 
 /* Important styles */
 #toggle {
+    position: relative;
+    top: 10px;
+    
   width: 28px;
   height: 30px;
-	margin-top: -35%;
-	margin-left: 95%
+	margin-left: 95%;
 }
 
 #toggle span:after,
@@ -685,7 +619,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
   visibility: visible;
 }
 
-/* ÇÁ·ÎÇÊ ÀÌ¹ÌÁö º¯°æ */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 .imgMold {
 	width: 380px;
 	height: 380px;
