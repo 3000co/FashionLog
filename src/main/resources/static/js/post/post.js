@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	console.log($("#userNo").text());
+	
 	$("#submit").click(function() {
 		fileInsert();
 	});
@@ -6,7 +8,6 @@ $(document).ready(function() {
 
 function fileInsert() {
 	var form = new FormData(document.getElementById('imgWrap')); 
-	
 	if ($("#selectImg").val() == "") {
 		alert("사진을 올려주세요");
 	}else if ($("#styleText1").val() == "") {
@@ -18,8 +19,11 @@ function fileInsert() {
 			data: form,
 			processData: false, 
 			contentType: false, 
-			success: function (fileNo) { 
+			success: function(fileNo) { 
+				alert("ㅋㅋ" + fileNo);
 				postInsert(fileNo)
+			},error:function() {
+				alert("ㅜㅜ");
 			}
 		});
 	}
@@ -30,7 +34,7 @@ function postInsert(fileNo) {
 		type : "post",
 		url : "/postInsert",
 		data : {
-			"memberNo" : $("#memberNo").val(),
+			"memberNo" : $("#userNo").text(),
 			"postImageNo" : fileNo,
 			"contents" : $("#contents").val(),
 			"styleNo1" : $("#styleNo1").val(),
