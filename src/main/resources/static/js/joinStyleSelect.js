@@ -48,7 +48,7 @@ $(document).ready(function () {
 		var j = 0
 		for (var num of numArr) {
 			var objImg = document.getElementById("styleImg" + j);
-			var styleName = sampleDataArray[num].name;
+			var styleName = sampleDataArray[num].type.split('_')[1];
 			objImg.src = sampleDataArray[num].path;
 			if($('#styleName'+j).find('.examStyleName').text().length===0) {
 				$("<p class='examStyleName'>" + styleName + "</p>").prependTo($("#styleName" + j));
@@ -81,7 +81,7 @@ $(document).ready(function () {
 	function changeImg(targetId) {
 		var nextNo = pageNumArr[5 + degree];
 		$("#" + targetId).children("img").attr("src", pageSampleDataArr[nextNo].path);
-		$("#" + targetId).children("p").text(pageSampleDataArr[nextNo].name);
+		$("#" + targetId).children("p").text(pageSampleDataArr[nextNo].type.split('_')[1]);
 
 	}
 
@@ -152,12 +152,13 @@ function setFavoriteStyle(array) {
 	insertFavoritesImage(secondFrequent, 1);
 }
 
+
 function insertFavoritesImage(favoriteStyleName, num) {
 	//page2html에 추가
 	for (var i = 0; i <= pageSampleDataArr.length - 1; i++) {
-		if (pageSampleDataArr[i].name == favoriteStyleName) {
+		if (pageSampleDataArr[i].type.split('_')[1] == favoriteStyleName) {
 			$("#favoriteStyle" + num).children("img").attr("src", pageSampleDataArr[i].path);
-			$("#favoriteStyle" + num).children("p").text(pageSampleDataArr[i].name);
+			$("#favoriteStyle" + num).children("p").text(pageSampleDataArr[i].type.split('_')[1]);
 		}
 	}
 	var favoriteStyle0Name = $("#favoriteStyle0").children("p").text();

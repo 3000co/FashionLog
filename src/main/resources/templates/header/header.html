@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <script
@@ -35,16 +35,14 @@
 	<!--db가져오기 테스트 -->
 	<header class="fashion">
 		<div class="icon component">
-			<a href="/feed"> 
+			<a href="/feed">
 				<img src="https://i.ibb.co/MVr31h7/logo.png" alt="logo" />
 			</a>
 		</div>
 
 		<ul class="searchBoard component" style="list-style: none;">
-			<li>
-				<input type="text" class="inputField" placeholder="" size="35"
-					id="inputField" value="" />
-			</li>
+			<input type="text" class="inputField" placeholder="" size="35" id="inputField" value="" />
+
 			<li class="drop-down" id="defaultSearch">
 				<div class="mega-menu">
 					<div class="mm-6column">
@@ -52,7 +50,7 @@
 					</div>
 
 					<div class="mm-3column">
-						<span class="menu-list"> 
+						<span class="menu-list">
 							<button class="menuBtn" id="categoryBtn" value="카테고리:"
 								onclick="changeSearchMod('categoryBtn')">카테고리</button>
 						</span>
@@ -109,7 +107,7 @@
 					</div>
 
 					<div class="mm-3column">
-						<span class="menu-list"> 
+						<span class="menu-list">
 							<span th:include="/header/colorPicker"></span>
 						</span>
 					</div>
@@ -164,14 +162,16 @@
 				</path> </svg>
 			</button>
 		</form>
+
+
 		<a href="/postWrite"><i class="glyphicon glyphicon-plus component"></i></a>
-		<a href="/ranking/brand"><i class="glyphicon glyphicon-king component"></i></a> 
+		<a href="/ranking/brand"><i class="glyphicon glyphicon-king component"></i></a>
 		<a href=""><i class="glyphicon glyphicon-heart component"></i></a>
 		<div sec:authorize="isAuthenticated()" id="userInfo" hidden="true">
 			<span id="userNo" sec:authentication="principal.member.memberNo"></span>
-			<span id="userNickname" sec:authentication="principal.member.nickname"></span> 
+			<span id="userNickname" sec:authentication="principal.member.nickname"></span>
 		</div>
-		<a th:id="myProfile" href=""> 
+		<a th:id="myProfile" href="">
 			<i class="glyphicon glyphicon-user component"></i>
 		</a>
 	</header>

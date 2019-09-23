@@ -25,9 +25,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
       security.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
       security.authorizeRequests().antMatchers("/user/**").hasAnyRole("USER");
       
-      security.formLogin().loginPage("/login").defaultSuccessUrl("/feed", true);
+      security.formLogin().loginPage("/login").defaultSuccessUrl("/myFeed", true);
 
-      security.formLogin().loginPage("/login").failureUrl("/loginFail");
+      security.formLogin().loginPage("/login").failureUrl("/login?fail");
       security.formLogin().usernameParameter("id");
       security.exceptionHandling().accessDeniedPage("/accessDenied");
       security.logout().logoutUrl("/logout").invalidateHttpSession(true).logoutSuccessUrl("/login");
