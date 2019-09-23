@@ -1,7 +1,15 @@
 @charset "UTF-8";
 
-.postWrite, .postView {
+.postWrite {
 	width: 750px;
+	height: 800px;
+	padding: 10px;
+	margin: auto;
+	/* 	border: 1px dashed #a7a7a7; */
+}
+
+.postView {
+	width: 930px;
 	height: 800px;
 	padding: 10px;
 	margin: auto;
@@ -89,10 +97,16 @@ select {
 	border-radius: 5px;
 }
 
+.temp{
+	width: 600px;
+	float: right;
+	margin-top: 18px;
+}
+
 .itemWrap {
 	width: 380px;
-	height: 580px;
-	float: right;
+	height: 600px;
+	float: left;
 	margin: 10px;
 	padding: 10px;
 	margin-top: 40px;
@@ -100,6 +114,15 @@ select {
 	border: 1px solid #bcbcbc;
 	border-radius: 5px;
 	overflow: hidden;
+}
+
+.commentArea {
+/* 	position: relative; */
+	width:200px;
+	float: right;
+	margin-top: 40px;
+/* 	bottom: 50px; */
+	/* 	margin:5px; */
 }
 
 .itemTagWrap {
@@ -166,7 +189,8 @@ select {
 	margin: auto;
 	padding: 20px;
 	border: 1px solid #888;
-	width: 50%;
+	border-radius: 5px;
+	width: 80%;
 }
 
 /* The Close Button */
@@ -186,27 +210,25 @@ select {
 .modalContent .imgMold {
 	margin: auto;
 }
-
+.viewBtn {
+	margin: 8px;
+}
 .colorSquare {
 	display: inline-block;
 	border: 1px solid #bcbcbc;
 	border-radius: 3px;
-	width: 110px;
+	width: 35%;
 	height: 20px;
-	margin-right: 5px;
+/* 	margin-right: 3px; */
 }
 
-.commentArea {
-	position: relative;
-	float: left;
-	bottom: 50;
-	/* 	margin:5px; */
-}
+
 
 /* .selected { */
 /* 	border: 5px solid orange !important; */
 /* } */
-.modalBtn {
+.modalBtn, .mapBtn, .paletteBtn {
+	width: 4em;
 	background-color: transparent !important;
 	border-radius: 5px;
 }

@@ -57,6 +57,7 @@ public class Report {
 	
 	@Column(columnDefinition = "char")
 	@ColumnDefault("미확인")
+	@Column(columnDefinition = "char")
 	private String checkHistory;
 	
 }

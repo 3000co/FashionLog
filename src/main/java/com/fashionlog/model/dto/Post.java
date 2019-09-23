@@ -80,4 +80,6 @@ public class Post implements Comparable<Post> {
 		}
 		return 0;
 	}
+	
+	
 }

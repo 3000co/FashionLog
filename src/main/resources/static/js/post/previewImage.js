@@ -10,6 +10,10 @@ $(document).ready(function() {
 		}
 		tagDetach();
 	});
+	$(document).on("click", ".glyphicon-minus", function(event) {
+		$("#postImage").attr('src', null);
+		tagDetach();
+	});
 });
 
 function colorPick(dates) {

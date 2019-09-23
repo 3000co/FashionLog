@@ -20,10 +20,7 @@ function fileInsert() {
 			processData: false, 
 			contentType: false, 
 			success: function(fileNo) { 
-				alert("ㅋㅋ" + fileNo);
 				postInsert(fileNo)
-			},error:function() {
-				alert("ㅜㅜ");
 			}
 		});
 	}
@@ -49,6 +46,7 @@ function postInsert(fileNo) {
 function itemInsert(postNo) {
 	$("div[class=itemTag]").each(function(index) {
 		var eqValue = $("div[class=itemTag]:eq(" + index + ")");
+		console.log($(eqValue).find("#categoryNo").val());
 		$.ajax({
 			type : "post",
 			url : "/itemInsert",
@@ -65,5 +63,5 @@ function itemInsert(postNo) {
 			}
 		});
 	});
-	location.replace("/feed");
+	location.replace("/myFeed");
 }

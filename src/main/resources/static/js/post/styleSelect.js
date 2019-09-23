@@ -14,10 +14,10 @@ $(document).ready( function() {
 			style++;
 		}
 	});
-	
+
 	$(document).on("click", "span[class=styleUndo]", function(event) {
 		var clickIndex = $("span[class=styleUndo]").index(event.target);
-		
+
 		$("input[class=styleText]").each(function(index) {
 			console.log(index);
 			var i = index - 1;
@@ -26,18 +26,18 @@ $(document).ready( function() {
 				var indexText = $("input[class=styleText]:eq(" + index + ")");
 				var newText = $("input[class=styleText]:eq(" + i + ")").val(indexText.val());
 				indexText.val("");
-				
+
 				var indexVal = $("input[class=styleNo]:eq(" + index + ")");
 				var newVal = $("input[class=styleNo]:eq(" + i + ")").val(indexVal.val());
 				indexVal.val("");
 			}
-			
+
 		});
 
 		style--;
 		$("input[class=styleText]:eq(" + style + ")").hide();
 		$("span[class=styleUndo]:eq(" + style + ")").hide();
-		
+
 	});
-	
+
 });

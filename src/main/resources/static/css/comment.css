@@ -8,7 +8,7 @@ body {
 }
 
 #badge {
-	background-size: 100% 270px;
+/* 	background-size: 100% 270px; */
 	/* background-position: top; */
 	background-repeat: no-repeat;
 	/* margin:5px auto; */
@@ -17,19 +17,21 @@ body {
 	box-shadow: 0px 1px 3px black, inset 0px 0px 2px white;
 	border-radius: 4px;
 	background-color: white;
+	padding: 15px;
 }
 
 section.all {
-	padding: 20px 10px;
+/* 	padding: 20px 10px; */
 }
 
 .commentInput button {
 	/*     float:right; */
 	background: #1bd5a7;
 	border: none;
-	width: 15%;
+	width: 18%;
 	padding: 5px;
 	margin-top: 0.1em;
+	margin-left: 0.1em;
 	color: white;
 	border-radius: 5px;
 	transition: 0.3s background;
@@ -39,7 +41,7 @@ input {
 	display: block;
 	font-size: 1em;
 	padding: 0.25em;
-	width: 70%;
+	width: 80%;
 	margin-left: 1em;
 	border-radius: 3px;
 	border: 1px solid #BABABA;
@@ -63,8 +65,8 @@ input {
 }
 
 .list {
-	height: 140px;
-	padding: 0 10px;
+	height: 160px;
+/* 	padding: 0 10px; */
 	overflow: auto;
 }
 

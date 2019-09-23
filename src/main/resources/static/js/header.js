@@ -157,6 +157,7 @@
 			break;
 		}
 	}
+});
 
 	function returnDefaultMod() {
 		var defaultSearch = document.getElementById("defaultSearch");

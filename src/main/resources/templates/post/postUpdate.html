@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>Post</title>
+	<title>PostUpdate</title>
 
 	<link rel="stylesheet" th:href="@{/css/post.css}">
 	<script th:src="@{https://code.jquery.com/jquery-3.3.1.min.js}"></script>
@@ -10,6 +10,8 @@
 </head>
 <body>
 	<div id="postWrite" class="postWrite">
+		<input id="memberNo" name="memberNo" class="memberNo" th:value="${post.memberNo.memberNo}" hidden="true">
+		<input id="postNo" name="postNo" class="postNo" th:value="${post.postNo}" hidden="true">
 		<div class="leftWrap">
 			<form id="imgWrap" class="imgWrap" action="/item" method="post" enctype="multipart/form-data">
 				<label class="btn glyphicon glyphicon-plus">
@@ -18,11 +20,11 @@
 				</label>
 				<label class="btn glyphicon glyphicon-minus"></label>
 				<div class="imgMold">
-					<img id="postImage" class="postImage"><br>
+					<img id="postImage" class="postImage" th:src="|${post.postImageNo.path}|"><br>
 				</div>
 			</form>
 			<div class="postContents">
-				<textarea id="contents" rows="10" cols="39" placeholder="글내용작성"></textarea>
+				<textarea id="contents" rows="10" cols="39" th:text="${post.contents}" placeholder="글내용작성"></textarea>
 			</div>
 		</div>
 		<div class="itemWrap">
@@ -31,62 +33,66 @@
 				<label for="style">스 타 일</label>
 				<select id="styleNo" name="styleNo">
 					<option value="0" selected>스타일 선택</option>
-					<option th:each="style:${style}" th:text="${style.name}"
-						th:value="${style.styleNo}"></option>
+					<option th:each="style:${style}" th:text="${style.name}" th:value="${style.styleNo}"></option>
 				</select><br>
 				&emsp;&emsp;&nbsp;
-				<input type="text" id="styleText1" class="styleText">
+				<input type="text" id="styleText1" class="styleText" th:if="${post.styleNo1}" th:value="${post.styleNo1.name}">
 				<span id="1" class="styleUndo">&times;</span>
 				<input type="number" id="styleNo1" class="styleNo" hidden="true">
 
-				<input type="text" id="styleText2" class="styleText">
+
+				<input type="text" id="styleText2" class="styleText" th:if="${post.styleNo2}" th:value="${post.styleNo2.name}">
 				<span id="2" class="styleUndo">&times;</span>
 				<input type="number" id="styleNo2" class="styleNo" hidden="true">
 
-				<input type="text" id="styleText3" class="styleText">
+				<input type="text" id="styleText3" class="styleText" th:if="${post.styleNo3}" th:value="${post.styleNo3.name}">
 				<span id="3" class="styleUndo">&times;</span>
 				<input type="number" id="styleNo3" class="styleNo" hidden="true">
 			</div>
 			<hr>
 			<!-- 태그 -->
 			<div id="itemTagWrap" class="itemTagWrap">
+			<th:block th:each="item:${itemList}">
+				<input type="text" id="itemList" th:value="${item}" hidden="true" disabled="disabled">
 				<div id="itemTag1" class="itemTag">
 					<div class="tag">
 					<button type="button" id="exitBtn">&times;</button>
 <!-- 						<label for="tagNo" >태그번호</label>  -->
-						<input type="number" id="tagNo" name="tagNo" disabled="disabled" hidden="true"><br>
+						<input type="number" id="tagNo" name="tagNo" th:value="${item.tagNo}" hidden="true" disabled="disabled"><br>
 
 						<label for="name">상 품 명</label>
-						<input type="text" id="name" name="name" placeholder="상품명 입력"><br>
+						<input type="text" id="name" name="name"  th:value="${item.name}" placeholder="상품명 입력"><br>
 
 						<label for="categoryNo">카테고리</label>
 						<select id="categoryNo" name="categoryNo">
-							<option value="0" selected>카테고리 선택</option>
+							<option th:value="${item.categoryNo.categoryNo}" th:text="${item.categoryNo.name}" selected>카테고리 선택</option>
 							<option th:each="category:${category}" th:text="${category.name}"
 								th:value="${category.categoryNo}"></option>
 						</select><br>
 
 						<label for="brandNo">브 랜 드</label>
 						<select id="brandNo" name="brandNo">
-							<option value="0" selected>브랜드 선택</option>
+							<option th:value="${item.brandNo.brandNo}" th:text="${item.brandNo.name}" selected>브랜드 선택</option>
 							<option th:each="brand:${brand}" th:text="${brand[1]}"
 								th:value="${brand[0]}"></option>
 						</select><br>
 
 						<label for="color">색상</label>
 						<div class="colorSquare"></div>
-						<span id="color"> </span>
+						<span id="color" th:text="${item.color}"> </span>
 						<button type="button" id="paletteBtn" class="paletteBtn">pa</button><br>
 
 						<label for="store">구 매 처</label>
-						<input type="text" id="store" name="store" placeholder="구매처 입력">
+						<input type="text" id="store" name="store"  th:value="${item.store}" placeholder="구매처 입력">
 						<button type="button" id="mapBtn" class="mapBtn">지도</button><br>
 
-						<input type="number" id="xCoordinate" name="xCoordinate" hidden="true">
-						<input type="number" id="yCoordinate" name="yCoordinate" hidden="true">
+						<input type="number" id="xCoordinate" name="xCoordinate" hidden="true"  th:value="${item.xCoordinate}">
+						<input type="number" id="yCoordinate" name="yCoordinate" hidden="true"  th:value="${item.yCoordinate}">
 
 					</div>
+					<span class="marker" th:text="${item.tagNo}"></span>
 				</div>
+				</th:block>
 			</div>
 		</div>
 
@@ -115,6 +121,7 @@
 	<script th:src="@{/js/post/palette.js}"></script>
 	<script th:src="@{/js/post/previewImage.js}"></script>
 	<script th:src="@{/js/post/styleSelect.js}"></script>
+	<script th:src="@{/js/post/postUpdate.js}"></script>
 	<script th:src="@{/js/post/tag.js}"></script>
 	<script th:src="@{/js/post/post.js}"></script>
 	<script th:src="@{/js/post/jquery.ajax-cross-origin.min.js}"></script>

@@ -26,6 +26,7 @@ import com.fashionlog.model.dao.BrandRepository;
 import com.fashionlog.model.dao.CategoryRepository;
 import com.fashionlog.model.dao.CommentRepository;
 import com.fashionlog.model.dao.ItemRepository;
+import com.fashionlog.model.dao.LikesRepository;
 import com.fashionlog.model.dao.MemberRepository;
 import com.fashionlog.model.dao.PostRepository;
 import com.fashionlog.model.dao.StyleRepository;
@@ -125,19 +126,18 @@ public class PostController {
 
 
 	//아이템 삭제
-	@RequestMapping("/itemDelete")
-	public String itemDelete() {
-		postRepository.deleteById(39);
-	
-		return "redirect:/feed";
+	@RequestMapping("/postDelete")
+	@ResponseBody
+	public void postDelete(Post postNo) {
+//		likesRepository.deleteByPostNo(postNo);
+		postRepository.deleteById(postNo.getPostNo());
 	}
 	
-	@RequestMapping("/afterPostWrite")
-	public String afterPostWrite() {
-
-		return "newsFeed";
-	}
-
+//	@RequestMapping("/afterPostWrite")
+//	public String afterPostWrite() {
+//
+//		return "newsFeed";
+//	}
 
 	// 마이프로필 화면
 	@RequestMapping("/user/{userNickname}")
@@ -158,6 +158,33 @@ public class PostController {
 		}
 		model.addAttribute("feed", likesService.setLikeCount(feed));
 		return "/member/profile";
+	}
+	
+	@RequestMapping("/post/{postNo}")
+	public String getPost(@PathVariable int postNo, Model model) {
+		Post post = postRepository.findById(postNo).get();
+		model.addAttribute("post", post);
+		model.addAttribute("itemList", itemRepository.findByPostNoOrderByTagNoAsc(post));
+		model.addAttribute("commentList", commentRepository.findByPostNo(post));
+		return "view";
+	}
+	
+	@RequestMapping("/postUpdate/{postNo}")
+	public String PostUpdate(@PathVariable int postNo, Model model) {
+		System.err.println(postNo);
+		List<Style> style = styleRepository.findAll();
+		List<Category> category = categoryRepository.findAll();
+		List<Object[]> brand = brandRepository.findBrandQuery();
+		
+		model.addAttribute("style", style);
+		model.addAttribute("category", category);
+		model.addAttribute("brand", brand);
+		
+		Post post = postRepository.findById(postNo).get();
+		model.addAttribute("post", post);
+		model.addAttribute("itemList", itemRepository.findByPostNoOrderByTagNoAsc(post));
+
+		return "post/postUpdate";
 	}
 
 	@RequestMapping("/allFeed")

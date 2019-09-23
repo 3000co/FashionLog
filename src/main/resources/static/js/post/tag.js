@@ -49,12 +49,13 @@ $(document).ready( function() {
 	$(document).on("click", "#postImage", function(event) {
 		// image가 있을 경우에만 작동
 		if ($("#selectImg").val() != "") {
+			console.log("event.clientX : " + event.clientX);
+			console.log("event.clientY : " + event.clientY);
+			console.log("event.offsetX : " + event.offsetX);
+			console.log("event.offsetY : " + event.offsetY);
 			// 최대 7개 태그
 			if (count < 7) {
 				img = document.getElementById("postImage");
-				
-				console.log("on img wi" + img.width);
-				console.log("on img he" + img.height);
 				
 				var tagNum = document.createElement("span");
 				var spanText;
@@ -78,8 +79,8 @@ $(document).ready( function() {
 					$("#itemTagWrap").append(newTag);
 			
 					//newTag의 하위요소중 찾아서 값을 설정
-					$(newTag).find("#xCoordinate").val(offsetX);
-					$(newTag).find("#yCoordinate").val(offsetY);
+					$(newTag).find("#xCoordinate").val(event.pageX);
+					$(newTag).find("#yCoordinate").val(event.pageY);
 					$(newTag).find("#color").text(hex);
 					$(newTag).find(".colorSquare").css("background-color", hex);
 					$("div[class=itemTag]").each(function(index) {
@@ -90,8 +91,8 @@ $(document).ready( function() {
 				} else {
 					$(newTag).show(); // display: none -> block
 					tagMold = $(newTag).clone(); // 복제
-					$("#xCoordinate").val(offsetX);
-					$("#yCoordinate").val(offsetY);
+					$("#xCoordinate").val(event.pageX);
+					$("#yCoordinate").val(event.pageY);
 					$("#color").text(hex);
 					$("#tagNo").val(count);
 					$(".colorSquare").css("background-color", hex);
@@ -102,8 +103,8 @@ $(document).ready( function() {
 				tagNum.setAttribute("class" , "marker") ;
 				 
 				//태그이미지위치
-				tagNum.style.left = (event.clientX) + "px";
-				tagNum.style.top = (event.clientY) + "px";
+				tagNum.style.left = (event.pageX) + "px";
+				tagNum.style.top = (event.pageY) + "px";
 				
 				//태그이미지를 해당 아이템태그 div에 append
 				$(newTag).append(tagNum);
@@ -134,16 +135,11 @@ $(document).ready( function() {
 function colorHex(x, y) {
 	var canvas = document.createElement("CANVAS");
 	var ctx = canvas.getContext("2d");
-	console.log("colorHex img wi " + img.width);
-	console.log("colorHex img he " + img.height);
-	console.log("XXXXXXXXXXXXXX " + x);
-	console.log("YYYYYYYYYYYYYYYYY " + y);
+
 	canvas.width = img.width;
 	canvas.height = img.height;
 	ctx.drawImage(img, 0, 0, img.width, img.height);
-	console.log("ctx " + ctx);
-	console.log("ctx.get " + ctx.getImageData(x, y, 1, 1).data);
-	
+
 	var pixelData = ctx.getImageData(x, y, 1, 1).data;
 
 	var hex0 = pad(pixelData[0].toString(16), 2);

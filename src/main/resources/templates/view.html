@@ -9,24 +9,29 @@
 	<link rel="stylesheet" href="/css/comment.css">
 <!-- 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+	<th:block th:include="header/header"></th:block>
 </head>
 <body>
-	<div th:include="header/header"></div>
+<!-- 	<div th:include="header/header"></div> -->
 	<div id="postView" class="postView">
-		<input id="memberNo" name="memberNo" class="memberNo" th:value="${post.memberNo.memberNo}" hidden="true">
-		<input id="postNo" name="postNo" class="postNo" th:value="${post.postNo}" hidden="true">
+	
 		<div class="leftWrap">
-			<div class="imgMold">
-				<img id="postImage" class="postImage" th:src="|${post.postImageNo.path}|"><br>
+			<button type="button" id="postDelete" class="viewBtn">삭제</button>
+			<button type="button" id="postUpdate" class="viewBtn">수정</button>
+		
+			<input id="memberNo" name="memberNo" class="memberNo" th:value="${post.memberNo.memberNo}" hidden="true">
+			<input id="postNo" name="postNo" class="postNo" th:value="${post.postNo}" hidden="true">
+			<div class="imgWrap">
+				<div class="imgMold">
+					<img id="postImage" class="postImage" th:src="|${post.postImageNo.path}|"><br>
+				</div>
 			</div>
 			<div class="postContents">
 				<textarea id="contents" rows="10" cols="39" th:text="${post.contents}" disabled="disabled"></textarea>
 			</div>
 		</div>
-
-		<button type="button" id="postDelete">삭제</button>
-		<button type="button" id="postUpdate">수정</button>
 		
+		<section class="temp">
 		<div class="itemWrap">
 			<!-- 스타일 -->
 			<div class="style">
@@ -38,6 +43,7 @@
 			</div>
 			<hr>
 			<!-- 태그 -->
+			<input type="text" id="itemList" th:value="${itemList}" hidden="true" disabled="disabled">
 			<div id="itemTagWrap" class="itemTagWrap accordion">
 				<th:block th:each="item:${itemList}">
 					<h3 th:id="|itemTag${item.tagNo}|" th:text="${item.tagNo}"></h3>
@@ -49,36 +55,35 @@
 						<input type="text" class="category" th:value="${item.categoryNo.name}" disabled="disabled"><br>
 						<br>
 						<label for="brandNo">브 랜 드</label>
-						<input type="text"
-							class="brand" th:value="${item.brandNo.name}" disabled="disabled"><br>
-						<br>
+						<input type="text" class="brand" th:value="${item.brandNo.name}" disabled="disabled"><br><br>
+						
 						<label for="color">색상</label>
 						<div class="colorSquare"></div>
-						<input type="text" class="color" th:value="${item.color}"
-							disabled="disabled"> <br>
-							<label for="store">구
-							매 처</label>
-							<input type="text" class="store" th:value="${item.store}"
-							disabled="disabled">
-						<button type="button" id="mapBtn">지도</button>
-						<br>
-						<input type="number" class="xCoordinate" hidden="true"
-							th:value="${item.xCoordinate}">
-							<input type="number"
-							class="yCoordinate" hidden="true" th:value="${item.yCoordinate}">
+						<span id="color" th:text="${item.color}"></span> <br>
+							
+						<label for="store">구 매 처</label>
+						<input type="text" class="store" th:value="${item.store}" disabled="disabled">
+						<button type="button" id="mapBtn">지도</button><br>
+						
+						<input type="number" class="xCoordinate" hidden="true" th:value="${item.xCoordinate}">
+						<input type="number" class="yCoordinate" hidden="true" th:value="${item.yCoordinate}">
+						<span class="marker" th:text="${item.tagNo}"></span>
 					</div>
 				</th:block>
 			</div>
 		</div>
-	<div th:include="comment" class="commentArea"></div>
-	</div>
+		<div th:include="comment" class="commentArea"></div>
+		</section>
+	
 	<div id="mapModal" class="modal">
 		<div class="modalContent">
 			<span class="close">&times;</span>
 			<p>지도지도도</p>
 		</div>
 	</div>
-
+	
+</div>
+		
 	<script th:src="@{/js/post/modal.js}"></script>
 	<script th:src="@{/js/view.js}"></script>
 </body>
