@@ -9,7 +9,7 @@
 		<div id="container">
 			<div th:each="post:${feed}" class="item" th:id="${'p'+post.postNo}">
 				<img class="postImg" th:alt="${post.postNo+'번 포스트의 사진'}"
-					th:src="${post.postImageNo.path}">
+					th:src="|${post.postImageNo.path}|">
 				<div class="postSum">
 					<div class="row1">
 						<span class="uploader" th:text="${post.memberNo.nickname}">

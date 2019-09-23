@@ -31,7 +31,7 @@ public class Item {
 	
 	private String name;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CATEGORY_NO")
 	private Category categoryNo;
 	

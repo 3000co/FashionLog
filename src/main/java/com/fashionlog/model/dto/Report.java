@@ -56,6 +56,7 @@ public class Report {
 	private Timestamp checkTime;
 	
 	@ColumnDefault("미확인")
+	@Column(columnDefinition = "char")
 	private String checkHistory;
 	
 }

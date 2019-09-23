@@ -58,8 +58,6 @@ public class PostController {
 	@Autowired
 	private CommentRepository commentRepository;
 	@Autowired
-	private LikesRepository likesRepository;
-	@Autowired
 	private PostService postService;
 	@Autowired
 	private FileService fileService;
@@ -126,12 +124,11 @@ public class PostController {
 		postRepository.deleteById(postNo.getPostNo());
 	}
 	
-	@RequestMapping("/afterPostWrite")
-	public String afterPostWrite() {
-
-		return "newsFeed";
-	}
-
+//	@RequestMapping("/afterPostWrite")
+//	public String afterPostWrite() {
+//
+//		return "newsFeed";
+//	}
 
 	// 마이프로필 화면
 	@RequestMapping("/user/{userNickname}")

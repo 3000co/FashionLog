@@ -13,9 +13,13 @@
 <body>
 	<div th:include="header/header"></div>
 	<div id="postView" class="postView">
-		<input id="memberNo" name="memberNo" class="memberNo" th:value="${post.memberNo.memberNo}" hidden="true">
-		<input id="postNo" name="postNo" class="postNo" th:value="${post.postNo}" hidden="true">
+	
 		<div class="leftWrap">
+			<button type="button" id="postDelete" class="viewBtn">삭제</button>
+			<button type="button" id="postUpdate" class="viewBtn">수정</button>
+		
+			<input id="memberNo" name="memberNo" class="memberNo" th:value="${post.memberNo.memberNo}" hidden="true">
+			<input id="postNo" name="postNo" class="postNo" th:value="${post.postNo}" hidden="true">
 			<div class="imgMold">
 				<img id="postImage" class="postImage" th:src="|${post.postImageNo.path}|"><br>
 			</div>
@@ -23,10 +27,8 @@
 				<textarea id="contents" rows="10" cols="39" th:text="${post.contents}" disabled="disabled"></textarea>
 			</div>
 		</div>
-
-		<button type="button" id="postDelete">삭제</button>
-		<button type="button" id="postUpdate">수정</button>
 		
+
 		<div class="itemWrap">
 			<!-- 스타일 -->
 			<div class="style">
@@ -38,6 +40,7 @@
 			</div>
 			<hr>
 			<!-- 태그 -->
+			<input type="text" id="itemList" th:value="${itemList}" hidden="true" disabled="disabled">
 			<div id="itemTagWrap" class="itemTagWrap accordion">
 				<th:block th:each="item:${itemList}">
 					<h3 th:id="|itemTag${item.tagNo}|" th:text="${item.tagNo}"></h3>
@@ -53,7 +56,7 @@
 						
 						<label for="color">색상</label>
 						<div class="colorSquare"></div>
-						<input type="text" class="color" th:value="${item.color}" disabled="disabled"> <br>
+						<span id="color" th:text="${item.color}"></span> <br>
 							
 						<label for="store">구 매 처</label>
 						<input type="text" class="store" th:value="${item.store}" disabled="disabled">
@@ -61,19 +64,21 @@
 						
 						<input type="number" class="xCoordinate" hidden="true" th:value="${item.xCoordinate}">
 						<input type="number" class="yCoordinate" hidden="true" th:value="${item.yCoordinate}">
+						<span class="marker" th:text="${item.tagNo}"></span>
 					</div>
 				</th:block>
 			</div>
 		</div>
-	<div th:include="comment" class="commentArea"></div>
-	</div>
+	
 	<div id="mapModal" class="modal">
 		<div class="modalContent">
 			<span class="close">&times;</span>
 			<p>지도지도도</p>
 		</div>
 	</div>
-
+	<div th:include="comment" class="commentArea"></div>
+</div>
+		
 	<script th:src="@{/js/post/modal.js}"></script>
 	<script th:src="@{/js/view.js}"></script>
 </body>

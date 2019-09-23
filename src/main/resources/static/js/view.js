@@ -1,7 +1,13 @@
 $(document).ready(function() {
 	console.log($("#memberNo").val());
 	console.log($("#userNo").text());
-
+	if ($("#itemList").val() != undefined) {
+		$(".itemInfo").each(function(index) {
+			var itemTag = $(".itemInfo:eq(" + index + ")");
+			itemTag.find(".marker").css("left", itemTag.find(".xCoordinate").val() + "px");
+			itemTag.find(".marker").css("top", itemTag.find(".yCoordinate").val() + "px");
+		});
+	}
 	if($("#memberNo").val() != $("#userNo").text()) {
 		console.log("달라~~");
 		$("#postDelete").hide();
@@ -17,14 +23,9 @@ $(document).ready(function() {
 		$.ajax({
 			type : 'POST',
 			url : "/postDelete",
-			data : {"postNo" : $("#postNo").val()},
-			success : function(){
-				console.log("aaaaaaaaaaa");
-			},error: function(){
-				console.log("vvv");
-			}
+			data : {"postNo" : $("#postNo").val()}
 		});
-		location.replace("/feed");
+		location.replace("/myFeed");
 	});
 	
 	$("#postUpdate").click(function() {

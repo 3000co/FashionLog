@@ -187,7 +187,9 @@ select {
 .modalContent .imgMold {
 	margin: auto;
 }
-
+.viewBtn {
+	margin: 10px;
+}
 .colorSquare {
 	display: inline-block;
 	border: 1px solid #bcbcbc;
@@ -200,7 +202,7 @@ select {
 .commentArea {
 	position: relative;
 	float: left;
-	bottom: 50;
+	bottom: 50px;
 	/* 	margin:5px; */
 }
 

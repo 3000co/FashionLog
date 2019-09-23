@@ -1,20 +1,5 @@
 $(document).ready( function() {
-	for (var i = 0; i < 3; i++) {
-		if ($(".styleText:eq(" + i + ")").val() != undefined) {
-			$(".styleText:eq(" + i + ")").show();
-			$(".styleUndo:eq(" + i + ")").show();
-		}
-	}
-	console.log($("#itemList").val());
-		if ($("#itemList").val() != undefined) {
-			$(".itemTag").show();
-			$(".itemTag").each(function(index) {
-				var itemTag = $(".itemTag:eq(" + index + ")");
-				itemTag.attr("id", "itemTag" + index);
-				itemTag.find(".colorSquare").css("background-color", itemTag.find("#color").text());
-			});
-		}
-		
+
 	var style = 0;
 	$(document).on("change", "#styleNo", function(event) {
 		$("input[class=styleText]:eq(" + style + ")").show();
@@ -29,10 +14,10 @@ $(document).ready( function() {
 			style++;
 		}
 	});
-	
+
 	$(document).on("click", "span[class=styleUndo]", function(event) {
 		var clickIndex = $("span[class=styleUndo]").index(event.target);
-		
+
 		$("input[class=styleText]").each(function(index) {
 			console.log(index);
 			var i = index - 1;
@@ -41,18 +26,18 @@ $(document).ready( function() {
 				var indexText = $("input[class=styleText]:eq(" + index + ")");
 				var newText = $("input[class=styleText]:eq(" + i + ")").val(indexText.val());
 				indexText.val("");
-				
+
 				var indexVal = $("input[class=styleNo]:eq(" + index + ")");
 				var newVal = $("input[class=styleNo]:eq(" + i + ")").val(indexVal.val());
 				indexVal.val("");
 			}
-			
+
 		});
 
 		style--;
 		$("input[class=styleText]:eq(" + style + ")").hide();
 		$("span[class=styleUndo]:eq(" + style + ")").hide();
-		
+
 	});
-	
+
 });
