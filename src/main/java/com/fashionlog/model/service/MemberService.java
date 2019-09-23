@@ -17,12 +17,7 @@ public interface MemberService {
 
 	void doLogout(Member member);
 
-	void modPassword(Member member);
-	
 	public void countLikes();
-	
-	
-
 	
 	
 

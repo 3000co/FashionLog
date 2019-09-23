@@ -1,6 +1,5 @@
 package com.fashionlog.model.service;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import com.fashionlog.model.dto.Member;
@@ -15,7 +14,5 @@ public interface LikesService {
 	public void countLikes();
 	
 	public void countLikes(Post post);
-
-	public List<Post> setLikeCount(List<Post> posts);
 	
 }

@@ -13,7 +13,8 @@
 <div sec:authorize="isAuthenticated()">
 	<h4><span sec:authentication="name"></span>님, 환영합니다 </h4>
 	<h3><span sec:authentication="principal.member.nickname"></span></h3>
-	</div>
+</div>
+	
 	<p align="center"><a href="feed">피드보기</a></p>
 	<p align="center"><a href="allFeed">모든피드보기</a></p>
 	<p align="center"><a href="login">로그인</a></p>

@@ -64,16 +64,4 @@ public class LikesServiceImpl implements LikesService {
 		}
 	}
 
-	@Override
-	public List<Post> setLikeCount(List<Post> posts) {
-		
-		 for (Post post : posts) {
-			if (post.getLikesCount() == null) {
-		
-				countLikes(post);
-			}
-		};
-		return posts;
-	}
-
 }

@@ -45,7 +45,7 @@ public class Member {
 	private String email;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PROFILE_IMAGE_NO")
+	@JoinColumn(name = "PROFILE_IMAGE_NO", insertable = false, updatable = false)
 	private File profileImageNo;
 	
 	@Column(columnDefinition = "char")
