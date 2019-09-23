@@ -127,8 +127,6 @@ public class PostController {
 	//아이템 삭제
 	@RequestMapping("/itemDelete")
 	public String itemDelete() {
-		
-//		System.out.println(item.getPostNo());
 		postRepository.deleteById(39);
 	
 		return "redirect:/feed";
@@ -197,6 +195,7 @@ public class PostController {
 			feedVo.put("postImageNo", post.getPostImageNo().getPath());
 			feedVo.put("uploadTime", post.getUploadTime());
 			feedVo.put("uploader", post.getMemberNo().getNickname());
+			feedVo.put("uploaderProfile", post.getMemberNo().getProfileImageNo().getPath());
 			likesService.countLikes(post);
 			feedVo.put("likesCount", post.getLikesCount());
 			newFeed.put(post.getPostNo() + "", feedVo);

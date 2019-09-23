@@ -18,8 +18,8 @@
 		<span id="myUserPhonenumber" th:text="${myInfo.phonenumber}"></span>
 		<span id="myUserEmail" th:text="${myInfo.email}"></span>
 		<span id="myUserStyleNo1" class="userStyle" th:text="${myInfo.styleNo1.styleNo}"></span>
-		<span id="myUserStyleNo2" class="userStyle" th:text="${myInfo.styleNo2.styleNo}"></span>
-		<span id="myUserStyleNo3" class="userStyle" th:text="${myInfo.styleNo3.styleNo}"></span>
+		<span id="myUserStyleNo2" th:if="${myInfo.styleNo2}" class="userStyle" th:text="${myInfo.styleNo2.styleNo}"></span>
+		<span id="myUserStyleNo3" th:if="${myInfo.styleNo3}" class="userStyle" th:text="${myInfo.styleNo3.styleNo}"></span>
 	</div>
 	
 	<div class="profile" th:with="info=${userInfo!=null?userInfo:myInfo}">
@@ -73,7 +73,7 @@
 					<input type="hidden" id="type" name="type" value="profile">
 					<input type="file" id="selectImg" name="mulFile" />
 					<div class="imgMold">
-						<img id="postImage" class="postImage" src=""><br>
+						<img id="profileModImage" class="profileModImage" th:src="${myInfo.profileImageNo.path}"><br>
 					</div>
 				</form>
 

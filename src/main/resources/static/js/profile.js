@@ -37,7 +37,7 @@ $("#submit").click(function() {
 
 function fileInsert() {
 	var form = new FormData(document.getElementById('imgWrap')); 
-	if ($("#postImage").attr("src") == "") {
+	if ($("#profileModImage").attr("src") == "") {
 		alert("사진을 올려주세요");
 	}else {
 		$.ajax({ 
@@ -55,15 +55,15 @@ function fileInsert() {
 }
 
 function memberInfoInsert(fileNo) {
-	alert("유저 이름:" +$("#userNo").text());
+	alert("유저 이름:" +$("#myUserNo").text());
 	$.ajax({
 		type : "post",
 		url : "/modProfile",
 		data : {
-			"memberNo" : $("#userNo").text(),
+			"memberNo" : $("#myUserNo").text(),
 			"profileImageNo" : fileNo
 		},
-		success : function(postNo){
+		success : function(no){
 			alert("프로필 사진 변경에 성공하셨습니다!");
 			location.reload();
 		}

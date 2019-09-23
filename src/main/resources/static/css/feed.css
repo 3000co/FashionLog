@@ -102,16 +102,6 @@
 	  border-radius: 27px;
 	} */
 	
-	.name {
-		display: inline-block;
-	}
-	
-	.name p {
-	  color: #5a5a5a;
-	  font-size: 9pt !important;
-	  margin-left: 8px;
-	}
-	
 	li {
 	  list-style:none;
 	}
@@ -120,17 +110,15 @@
 	  margin-left: 180px;
 	}
 	
-	.profileImg {
-		width: fit-content;
-    	height: fit-content;
-		/* float: left;
-		text-align:left;
-		width:33.33333%; */
+	.profileImg img {
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		display: inline;
 	}
 
 	.nickname {
-		float: left;
-		text-align:left;
+		text-align:center;
 		width:33.33333%;
 	}
 	

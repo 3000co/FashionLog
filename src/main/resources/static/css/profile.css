@@ -113,23 +113,17 @@ header {
     -webkit-transition: all .2s ease-in-out;
   }
   
-  .profile {
-    width: 27px;
-    height: 27px;
-    display: inline-block;
-    background-color: #3E90A8;
-    border-radius: 27px;
-  }
+  
   
   .name {
       display: inline-block;
   }
   
   .name p {
+    display: inline;
     color: #5a5a5a;
     font-size: 9pt !important;
     margin-left: 8px;
-    line-height: 0.3;
   }
   
   
@@ -553,8 +547,8 @@ header {
   /* Important styles */
   /* Important styles */
 #toggle {
-    position: fixed;
-    right: 80px;
+    position: relative;
+    right: -85%;
     width: 28px;
     height: 30px;
       /* margin-top: -35%;
