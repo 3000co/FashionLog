@@ -50,6 +50,7 @@ $.getNotification = function () {
 				notiLine.append(notiSendTime);
 				//화면에 넣기
 				$('.notiDiv').append(notiLine);
+				$('.notiDiv').append('<hr>');
 			});
 			$.setTimeExp();
 		},
@@ -90,7 +91,16 @@ $.setTimeExp = function () {
 	}
 }
 
+
 //jquery선언
 $(function () {
 	$.getNotification();
+
+	$('.notiLine').click(function() {
+		var notiNo = this.attr('id').substring(6);
+		var tempForm = new FormData();
+		tempForm.attr('action','noti/check');
+		tempForm.append('notiNo',notiNo);
+		tempForm.submit();
+	});
 });

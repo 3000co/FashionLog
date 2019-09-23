@@ -40,7 +40,6 @@ public class NotificationController {
 	@ResponseBody
 	public List<Notification> uncheckedNotificationList(@AuthenticationPrincipal SecurityUser securityUser) {
 		Member user = memberRepository.findById(securityUser.getMember().getId());
-		System.out.println(user);
 		List<Notification> notiList = notificiationRepository.findByRecieverMemNoAndCheckTimeIsNull(user);
 		return notiList;
 	}

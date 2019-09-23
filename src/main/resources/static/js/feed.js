@@ -115,17 +115,14 @@ $(function() {
 	var makeItemBoxes = function(feedData) {
 		var boxes = new Array;
 		for ( var attr in feedData) {
-			var itemDiv = $('<div></div>').addClass('item').attr('id',
+			var itemDiv = $('<div></div>').addClass('item pin').attr('id',
 					"p" + attr);
-			var itemHtml = "<img class='postImg' alt='" + attr
-					+ "번 포스트의 사진' src='" + feedData[attr].postImageNo + "'>";
-			itemHtml += "<div class='postSum'><div class='row1'><span class='uploader'>" + feedData[attr].uploader
-					+ "</span>";
-			itemHtml += "<span class='likesCount'>" + (feedData[attr].likesCount === null ? 0 : feedData[attr].likesCount)
-					+ "</span>";
-			itemHtml += "<button class='likesBtn btn' style='display: none'> 좋아요 </button></div>";
-			itemHtml += "<div class='row2'><span class='uploadTime'>" + feedData[attr].uploadTime
-			+ "</span></div></div></div>";
+
+			var itemHtml = "<div class='author'><a th:href='/profile/post/"+feedData[attr].uploader+"'><img class='profileImg' src='"+feedData[attr].uploaderProfile+"' /></a><div class='name'><p class='uploader nickname'>" + feedData[attr].uploader+"</p><p class='uploadTime datetime'>"+feedData[attr].uploadTime+"</p></div>"
+			itemHtml +="<img class='postImg' alt='"+feedData[attr].postNo+"번 포스트의 사진' src='"+feedData[attr].postImageNo+"'><div class='description'></div><div class='author'><span class='likesCount' >"+feedData[attr].likesCount+"</span>"
+			itemHtml += "<a href=''><i class='glyphicon glyphicon-heart likesBtn' style='display: none'></i></a>"
+			itemHtml +="<a href=''><i class='glyphicon glyphicon-comment'></i></a>"
+			itemHtml += "<a href='' class='btn btn-primary followToggleBtn' role='button' style='display: none'>팔로우</a></div>";
 			itemDiv.html(itemHtml);
 			boxes.push(itemDiv);
 		}

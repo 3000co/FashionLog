@@ -127,8 +127,6 @@ public class PostController {
 	//아이템 삭제
 	@RequestMapping("/itemDelete")
 	public String itemDelete() {
-		
-//		System.out.println(item.getPostNo());
 		postRepository.deleteById(39);
 	
 		return "redirect:/feed";
@@ -144,10 +142,20 @@ public class PostController {
 	// 마이프로필 화면
 	@RequestMapping("/user/{userNickname}")
 	public String profileSetting(@PathVariable String userNickname, Model model,
-	@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 10) Pageable paging) {
+	@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 10) Pageable paging,
+	@AuthenticationPrincipal SecurityUser securityUser) {
+		List<Post> feed = new ArrayList<>();
 		Member userInfo = memberRepository.findByNickname(userNickname);
-		model.addAttribute("userInfo", userInfo);
-		List<Post> feed = postService.getProfileFeed(userInfo, paging);
+		Member myInfo = memberRepository.findById(securityUser.getUsername());
+		if(userInfo!=myInfo){
+			model.addAttribute("userInfo", userInfo);
+			myInfo.setPassword("0");
+			model.addAttribute("myInfo", myInfo);
+			feed = postService.getProfileFeed(userInfo, paging);
+		}else{
+			model.addAttribute("myInfo", myInfo);
+			feed = postService.getProfileFeed(myInfo, paging);
+		}
 		model.addAttribute("feed", likesService.setLikeCount(feed));
 		return "/member/profile";
 	}
@@ -187,6 +195,7 @@ public class PostController {
 			feedVo.put("postImageNo", post.getPostImageNo().getPath());
 			feedVo.put("uploadTime", post.getUploadTime());
 			feedVo.put("uploader", post.getMemberNo().getNickname());
+			feedVo.put("uploaderProfile", post.getMemberNo().getProfileImageNo().getPath());
 			likesService.countLikes(post);
 			feedVo.put("likesCount", post.getLikesCount());
 			newFeed.put(post.getPostNo() + "", feedVo);

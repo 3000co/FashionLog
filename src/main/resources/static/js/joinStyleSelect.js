@@ -183,6 +183,7 @@ function shuffleRandom(length) {
 
 //3번 페이지 표시
 $(document).on('click', ".goPage3Btn", function () {
+	console.log("?????")
 	$("#styleSelect1").css("display", "none");
 	$("#styleSelect2").css("display", "none");
 	$("#styleSelect3").css("display", "block");
