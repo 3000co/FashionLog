@@ -45,14 +45,19 @@ $(document).ready( function() {
 		$("span[class=styleUndo]:eq(" + style + ")").hide();
 	});
 
-	// image를클릭했을 때 아이템태그 추가
+	// image를 클릭했을 때 아이템태그 추가
 	$(document).on("click", "#postImage", function(event) {
 		// image가 있을 경우에만 작동
 		if ($("#selectImg").val() != "") {
 			// 최대 7개 태그
 			if (count < 7) {
 				img = document.getElementById("postImage");
-				var tagImg = document.createElement("img");
+				
+				console.log("on img wi" + img.width);
+				console.log("on img he" + img.height);
+				
+				var tagNum = document.createElement("span");
+				var spanText;
 
 				// itemTag1의 display
 				var tagStyle = $(newTag).css("display");
@@ -80,7 +85,7 @@ $(document).ready( function() {
 					$("div[class=itemTag]").each(function(index) {
 						var clickIndex = $(this).index();
 						$(newTag).find('#tagNo').val(clickIndex + 1);
-						tagImg.setAttribute("src", "images/tag" + (clickIndex + 1) + ".png");
+						spanText = document.createTextNode(clickIndex + 1);
 					});
 				} else {
 					$(newTag).show(); // display: none -> block
@@ -90,20 +95,18 @@ $(document).ready( function() {
 					$("#color").text(hex);
 					$("#tagNo").val(count);
 					$(".colorSquare").css("background-color", hex);
-					tagImg.setAttribute("src", "images/tag1.png");
+					spanText = document.createTextNode(1);
 				}
-
-				//태그이미지 alt Attribute를 tagNoImg로 지정
-				tagImg.setAttribute("alt","tagNoImg");
+				
+				tagNum.appendChild(spanText)
+				tagNum.setAttribute("class" , "marker") ;
+				 
 				//태그이미지위치
-				tagImg.style.position = "absolute";
-				tagImg.style.left = (event.clientX) + "px";
-				tagImg.style.top = (event.clientY) + "px";
-//				tagImg.style.left = (offsetX + 15) + "px";
-//				tagImg.style.top = (offsetY + 30) + "px";
+				tagNum.style.left = (event.clientX) + "px";
+				tagNum.style.top = (event.clientY) + "px";
 				
 				//태그이미지를 해당 아이템태그 div에 append
-				$(newTag).append(tagImg);
+				$(newTag).append(tagNum);
 			}
 		}
 	});
@@ -116,11 +119,10 @@ $(document).ready( function() {
 
 			if (clickIndex < index) {
 				$("input[name=tagNo]:eq(" + index + ")").val(eqValue - 1);
-				$("img[alt=tagNoImg]:eq(" + index + ")").attr("src", "images/tag" + (eqValue - 1) + ".png");
+				$(".marker:eq(" + index + ")").text(eqValue - 1);
 			}
 		});
 
-		$(event.target).parents(".itemTag").detach();
 		$(event.target).parents(".itemTag").detach();
 		count--;
 	});
@@ -132,12 +134,17 @@ $(document).ready( function() {
 function colorHex(x, y) {
 	var canvas = document.createElement("CANVAS");
 	var ctx = canvas.getContext("2d");
-	
+	console.log("colorHex img wi " + img.width);
+	console.log("colorHex img he " + img.height);
+	console.log("XXXXXXXXXXXXXX " + x);
+	console.log("YYYYYYYYYYYYYYYYY " + y);
 	canvas.width = img.width;
 	canvas.height = img.height;
 	ctx.drawImage(img, 0, 0, img.width, img.height);
+	console.log("ctx " + ctx);
+	console.log("ctx.get " + ctx.getImageData(x, y, 1, 1).data);
 	
-	var pixelData = canvas.getContext("2d").getImageData(x, y, 1, 1).data;
+	var pixelData = ctx.getImageData(x, y, 1, 1).data;
 
 	var hex0 = pad(pixelData[0].toString(16), 2);
 	var hex1 = pad(pixelData[1].toString(16), 2);

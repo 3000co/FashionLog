@@ -1,33 +1,21 @@
+
 $(document).ready(function() {
 
 	$(document).on("change", "#selectImg", function(event) {
-		
-		// 선택이미지를 바꿨을 경우 태그 삭제
-		var total = $(".itemTag").length;
-		if (total > 1) {
-			$(".itemTag").each(function(index) {
-				index = total - index -1;
-				console.log(index);
-					$(".itemTag:eq(" + index + ")").detach();
-			});
-			count = 0;
-		}
 		handleImgFileSelect(event);
 
 		if($("#postImage").attr('src') !== 'undefined'){
-			colorPick();
+			var date = new Date();
+			colorPick(date.getSeconds());
 		}
+		tagDetach();
 	});
 });
 
-function colorPick() {
-	
-	//get form
-	var form = $('#imgWrap')[0];
-	
+function colorPick(dates) {
 	//create an form data object
-	var data = new FormData(form);
-	
+	var data = new FormData($('#imgWrap')[0]);
+
 	$.ajax({
 		type : 'POST',
 		crossOrigin : true,
@@ -37,9 +25,9 @@ function colorPick() {
 		data : data,
 		success : function(str){
 			console.log(str);
-		},
-		error: function(e){
-			
+			var date = new Date();
+			console.log(date.getSeconds() - dates);
+			colorSend(str);
 		}
 	});
 }
@@ -48,24 +36,51 @@ function handleImgFileSelect(e) {
 
 	var files = e.target.files;
 	var filesArr = Array.prototype.slice.call(files);
-	
+
 	if (filesArr.length != 0) {
 		filesArr.forEach(function(f) {
 			if(!f.type.match("image.*")) {
 				alert("이미지 확장자만 가능");
 				return;
 			}
-
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				$("#postImage").attr("src", e.target.result);
 			}
 			reader.readAsDataURL(f);
-			
 		});
-		
 	}else {
 		$("#postImage").attr("src", null);
 	}
-	
 }
+
+
+function colorSend(data) {
+	var colorArr = data.split(",");
+	
+	var auto;
+	for (var i = 0; i < colorArr.length - 1 ; i++) {
+		auto = $(".square.auto:eq(" + i + ")");
+		auto.attr("color", colorArr[i + 1]);
+		auto.css("background-color", colorArr[i + 1]);
+	}
+}
+
+
+function tagDetach() {
+	// 선택이미지를 바꿨을 경우 태그 삭제
+	var tagDisplay = $(".itemTag").css("display");
+	
+	if (tagDisplay === "block") {
+		
+		var len = $(".itemTag").length;
+		var num;
+		
+		for (var i = 0; i < len; i++) {
+			num = len - i - 1;
+			$(".itemTag:eq(" + num + ")").detach();
+		}
+		count = 0;
+	}
+}
+

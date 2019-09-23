@@ -69,19 +69,16 @@ public class PostController {
 		List<Style> style = styleRepository.findAll();
 		List<Category> category = categoryRepository.findAll();
 		List<Object[]> brand = brandRepository.findBrandQuery();
-
-		Member user = securityUser.getMember();
+		
 		model.addAttribute("style", style);
 		model.addAttribute("category", category);
 		model.addAttribute("brand", brand);
-		model.addAttribute("member", user);
 
 		return "post/post";
 	}
 
 	/**
 	 * 1. file 올리기
-	 *
 	 * @param mulFile (파일)
 	 * @param model
 	 * @param request
@@ -97,7 +94,6 @@ public class PostController {
 
 	/**
 	 * 2. fileNo를 받아서 post 올리기
-	 *
 	 * @param post
 	 * @return postNo
 	 */
@@ -110,7 +106,6 @@ public class PostController {
 
 	/**
 	 * 3. postNo를 받아서 item만들고(view에서 작업함) 올리기
-	 *
 	 * @param item
 	 */
 	@RequestMapping("/itemInsert")
@@ -119,6 +114,17 @@ public class PostController {
 		itemRepository.save(item);
 	}
 
+
+	//아이템 삭제
+	@RequestMapping("/itemDelete")
+	public String itemDelete() {
+		
+//		System.out.println(item.getPostNo());
+		postRepository.deleteById(39);
+	
+		return "redirect:/feed";
+	}
+	
 	@RequestMapping("/afterPostWrite")
 	public String afterPostWrite() {
 

@@ -13,10 +13,7 @@ import com.fashionlog.model.service.ItemService;
 public interface ItemRepository extends JpaRepository<Item, Integer>, ItemService{
 	public List<Item> findByPostNoOrderByTagNoAsc(Post post);
 
-	
-	public Item countByItemNo(int itemNo);//?어디에 사용하지? pk로 레코드갯수 세어봤자 1갠데,,?
-	
-	public Item deleteByPostNo(int postNo);
+	public Item deleteByPostNo(Post postNo);
 	
 	public Long countByBrandNo(Brand brand);
 	
