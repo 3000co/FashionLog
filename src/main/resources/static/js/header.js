@@ -68,6 +68,7 @@
 			var searchWord = $('#inputField-tokenfield').val();
 			searchWord += ($(this).val());
 			$('#inputField-tokenfield').val(searchWord);
+			changeSearchMod(this);
 		});
 
 		//상세버튼 누를 시 검색창에 토큰 추가
@@ -105,30 +106,26 @@
 						//attrName = data.styleList[i].name;
 						attrName = data.attrList[i].name;
 						html += "<td><input class='attrBtn'";
-						html += "type='button' value=" + attrName + " ";
-						html += "onclick=returnDefaultMod()>";
-						html += "</input></td>"
+						html += "type='button' value='" + attrName + "'/>";
+						html += "</td>"
 					}
 
 					$("#obj").append(jsondata);
 					$("#" + applyTargetId).html(html);
-
+					$('.attrBtn').click(function(){
+						returnDefaultMod();
+					})
 				},
 				error: function (data) {
 					console.log("오류 발생");
 					console.log("data: " + data);
-				},
-				beforeSend: function () {},
-				complete: function () {
-
 				}
 			});
 		}
 
 		function changeSearchMod(target) {
 			var defaultSearch = document.getElementById("defaultSearch");
-
-			switch (target) {
+			switch ($(target).attr('id')) {
 				case 'categoryBtn':
 					defaultSearch.style.display = 'none';
 					document.getElementById("categorySearch").style.display = 'block';
