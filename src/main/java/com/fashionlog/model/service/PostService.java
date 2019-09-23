@@ -9,7 +9,10 @@ import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Post;
 
 public interface PostService {
-	
+
+	//프로필에 보여질 피드
+	public List<Post> getProfileFeed(Member user, Pageable paging);
+
 	//팔로이 글 5개
 	public Set<Post> getFeedByFollowee(Member user, Pageable paging);
 
