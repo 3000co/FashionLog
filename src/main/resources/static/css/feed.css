@@ -94,13 +94,13 @@
 	  -webkit-transition: all .2s ease-in-out;
 	}
 	
-	.profile {
+	/* .profile {
 	  width: 27px;
 	  height: 27px;
 	  display: inline-block;
 	  background-color: #3E90A8;
 	  border-radius: 27px;
-	}
+	} */
 	
 	.name {
 		display: inline-block;

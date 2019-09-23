@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -20,6 +22,7 @@ import lombok.ToString;
 @DynamicInsert
 @DynamicUpdate
 @Getter@Setter@ToString
+@JsonIgnoreProperties(value={"hibernateLazyInitializer", "handler"})
 public class File {
 
 

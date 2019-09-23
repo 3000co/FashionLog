@@ -128,13 +128,12 @@ public class PostController {
 
 	// 마이프로필 화면
 	@RequestMapping("/user/{userNickname}")
-	public String profileSetting(@PathVariable String userNickname, Model model) {
+	public String profileSetting(@PathVariable String userNickname, Model model,
+	@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 10) Pageable paging) {
 		Member userInfo = memberRepository.findByNickname(userNickname);
 		model.addAttribute("userInfo", userInfo);
-		Post post = postRepository.findById(userInfo.getMemberNo()).get();
-		model.addAttribute("post", post);
-		model.addAttribute("itemList", itemRepository.findByPostNoOrderByTagNoAsc(post));
-		model.addAttribute("commentList", commentRepository.findByPostNo(post));
+		List<Post> feed = postService.getProfileFeed(userInfo, paging);
+		model.addAttribute("feed", likesService.setLikeCount(feed));
 		return "/member/profile";
 	}
 
@@ -158,16 +157,6 @@ public class PostController {
 		List<Post> feed = postService.getPostToFeed(user, paging);
 		model.addAttribute("feed", likesService.setLikeCount(feed));
 		return "newsFeed";
-	}
-
-	@RequestMapping("/profile/{userId}")
-	public String profileFeed(Model model, @PathVariable String userId, 
-		@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 10) Pageable paging) {
-		// 로그인한 사람 user
-		Member user = memberRepository.findById(userId);
-		List<Post> feed = postService.getProfileFeed(user, paging);
-		model.addAttribute("feed", likesService.setLikeCount(feed));
-		return "profile";
 	}
 
 	@RequestMapping(value = "/getMoreFeed", method = RequestMethod.GET)
