@@ -35,9 +35,9 @@
 		<div class="profile-image">
 			<img th:src="${userInfo.profileImageNo.path}" alt="">
 		</div>
-		<div class="profile-user-settings">
-			<h1 class="profile-user-name" th:text="${userInfo.nickname}"></h1>
-			<button class="btn profile-edit-btn">팔로우</button>
+		<div class="profile-user-settings" th:with="userNickname=${userInfo.nickname}">
+			<h1 class="profile-user-name" th:text="${userNickname}"></h1>
+			<button th:unless="${userNickname=}" class="btn profile-edit-btn">팔로우</button>
 		</div>
 		<div class="profile-stats">
 			<ul>
