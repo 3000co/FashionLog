@@ -22,8 +22,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
       security.csrf().disable();
       
       security.authorizeRequests().antMatchers("/").permitAll();
+      security.authorizeRequests().antMatchers("/login").permitAll();
+      // security.authorizeRequests().antMatchers("/join**").permitAll();
+      // security.authorizeRequests().antMatchers("/styleSelect**").permitAll();
       security.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
       security.authorizeRequests().antMatchers("/user/**").hasAnyRole("USER");
+      // security.authorizeRequests().antMatchers("/**").hasAnyRole("USER");
       
       security.formLogin().loginPage("/login").defaultSuccessUrl("/myFeed", true);
 

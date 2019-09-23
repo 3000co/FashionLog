@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -45,9 +45,10 @@
 			"${criterion=='likes'} ? 
 			${user.likesCount}+'개의 좋아요를 받았습니다.' : 
 			${user.followers.size()}+'명이 팔로우합니다.'"></p>
+			</div>
 		</div>
 	</div>
-</div>
-</section>
+	<script type="text/javascript" src="/js/profileUnit.js"></script>
 </body>
+
 </html>

@@ -91,7 +91,6 @@ public class SearchController {
 //		  searchTokenArrayList.get(i); for (String t : temp) { System.out.println(t); }
 //		  }
 
-		System.err.println(itemRepository.getSearchResult(searchTokenArrayList));
 		Integer[] searchedResultNoList = itemRepository.getSearchResult(searchTokenArrayList);
 		
 		//검색된 item을 가진 post 가지고 오는 파트
@@ -113,8 +112,6 @@ public class SearchController {
 	private List<String> splitWordsByAmp(String searchWords, List<String> searchTokenList) {
 		String[] searchTokenArray;
 		searchTokenArray = searchWords.split(" ");
-
-		
 		 for(String temp:searchTokenArray) {
 			 searchTokenList.add(temp); }
 		 

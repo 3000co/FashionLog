@@ -39,7 +39,6 @@ public class FileServiceImpl implements FileService {
 		file.setName(savedName);
 		file.setPath(uploadPath + "/" + savedName);
 		file.setSize((int) mulFile.getSize());
-		System.err.println("db용 파일 : " + file.toString());
 		fileRepository.save(file);
 		File fileName = fileRepository.findByName(savedName);
 		return fileName;
