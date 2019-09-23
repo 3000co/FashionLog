@@ -131,6 +131,14 @@ public class PostController {
 		return "feed";
 	}
 
+	@RequestMapping("/post/{postNo}")
+	public String getPost(@PathVariable int postNo, Model model) {
+		Post post = postRepository.findById(postNo).get();
+		model.addAttribute("post", post);
+		model.addAttribute("itemList", itemRepository.findByPostNoOrderByTagNoAsc(post));
+		model.addAttribute("commentList", commentRepository.findByPostNo(post));
+		return "view";
+	}
 
 	// 마이프로필 화면
 	@RequestMapping("/user/{userNickname}")
