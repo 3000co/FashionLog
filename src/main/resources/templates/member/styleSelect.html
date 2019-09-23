@@ -6,6 +6,7 @@
 	<title>회원 가입</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" th:href="@{/css/styleSelect.css}">
+	<link rel ="stylesheet" th:href="@{/css/join.css}">
 	<script type="text/javascript">
 
 		/* function endueStyleNo() {
@@ -22,16 +23,18 @@
 	</script>
 </head>
 
-<body th:align="center">
-	<h3>회원가입</h3>
-	<img src="images/google-logo.png" width="50" height="50" />
+<body  th:align="center">
 	<form name='member' id='memberInfo' action="/styleSelect2.do" method="post">
-
+		<div class="logo_img">
+			<img src="https://i.ibb.co/MVr31h7/logo.png" alt="logo" /> <span
+				class="sign_up">회원 가입</span>
+		</div>
 		<!-- 세번째 페이지 -->
 		<div id="styleSelect3" class="page" style="display: none">
-			<h4>관심있는 스타일을 더 선택하세요.</h4>
-			<h5>이후 마이페이지에서 변경 가능</h5><br>
-			<h6>1~3개의 스타일을 선택하면 회원가입이 가능합니다</h6><br>
+			<br>
+			<h7>관심있는 스타일을 더 선택하세요.</h7>
+			<h5>이후 마이페이지에서 변경 가능<br>
+			1~3개의 스타일을 선택하면 회원가입이 가능합니다</h5><br>
 
 			<div class="form-group">
 				<input type="hidden" name="id" th:value="${id}">
@@ -62,8 +65,8 @@
 			</div>
 
 			<div class="page1Btns">
-				<input type="button" class="refreshBtn" value="돌아가기" />
-				<span><button type="button" class="finalJoinBtn">가입</button></span>
+				<input type="button" name="styleBtn" class="refreshBtn" value="돌아가기" />
+				<span><input type="button" class="finalJoinBtn" value="가입"/></span>
 			</div>
 		</div>
 
@@ -83,16 +86,17 @@
 			</table>
 
 			<div id="page2Btns">
-				<input type="button" class="refreshBtn" value="다시하기" />
-				<input type="button" class="goPage3Btn" value="더선택하기" />
-				<span><button type="button" class="finalJoinBtn">가입</button></span>
+				<input type="button" name="styleBtn" class="refreshBtn" value="다시하기" />
+				<input type="button" name="styleBtn" class="goPage3Btn" value="더선택하기" />
+				<span><button type="button" name="styleBtn" class="finalJoinBtn">가입</button></span>
 			</div>
 
 		</div>
 
 		<!-- 첫번째 페이지 -->
 		<div id="styleSelect1" class="page" style="display: block">
-			<br> 마음에 드는사진을 선택해주세요. <br> 10장이 모이면 회원님의 선호 스타일을 알려드립니다.</br>
+			<h7><br> 마음에 드는사진을 선택해주세요. <br></h7>
+			<h5>10장이 모이면 회원님의 선호 스타일을 알려드립니다.</br></h5>
 
 			<div class="container">
 				<div class="progress">
@@ -117,12 +121,11 @@
 					</tr>
 
 			</div>
-
 			<div class="page1Btns">
-				<input type="button" class="goPage3Btn" value="건너 뛰기" /> <span>
-					<input type="button" class="otherPicBtn" value="다른 사진" /></span>
+				<input type="button" name="styleBtn" class="goPage3Btn" value="건너 뛰기" /> <span>
+				<input type="button" name="styleBtn" class="otherPicBtn" value="다른 사진" /></span>
+				<br><br>
 			</div>
-
 		</div>
 
 	</form>
