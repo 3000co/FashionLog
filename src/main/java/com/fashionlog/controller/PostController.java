@@ -147,14 +147,13 @@ public class PostController {
 	
 	@RequestMapping("/post/{postNo}")
 	public String getPost(@PathVariable int postNo, Model model) {
-
 		Post post = postRepository.findById(postNo).get();
 		model.addAttribute("post", post);
 		model.addAttribute("itemList", itemRepository.findByPostNoOrderByTagNoAsc(post));
-		model.addAttribute("itemList", itemRepository.findByPostNoOrderByTagNoAsc(post));
-		
+		model.addAttribute("commentList", commentRepository.findByPostNo(post));
 		return "view";
 	}
+	
 	@RequestMapping("/postUpdate/{postNo}")
 	public String PostUpdate(@PathVariable int postNo, Model model) {
 		System.err.println(postNo);

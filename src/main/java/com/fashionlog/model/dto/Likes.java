@@ -20,7 +20,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString(exclude = {"notification", "postNo"})
+@ToString(exclude = "notification")
 @Entity
 public class Likes implements SocialEvent{
 
@@ -33,7 +33,7 @@ public class Likes implements SocialEvent{
 	@JoinColumn(name = "MEMBER_NO")
 	private Member memberNo;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "POST_NO")
 	private Post postNo;
 	
