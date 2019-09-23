@@ -62,5 +62,5 @@ function itemInsert(postNo) {
 			}
 		});
 	});
-	location.replace("/feed");
+	location.replace("/myFeed");
 }
