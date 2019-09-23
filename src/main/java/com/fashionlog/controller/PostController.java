@@ -160,15 +160,6 @@ public class PostController {
 		return "/member/profile";
 	}
 	
-	@RequestMapping("/post/{postNo}")
-	public String getPost(@PathVariable int postNo, Model model) {
-		Post post = postRepository.findById(postNo).get();
-		model.addAttribute("post", post);
-		model.addAttribute("itemList", itemRepository.findByPostNoOrderByTagNoAsc(post));
-		model.addAttribute("commentList", commentRepository.findByPostNo(post));
-		return "view";
-	}
-	
 	@RequestMapping("/postUpdate/{postNo}")
 	public String PostUpdate(@PathVariable int postNo, Model model) {
 		System.err.println(postNo);
@@ -185,15 +176,6 @@ public class PostController {
 		model.addAttribute("itemList", itemRepository.findByPostNoOrderByTagNoAsc(post));
 
 		return "post/postUpdate";
-	}
-
-	@RequestMapping("/allFeed")
-	public String getPost(Model model,
-			@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 30) Pageable paging) {
-		List<Post> allFeed = new ArrayList<>(postService.getAllFeed(paging));
-		Collections.sort(allFeed);
-		model.addAttribute("feed", allFeed);
-		return "feed";
 	}
 
 	@RequestMapping("/myFeed")
