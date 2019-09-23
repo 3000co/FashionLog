@@ -170,6 +170,6 @@
 	}
 //프로필 버튼 누르면 해당 유저 전용 url로 들어감.
 	$('#myProfile').click(function(){
-		var userNickname = $("#userNickname").text();
+		var userNickname = $("#myUserNickname").text();
 		$(this).attr("href","/user/"+userNickname)
 	});
