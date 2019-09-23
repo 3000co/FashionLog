@@ -46,7 +46,7 @@ public class FollowController {
 	public void follow(Integer memberNo, @AuthenticationPrincipal SecurityUser securityUser) {
 		Member user = memberRepository.findById(securityUser.getMember().getId());
 		Member followee = memberRepository.findById(memberNo).get();
-		if(!followService.isFollowing(user, followee)) {
+		if(user!=followee && !followService.isFollowing(user, followee)) {
 			Follow follow = new Follow();
 			follow.setFollowerMemNo(user);
 			follow.setFolloweeMemNo(followee);

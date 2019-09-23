@@ -11,15 +11,15 @@
 <body>
 	<div th:include="header/header" class="fashionHeader"></div>
 	<!-- 이용자 정보 -->
-	<div sec:authorize="isAuthenticated()" id="userInfo" hidden="true">
-		<span id="userNo" sec:authentication="principal.member.memberNo"></span>
-		<span id="userId" sec:authentication="principal.member.id"></span>
-		<span id="userNickname" sec:authentication="principal.member.nickname"></span>
-		<span id="userPhonenumber" sec:authentication="principal.member.phonenumber"></span>
-		<span id="userEmail" sec:authentication="principal.member.email"></span>
-		<span id="userStyleNo1" class="userStyle" th:text="${userInfo.styleNo1.styleNo}"></span>
-		<span id="userStyleNo2" class="userStyle" th:text="${userInfo.styleNo2?.styleNo}"></span>
-		<span id="userStyleNo3" class="userStyle" th:text="${userInfo.styleNo3?.styleNo}"></span>
+	<div sec:authorize="isAuthenticated()" id="myUserInfo" hidden="true">
+		<span id="myUserNo" sec:authentication="principal.member.memberNo"></span>
+		<span id="myUserId" sec:authentication="principal.member.id"></span>
+		<span id="myUserNickname" sec:authentication="principal.member.nickname"></span>
+		<span id="myUserPhonenumber" sec:authentication="principal.member.phonenumber"></span>
+		<span id="myUserEmail" sec:authentication="principal.member.email"></span>
+		<span id="myUserStyleNo1" class="userStyle" th:text="${principal.member.styleNo1.styleNo}"></span>
+		<span id="myUserStyleNo2" class="userStyle" th:text="${principal.member.styleNo2?.styleNo}"></span>
+		<span id="myUserStyleNo3" class="userStyle" th:text="${principal.member.styleNo3?.styleNo}"></span>
 	</div>
 	
 	<div class="profile">
@@ -37,7 +37,7 @@
 		</div>
 		<div class="profile-user-settings" th:with="userNickname=${userInfo.nickname}">
 			<h1 class="profile-user-name" th:text="${userNickname}"></h1>
-			<button th:unless="${userNickname=}" class="btn profile-edit-btn">팔로우</button>
+			<button class="btn profile-edit-btn followToggleBtn">팔로우</button>
 		</div>
 		<div class="profile-stats">
 			<ul>
@@ -167,6 +167,7 @@
 
 		<script src="/js/profile.js"></script>
 		<script src="/js/profileMenu.js"></script>
+		<script src="/js/profileUnit.js"></script>
 		<script th:src="@{/js/post/previewImage.js}"></script>
 </body>
 
