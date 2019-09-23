@@ -19,6 +19,7 @@ $.fn.setFollowBtnStat = function(memberNo) {
 			memberNo : memberNo
 		},
 		success : function(followStat) {
+			console.log(followStat);
 			switch (followStat) {
 			case ('follow'):
 				if (element.hasClass("stat-following")) {
@@ -43,7 +44,7 @@ $.fn.setFollowBtnStat = function(memberNo) {
 			}
 		},
 		error : function(result) {
-			alert("연결 상태를 확인해주세요");
+			console.log("연결 상태를 확인해주세요");
 		}
 	});
 }
@@ -66,7 +67,7 @@ $.fn.doFollow = function(memberNo) {
 			element.setFollowBtnStat(memberNo);
 		},
 		error : function(result) {
-			alert("연결 상태를 확인해주세요");
+			console.log("연결 상태를 확인해주세요");
 		}
 	});
 }
@@ -89,7 +90,7 @@ $.fn.unFollow = function(memberNo) {
 			element.setFollowBtnStat(memberNo);
 		},
 		error : function(result) {
-			alert("연결 상태를 확인해주세요");
+			console.log("연결 상태를 확인해주세요");
 		}
 	});
 }

@@ -38,8 +38,9 @@
 	        elem.className += ' ' + className;
 	    }
 	}
-
-	theToggle.onclick = function() {
-	   toggleClass(this, 'on');
-	   return false;
+	if(theToggle!=null){
+		theToggle.onclick = function() {
+		toggleClass(this, 'on');
+		return false;
+		}
 	}

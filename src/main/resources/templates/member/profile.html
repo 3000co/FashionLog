@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="/css/profile.css">
 	<link rel="stylesheet" href="/css/modal.css">
 </head>
+
 <body>
 	<div th:include="header/header" class="fashionHeader"></div>
 	<!-- 이용자 정보 -->
@@ -18,10 +19,11 @@
 		<span id="myUserPhonenumber" th:text="${myInfo.phonenumber}"></span>
 		<span id="myUserEmail" th:text="${myInfo.email}"></span>
 		<span id="myUserStyleNo1" class="userStyle" th:text="${myInfo.styleNo1.styleNo}"></span>
-		<span id="myUserStyleNo2" th:if="${myInfo.styleNo2}" class="userStyle" th:text="${myInfo.styleNo2.styleNo}"></span>
-		<span id="myUserStyleNo3" th:if="${myInfo.styleNo3}" class="userStyle" th:text="${myInfo.styleNo3.styleNo}"></span>
+		<span id="myUserStyleNo2" th:if="${myInfo.styleNo2}" class="userStyle"
+			th:text="${myInfo.styleNo2.styleNo}"></span>
+		<span id="myUserStyleNo3" th:if="${myInfo.styleNo3}" class="userStyle"
+			th:text="${myInfo.styleNo3.styleNo}"></span>
 	</div>
-	
 	<div class="profile" th:with="info=${userInfo!=null?userInfo:myInfo}">
 		<a href="#menu" th:if="${userInfo==null}" id="toggle"><span></span></a>
 		<div class="option" id="menu">
@@ -36,9 +38,9 @@
 			<img th:src="${info.profileImageNo.path}" alt="">
 		</div>
 		<div class="profile-user-settings">
-			<input type="hidden" value="${info.memberNo}">
+			<input type="hidden" id="profileUserNo" th:value="${info.memberNo}">
 			<h1 class="profile-user-name" th:text="${info.nickname}"></h1>
-			<button th:if="${userInfo}" class="btn profile-edit-btn followToggleBtn">팔로우</button>
+			<button th:if="${userInfo}" class="followToggleBtn btn profile-edit-btn ">팔로우</button>
 		</div>
 		<div class="profile-stats">
 			<ul>
@@ -51,129 +53,131 @@
 
 	</div>
 
-		<div class="container">
+	<div class="container">
 
-			<div th:include="post/feed" class="gallery"></div>
-			<!-- End of gallery -->
+		<div th:include="post/feed" class="gallery"></div>
+		<!-- End of gallery -->
 
-			<!-- <div class="loader"></div> -->
+		<!-- <div class="loader"></div> -->
 
-		</div>
-		<!-- End of container -->
+	</div>
+	<!-- End of container -->
 
 
-		<!-- 프로필 변경 -->
-		<div id="modProfileModal" class="modal" method=post>
-			<div class="modalContents">
-				<label class="close">&times;</label>
-				<h1>프로필 사진 변경</h1>
-				<br>
+	<!-- 프로필 변경 -->
+	<div id="modProfileModal" class="modal" method=post>
+		<div class="modalContents">
+			<label class="close">&times;</label>
+			<h1>프로필 사진 변경</h1>
+			<br>
 
-				<form id="imgWrap" class="imgWrap" method="post" enctype="multipart/form-data">
-					<input type="hidden" id="type" name="type" value="profile">
-					<input type="file" id="selectImg" name="mulFile" />
-					<div class="imgMold">
-						<img id="profileModImage" class="profileModImage" th:src="${myInfo.profileImageNo.path}"><br>
-					</div>
-				</form>
+			<form id="imgWrap" class="imgWrap" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="type" name="type" value="profile">
+				<input type="file" id="selectImg" name="mulFile" />
+				<div class="imgMold">
+					<img id="profileModImage" class="profileModImage" th:src="${myInfo.profileImageNo.path}"><br>
+				</div>
+			</form>
 
-				<button type="submit" id="submit">프로필 사진 등록</button>
-
-			</div>
+			<button type="submit" id="submit">프로필 사진 등록</button>
 
 		</div>
 
-		<div id="modProfileModal2" class="modal" method=post>
-			<div class="modalContents">
-				<label class="close">&times;</label>
-				<h1>유저 정보 수정</h1>
-				<br>
-				<form method="post" id="userInfoForm" name="userInfoForm">
-					<div class="form-group">
-						<label>아이디</label> <input id="id" name="id" value="" readonly="readonly" /><br>
-					</div>
+	</div>
 
-					<div class="form-group">
-						<label>닉네임(한글, 영문, 숫자 조합으로 4~10자)</label><br> <input type="text" class="form-control"
-							id="nickname" name="nickname" required="required" pattern="[a-zA-z가-힣]{4,10}" /><br> <br>
-					</div>
-					<div class="form-group">
-						<label>휴대폰 번호</label><br> <input type="text" class="form-control" id="phonenumber"
-							name="phonenumber" placeholder="번호 입력" required="required" pattern="[0-9]{10,11}" /><br>
-						<br>
-					</div>
-					<div class="form-group">
-						<label>이메일</label><br> <input type="email" class="form-control1" id="email" name="email"
-							placeholder="이메일 주소 입력" required="required" /><br>
-						<div id="emailFalse"></div>
-						<br>
-					</div>
+	<div id="modProfileModal2" class="modal" method=post>
+		<div class="modalContents">
+			<label class="close">&times;</label>
+			<h1>유저 정보 수정</h1>
+			<br>
+			<form method="post" id="userInfoForm" name="userInfoForm">
+				<div class="form-group">
+					<label>아이디</label> <input id="id" name="id" value="" readonly="readonly" /><br>
+				</div>
 
-					<div class="form-group">
-						<label>선호 스타일</label>
-						<div id="styleFalse"></div> <br>
-						<input type="checkbox" class="cb" id="cb0" value="1" name="styleNo" /><label id="la0"
-							for="1">Vintage</label>
-						<input type="checkbox" class="cb" id="cb1" value="2" name="styleNo" /><label id="la1"
-							for="2">Casual</label> <br>
-						<input type="checkbox" class="cb" id="cb2" value="3" name="styleNo" /><label id="la2"
-							for="3">Chic</label>
-						<input type="checkbox" class="cb" id="cb3" value="4" name="styleNo" /><label id="la3"
-							for="4">Street</label> <br>
-						<input type="checkbox" class="cb" id="cb4" value="5" name="styleNo" /><label id="la4"
-							for="5">Sporty</label>
-						<input type="checkbox" class="cb" id="cb5" value="6" name="styleNo" /><label id="la5"
-							for="6">Formal</label> <br>
-						<input type="checkbox" class="cb" id="cb6" value="7" name="styleNo" /><label id="la6"
-							for="7">Gothic</label>
-						<input type="checkbox" class="cb" id="cb7" value="8" name="styleNo" /><label id="la7"
-							for="8">Punk</label> <br>
-						<input type="checkbox" class="cb" id="cb8" value="9" name="styleNo" /><label id="la8"
-							for="9">Retro</label>
-						<input type="checkbox" class="cb" id="cb9" value="10" name="styleNo" /><label id="la9"
-							for="10">Dandy</label> <br>
-					</div>
-				</form>
-				<input type="submit" id="submit2" value="변경">
-			</div>
+				<div class="form-group">
+					<label>닉네임(한글, 영문, 숫자 조합으로 4~10자)</label><br> <input type="text" class="form-control" id="nickname"
+						name="nickname" required="required" pattern="[a-zA-z가-힣]{4,10}" /><br> <br>
+				</div>
+				<div class="form-group">
+					<label>휴대폰 번호</label><br> <input type="text" class="form-control" id="phonenumber"
+						name="phonenumber" placeholder="번호 입력" required="required" pattern="[0-9]{10,11}" /><br>
+					<br>
+				</div>
+				<div class="form-group">
+					<label>이메일</label><br> <input type="email" class="form-control1" id="email" name="email"
+						placeholder="이메일 주소 입력" required="required" /><br>
+					<div id="emailFalse"></div>
+					<br>
+				</div>
 
+				<div class="form-group">
+					<label>선호 스타일</label>
+					<div id="styleFalse"></div> <br>
+					<input type="checkbox" class="cb" id="cb0" value="1" name="styleNo" /><label id="la0"
+						for="1">Vintage</label>
+					<input type="checkbox" class="cb" id="cb1" value="2" name="styleNo" /><label id="la1"
+						for="2">Casual</label> <br>
+					<input type="checkbox" class="cb" id="cb2" value="3" name="styleNo" /><label id="la2"
+						for="3">Chic</label>
+					<input type="checkbox" class="cb" id="cb3" value="4" name="styleNo" /><label id="la3"
+						for="4">Street</label> <br>
+					<input type="checkbox" class="cb" id="cb4" value="5" name="styleNo" /><label id="la4"
+						for="5">Sporty</label>
+					<input type="checkbox" class="cb" id="cb5" value="6" name="styleNo" /><label id="la5"
+						for="6">Formal</label> <br>
+					<input type="checkbox" class="cb" id="cb6" value="7" name="styleNo" /><label id="la6"
+						for="7">Gothic</label>
+					<input type="checkbox" class="cb" id="cb7" value="8" name="styleNo" /><label id="la7"
+						for="8">Punk</label> <br>
+					<input type="checkbox" class="cb" id="cb8" value="9" name="styleNo" /><label id="la8"
+						for="9">Retro</label>
+					<input type="checkbox" class="cb" id="cb9" value="10" name="styleNo" /><label id="la9"
+						for="10">Dandy</label> <br>
+				</div>
+			</form>
+			<input type="submit" id="submit2" value="변경">
 		</div>
 
-		<div id="modProfileModal3" class="modal" method=post>
-			<div class="modalContents">
-				<label class="close">&times;</label>
-				<h1>비밀번호 변경</h1>
-				<br>
-				<form method="post" th:action="@{/modPassword.do}" id="passwordModInfo" name="userInfoForm">
-					<div class="form-group">
-						<label>새 비밀번호 (영문, 숫자 조합으로 8~32자)</label> <input type="password" class="form-control"
-							id="password" name="password" placeholder="내용을 입력해주세요" required="required"
-							pattern="[a-zA-Z0-9]{8,32}" title="영문 숫자조합으로 8-32자리 입력" /><br>
-						<label>새 비밀번호 확인 </label> <input type="password" class="form-control" id="password2"
-							name="password2" placeholder="내용을 입력해주세요" required="required"
-							pattern="[a-zA-Z0-9]{8,32}" /><br>
-						<div id="passwordFalse">비밀번호가 일치하지 않습니다</div>
-					</div>
+	</div>
 
-					<button type="submit" id="submit3">비밀번호 변경</button>
-				</form>
+	<div id="modProfileModal3" class="modal" method=post>
+		<div class="modalContents">
+			<label class="close">&times;</label>
+			<h1>비밀번호 변경</h1>
+			<br>
+			<form method="post" th:action="@{/modPassword.do}" id="passwordModInfo" name="userInfoForm">
+				<div class="form-group">
+					<label>새 비밀번호 (영문, 숫자 조합으로 8~32자)</label> <input type="password" class="form-control" id="password"
+						name="password" placeholder="내용을 입력해주세요" required="required" pattern="[a-zA-Z0-9]{8,32}"
+						title="영문 숫자조합으로 8-32자리 입력" /><br>
+					<label>새 비밀번호 확인 </label> <input type="password" class="form-control" id="password2"
+						name="password2" placeholder="내용을 입력해주세요" required="required" pattern="[a-zA-Z0-9]{8,32}" /><br>
+					<div id="passwordFalse">비밀번호가 일치하지 않습니다</div>
+				</div>
 
-
-			</div>
-		</div>
-		</div>
+				<button type="submit" id="submit3">비밀번호 변경</button>
+			</form>
 
 
 		</div>
+	</div>
+	</div>
 
-		<script src="/js/profile.js"></script>
-		<script src="/js/profileMenu.js"></script>
-		<script src="/js/profileUnit.js"></script>
-		<script th:src="@{/js/post/previewImage.js}"></script>
-		<script>
-		$(".followToggleBtn").click(function() {
+
+	</div>
+
+	<script src="/js/profile.js"></script>
+	<script src="/js/profileMenu.js"></script>
+	<script src="/js/profileUnit.js"></script>
+	<script th:src="@{/js/post/previewImage.js}"></script>
+	<script>
+		var memNo = $("#profileUserNo").val();
+		$('.followToggleBtn').ready(function() {
+			$('.followToggleBtn').setFollowBtnStat(memNo);
+		});
+		$(".followToggleBtn").click(function () {
 			var element = $(this);
-			var memNo = element.siblings(".unitMemberNo").val();
 			if (element.hasClass("stat-follow")) {
 				element.doFollow(memNo);
 			} else {
