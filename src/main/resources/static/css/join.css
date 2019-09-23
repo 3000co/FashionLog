@@ -161,3 +161,8 @@ input[name='styleBtn'] {
 		max-width: 480px;
 	}
 }
+
+#passwordFalse{
+	color: red;
+	font-size: 5px;
+}

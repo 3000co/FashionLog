@@ -172,39 +172,4 @@ $(document).ready(function () {
 		$(this).attr("href", "/user/" + userNickname)
 	});
 
-	console.log(target);
-
-	switch (target) {
-		case 'categoryBtn':
-			defaultSearch.style.display = 'none';
-			document.getElementById("categorySearch").style.display = 'block';
-			break;
-		case 'colorBtn':
-			defaultSearch.style.display = 'none';
-			document.getElementById("colorSearch").style.display = 'block';
-			break;
-		case 'styleBtn':
-			defaultSearch.style.display = 'none';
-			document.getElementById("styleSearch").style.display = 'block';
-			break;
-		case 'brandBtn':
-			defaultSearch.style.display = 'none';
-			document.getElementById("brandSearch").style.display = 'block';
-			break;
-		case 'userBtn':
-			defaultSearch.style.display = 'none';
-			document.getElementById("userSearch").style.display = 'block';
-			break;
-	}
-
-
-	function returnDefaultMod() {
-		var defaultSearch = document.getElementById("defaultSearch");
-		defaultSearch.style.display = 'block';
-		document.getElementById("categorySearch").style.display = 'none';
-		document.getElementById("colorSearch").style.display = 'none';
-		document.getElementById("styleSearch").style.display = 'none';
-		document.getElementById("brandSearch").style.display = 'none';
-		document.getElementById("userSearch").style.display = 'none';
-	}
-});
+	
