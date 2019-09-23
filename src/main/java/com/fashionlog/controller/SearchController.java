@@ -113,8 +113,6 @@ public class SearchController {
 	private List<String> splitWordsByAmp(String searchWords, List<String> searchTokenList) {
 		String[] searchTokenArray;
 		searchTokenArray = searchWords.split(" ");
-
-		
 		 for(String temp:searchTokenArray) {
 			 searchTokenList.add(temp); }
 		 
