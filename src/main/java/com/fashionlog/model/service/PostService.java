@@ -22,6 +22,8 @@ public interface PostService {
 	public Set<Post> getAllFeed(Pageable paging);
 	
 	public List<Post> getPostToFeed(Member user, Pageable paging);
+
+	public List<Post> getProfileFeed(Member userInfo, Pageable paging);
 	
 
 	

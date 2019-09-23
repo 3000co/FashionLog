@@ -23,6 +23,12 @@ public class PostServiceImpl implements PostService {
 	@Autowired
 	private PostRepository postRepository;
 
+	// 프로필 페이지에서 보여지는 피드를 가져옴
+		@Override
+		public List<Post> getProfileFeed(Member member, Pageable paging) {
+			return postRepository.findByMemberNoOrderByUploadTimeDesc(member, paging);
+		}
+		
 	//팔로우하는 사람들의 글을 피드로 가져옴
 	@Override
 	public Set<Post> getFeedByFollowee(Member user, Pageable paging) {
