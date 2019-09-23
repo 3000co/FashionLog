@@ -4,7 +4,8 @@ $(document).ready(function() {
 	if ($("#itemList").val() != undefined) {
 		$(".itemInfo").each(function(index) {
 			var itemTag = $(".itemInfo:eq(" + index + ")");
-			itemTag.find(".marker").css("left", itemTag.find(".xCoordinate").val() + "px");
+			itemTag.find(".colorSquare").css("background-color", itemTag.find("#color").text());
+			itemTag.find(".marker").css("left", itemTag.find(".xCoordinate").val() - 90 + "px");
 			itemTag.find(".marker").css("top", itemTag.find(".yCoordinate").val() + "px");
 		});
 	}

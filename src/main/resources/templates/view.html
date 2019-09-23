@@ -9,9 +9,10 @@
 	<link rel="stylesheet" href="/css/comment.css">
 <!-- 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+	<th:block th:include="header/header"></th:block>
 </head>
 <body>
-	<div th:include="header/header"></div>
+<!-- 	<div th:include="header/header"></div> -->
 	<div id="postView" class="postView">
 	
 		<div class="leftWrap">
@@ -20,15 +21,17 @@
 		
 			<input id="memberNo" name="memberNo" class="memberNo" th:value="${post.memberNo.memberNo}" hidden="true">
 			<input id="postNo" name="postNo" class="postNo" th:value="${post.postNo}" hidden="true">
-			<div class="imgMold">
-				<img id="postImage" class="postImage" th:src="|${post.postImageNo.path}|"><br>
+			<div class="imgWrap">
+				<div class="imgMold">
+					<img id="postImage" class="postImage" th:src="|${post.postImageNo.path}|"><br>
+				</div>
 			</div>
 			<div class="postContents">
 				<textarea id="contents" rows="10" cols="39" th:text="${post.contents}" disabled="disabled"></textarea>
 			</div>
 		</div>
 		
-
+		<section class="temp">
 		<div class="itemWrap">
 			<!-- 스타일 -->
 			<div class="style">
@@ -69,6 +72,8 @@
 				</th:block>
 			</div>
 		</div>
+		<div th:include="comment" class="commentArea"></div>
+		</section>
 	
 	<div id="mapModal" class="modal">
 		<div class="modalContent">
@@ -76,7 +81,7 @@
 			<p>지도지도도</p>
 		</div>
 	</div>
-	<div th:include="comment" class="commentArea"></div>
+	
 </div>
 		
 	<script th:src="@{/js/post/modal.js}"></script>

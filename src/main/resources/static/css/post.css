@@ -1,7 +1,15 @@
 @charset "UTF-8";
 
-.postWrite, .postView {
+.postWrite {
 	width: 750px;
+	height: 800px;
+	padding: 10px;
+	margin: auto;
+	/* 	border: 1px dashed #a7a7a7; */
+}
+
+.postView {
+	width: 930px;
 	height: 800px;
 	padding: 10px;
 	margin: auto;
@@ -89,10 +97,16 @@ select {
 	border-radius: 5px;
 }
 
+.temp{
+	width: 600px;
+	float: right;
+	margin-top: 18px;
+}
+
 .itemWrap {
 	width: 380px;
-	height: 580px;
-	float: right;
+	height: 600px;
+	float: left;
 	margin: 10px;
 	padding: 10px;
 	margin-top: 40px;
@@ -100,6 +114,15 @@ select {
 	border: 1px solid #bcbcbc;
 	border-radius: 5px;
 	overflow: hidden;
+}
+
+.commentArea {
+/* 	position: relative; */
+	width:200px;
+	float: right;
+	margin-top: 40px;
+/* 	bottom: 50px; */
+	/* 	margin:5px; */
 }
 
 .itemTagWrap {
@@ -188,7 +211,7 @@ select {
 	margin: auto;
 }
 .viewBtn {
-	margin: 10px;
+	margin: 8px;
 }
 .colorSquare {
 	display: inline-block;
@@ -199,12 +222,7 @@ select {
 /* 	margin-right: 3px; */
 }
 
-.commentArea {
-	position: relative;
-	float: left;
-	bottom: 50px;
-	/* 	margin:5px; */
-}
+
 
 /* .selected { */
 /* 	border: 5px solid orange !important; */
