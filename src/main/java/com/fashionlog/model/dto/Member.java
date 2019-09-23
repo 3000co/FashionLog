@@ -48,7 +48,7 @@ public class Member {
 	@Column(columnDefinition = "char")
 	private String email;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PROFILE_IMAGE_NO")
 	private File profileImageNo;
 	
