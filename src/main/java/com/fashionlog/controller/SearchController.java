@@ -102,7 +102,7 @@ public class SearchController {
 		searchTokenArray = searchWords.split(" ");
 		 for(String temp:searchTokenArray) {
 			 searchTokenList.add(temp); }
-		 
+		 System.err.println(searchTokenList);
 		return searchTokenList;
 	}
 
@@ -121,6 +121,7 @@ public class SearchController {
 			searchTokenArrayList.add(searchToken);
 		
 		}
+		System.err.println(searchTokenArrayList);
 		return searchTokenArrayList;
 	}
 
