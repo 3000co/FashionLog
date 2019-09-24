@@ -31,7 +31,7 @@ function postInsert(fileNo) {
 		type : "post",
 		url : "/postInsert",
 		data : {
-			"memberNo" : $("#userNo").text(),
+			"memberNo" : $("#myUserNo").text(),
 			"postImageNo" : fileNo,
 			"contents" : $("#contents").val(),
 			"styleNo1" : $("#styleNo1").val(),
