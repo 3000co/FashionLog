@@ -55,10 +55,11 @@ public class NotificationController {
 	
 	//알림을 확인
 	@RequestMapping(value = "noti/check", method = RequestMethod.POST)
+	@ResponseBody
 	public String checkNotification(Notification noti) {
 		Notification requestedNotification = notificiationRepository.findById(noti.getNotiNo()).get();
 		notificationService.checkNotification(requestedNotification);
-		return "redirect:/"+notificationService.moveToEvent(requestedNotification);
+		return notificationService.moveToEvent(requestedNotification);
 	}
 	
 }

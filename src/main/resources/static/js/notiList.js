@@ -62,7 +62,6 @@ $.getNotification = function () {
 				noContainer.setAttribute('name','notiNo');
 				noContainer.setAttribute('value',notiNo);
 				tempForm.appendChild(noContainer);
-				console.log(tempForm);
 				tempForm.submit();
 			});
 		},
