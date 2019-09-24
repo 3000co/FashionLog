@@ -14,7 +14,7 @@
 
 .colorContainer{
   display:block;
-  width:35em;
+  width:80em;
   height:auto;
   margin:5px auto;
   text-align:center;
@@ -29,8 +29,8 @@
 	display:inline-block;
 	margin:8px 10px 3px 2px;
   border-radius: 5px;
-	width: 2em;
-	height: 2em;
+	width: 4em;
+	height: 4em;
   box-shadow: 1px 1px 5px grey;
 }
 
@@ -96,5 +96,19 @@
 .sienna{
 	background-color:sienna;
    border:5px dashed sienna;    
+}
+
+.orange{
+	background-color:orange;
+   border:5px dashed orange; 
+}
+
+.purple{
+	background-color:purple;
+	border:5px dashed purple
+}
+
+{
+	
 }
 

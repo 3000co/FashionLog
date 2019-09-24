@@ -17,5 +17,6 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 	public List<Post> findByStyleNo1OrderByUploadTimeDesc(Style styleNo, Pageable paging);
 	public List<Post> findByStyleNo2OrderByUploadTimeDesc(Style styleNo, Pageable paging);
 	public List<Post> findByStyleNo3OrderByUploadTimeDesc(Style styleNo, Pageable paging);
+	public Integer countByMemberNo(Member userInfo);
 }
 
