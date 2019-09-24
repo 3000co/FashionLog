@@ -118,7 +118,7 @@ $(function() {
 			var itemDiv = $('<div></div>').addClass('item pin').attr('id',
 					"p" + attr);
 
-			var itemHtml = "<div class='author'><a th:href='/profile/post/"+feedData[attr].uploader+"'><img class='profileImg' src='"+feedData[attr].uploaderProfile+"' /></a><div class='name'><p class='uploader nickname'>" + feedData[attr].uploader+"</p><p class='uploadTime datetime'>"+feedData[attr].uploadTime+"</p></div>"
+			var itemHtml = "<div class='author'><a th:href='/profile/"+feedData[attr].uploader+"'><img class='profileImg' src='"+feedData[attr].uploaderProfile+"' /></a><div class='name'><p class='uploader nickname'>" + feedData[attr].uploader+"</p><p class='uploadTime datetime'>"+feedData[attr].uploadTime+"</p></div>"
 			itemHtml +="<img class='postImg' alt='"+feedData[attr].postNo+"번 포스트의 사진' src='"+feedData[attr].postImageNo+"'><div class='description'></div><div class='author'><span class='likesCount' >"+feedData[attr].likesCount+"</span>"
 			itemHtml += "<a href=''><i class='glyphicon glyphicon-heart likesBtn' style='display: none'></i></a>"
 			itemHtml +="<a href=''><i class='glyphicon glyphicon-comment'></i></a>"
