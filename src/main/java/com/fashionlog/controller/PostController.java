@@ -1,7 +1,6 @@
 package com.fashionlog.controller;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,8 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fashionlog.model.dao.BrandRepository;
 import com.fashionlog.model.dao.CategoryRepository;
 import com.fashionlog.model.dao.CommentRepository;
+import com.fashionlog.model.dao.FollowRepository;
 import com.fashionlog.model.dao.ItemRepository;
-import com.fashionlog.model.dao.LikesRepository;
 import com.fashionlog.model.dao.MemberRepository;
 import com.fashionlog.model.dao.PostRepository;
 import com.fashionlog.model.dao.StyleRepository;
@@ -57,6 +56,8 @@ public class PostController {
 	private MemberRepository memberRepository;
 	@Autowired
 	private CommentRepository commentRepository;
+	@Autowired
+	private FollowRepository followRepository;
 	@Autowired
 	private PostService postService;
 	@Autowired
@@ -142,20 +143,28 @@ public class PostController {
 	// 마이프로필 화면
 	@RequestMapping("/user/{userNickname}")
 	public String profileSetting(@PathVariable String userNickname, Model model,
-	@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 10) Pageable paging,
+	@PageableDefault(sort = { "postNo" }, direction = Direction.DESC, size = 30) Pageable paging,
 	@AuthenticationPrincipal SecurityUser securityUser) {
 		List<Post> feed = new ArrayList<>();
 		Member userInfo = memberRepository.findByNickname(userNickname);
 		Member myInfo = memberRepository.findById(securityUser.getUsername());
+		List<Integer> numbers = new ArrayList<>();
 		if(userInfo!=myInfo){
+			numbers.add(postRepository.countByMemberNo(userInfo));
+			numbers.add(followRepository.countByFolloweeMemNo(userInfo));
+			numbers.add(followRepository.countByFollowerMemNo(userInfo));
 			model.addAttribute("userInfo", userInfo);
-			myInfo.setPassword("0");
 			model.addAttribute("myInfo", myInfo);
 			feed = postService.getProfileFeed(userInfo, paging);
 		}else{
-			model.addAttribute("myInfo", myInfo);
+			//포스트 수, 팔로워 수, 팔로잉 수
+			numbers.add(myInfo.getPosts().size());
+			numbers.add(myInfo.getFollowers().size());
+			numbers.add(myInfo.getFollowees().size());
 			feed = postService.getProfileFeed(myInfo, paging);
+			model.addAttribute("myInfo", myInfo);
 		}
+		model.addAttribute("numbers", numbers);
 		model.addAttribute("feed", likesService.setLikeCount(feed));
 		return "/member/profile";
 	}

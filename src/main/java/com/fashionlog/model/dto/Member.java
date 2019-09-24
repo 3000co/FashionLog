@@ -70,7 +70,7 @@ public class Member {
 	private Style styleNo3;
 
 	@JsonBackReference
-	@OneToMany(mappedBy = "memberNo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "memberNo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Post> posts = new ArrayList<Post>();
 
 	@Transient
