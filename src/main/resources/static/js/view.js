@@ -5,7 +5,7 @@ $(document).ready(function() {
 		$(".itemInfo").each(function(index) {
 			var itemTag = $(".itemInfo:eq(" + index + ")");
 			itemTag.find(".colorSquare").css("background-color", itemTag.find("#color").text());
-			itemTag.find(".marker").css("left", itemTag.find(".xCoordinate").val() - 140 + "px");
+			itemTag.find(".marker").css("left", itemTag.find(".xCoordinate").val() - 80 + "px");
 			itemTag.find(".marker").css("top", itemTag.find(".yCoordinate").val() + "px");
 		});
 	}
