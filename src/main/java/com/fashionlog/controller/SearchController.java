@@ -82,30 +82,18 @@ public class SearchController {
 	public String searchProcess(HttpServletRequest request, Model model) {
 		List<String> searchTokenList = new ArrayList<>();
 		List<String[]> searchTokenArrayList = new ArrayList<>();
-
 		splitWordsByAmp(request.getParameter("searchWords"), searchTokenList);
 		splitWordsByColon(searchTokenList, searchTokenArrayList);
-		
-		
-//		  for (int i = 0; i <= searchTokenArrayList.size() - 1; i++) { String[] temp =
-//		  searchTokenArrayList.get(i); for (String t : temp) { System.out.println(t); }
-//		  }
-
 		Integer[] searchedResultNoList = itemRepository.getSearchResult(searchTokenArrayList);
 		
 		//검색된 item을 가진 post 가지고 오는 파트
 		List<Post> searchPostList = new ArrayList<Post>();
 		Post searchedPost;
-
-		
 		for(int postNo : searchedResultNoList) {
 			searchedPost = postRepository.findById(postNo).get();
 			searchPostList.add(searchedPost);
 		}
-		
-		model.addAttribute("searchedPost", searchPostList);
-		
-	
+		model.addAttribute("feed", searchPostList);
 		return "searchedFeed";
 	}
 
