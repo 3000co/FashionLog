@@ -32,7 +32,7 @@ $(document).ready(function() {
 	});
 	
 	$("#postDelete").click(function() {
-		console.log($(".postNo").val());
+		alert($(".postNo").val());
 		$.ajax({
 			type : 'POST',
 			url : "/postDelete",

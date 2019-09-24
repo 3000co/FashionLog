@@ -28,9 +28,6 @@ function colorPick(dates) {
 		processData: false,
 		data : data,
 		success : function(str){
-			console.log(str);
-			var date = new Date();
-			console.log(date.getSeconds() - dates);
 			colorSend(str);
 		}
 	});

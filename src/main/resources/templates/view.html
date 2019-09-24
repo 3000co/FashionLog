@@ -24,11 +24,14 @@
 				</div>
 			</div>
 			<div class="viewContents">
-				<textarea id="contents" rows="2" cols="55" th:text="${post.contents}" disabled="disabled"></textarea>
+				<textarea id="contents" rows="4" cols="55" th:text="${post.contents}" disabled="disabled"></textarea>
 			</div>
 			</div>
 		</div>
 		
+		<div class="Wrap">
+		<button type="button" id="postDelete" class="viewBtn">삭제</button>
+		<button type="button" id="postUpdate" class="viewBtn">수정</button>
 		<div class="itemWrapView">
 			<!-- 스타일 -->
 			<div class="style">
@@ -69,9 +72,7 @@
 				</th:block>
 			</div>
 		</div>
-			<button type="button" id="postDelete" class="viewBtn">삭제</button>
-			<button type="button" id="postUpdate" class="viewBtn">수정</button>
-		
+		</div>
 		
 		<div class="threegrid">
 			<div th:include="comment" class="commentA"></div>
@@ -79,13 +80,13 @@
 		
 	
 	
-	<div id="mapModal" class="modal">
-		<div class="modalContent">
-			<span class="close">&times;</span>
-			<p>지도지도도</p>
-			<div th:include="post/map"></div><br>
+		<div id="mapModal" class="modal">
+			<div class="modalContent">
+				<span class="close">&times;</span>
+				<p>지도지도도</p>
+				<div th:include="post/map"></div><br>
+			</div>
 		</div>
-	</div>
 
 	
 	

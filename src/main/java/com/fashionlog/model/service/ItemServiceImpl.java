@@ -50,8 +50,9 @@ public Integer[] getSearchResult(List<String[]> searchTokenArrayList) {
 //			ctItemName("회색")
 //			);
 
-	
+	System.err.println("여기가 문제");
 	searchResult =  searchQuery.fetch();
+	System.err.println(searchResult.toString());
 	searchResultToController = searchResult.toArray(new Integer[0]);
 	
 	return searchResultToController;
@@ -70,9 +71,8 @@ public List<Object> getItemPost(String itemName) {
 //			eqCategoryNo(itemName)
 //			);
 	//eqCategoryNo(categoryNo)jpqlQuery.orderBy(item.itemNo.desc());
-	 
     itemPostList = jpqlQuery.fetch();
-
+    
 	return itemPostList;
 }
 
@@ -87,6 +87,7 @@ private JPQLQuery setJoinConnection(List<String[]> searchTokenArrayList, JPQLQue
 			
 		case "카테고리":
 			searchQuery.leftJoin(item.categoryNo, category);
+			System.err.println("카테고리와 조인 생성");
 			break;
 			
 		case "스타일":
@@ -126,6 +127,7 @@ private JPQLQuery setSearchCondition(List<String[]> searchTokenArrayList, JPQLQu
 			
 		case "카테고리":
 			searchQuery.where(ctCategoryName(tokenValue));
+			System.err.println("해당하는 카테고리 포스트넘 가져옴");
 			break;
 			
 		case "스타일":
@@ -163,7 +165,7 @@ private BooleanExpression ctCategoryName(String categoryName) {
 	if(org.springframework.util.StringUtils.isEmpty(categoryName)) {
 		return null;
 	}
-	
+	System.err.println("해당 카테고리 포함한 아이템 존재함");
 	return category.name.contains(categoryName);
 }
 private BooleanExpression ctBrandName(String brandName) {

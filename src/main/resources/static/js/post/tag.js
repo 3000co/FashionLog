@@ -49,10 +49,7 @@ $(document).ready( function() {
 	$(document).on("click", "#postImage", function(event) {
 		// image가 있을 경우에만 작동
 		if ($("#selectImg").val() != "") {
-			console.log("event.clientX : " + event.clientX);
-			console.log("event.clientY : " + event.clientY);
-			console.log("event.offsetX : " + event.offsetX);
-			console.log("event.offsetY : " + event.offsetY);
+
 			// 최대 7개 태그
 			if (count < 7) {
 				img = document.getElementById("postImage");
