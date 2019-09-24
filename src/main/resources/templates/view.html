@@ -15,7 +15,7 @@
 <!-- 	<div th:include="header/header"></div> -->
 	<div id="postView" class="postView">
 		<div class="leftWrapWrap">
-		
+			<div class="imgWrap">
 			<input id="memberNo" name="memberNo" class="memberNo" th:value="${post.memberNo.memberNo}" hidden="true">
 			<input id="postNo" name="postNo" class="postNo" th:value="${post.postNo}" hidden="true">
 			<div class="imgWrapWrap">
@@ -23,26 +23,25 @@
 					<img id="postImage" class="postImage" th:src="|${post.postImageNo.path}|"><br>
 				</div>
 			</div>
-			<div class="postContents">
-				<textarea id="contents" rows="12" cols="55" th:text="${post.contents}" disabled="disabled"></textarea>
+			<div class="viewContents">
+				<textarea id="contents" rows="2" cols="55" th:text="${post.contents}" disabled="disabled"></textarea>
 			</div>
-	
+			</div>
 		</div>
 		
-		<section class="temp">
 		<div class="itemWrapView">
 			<!-- 스타일 -->
 			<div class="style">
 				<label for="style">스 타 일</label>
 				&emsp;&emsp;&nbsp;
-				<input th:if="${post.styleNo1}" type="text" id="style1" class="style" th:value="${post.styleNo1.name}" disabled="disabled">
-				<input th:if="${post.styleNo2}" type="text" id="style2" class="style" th:value="${post.styleNo2.name}" disabled="disabled">
-				<input th:if="${post.styleNo3}" type="text" id="style3" class="style" th:value="${post.styleNo3.name}" disabled="disabled">
+				<input th:if="${post.styleNo1}" type="text" id="style1" class="styleT" th:value="${post.styleNo1.name}" disabled="disabled">
+				<input th:if="${post.styleNo2}" type="text" id="style2" class="styleT" th:value="${post.styleNo2.name}" disabled="disabled">
+				<input th:if="${post.styleNo3}" type="text" id="style3" class="styleT" th:value="${post.styleNo3.name}" disabled="disabled">
 			</div>
 			<hr>
 			<!-- 태그 -->
 			<input type="text" id="itemList" th:value="${itemList}" hidden="true" disabled="disabled">
-			<div id="itemTagWrap" class="itemTagWrap accordion">
+			<div id="itemTagWrap" class="itemTagWrapWrap accordion">
 				<th:block th:each="item:${itemList}">
 					<h3 th:id="|itemTag${item.tagNo}|" th:text="${item.tagNo}"></h3>
 					<div class="itemInfo">
@@ -72,8 +71,13 @@
 		</div>
 			<button type="button" id="postDelete" class="viewBtn">삭제</button>
 			<button type="button" id="postUpdate" class="viewBtn">수정</button>
-		<div th:include="comment" class="commentArea"></div>
-		</section>
+		
+		
+		<div class="threegrid">
+			<div th:include="comment" class="commentA"></div>
+		</div>
+		
+	
 	
 	<div id="mapModal" class="modal">
 		<div class="modalContent">
@@ -82,6 +86,8 @@
 			<div th:include="post/map"></div><br>
 		</div>
 	</div>
+
+	
 	
 </div>
 		
