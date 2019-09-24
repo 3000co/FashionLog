@@ -1,0 +1,44 @@
+
+.profileUnitMemImg {
+    float: left;
+    display: flex;
+	position: relative;
+    margin-right: 3rem;
+	width: auto;
+	height: 125px;
+    border-radius: 50%;
+	
+	z-index: 3;
+}
+
+.profileUnitPost {
+	margin: 15px 15px 0;
+}
+.profileUnitPost::after {
+	content: '';
+	clear: both;
+	display: block;
+}
+.postImage {
+	width: 150px;
+	height: 150px;
+}
+.profileUnit {
+	width: 100%;
+	height: 180px;
+	padding: 30px;
+}
+.profileRow p {
+	padding: 15px;
+	margin-top: 60px;
+}
+
+.profileUnitNickname {
+		display: inline-block;
+		font-weight: 300;
+		font-size: large;
+}
+.postTable {
+	position:relative;
+	top:-20px;
+}
