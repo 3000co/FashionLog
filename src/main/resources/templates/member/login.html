@@ -5,22 +5,11 @@
  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
  <script type="text/javascript">
- $(function() {
-	 $("#hiddenDevBtn").click(function(){
-		 $.ajax({
-		type : 'post',
-		url : '/getAllMember',
-		dataType : 'text',
-		data : {},
-		success : function(idList) {
-		$('#nowMems').html(idList);	
-		},
-		error : function(result) {
-			alert("연결 상태를 확인해주세요");
+ $(function () {
+		if (window.location.href.indexOf('?fail') != -1) {
+			document.getElementById('messege').innerText = '로그인에 실패했습니다. 아이디 및 비밀번호를 확인해주세요.';
 		}
 	});
-	 })
- });
  
  $(function(){
 	 $("#joinBtn").click(function(){
@@ -41,6 +30,7 @@
 	<div class="right">
 		<div class="content">
 			<h2>fashion log</h2>
+			<p id='messege' style="color: red"></p>
 			<form method="post">
 				<div class="form-group">
 					<input type="text" class="form-control" id="id" name="id"
