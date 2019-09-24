@@ -253,8 +253,21 @@ overflow: auto;
 	height: 20px;
 /* 	margin-right: 3px; */
 }
-
-
+.itemWrapView input{
+	width: 60px;
+}
+.itemWrapView label{
+	width: 50px;
+	text-align: justify; /* 왜안돼? */
+}
+.itemInfo label {
+	width: 50px;
+	text-align: justify; /* 왜안돼? */
+}
+.itemInfo input {
+	width: 200px;
+	width: 200px;
+}
 
 /* .selected { */
 /* 	border: 5px solid orange !important; */

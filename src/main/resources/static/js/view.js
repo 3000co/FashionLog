@@ -19,6 +19,18 @@ $(document).ready(function() {
 		$("#postUpdate").show();
 	}
 	
+	$(document).on("click", "#mapBtn", function(e) {
+		$("#mapModal").show();
+		var store = $(this).siblings(".store").val();
+		
+		$("#keyword").val(store);
+		searchPlaces();
+	});
+	
+	$(document).on("click", ".close", function() {
+		$("#mapModal").hide();
+	});
+	
 	$("#postDelete").click(function() {
 		console.log($(".postNo").val());
 		$.ajax({
