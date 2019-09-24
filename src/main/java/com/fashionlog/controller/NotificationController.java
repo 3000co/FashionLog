@@ -58,7 +58,7 @@ public class NotificationController {
 	public String checkNotification(Notification noti) {
 		Notification requestedNotification = notificiationRepository.findById(noti.getNotiNo()).get();
 		notificationService.checkNotification(requestedNotification);
-		return notificationService.moveToEvent(requestedNotification);
+		return "redirect:/"+notificationService.moveToEvent(requestedNotification);
 	}
 	
 }

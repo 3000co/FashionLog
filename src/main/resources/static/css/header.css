@@ -75,6 +75,10 @@ button svg {
 	margin: 20px;
 }
 
+.notiList :hover{
+	cursor: pointer;
+}
+
 input:focus {
 	outline: 0;
 }
