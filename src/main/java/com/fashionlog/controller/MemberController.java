@@ -27,7 +27,6 @@ import com.fashionlog.model.dto.File;
 import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Post;
 import com.fashionlog.model.dto.Role;
-import com.fashionlog.model.dto.Style;
 import com.fashionlog.model.service.MemberService;
 import com.fashionlog.security.SecurityUser;
 @Controller
@@ -109,7 +108,6 @@ public class MemberController {
 	// 최종적으로 db에 멤버정보 추가
 	@RequestMapping(value = "/styleSelect2.do", method = RequestMethod.POST)
 	public String doStyleSelect3(Member member, Model model) {
-		System.err.println("들어온 멤버" + member);
 		if (member.getStyleNo1() == null) {
 			return "/member/styleSelect";
 		} else {
@@ -134,15 +132,12 @@ public class MemberController {
 	@RequestMapping(value = "user/checkPassword.do", method = RequestMethod.POST)
 	public String doCheckPassword(Member member, HttpSession session) {
 		Member getMemberInfo = memberService.findByPassword(member.getPassword());
-		System.out.println("getMemberInfo: " + getMemberInfo);
 		if (getMemberInfo == null) {
 			session.setAttribute("member", null);
-			System.out.println("비밀번호 확인 실패");
 			return "member/checkPassword";
 		} else {
 			session.setAttribute("member", getMemberInfo);
 			session.setAttribute("password", getMemberInfo.getPassword());
-			System.out.println("비밀번호 확인 성공" + getMemberInfo);
 			return "redirect:/member/modProfileAll";
 		}
 	}
@@ -156,13 +151,10 @@ public class MemberController {
 	@RequestMapping("/modProfile")
 	@ResponseBody
 	public void modProfile(Member member) {
-		System.out.println(member);
 		Member userInfo = memberRepository.findById(member.getMemberNo()).get();
 		File profileImg = fileRepository.findById(member.getProfileImageNo().getFileNo()).get();
 		userInfo.setProfileImageNo(profileImg);
 		memberRepository.save(userInfo);
-		memberRepository.flush();
-
 	}
 	/**
 	 * 2. 비밀번호, id 제외한 memberInfo 받아서 member컬럼 변경하기
@@ -182,7 +174,6 @@ public class MemberController {
 			user.setStyleNo1(member.getStyleNo1());
 			user.setStyleNo2(member.getStyleNo2());
 			user.setStyleNo3(member.getStyleNo3());
-			System.err.println("받아온 멤버:"+user.toString());
 			memberRepository.save(user);
 		}
 		/**
@@ -193,7 +184,6 @@ public class MemberController {
 				@RequestMapping(value = "/modPassword.do", method = RequestMethod.POST)
 				public String doModPassword(@RequestParam(value="password", required=true) String password,
 						@AuthenticationPrincipal SecurityUser securityUser) {
-					System.err.println("!!!!!"+password+" "+securityUser.getUsername());
 					String userNickname = securityUser.getUsername();
 					//비번 암호화
 					Member member = memberRepository.findByNickname(userNickname);

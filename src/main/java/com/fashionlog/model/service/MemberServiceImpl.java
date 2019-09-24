@@ -51,7 +51,6 @@ public class MemberServiceImpl implements MemberService {
 		for (Member member:members) {
 			member.setLikesCount();
 			memberRepo.save(member);
-			System.out.println("member likes counted : " + member);
 		}
   }
 

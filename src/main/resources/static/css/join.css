@@ -1,0 +1,168 @@
+input:focus {
+	outline: 0;
+}
+
+button:focus {
+	outline: 0;
+}
+
+@media screen and (max-width: 768px) {
+	.fashion {
+		flex-direction: column;
+		justify-content: flex-start;
+		padding: 0px;
+		background: #fff;
+		justify-content: space-between;
+		align-items: center;
+		flex: 1 1 auto;
+		margin-top: 1em;
+		padding-bottom: 3.5em;
+		border-bottom: 1px solid #ccc;
+		height: 170px;
+	}
+}
+
+*, *:before, *:after {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+	background: #eee;
+}
+
+.logo_img>img {
+	width: 75px;
+	position: static;
+	float: center;
+}
+
+.signup {
+	max-width: 300px;
+	margin: 10px auto;
+	padding: 10px 20px;
+	background: #ffffff;
+	border-radius: 8px;
+}
+
+#memberInfo {
+	max-width: 650px;
+	height: 980px; margin : 10px auto;
+	padding: 10px 20px;
+	background: #ffffff;
+	border-radius: 8px;
+	margin: 10px auto;
+}
+
+.logo_img>span {
+	margin: 0 0 30px 0;
+	text-align: center;
+	float: inherit;
+	font-size: 2em;
+	margin_bottom: 10px;
+}
+
+input[type="text"] {
+	background: rgba(255, 255, 255, 0.1);
+	border: none;
+	font-size: 16px;
+	height: auto;
+	margin: 0;
+	outline: 0;
+	padding: 15px;
+	width: 100%;
+	background-color: #eee;
+	color: #8a97a0;
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+	margin-bottom: 30px;
+	border-radius: 5px;
+}
+
+input[type="password"] {
+	background: rgba(255, 255, 255, 0.1);
+	border: none;
+	font-size: 16px;
+	height: auto;
+	margin: 0;
+	outline: 0;
+	padding: 15px;
+	width: 100%;
+	background-color: #eee;
+	color: #8a97a0;
+	margin-bottom: 10px;
+	border-radius: 5px;
+}
+
+.sign {
+	padding: 19px 19px 18px 19px;
+	color: #FFF;
+	background-color: #4bc970;
+	font-size: 18px;
+	text-align: center;
+	font-style: normal;
+	border-radius: 5px;
+	width: 30%;
+	margin-bottom: 10px;
+	float: right;
+}
+
+.backspace {
+	padding: 19px 19px 18px 19px;
+	color: #FFF;
+	background-color: #7a7a7a;
+	font-size: 18px;
+	text-align: center;
+	font-style: normal;
+	border-radius: 5px;
+	width: 30%;
+	border-width: 1px 1px 3px;
+	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+	margin-bottom: 10px;
+}
+
+input[name='styleBtn'] {
+	color: #FFF;
+	background-color: #7a7a7a;
+	font-size: 20px;
+	text-align: center;
+	font-style: normal;
+	border-radius: 15px;
+	width: 20%;
+	border-width: 1px 1px 3px;
+	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+	margin-bottom: 10px;
+}
+
+    .finalJoinBtn {
+    color: #FFF;
+	background-color: #2e7532;
+	font-size: 20px;
+	text-align: center;
+	font-style: normal;
+	border-radius: 15px;
+	width: 20%;
+	border-width: 1px 1px 3px;
+	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+	margin-top: 30px;
+}
+
+.field {
+	margin-bottom: 30px;
+	border: none;
+}
+
+.password {
+	margin-bottom: 10px;
+}
+
+@media screen and (min-width: 480px) {
+	.signup {
+		max-width: 480px;
+	}
+}
+
+#passwordFalse{
+	color: red;
+	font-size: 5px;
+}

@@ -69,7 +69,6 @@ public class LikesServiceImpl implements LikesService {
 		
 		 for (Post post : posts) {
 			if (post.getLikesCount() == null) {
-		
 				countLikes(post);
 			}
 		};
