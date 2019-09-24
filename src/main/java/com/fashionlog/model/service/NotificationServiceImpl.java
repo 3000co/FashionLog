@@ -57,9 +57,9 @@ public class NotificationServiceImpl implements NotificationService {
 	public String moveToEvent(Notification noti) {
 		switch(noti.getType()) {
 		case EventType.LIKES: 
-			return "post/" + noti.getLikesNo().getPostNo();
+			return "post/" + noti.getLikesNo().getPostNo().getPostNo();
 		case EventType.COMMENT: 
-			return "post/" + noti.getCommentNo().getPostNo(); 
+			return "post/" + noti.getCommentNo().getPostNo().getPostNo(); 
 		default:
 			return "user/" + noti.getFollowNo().getFollowerMemNo().getNickname();
 		}
