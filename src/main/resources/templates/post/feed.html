@@ -8,7 +8,7 @@
 
 <body>
 	<div id="feed">
-		<div id="container">
+		<div id="container" th:if="${feed}">
 			<div th:each="post:${feed}" class="item pin" th:id="${'p'+post.postNo}">
 				<div class="author">
 					<a class="profileImg" th:href="|/profile/post/${post.memberNo.nickname}|"><img
