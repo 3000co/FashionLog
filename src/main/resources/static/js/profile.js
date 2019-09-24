@@ -47,15 +47,13 @@ function fileInsert() {
 			processData: false, 
 			contentType: false, 
 			success: function (fileNo) { 
-			alert(fileNo);
-			memberInfoInsert(fileNo);
+				memberInfoInsert(fileNo);
 			}
 		});
 	}
 }
 
 function memberInfoInsert(fileNo) {
-	alert("유저 이름:" +$("#myUserNo").text());
 	$.ajax({
 		type : "post",
 		url : "/modProfile",
