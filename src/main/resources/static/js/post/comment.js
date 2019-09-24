@@ -88,7 +88,7 @@ function insertComment(insertData,postNo){
 
 //댓글 삭제
 $(".commentDeleteBtn").click(function(){
-	var sessionNickName = $("#userNickname").text();
+	var sessionNickName = $("#myUserNickname").text();
 	var commentWriter = $(this).children(".targetMemName").val();
 	var commentNo = $(this).children('.targetCommentNo').val();
 	alert(commentNo);

@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	console.log($("#memberNo").val());
-	console.log($("#userNo").text());
+	console.log($("#myUserNo").text());
 	if ($("#itemList").val() != undefined) {
 		$(".itemInfo").each(function(index) {
 			var itemTag = $(".itemInfo:eq(" + index + ")");
@@ -9,7 +9,7 @@ $(document).ready(function() {
 			itemTag.find(".marker").css("top", itemTag.find(".yCoordinate").val() + "px");
 		});
 	}
-	if($("#memberNo").val() != $("#userNo").text()) {
+	if($("#memberNo").val() != $("#myUserNo").text()) {
 		console.log("달라~~");
 		$("#postDelete").hide();
 		$("#postUpdate").hide();
