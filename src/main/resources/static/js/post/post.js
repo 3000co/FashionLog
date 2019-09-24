@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	console.log($("#userNo").text());
+	console.log($("#myUserNo").text());
 	
 	$("#submit").click(function() {
 		fileInsert();
@@ -31,7 +31,7 @@ function postInsert(fileNo) {
 		type : "post",
 		url : "/postInsert",
 		data : {
-			"memberNo" : $("#userNo").text(),
+			"memberNo" : $("#myUserNo").text(),
 			"postImageNo" : fileNo,
 			"contents" : $("#contents").val(),
 			"styleNo1" : $("#styleNo1").val(),
