@@ -53,6 +53,18 @@ $.getNotification = function () {
 				$('.notiDiv').append('<hr>');
 			});
 			$.setTimeExp();
+			$('.notiLine').click(function() {
+				var notiNo = $(this).attr('id').substring(6);
+				var tempForm = document.getElementById('socialEventForm');
+				tempForm.action = "/noti/check";
+				tempForm.method = "post";
+				var noContainer = document.createElement('input');
+				noContainer.setAttribute('name','notiNo');
+				noContainer.setAttribute('value',notiNo);
+				tempForm.appendChild(noContainer);
+				console.log(tempForm);
+				tempForm.submit();
+			});
 		},
 		error: function (result) {
 			console.log("알림을 불러오는 데 실패했습니다.");
@@ -91,16 +103,7 @@ $.setTimeExp = function () {
 	}
 }
 
-
 //jquery선언
 $(function () {
 	$.getNotification();
-
-	$('.notiLine').click(function() {
-		var notiNo = this.attr('id').substring(6);
-		var tempForm = new FormData();
-		tempForm.attr('action','noti/check');
-		tempForm.append('notiNo',notiNo);
-		tempForm.submit();
-	});
 });

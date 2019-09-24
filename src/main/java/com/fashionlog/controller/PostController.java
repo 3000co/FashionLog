@@ -221,4 +221,24 @@ public class PostController {
 		return newFeed;
 	}
 
+	@RequestMapping(value = "/getMoreProfileFeed", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getMoreProfileFeed(Pageable paging, String id) {
+		Member user = memberRepository.findById(id);
+		Map<String, Object> newFeed = new HashMap<>();
+		List<Post> feedList = postRepository.findByMemberNo(user);
+		for (Post post : feedList) {
+			Map<String, Object> feedVo = new HashMap<>();
+			feedVo.put("postNo", post.getPostNo());
+			feedVo.put("postImageNo", post.getPostImageNo().getPath());
+			feedVo.put("uploadTime", post.getUploadTime());
+			feedVo.put("uploader", post.getMemberNo().getNickname());
+			feedVo.put("uploaderProfile", post.getMemberNo().getProfileImageNo().getPath());
+			likesService.countLikes(post);
+			feedVo.put("likesCount", post.getLikesCount());
+			newFeed.put(post.getPostNo() + "", feedVo);
+		}
+		return newFeed;
+	}
+
 }

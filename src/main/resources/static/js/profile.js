@@ -1,4 +1,5 @@
 	$(document).ready(function() {
+		$('window').unbind('scroll');
 		$('#memberNo').val($('#userNo').text());
 		$('#id').val($('#userId').text());
 		$('#nickname').val($('#userNickname').text());
@@ -11,7 +12,7 @@
 		
 		$("#passwordFalse").hide();
 		$("#submit3").prop("disabled", true);
-			
+		
 	});
 	
 
