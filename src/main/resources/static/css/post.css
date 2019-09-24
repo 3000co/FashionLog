@@ -61,13 +61,28 @@ select {
 }
 
 .leftWrap {
+/* 	margin-top: 45px; */
 	width: 300px;
 	height: 650px;
 	float: left;
 	/* 	margin:5px; */
 }
-
+.leftWrapWrap{
+	margin-top: 45px;
+	width: 300px;
+	height: 650px;
+	float: left;
+	/* 	margin:5px; */
+}
 .imgWrap {
+	width: 300px;
+	height: 400px;
+	float: left;
+	padding: 10px;
+	margin-bottom: 30px;
+	/* 	border: 1px dashed #bcbcbc; */
+}
+.imgWrapWrap {
 	width: 300px;
 	height: 400px;
 	float: left;
@@ -75,7 +90,6 @@ select {
 	margin-bottom: 10px;
 	/* 	border: 1px dashed #bcbcbc; */
 }
-
 .imgMold {
 	width: 300px;
 	height: 380px;
@@ -95,6 +109,7 @@ select {
 	float: left;
 	border: 1px solid #bcbcbc;
 	border-radius: 5px;
+	margin-top: 10px;
 }
 
 .temp{
@@ -104,6 +119,18 @@ select {
 }
 
 .itemWrap {
+	width: 380px;
+	height: 600px;
+	float: right;
+	margin: 10px;
+	padding: 10px;
+	margin-top: 40px;
+	padding-bottom: 10px;
+	border: 1px solid #bcbcbc;
+	border-radius: 5px;
+	overflow: hidden;
+}
+.itemWrapView {
 	width: 380px;
 	height: 600px;
 	float: left;
@@ -211,7 +238,9 @@ select {
 	margin: auto;
 }
 .viewBtn {
-	margin: 8px;
+	margin-top: 40px;
+/* display: inline-block; */
+overflow: auto;
 }
 .colorSquare {
 	display: inline-block;
