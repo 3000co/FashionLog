@@ -5,14 +5,12 @@ $("input#commentContents").change(function(){
 $(document).ready(function(){
 	//내용 입력전 비활성화 처리
 	$("#insertBtn").attr("disabled","true");
-	console.log("비활성화");
 });
 
 //모달 함수들 
 $(".reportable").click( function() {
 	$(reportModal).show();
 	targetCommentNo = $(this).attr('id');
-	console.log("타겟넘버: " + targetCommentNo);
 	$("#targetCommentNo").val(targetCommentNo);
 });
 
@@ -31,7 +29,6 @@ $("#reportBtn2").on("click", function(){
 
 $(".reportBtn").on("click", function(){
 	var targetCommentNo = $("#targetCommentNo").val();
-	alert(targetCommentNo);
 	var type='1';
 	var reason = $(".reportBtn").val();
 	$.ajax({
@@ -44,9 +41,7 @@ $(".reportBtn").on("click", function(){
 		},
 		success : function(result) {
 			if(result == 'SUCCESS'){
-				alert(result);
 				console.log("신고 완료");
-				
 			}
 		},
 		error : function(request,status,error){
@@ -66,9 +61,6 @@ $("#insertBtn").click(function(){ //댓글 등록 버튼 클릭시
 });
 
 function insertComment(insertData,postNo){
-	alert("댓글 등록");
-	alert(insertData);
-    alert(postNo);
     $.ajax({
         url : '/insertComment',
         type : 'post',
@@ -93,13 +85,11 @@ $(".commentDeleteBtn").click(function(){
 	var commentNo = $(this).children('.targetCommentNo').val();
 	alert(commentNo);
 	if(sessionNickName == commentWriter ){
-		console.log("일치함!");
 		 $.ajax({
 		        url : '/deleteComment/'+commentNo,
 		        type : 'post',
 		        data : commentNo,
 		        success : function(data){
-		        	console.log(data)
 		        	location.reload()
 		        },
 		        error : function(request,status,error){

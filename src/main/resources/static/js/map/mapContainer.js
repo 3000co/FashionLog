@@ -15,7 +15,6 @@ function mapCall() {
 
 //	지도를 생성합니다    
 	map = new kakao.maps.Map(mapContainer, mapOption); 
-//	setTimeout(relayout, 3000);
 
 //	장소 검색 객체를 생성합니다
 	ps = new kakao.maps.services.Places();
@@ -60,14 +59,15 @@ function placesSearchCB(data, status, pagination) {
 		// 페이지 번호를 표출합니다
 		displayPagination(pagination);
 
-	} else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-		alert('검색 결과가 존재하지 않습니다.');
-		return;
-
-	} else if (status === kakao.maps.services.Status.ERROR) {
-		alert('검색 결과 중 오류가 발생했습니다.');
-		return;
-	}
+	} 
+//	else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+//		alert('검색 결과가 존재하지 않습니다.');
+//		return;
+//
+//	} else if (status === kakao.maps.services.Status.ERROR) {
+//		alert('검색 결과 중 오류가 발생했습니다.');
+//		return;
+//	}
 }
 
 //검색 결과 목록과 마커를 표출하는 함수입니다
