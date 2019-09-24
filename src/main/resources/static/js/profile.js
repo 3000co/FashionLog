@@ -1,14 +1,12 @@
 	$(document).ready(function() {
-		$('window').unbind('scroll');
-		$('#memberNo').val($('#userNo').text());
-		$('#id').val($('#userId').text());
-		$('#nickname').val($('#userNickname').text());
-		$('#phonenumber').val($('#userPhonenumber').text());
-		$('#email').val($('#userEmail').text());
-
-		cbCheck($("#userStyleNo1").text());
-		cbCheck($("#userStyleNo2").text());
-		cbCheck($("#userStyleNo3").text());
+		$('#memberNo').val($('#myUserNo').text());
+		$('#id').val($('#myUserId').text());
+		$('#nickname').val($('#myUserNickname').text());
+		$('#phonenumber').val($('#myUserPhonenumber').text());
+		$('#email').val($('#myUserEmail').text());
+		cbCheck($("#myUserStyleNo1").text());
+		cbCheck($("#myUserStyleNo2").text());
+		cbCheck($("#myUserStyleNo3").text());
 		
 		$("#passwordFalse").hide();
 		$("#submit3").prop("disabled", true);
@@ -129,12 +127,11 @@ function password_check(password) {
 	
 	//styleNo 값 모달에 체크
 	function cbCheck(favoriteStyleNo) {
-		
+		console.log(favoriteStyleNo);
 		for (var i = 0; i < 10; i++) {
 			var cbVal = $("#cb" + i).val();
 			if (cbVal == favoriteStyleNo) {
 				$("#cb" + i).prop('checked', true);
-				break;
 			}
 		}
 	}
@@ -148,16 +145,15 @@ function password_check(password) {
 	function userInfoInsert() {
 
 			var data = {
-					"memberNo":$('#userNo').text(),
+					"memberNo":$('#myUserNo').text(),
 					"id":$('#id').val(),
 		        	"nickname":$('#nickname').val(),
 		        	"phonenumber":$('#phonenumber').val(),
 		        	"email":$('#email').val(),
-		        	"styleNo1":$('[name="styleNo1"]').val()+"",//ajax int자료형 처리 안됨
-		        	"styleNo2":$('[name="styleNo2"]').val()+"",
-		        	"styleNo3":$('[name="styleNo3"]').val()+""
+		        	"styleNo1":$('[name="styleNo1"]').val(),//ajadx int자료형 처리 안됨
+		        	"styleNo2":$('[name="styleNo2"]').val(),
+		        	"styleNo3":$('[name="styleNo3"]').val()
 			}
-			
 			$.ajax({ 
 				type: 'POST',
 				url: "/modProfileAll.do",

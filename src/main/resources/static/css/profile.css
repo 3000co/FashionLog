@@ -659,14 +659,17 @@ header {
     margin: 0;
     padding: 0;
   }
-  .option li a {
+  .option li button {
+    width:100%;
     padding: 5px;
-    color: #888;
+    color: #000;
+    background-color: white;
+    border:0;
     text-decoration: none;
     transition: all .2s;
   }
-  .option li a:hover,
-  .option li a:focus {
+  .option li button:hover,
+  .option li button:focus {
     background: #1ABC9C;
     color: #fff;
   }

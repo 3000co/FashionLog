@@ -1,7 +1,7 @@
 $(document).ready(function() {
-	console.log($("#myUserNo").text());
 	
 	$("#submit").click(function() {
+		console.log($(this));
 		fileInsert();
 	});
 });
@@ -21,6 +21,8 @@ function fileInsert() {
 			contentType: false, 
 			success: function(fileNo) { 
 				postInsert(fileNo)
+			},error: function(){
+				alert("file");
 			}
 		});
 	}
@@ -40,6 +42,8 @@ function postInsert(fileNo) {
 		},
 		success : function(postNo){
 			itemInsert(postNo);
+		},error: function(){
+			alert("post");
 		}
 	});
 }
@@ -60,6 +64,8 @@ function itemInsert(postNo) {
 				"store" : $(eqValue).find("#store").val(),
 				"xCoordinate" : $(eqValue).find("#xCoordinate").val(),
 				"yCoordinate" : $(eqValue).find("#yCoordinate").val()
+			},error: function(){
+				alert("item");
 			}
 		});
 	});
