@@ -6,9 +6,8 @@
 <body>
 	<input type="hidden" class="unitMemberNo" th:value="${user.memberNo}"/>
 	<img class='profileUnitMemImg' th:alt="${user.nickname+'의 프로필 사진'}" th:src="${user.profileImageNo.path}">&nbsp;&nbsp;
-	<span class='profileUnitNickname' th:text='${user.nickname}'> 유저 닉네임 </span>
 	<div class='posts'>
-		<table>
+		<table class='postTable'>
 			<tr>
 				<td th:each='post,index:${user.posts}' class='profileUnitPost' th:unless='${index.index}>2' >
 					<input type="hidden" class='postNo' th:value="${post.postNo}"/>
@@ -16,8 +15,8 @@
 				</td>
 			</tr>
 		</table>
-		
 	</div>
+	<span class='profileUnitNickname' th:text='${user.nickname}'> 유저 닉네임 </span>
 	<button class="followToggleBtn" style="display:none" > follow </button>
 </body>
 </html>
