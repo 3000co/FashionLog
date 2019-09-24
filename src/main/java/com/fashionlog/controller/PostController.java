@@ -131,6 +131,7 @@ public class PostController {
 	@ResponseBody
 	public void postDelete(Post postNo) {
 //		likesRepository.deleteByPostNo(postNo);
+		System.err.println(postNo.getPostNo());
 		postRepository.deleteById(postNo.getPostNo());
 	}
 	
