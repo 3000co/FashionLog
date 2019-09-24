@@ -1,13 +1,13 @@
 	$(document).ready(function() {
-		$('#memberNo').val($('#userNo').text());
-		$('#id').val($('#userId').text());
-		$('#nickname').val($('#userNickname').text());
-		$('#phonenumber').val($('#userPhonenumber').text());
-		$('#email').val($('#userEmail').text());
+		$('#myUserNo').val($('#userNo').text());
+		$('#myUserId').val($('#userId').text());
+		$('#myUserNickname').val($('#userNickname').text());
+		$('#myUserPhonenumber').val($('#userPhonenumber').text());
+		$('#myUserEmail').val($('#userEmail').text());
 
-		cbCheck($("#userStyleNo1").text());
-		cbCheck($("#userStyleNo2").text());
-		cbCheck($("#userStyleNo3").text());
+		cbCheck($("#myUserStyleNo1").text());
+		cbCheck($("#myUserStyleNo2").text());
+		cbCheck($("#myUserStyleNo3").text());
 		
 		$("#passwordFalse").hide();
 		$("#submit3").prop("disabled", true);
