@@ -11,6 +11,7 @@
 <body>
 	<div id="postWrite" class="postWrite">
 		<div class="leftWrap">
+			<button type="submit" id="submit">등록</button>
 			<form id="imgWrap" class="imgWrap" action="/item" method="post" enctype="multipart/form-data">
 				<label class="btn glyphicon glyphicon-plus">
 					<input type="hidden" id="type" name="type" value="post">
@@ -21,9 +22,7 @@
 					<img id="postImage" class="postImage"><br>
 				</div>
 			</form>
-			<div class="postContents">
-				<textarea id="contents" rows="12" cols="45" placeholder="글내용작성"></textarea>
-			</div>
+
 		</div>
 		<div class="itemWrap">
 			<!-- 스타일 -->
@@ -34,7 +33,7 @@
 					<option th:each="style:${style}" th:text="${style.name}"
 						th:value="${style.styleNo}"></option>
 				</select><br>
-				&emsp;&emsp;&nbsp;
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 				<input type="text" id="styleText1" class="styleText">
 				<span id="1" class="styleUndo">&times;</span>
 				<input type="number" id="styleNo1" class="styleNo" hidden="true">
@@ -75,7 +74,7 @@
 
 						<label for="color">색상</label>
 						<div class="colorSquare"></div>
-						<span id="color"> </span>
+						<span id="color"></span>
 						<button type="button" id="paletteBtn" class="paletteBtn">pa</button><br>
 
 						<label for="store">구 매 처</label>
@@ -90,8 +89,13 @@
 			</div>
 		</div>
 
-		<button type="submit" id="submit">등록</button>
-
+		
+		<div class="postContents">
+			<textarea id="contents" rows="10" cols="56" placeholder="글내용작성"></textarea>
+		</div>
+		
+		
+		
 		<div id="paletteModal" class="modal">
 			<div class="modalContent">
 				<span class="close" id="paletteCloseBtn">&times;</span>
