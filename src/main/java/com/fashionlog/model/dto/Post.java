@@ -61,6 +61,7 @@ public class Post implements Comparable<Post> {
 	@JoinColumn(name = "STYLE_NO3")
 	private Style styleNo3;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "postNo")
 	private List<Comment> commentList = new ArrayList<Comment>();
 	

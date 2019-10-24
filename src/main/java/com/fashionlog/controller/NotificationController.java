@@ -16,6 +16,7 @@ import com.fashionlog.model.dto.Member;
 import com.fashionlog.model.dto.Notification;
 import com.fashionlog.model.service.NotificationService;
 import com.fashionlog.security.SecurityUser;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Controller
 public class NotificationController {

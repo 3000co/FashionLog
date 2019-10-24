@@ -11,7 +11,7 @@
 		<div id="container" th:if="${feed}">
 			<div th:each="post:${feed}" class="item pin" th:id="${'p'+post.postNo}">
 				<div class="author">
-					<a class="profileImg" th:href="|/profile/post/${post.memberNo.nickname}|"><img
+					<a class="profileImg" th:href="|/user/${post.memberNo.nickname}|"><img
 							th:src="${post.memberNo.profileImageNo.path}" /></a>
 					<div class="name">
 						<p class="uploader nickname" th:text="${post.memberNo.nickname}">
